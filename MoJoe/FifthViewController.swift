@@ -12,13 +12,12 @@ import UIKit
 
 class FifthViewController: UIViewController, UITextFieldDelegate {
    
-    
- 
-    
-    
     @IBOutlet weak var yourName: UILabel!
     @IBOutlet weak var profileTField: UITextField! 
     
+    @IBAction func tapKeyboardHide(_ sender: Any) {
+        self.profileTField.resignFirstResponder()
+    }
     
 
     

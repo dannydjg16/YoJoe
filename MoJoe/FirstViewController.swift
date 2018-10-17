@@ -8,8 +8,17 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var feedTField: UITextField!
+    
+    
+    
+    @IBAction func tapHideKeyboard(_ sender: Any) {
+        self.feedTField.resignFirstResponder()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +29,15 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    //2) this function runs when the text field returns true after it is no longer the first responder
+    func textFieldDidEndEditing(_ textField: UITextField)  {
+        
+    }
 
 }
 

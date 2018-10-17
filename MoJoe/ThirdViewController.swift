@@ -9,14 +9,26 @@
 import Foundation
 import UIKit
 
-class ThirdViewController: UIViewController {
+class ThirdViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var shopsTextField: UITextField!
     
+    @IBAction func tapHideKeyboard(_ sender: Any) {
+        self.shopsTextField.resignFirstResponder()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    //2) this function runs when the text field returns true after it is no longer the first responder
+    func textFieldDidEndEditing(_ textField: UITextField)  {
+        
+    }
     
     
 }

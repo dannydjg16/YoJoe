@@ -19,27 +19,72 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fillOutErrorLabel: UILabel!
     
     
+    @IBAction func tapHideKeyboard(_ sender: Any) {
+        self.firstName.resignFirstResponder()
+        self.lastName.resignFirstResponder()
+        self.userName.resignFirstResponder()
+    }
     
     @IBAction func nameButton(_ sender: Any) {
       
-        nameLabel.text = "\(firstName.text!)  \(lastName.text!)"
-        
-        func fillOut() {
-            let label = fillOutErrorLabel
-            guard let firstName = firstName.text, let lastName = lastName.text, let username = userName.text   else {
-            let label = "Fill Out All Fields"
-            return
+      let userFirstName = firstName.text
+      let userLastName = lastName.text
+      let userUserName = userName.text
+        //check for empty fields
+        if (userFirstName?.isEmpty)! || (userLastName?.isEmpty)! || (userUserName?.isEmpty)!
+        {
+            
+            
+            //alert message
+            alertMessage(message: "All fields must be filled")
+            
         }
+    }
+    func alertMessage(message: String)
+    {
+        //Create alert object, create an action and set it equal to a constant, use the addAction function to add it to the alert(along with other actions that only exist in that declaration and not seperate objects, present the alert
+        let myAlert = UIAlertController(title: "Alert" , message: message, preferredStyle: .alert)
         
+        let okAction = UIAlertAction(title: "Fill remaining fields", style: UIAlertAction.Style.default, handler: nil)
        
-         }
- 
+        myAlert.addAction(UIAlertAction(title: "Hello", style: .cancel, handler: nil))
+        
+        myAlert.addAction(okAction)
+        myAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in
+            print("Yes")
+        }))
+        
+        
+        
+        self.present(myAlert, animated: true, completion: nil)
+    }
+        
+        
+        //save the data
+        
+        //Then display the alert and the confrmation
+     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /*
         let register2controller = storyboard?.instantiateViewController(withIdentifier: "Register2ViewController") as! Register2ViewController
         
         present(register2controller, animated: true, completion: nil )
  */
-        }
+    
     
   
 

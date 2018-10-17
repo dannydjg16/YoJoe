@@ -17,6 +17,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var password: UITextField!
     
     
+
+    
+    @IBAction func tapHideKeyboard(_ sender: Any) {
+        self.userName.resignFirstResponder()
+        self.password.resignFirstResponder()
+    }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -35,7 +41,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         password.delegate = self
         
     }
-    
+
+
     @IBAction func loginTapped(_ sender: Any) {
       
         let mainTabController = storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController

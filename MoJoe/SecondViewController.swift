@@ -8,14 +8,15 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, UISearchBarDelegate {
+class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
 
   
     @IBOutlet weak var searchForShops: UISearchBar!
-
+    @IBOutlet weak var searchTField: UITextField!
     
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.searchForShops.resignFirstResponder()
+        self.searchTField.resignFirstResponder()
      
     }
     
@@ -33,7 +34,15 @@ class SecondViewController: UIViewController, UISearchBarDelegate {
         self.searchForShops.endEditing(true)
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    //2) this function runs when the text field returns true after it is no longer the first responder
+    func textFieldDidEndEditing(_ textField: UITextField)  {
+        
+    }
 
     
     

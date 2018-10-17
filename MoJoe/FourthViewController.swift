@@ -16,6 +16,10 @@ class FourthViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mealNameLabel: UILabel!
     
    
+    @IBAction func tapHideKeyBoard(_ sender: Any) {
+        self.nameTextField.resignFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //handle the text field's user input through delegate callbacks
