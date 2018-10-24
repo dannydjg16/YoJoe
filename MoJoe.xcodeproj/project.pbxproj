@@ -19,6 +19,7 @@
 		7E312B4B212CA01B009D7F83 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B4A212CA01B009D7F83 /* InitialViewController.swift */; };
 		7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B4C212CA116009D7F83 /* MainTabController.swift */; };
 		7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B4E212CA402009D7F83 /* RegisterViewController.swift */; };
+		8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */; };
 		81B1B3442164533F00A78A29 /* Register2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1B3432164533F00A78A29 /* Register2ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		7E312B4A212CA01B009D7F83 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		7E312B4C212CA116009D7F83 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		7E312B4E212CA402009D7F83 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealLoginViewController.swift; sourceTree = "<group>"; };
 		81B1B3432164533F00A78A29 /* Register2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
 				81B1B3432164533F00A78A29 /* Register2ViewController.swift */,
 				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
+				8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */,
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
@@ -165,6 +168,7 @@
 				7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */,
 				7E312B47212C9E30009D7F83 /* FifthViewController.swift in Sources */,
 				7E312B4B212CA01B009D7F83 /* InitialViewController.swift in Sources */,
+				8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */,
 				7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */,
 				7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,

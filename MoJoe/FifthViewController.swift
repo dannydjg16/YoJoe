@@ -29,7 +29,7 @@ class FifthViewController: UIViewController, UITextFieldDelegate {
     }
     //2) this function runs when the text field returns true after it is no longer the first responder
     func textFieldDidEndEditing(_ textField: UITextField)  {
-     yourName.text = profileTField.text
+    
     }
     
     
@@ -37,12 +37,14 @@ class FifthViewController: UIViewController, UITextFieldDelegate {
     //logout
     @IBAction func logout(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         profileTField.delegate = self
+        yourName.text = UserDefaults.standard.string(forKey: "firstName")
     }
     
     override func didReceiveMemoryWarning() {

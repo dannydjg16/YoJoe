@@ -10,36 +10,80 @@ import Foundation
 import UIKit
 
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
+class RegisterViewController: UIViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var fillOutErrorLabel: UILabel!
+    
+    @IBOutlet weak var password: UITextField!
+    
+    @IBOutlet weak var duplicatePassword: UITextField!
+    
+   
     
     
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.firstName.resignFirstResponder()
         self.lastName.resignFirstResponder()
         self.userName.resignFirstResponder()
+        self.password.resignFirstResponder()
+        self.duplicatePassword.resignFirstResponder()
     }
+    
+   
+  
+    
+    
     
     @IBAction func nameButton(_ sender: Any) {
       
       let userFirstName = firstName.text
       let userLastName = lastName.text
       let userUserName = userName.text
+      let userPassword = password.text
+      let userDuplicatePassword = duplicatePassword.text
         //check for empty fields
-        if (userFirstName?.isEmpty)! || (userLastName?.isEmpty)! || (userUserName?.isEmpty)!
+        if (userFirstName?.isEmpty)! || (userLastName?.isEmpty)! || (userUserName?.isEmpty)! || (userPassword?.isEmpty)! || (userDuplicatePassword?.isEmpty)!
         {
-            
-            
             //alert message
             alertMessage(message: "All fields must be filled")
-            
         }
+        if (userPassword)! != (userDuplicatePassword)! {
+            alertMessage(message: "Passwords must match")
+        }
+        
+        
+        //save data
+        UserDefaults.standard.set(userFirstName, forKey: "firstName");
+        UserDefaults.standard.set(userLastName, forKey: "lastName");
+        UserDefaults.standard.set(userUserName, forKey: "userName")
+        UserDefaults.standard.set(userPassword, forKey: "password")
+        UserDefaults.standard.set(userDuplicatePassword, forKey: "duplicatePassword")
+        
+        UserDefaults.standard.synchronize();
+        
+        
+        
+        //Make an alert message to notify the user that they registered successfully
+        var firstLoginAlert = UIAlertController(title: "Congratulations", message: "You have successfully created an account", preferredStyle: .alert)
+        
+        firstLoginAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+        
+            
+            /*let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+            
+            mainTabController.selectedViewController = mainTabController.viewControllers?[4]
+            
+            self.present(mainTabController, animated: true, completion: nil)*/
+        }))
+        //present the firstLoginALert that I just made
+        self.present(firstLoginAlert, animated: true, completion: nil)
+       
     }
+    
+    
     func alertMessage(message: String)
     {
         //Create alert object, create an action and set it equal to a constant, use the addAction function to add it to the alert(along with other actions that only exist in that declaration and not seperate objects, present the alert
@@ -47,47 +91,25 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         let okAction = UIAlertAction(title: "Fill remaining fields", style: UIAlertAction.Style.default, handler: nil)
        
+       
         myAlert.addAction(UIAlertAction(title: "Hello", style: .cancel, handler: nil))
-        
         myAlert.addAction(okAction)
         myAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in
             print("Yes")
         }))
-        
+        myAlert.addTextField(configurationHandler: {textfield in textfield.placeholder = "What is your name?"})
+        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:{ action in if let name = myAlert.textFields?.first?.text {
+            print("\(name)")
+            }
+        }))
         
         
         self.present(myAlert, animated: true, completion: nil)
-    }
-        
-        
-        //save the data
-        
-        //Then display the alert and the confrmation
-     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-        let register2controller = storyboard?.instantiateViewController(withIdentifier: "Register2ViewController") as! Register2ViewController
-        
-        present(register2controller, animated: true, completion: nil )
- */
     
-    
+}
   
-
+    
+    
     //UITextFieldDelegate(2) 1)- this is the function called when you hit the enter/retur/done button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //hide keyboard
@@ -99,21 +121,16 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
        
     }
 
+   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         firstName.delegate = self
         lastName.delegate = self
         userName.delegate = self
-    }
-    
-    
-    
-    
-    
-    
-  //go back to initial VC
-    @IBAction func backFunc(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        password.delegate = self
+        duplicatePassword.delegate = self
     }
     
     
