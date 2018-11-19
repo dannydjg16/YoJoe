@@ -36,6 +36,8 @@ class FifthViewController: UIViewController, UITextFieldDelegate {
     
     //logout
     @IBAction func logout(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "loggedIn")
+        UserDefaults.standard.synchronize()
         dismiss(animated: true, completion: nil)
         
     }

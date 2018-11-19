@@ -46,10 +46,13 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     
+    //keep the username field as the username, but now im thinking this doesnt make sense because they user would not need to log in. it has to be more of something like if the person checks a box that says so, keep the username there. I also could add a box for stay lgged in but that might also just be default.
+   /* let keepUserName = UserDefaults.standard.bool(forKey: "loggedIn")
+    if keepUserName = true {
     
+    }
     
-    
-    
+    */
     
     
     @IBAction func loginToApp(_ sender: Any) {
@@ -70,10 +73,12 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
                 
                 present(mainTabController, animated: true, completion: nil)
                 
+                UserDefaults.standard.set(true, forKey: "loggedIn")
+                UserDefaults.standard.synchronize()
             }
         }
         
-        
+       
         
         
         

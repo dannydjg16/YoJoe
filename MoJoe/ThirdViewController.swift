@@ -13,6 +13,11 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var shopsTextField: UITextField!
     
+    @IBOutlet weak var exampleButton: UILabel!
+    @IBAction func unwinded (segue: UIStoryboardSegue) {
+        exampleButton.text = "unwinded"
+    }
+    
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.shopsTextField.resignFirstResponder()
     }

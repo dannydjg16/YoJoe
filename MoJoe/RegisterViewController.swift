@@ -60,8 +60,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
         UserDefaults.standard.set(userUserName, forKey: "userName")
         UserDefaults.standard.set(userPassword, forKey: "password")
         UserDefaults.standard.set(userDuplicatePassword, forKey: "duplicatePassword")
+        UserDefaults.standard.set(true, forKey: "loggedIn")
         
         UserDefaults.standard.synchronize();
+        
         
         
         
@@ -72,11 +74,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
             
         
             
-            /*let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+            let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
             
             mainTabController.selectedViewController = mainTabController.viewControllers?[4]
             
-            self.present(mainTabController, animated: true, completion: nil)*/
+            self.present(mainTabController, animated: true, completion: nil)
+            
+         
         }))
         //present the firstLoginALert that I just made
         self.present(firstLoginAlert, animated: true, completion: nil)
@@ -98,7 +102,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
             print("Yes")
         }))
         myAlert.addTextField(configurationHandler: {textfield in textfield.placeholder = "What is your name?"})
-        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:{ action in if let name = myAlert.textFields?.first?.text {
+        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:{ action in
+            if let name = myAlert.textFields?.first?.text {
             print("\(name)")
             }
         }))
