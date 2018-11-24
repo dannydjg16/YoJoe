@@ -68,15 +68,27 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
         
         
         //Make an alert message to notify the user that they registered successfully
-        var firstLoginAlert = UIAlertController(title: "Congratulations", message: "You have successfully created an account", preferredStyle: .alert)
+        var firstLoginAlert = UIAlertController(title: "Congratulations, account created!", message: "Would you like to:", preferredStyle: .alert)
         
-        firstLoginAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        firstLoginAlert.addAction(UIAlertAction(title: "Build your profile", style: .cancel, handler: { action
+           
+            in
+            
+            let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+            
+            mainTabController.selectedViewController = mainTabController.viewControllers?[4]
+            
+            self.present(mainTabController, animated: true, completion: nil)
+            
+        } ))
+        
+        firstLoginAlert.addAction(UIAlertAction(title: "Get Searching", style: .default, handler: { action in
             
         
             
             let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
             
-            mainTabController.selectedViewController = mainTabController.viewControllers?[4]
+            mainTabController.selectedViewController = mainTabController.viewControllers?[1]
             
             self.present(mainTabController, animated: true, completion: nil)
             
@@ -88,9 +100,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
     }
     
     
+    
+    
+    
+    
+    
+    //alertMessage is just a function of an example of an alert. It has the set answers you can click, but the actual message is supposed to be added in that instance that will be specific to the actual alert. Look in the top of the nameButton function: it has alert messages for what the app needs. Both have the same body just different responses.
     func alertMessage(message: String)
     {
-        //Create alert object, create an action and set it equal to a constant, use the addAction function to add it to the alert(along with other actions that only exist in that declaration and not seperate objects, present the alert
+        //Create alert object(myAlert), create an action and set it equal to a constant, use the addAction function to add it to the alert(along with other actions that only exist in that declaration and not seperate objects, present the alert
         let myAlert = UIAlertController(title: "Alert" , message: message, preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Fill remaining fields", style: UIAlertAction.Style.default, handler: nil)
@@ -110,7 +128,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
         
         
         self.present(myAlert, animated: true, completion: nil)
-    
 }
   
     

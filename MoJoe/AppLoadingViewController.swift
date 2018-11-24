@@ -41,7 +41,7 @@ class AppLoadingViewController: UIViewController {
         
         let mainTabController = storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
         
-        mainTabController.selectedViewController = mainTabController.viewControllers?[2]
+        mainTabController.selectedViewController = mainTabController.viewControllers?[0]
         
         present(mainTabController, animated: true, completion: nil)
         

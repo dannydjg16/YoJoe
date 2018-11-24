@@ -21,9 +21,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.shopsTextField.resignFirstResponder()
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+ 
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //hide keyboard
@@ -35,5 +33,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

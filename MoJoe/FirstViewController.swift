@@ -10,24 +10,12 @@ import UIKit
 
 class FirstViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var feedTField: UITextField!
-    
     
     
     @IBAction func tapHideKeyboard(_ sender: Any) {
-        self.feedTField.resignFirstResponder()
+        //self.feedTField.resignFirstResponder()
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //hide keyboard
@@ -38,6 +26,26 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField)  {
         
     }
-
+   
+    @IBAction func unwinded (segue: UIStoryboardSegue) {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
 }
 

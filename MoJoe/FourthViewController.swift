@@ -20,11 +20,7 @@ class FourthViewController: UIViewController, UITextFieldDelegate {
         self.nameTextField.resignFirstResponder()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //handle the text field's user input through delegate callbacks
-        nameTextField.delegate = self
-    }
+   
     
     @IBAction func setDefaultLabelText(_ sender: Any) {
         mealNameLabel.text = "Default Text"
@@ -39,4 +35,10 @@ class FourthViewController: UIViewController, UITextFieldDelegate {
         mealNameLabel.text = nameTextField.text
     }
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //handle the text field's user input through delegate callbacks
+        nameTextField.delegate = self
+    }
 }

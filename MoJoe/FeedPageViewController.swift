@@ -30,7 +30,8 @@ class FeedPageViewController: UIPageViewController, UIPageViewControllerDelegate
         let previousIndex = viewControllerIndex - 1
         
         guard previousIndex >= 0 else {
-            return feedViewContollers.last
+           // return feedViewContollers.last-- this is if i wanted it to loop
+            return nil
         }
         
         guard feedViewContollers.count > previousIndex else {
@@ -49,7 +50,8 @@ class FeedPageViewController: UIPageViewController, UIPageViewControllerDelegate
         let feedViewControllersCount = feedViewContollers.count
         
         guard feedViewControllersCount != nextIndex else {
-            return feedViewContollers.first
+            //return feedViewContollers.first-- this is if i wanted it to loop
+            return nil
         }
         
         guard feedViewControllersCount > nextIndex else {

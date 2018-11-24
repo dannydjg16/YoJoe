@@ -20,14 +20,7 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
      
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-       // self.searchForShops.delegate = self.. this goes with searchbarSearchButtonCLicked
-    }
 
-    
-    
     private func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         
@@ -44,14 +37,14 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
         
     }
 
-    
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        // self.searchForShops.delegate = self.. this goes with searchbarSearchButtonCLicked
     }
 
 

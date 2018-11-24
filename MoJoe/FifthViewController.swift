@@ -13,10 +13,10 @@ import UIKit
 class FifthViewController: UIViewController, UITextFieldDelegate {
    
     @IBOutlet weak var yourName: UILabel!
-    @IBOutlet weak var profileTField: UITextField! 
+    
     
     @IBAction func tapKeyboardHide(_ sender: Any) {
-        self.profileTField.resignFirstResponder()
+        
     }
     
 
@@ -45,8 +45,8 @@ class FifthViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileTField.delegate = self
-        yourName.text = UserDefaults.standard.string(forKey: "firstName")
+       
+        yourName.text = UserDefaults.standard.string(forKey: "userName") 
     }
     
     override func didReceiveMemoryWarning() {

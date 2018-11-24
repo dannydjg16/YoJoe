@@ -22,6 +22,7 @@
 		811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */; };
 		813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CBD13219DE03E00661736 /* FeedPageViewController.swift */; };
 		8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */; };
+		819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819042F921A87987009C6083 /* FirstReviewViewController.swift */; };
 		81B1B3442164533F00A78A29 /* Register2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1B3432164533F00A78A29 /* Register2ViewController.swift */; };
 		81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA171F2180FC92003388DA /* AppLoadingViewController.swift */; };
 		81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA1721218110F7003388DA /* LoginNavigationController.swift */; };
@@ -45,6 +46,7 @@
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyFeedViewController.swift; sourceTree = "<group>"; };
 		813CBD13219DE03E00661736 /* FeedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
 		8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealLoginViewController.swift; sourceTree = "<group>"; };
+		819042F921A87987009C6083 /* FirstReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReviewViewController.swift; sourceTree = "<group>"; };
 		81B1B3432164533F00A78A29 /* Register2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register2ViewController.swift; sourceTree = "<group>"; };
 		81EA171F2180FC92003388DA /* AppLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		81EA1721218110F7003388DA /* LoginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				7E312B44212C9DFF009D7F83 /* FourthViewController.swift */,
 				7E312B46212C9E30009D7F83 /* FifthViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				819042F921A87987009C6083 /* FirstReviewViewController.swift */,
 				81EA1721218110F7003388DA /* LoginNavigationController.swift */,
 				81B1B3432164533F00A78A29 /* Register2ViewController.swift */,
 				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
@@ -179,6 +182,7 @@
 				81B1B3442164533F00A78A29 /* Register2ViewController.swift in Sources */,
 				81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */,
 				7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */,
+				819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */,
 				7E312B47212C9E30009D7F83 /* FifthViewController.swift in Sources */,
 				81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */,
 				813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */,
