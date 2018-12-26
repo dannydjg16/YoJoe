@@ -32,6 +32,24 @@ class FirstViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    var tF = false
+    struct trueFalse {
+        static var realTF = Bool()
+    }
+    
+    @IBAction func trueOrFalse(_ sender: Any) {
+        if tF == false {
+            tF = true
+        }
+       else if tF == true {
+            tF = false
+        }
+        
+        let tFValue = trueFalse()
+        trueFalse.realTF = tF
+        
+        print(trueFalse.realTF)
+    }
     
     
     

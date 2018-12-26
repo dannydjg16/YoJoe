@@ -10,6 +10,19 @@ import UIKit
 
 class NearbyFeedViewController: UIViewController {
 
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
