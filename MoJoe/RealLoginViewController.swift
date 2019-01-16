@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RealLoginViewController: UIViewController,UITextFieldDelegate {
 
@@ -23,7 +24,17 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         userNameTField.delegate = self
-        passwordTField.delegate = self 
+        passwordTField.delegate = self
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            
+            if user != nil {
+                let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+                
+                mainTabController.selectedViewController = mainTabController.viewControllers?[0]
+                
+                self.present(mainTabController, animated: true, completion: nil)
+            }
+        }
     }
     
 
@@ -32,9 +43,6 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
         self.userNameTField.resignFirstResponder()
         self.passwordTField.resignFirstResponder()
     }
-    
-    
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //hide keyboard
@@ -46,70 +54,24 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
         
     }
     
-    
-    
-    //keep the username field as the username, but now im thinking this doesnt make sense because they user would not need to log in. it has to be more of something like if the person checks a box that says so, keep the username there. I also could add a box for stay lgged in but that might also just be default.
-   
-    
-    
     @IBAction func loginToApp(_ sender: Any) {
-        
-        let userName = userNameTField.text
-        let password = passwordTField.text
-        
-        let userNameStored = UserDefaults.standard.string(forKey: "userName")
-        let passwordStored = UserDefaults.standard.string(forKey: "password")
-        
-        if(userNameStored == userName) 
-        {
-            if(passwordStored == password)
-            {
-                let mainTabController = storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
-                
-                mainTabController.selectedViewController = mainTabController.viewControllers?[0]
-                
-                present(mainTabController, animated: true, completion: nil)
-                
-                UserDefaults.standard.set(true, forKey: "loggedIn")
-                UserDefaults.standard.synchronize()
-            }
+        guard let email = userNameTField.text,
+            let password = passwordTField.text,
+            email.count > 0,
+            password.count > 0 else {
+            return
         }
         
-       
-        
-        
-        
-        
-        
-        
-    
-        
+        Auth.auth().signIn(withEmail: email, password: password) { user, error in
+            if let error = error, user == nil {
+                let alert = UIAlertController(title: "Sign In Failed",
+                                              message: error.localizedDescription,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

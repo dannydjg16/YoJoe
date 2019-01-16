@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F4F05D7CFC8171CECE7FA91 /* Pods_MoJoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE5188F47E28591D566832E /* Pods_MoJoe.framework */; };
 		7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B2E212C98E3009D7F83 /* AppDelegate.swift */; };
 		7E312B31212C98E3009D7F83 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B30212C98E3009D7F83 /* FirstViewController.swift */; };
 		7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B32212C98E3009D7F83 /* SecondViewController.swift */; };
@@ -21,14 +22,19 @@
 		7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B4E212CA402009D7F83 /* RegisterViewController.swift */; };
 		811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */; };
 		813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CBD13219DE03E00661736 /* FeedPageViewController.swift */; };
+		8141909A21E1622D000BE77F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8141909921E1622D000BE77F /* GoogleService-Info.plist */; };
+		8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */; };
+		8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8144EE8621EBEB23005FF0B6 /* UserService.swift */; };
 		8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */; };
 		819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819042F921A87987009C6083 /* FirstReviewViewController.swift */; };
-		81B1B3442164533F00A78A29 /* Register2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1B3432164533F00A78A29 /* Register2ViewController.swift */; };
 		81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA171F2180FC92003388DA /* AppLoadingViewController.swift */; };
 		81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA1721218110F7003388DA /* LoginNavigationController.swift */; };
+		81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE421E3E3890008B9A4 /* Review.swift */; };
+		81FE6AE721E3E6720008B9A4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE621E3E6720008B9A4 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68B6CEEA1D516D622CE5F1CC /* Pods-MoJoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoJoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe.release.xcconfig"; sourceTree = "<group>"; };
 		7E312B2B212C98E3009D7F83 /* MoJoe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoJoe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E312B2E212C98E3009D7F83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E312B30212C98E3009D7F83 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -45,11 +51,18 @@
 		7E312B4E212CA402009D7F83 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyFeedViewController.swift; sourceTree = "<group>"; };
 		813CBD13219DE03E00661736 /* FeedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
+		8141909921E1622D000BE77F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegistrationViewController.swift; sourceTree = "<group>"; };
+		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
+		8144EE8621EBEB23005FF0B6 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealLoginViewController.swift; sourceTree = "<group>"; };
 		819042F921A87987009C6083 /* FirstReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReviewViewController.swift; sourceTree = "<group>"; };
-		81B1B3432164533F00A78A29 /* Register2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register2ViewController.swift; sourceTree = "<group>"; };
 		81EA171F2180FC92003388DA /* AppLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		81EA1721218110F7003388DA /* LoginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationController.swift; sourceTree = "<group>"; };
+		81FE6AE421E3E3890008B9A4 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		81FE6AE621E3E6720008B9A4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		97D18275BB04A6374CA5EF50 /* Pods-MoJoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoJoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe.debug.xcconfig"; sourceTree = "<group>"; };
+		ABE5188F47E28591D566832E /* Pods_MoJoe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoJoe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,17 +70,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F4F05D7CFC8171CECE7FA91 /* Pods_MoJoe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53E66F58F74544B70ED04B4E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97D18275BB04A6374CA5EF50 /* Pods-MoJoe.debug.xcconfig */,
+				68B6CEEA1D516D622CE5F1CC /* Pods-MoJoe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7E312B22212C98E3009D7F83 = {
 			isa = PBXGroup;
 			children = (
 				7E312B2D212C98E3009D7F83 /* MoJoe */,
 				7E312B2C212C98E3009D7F83 /* Products */,
+				53E66F58F74544B70ED04B4E /* Pods */,
+				81ADB2C6FCFA71631D2CCC77 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,28 +107,57 @@
 		7E312B2D212C98E3009D7F83 /* MoJoe */ = {
 			isa = PBXGroup;
 			children = (
+				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
 				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
 				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
 				7E312B4A212CA01B009D7F83 /* InitialViewController.swift */,
 				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
+				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
+				819042F921A87987009C6083 /* FirstReviewViewController.swift */,
+				81EA1721218110F7003388DA /* LoginNavigationController.swift */,
+				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
+				8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */,
+				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
+				8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */,
+				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				81FE6AE821E3EEAA0008B9A4 /* Models */,
+				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
+				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
+				7E312B3C212C98E3009D7F83 /* Info.plist */,
+				8141909921E1622D000BE77F /* GoogleService-Info.plist */,
+				8144EE8621EBEB23005FF0B6 /* UserService.swift */,
+			);
+			path = MoJoe;
+			sourceTree = "<group>";
+		};
+		8141909E21E2E649000BE77F /* Main Tab Bar Views */ = {
+			isa = PBXGroup;
+			children = (
 				7E312B30212C98E3009D7F83 /* FirstViewController.swift */,
 				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
 				7E312B32212C98E3009D7F83 /* SecondViewController.swift */,
 				7E312B42212C9DB6009D7F83 /* ThirdViewController.swift */,
 				7E312B44212C9DFF009D7F83 /* FourthViewController.swift */,
 				7E312B46212C9E30009D7F83 /* FifthViewController.swift */,
-				819042F921A87987009C6083 /* FirstReviewViewController.swift */,
-				81EA1721218110F7003388DA /* LoginNavigationController.swift */,
-				81B1B3432164533F00A78A29 /* Register2ViewController.swift */,
-				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
-				8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */,
-				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
-				7E312B34212C98E3009D7F83 /* Main.storyboard */,
-				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
-				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
-				7E312B3C212C98E3009D7F83 /* Info.plist */,
 			);
-			path = MoJoe;
+			path = "Main Tab Bar Views";
+			sourceTree = "<group>";
+		};
+		81ADB2C6FCFA71631D2CCC77 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABE5188F47E28591D566832E /* Pods_MoJoe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81FE6AE821E3EEAA0008B9A4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81FE6AE421E3E3890008B9A4 /* Review.swift */,
+				81FE6AE621E3E6720008B9A4 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -113,9 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E312B3F212C98E3009D7F83 /* Build configuration list for PBXNativeTarget "MoJoe" */;
 			buildPhases = (
+				4F849388545840523A60817C /* [CP] Check Pods Manifest.lock */,
 				7E312B27212C98E3009D7F83 /* Sources */,
 				7E312B28212C98E3009D7F83 /* Frameworks */,
 				7E312B29212C98E3009D7F83 /* Resources */,
+				5DBA17026095EB2EF58BE657 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -140,6 +196,11 @@
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -167,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E312B3B212C98E3009D7F83 /* LaunchScreen.storyboard in Resources */,
+				8141909A21E1622D000BE77F /* GoogleService-Info.plist in Resources */,
 				7E312B38212C98E3009D7F83 /* Assets.xcassets in Resources */,
 				7E312B36212C98E3009D7F83 /* Main.storyboard in Resources */,
 			);
@@ -174,14 +236,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4F849388545840523A60817C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoJoe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DBA17026095EB2EF58BE657 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7E312B27212C98E3009D7F83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81B1B3442164533F00A78A29 /* Register2ViewController.swift in Sources */,
 				81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */,
 				7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */,
+				8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */,
 				819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */,
 				7E312B47212C9E30009D7F83 /* FifthViewController.swift in Sources */,
 				81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */,
@@ -192,6 +307,9 @@
 				7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */,
 				7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
+				8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */,
+				81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */,
+				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,
 				7E312B43212C9DB6009D7F83 /* ThirdViewController.swift in Sources */,
 				7E312B31212C98E3009D7F83 /* FirstViewController.swift in Sources */,
 				7E312B45212C9DFF009D7F83 /* FourthViewController.swift in Sources */,
@@ -333,8 +451,10 @@
 		};
 		7E312B40212C98E3009D7F83 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97D18275BB04A6374CA5EF50 /* Pods-MoJoe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MoJoe/MoJoe.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9YG269PFG;
@@ -350,8 +470,10 @@
 		};
 		7E312B41212C98E3009D7F83 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68B6CEEA1D516D622CE5F1CC /* Pods-MoJoe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MoJoe/MoJoe.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9YG269PFG;

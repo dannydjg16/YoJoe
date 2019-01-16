@@ -35,7 +35,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
   
     
     
-    
+   
     @IBAction func nameButton(_ sender: Any) {
       
       let userFirstName = firstName.text
@@ -68,9 +68,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
         
         
         //Make an alert message to notify the user that they registered successfully
-        var firstLoginAlert = UIAlertController(title: "Congratulations, account created!", message: "Would you like to:", preferredStyle: .alert)
+        let firstLoginAlert = UIAlertController(title: "Welcome, \(UserDefaults.standard.string(forKey: "userName")!)!", message: "Would you like to:", preferredStyle: .alert)
         
-        firstLoginAlert.addAction(UIAlertAction(title: "Build your profile", style: .cancel, handler: { action
+        firstLoginAlert.addAction(UIAlertAction(title: "Build your profile", style: .cancel, handler: nil
+            /*{ action
            
             in
             
@@ -80,9 +81,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
             
             self.present(mainTabController, animated: true, completion: nil)
             
-        } ))
+        */ ))
         
-        firstLoginAlert.addAction(UIAlertAction(title: "Get Searching", style: .default, handler: { action in
+        firstLoginAlert.addAction(UIAlertAction(title: "Seach For Your Favorites", style: .default, handler: { action in
             
         
             

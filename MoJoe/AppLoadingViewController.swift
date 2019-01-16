@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AppLoadingViewController: UIViewController {
 
@@ -27,8 +28,24 @@ class AppLoadingViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-
+// This checks if the user is logged in and if so brings them to the main part of the app, if not, it continues the
+        Auth.auth().addStateDidChangeListener{ auth, user in
+            if user != nil {
+                let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+                
+                mainTabController.selectedViewController = mainTabController.viewControllers?[0]
+                
+                self.present(mainTabController, animated: true, completion: nil)
+            }
+            if user == nil {
+                self.performSegue(withIdentifier: "firstSegue", sender: self)
+            }
+            
+        }
         
+       // self.performSegue(withIdentifier: "firstSegue", sender: self)
+        
+      /*
         let isLoggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
       
         //if the user is not logged in, i want them to go to the loginVC through the firstSegue
@@ -45,8 +62,8 @@ class AppLoadingViewController: UIViewController {
         
         present(mainTabController, animated: true, completion: nil)
         
-    }
-    
+    }*/
+}
     // MARK: - Navigation
 
     

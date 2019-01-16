@@ -1,0 +1,6 @@
+framework module Pods_MoJoe {
+  umbrella header "Pods-MoJoe-umbrella.h"
+
+  export *
+  module * { export * }
+}
