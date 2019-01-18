@@ -8,12 +8,23 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class ThirdViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var shopsTextField: UITextField!
     
     @IBOutlet weak var exampleButton: UILabel!
+    
+    @IBOutlet weak var nearMeMap: MKMapView!
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func unwinded (segue: UIStoryboardSegue) {
         exampleButton.text = "unwinded"
     }
@@ -37,5 +48,13 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        var mapOrigin = CLLocationCoordinate2DMake(41.8077, 72.2540)
+        
+        var mapReach = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        
+        var mapRegion = MKCoordinateRegion(center: mapOrigin, span: mapReach)
+        
+        self.nearMeMap.setRegion(mapRegion, animated: true)
     }
 }

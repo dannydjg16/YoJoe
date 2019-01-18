@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 
-class FifthViewController: UIViewController, UITextFieldDelegate {
+class FifthViewController: UIViewController {
    
     @IBOutlet weak var yourName: UILabel!
     
@@ -22,16 +22,7 @@ class FifthViewController: UIViewController, UITextFieldDelegate {
     
 
     
-    //UITextFieldDelegate(2) 1)- this is the function called when you hit the enter/retur/done button
-   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-      //hide keyboard
-        textField.resignFirstResponder()
-        return true
-    }
-    //2) this function runs when the text field returns true after it is no longer the first responder
-    func textFieldDidEndEditing(_ textField: UITextField)  {
-    
-    }
+ 
     
     
     
@@ -89,4 +80,19 @@ class FifthViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+
+
+extension FifthViewController: UITextFieldDelegate {
+    //UITextFieldDelegate(2) 1)- this is the function called when you hit the enter/retur/done button
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    //2) this function runs when the text field returns true after it is no longer the first responder
+    func textFieldDidEndEditing(_ textField: UITextField)  {
+        
+    }
 }

@@ -137,6 +137,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0VU-cT-fT1" id="ety-qO-bmN"/>
+                                    <outlet property="delegate" destination="0VU-cT-fT1" id="pqx-mA-Nqi"/>
+                                </connections>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m3M-29-Y04">
                                 <rect key="frame" x="16" y="606" width="192" height="30"/>
@@ -161,6 +165,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.56845185764856487" green="0.74172655682545385" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Rxk-Zx-7Vz" firstAttribute="leading" secondItem="waw-RC-sim" secondAttribute="leading" id="Bi8-aa-fVO"/>
                             <constraint firstItem="Tn9-CP-w6p" firstAttribute="trailing" secondItem="b1h-y6-tME" secondAttribute="trailing" id="Fqi-DF-3BG"/>
@@ -177,6 +182,9 @@
                             <constraint firstItem="b1h-y6-tME" firstAttribute="bottom" secondItem="m3M-29-Y04" secondAttribute="bottom" constant="31" id="t16-2D-2wT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1h-y6-tME"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ugu-e5-q68" appends="YES" id="ZjY-Zk-FaG"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="messageField" destination="m3M-29-Y04" id="xRc-vr-Tuc"/>
@@ -184,6 +192,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9IQ-5p-Z2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ugu-e5-q68">
+                    <connections>
+                        <action selector="tapHideKeyboard:" destination="0VU-cT-fT1" id="Fw8-1e-OzN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2549.5999999999999" y="-1645.7271364317842"/>
         </scene>
@@ -803,15 +816,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lh6-p3-ZOC">
-                                <rect key="frame" x="164" y="319" width="47" height="29"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lh6-p3-ZOC">
+                                <rect key="frame" x="231" y="110" width="47" height="29"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <segue destination="FjA-HT-hVq" kind="show" id="sA8-gH-0fz"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMg-oC-J6w">
-                                <rect key="frame" x="91" y="201" width="218" height="21"/>
+                                <rect key="frame" x="89" y="107" width="218" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Sl4-U8-R38"/>
                                 </constraints>
@@ -819,6 +832,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="St3-h0-fzs">
+                                <rect key="frame" x="16" y="147" width="343" height="471"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -841,6 +858,7 @@
                     <tabBarItem key="tabBarItem" title="Shops" image="first" selectedImage="first" id="4eC-fr-bqn"/>
                     <connections>
                         <outlet property="exampleButton" destination="LMg-oC-J6w" id="Xgy-oO-X1u"/>
+                        <outlet property="nearMeMap" destination="St3-h0-fzs" id="RYv-ZK-i0G"/>
                         <outlet property="shopsTextField" destination="RDT-Yg-0Tg" id="VyJ-wj-kdh"/>
                     </connections>
                 </viewController>

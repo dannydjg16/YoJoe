@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class NearbyFeedViewController: UIViewController {
-
+    //MARK: variables and constants
     var posts: [Review] = []
     var user: User? {
     var ref: DatabaseReference!
@@ -18,17 +18,22 @@ class NearbyFeedViewController: UIViewController {
         
         guard let firebaseUser = Auth.auth().currentUser,
             let email = firebaseUser.email else {
-            return nil
+                return nil
         }
-
+        
         return User(uid: firebaseUser.uid, email: email)
     }
     
     let ref = Database.database().reference(withPath: "Reviews")
-    
+   
+    //MARK: outlets then actions
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-
+    
+    //MARK: tap gesture recognizer
+    @IBAction func tapHideKeyboard(_ sender: Any) {
+        self.messageField.resignFirstResponder()
+    }
     
     
     
@@ -39,7 +44,7 @@ class NearbyFeedViewController: UIViewController {
         super.viewDidLoad()
 
    
-     ref.observe(.value, with: { snapshot in
+     ref.observe(.value, with: { (snapshot) in
        
         var newReviews: [Review] = []
         
@@ -60,11 +65,13 @@ class NearbyFeedViewController: UIViewController {
             return
         }
         
-        let review = Review(description: message, reviewer: user.email)
+        let review = Review(description: message, reviewer: user.email
+            //, date: Date.description(Any?)
+        )
        
         let reviewRef = self.ref.child(message)
         
-        reviewRef.setValue(review.toDictionary())
+        reviewRef.setValue(review.makeDictionary())
     }
 }
 
@@ -86,5 +93,17 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension NearbyFeedViewController: UITextFieldDelegate {
+    //UITextFieldDelegate(2) 1)- this is the function called when you hit the enter/retur/done button
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    //2) this function runs when the text field returns true after it is no longer the first responder
+    func textFieldDidEndEditing(_ textField: UITextField)  {
+        
+        
+    }
+    
     
 }

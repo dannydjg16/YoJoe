@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class FourthViewController: UIViewController, UITextFieldDelegate {
+class FourthViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var mealNameLabel: UILabel!
@@ -26,19 +26,24 @@ class FourthViewController: UIViewController, UITextFieldDelegate {
         mealNameLabel.text = "Default Text"
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-   
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        mealNameLabel.text = nameTextField.text
-    }
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //handle the text field's user input through delegate callbacks
         nameTextField.delegate = self
+    }
+}
+
+
+extension FourthViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        mealNameLabel.text = nameTextField.text
     }
 }
