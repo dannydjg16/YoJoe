@@ -12,16 +12,24 @@ import Firebase
 class NearbyFeedViewController: UIViewController {
     //MARK: variables and constants
     var posts: [Review] = []
+    
     var user: User? {
     var ref: DatabaseReference!
-        
-        
         guard let firebaseUser = Auth.auth().currentUser,
             let email = firebaseUser.email else {
                 return nil
         }
-        
         return User(uid: firebaseUser.uid, email: email)
+    }
+    
+    var date: String {
+        get {
+            let postDate = Date()
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "YYYY-MM-dd HH:mm:ss"
+            let stringDate = dateFormat.string(from: postDate)
+            return stringDate
+        }
     }
     
     let ref = Database.database().reference(withPath: "Reviews")
@@ -43,8 +51,8 @@ class NearbyFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-   
-     ref.observe(.value, with: { (snapshot) in
+   //using an observer to recognize changes in the database then adding it to the posts array as the newReviews array
+     ref.queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
        
         var newReviews: [Review] = []
         
@@ -54,7 +62,7 @@ class NearbyFeedViewController: UIViewController {
                 newReviews.append(review)
             }
         }
-        self.posts = newReviews
+        self.posts = newReviews.reversed()
         self.tableView.reloadData()
      })
     }
@@ -65,13 +73,14 @@ class NearbyFeedViewController: UIViewController {
             return
         }
         
-        let review = Review(description: message, reviewer: user.email
-            //, date: Date.description(Any?)
-        )
-       
+        let review = Review(description: message, reviewer: user.email, date: date)
+    
+        
         let reviewRef = self.ref.child(message)
         
         reviewRef.setValue(review.makeDictionary())
+        
+        self.messageField.text = nil
     }
 }
 
@@ -82,8 +91,11 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         let reviewCell = tableView.dequeueReusableCell(withIdentifier: "Review Cell", for: indexPath)
         let review = posts[indexPath.row]
+        
+    
         
         reviewCell.textLabel?.text = review.description
         reviewCell.detailTextLabel?.text = review.reviewer
