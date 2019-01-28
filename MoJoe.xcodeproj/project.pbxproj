@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5F4F05D7CFC8171CECE7FA91 /* Pods_MoJoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE5188F47E28591D566832E /* Pods_MoJoe.framework */; };
 		7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B2E212C98E3009D7F83 /* AppDelegate.swift */; };
-		7E312B31212C98E3009D7F83 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B30212C98E3009D7F83 /* FirstViewController.swift */; };
 		7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B32212C98E3009D7F83 /* SecondViewController.swift */; };
 		7E312B36212C98E3009D7F83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B34212C98E3009D7F83 /* Main.storyboard */; };
 		7E312B38212C98E3009D7F83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B37212C98E3009D7F83 /* Assets.xcassets */; };
@@ -29,6 +28,7 @@
 		819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819042F921A87987009C6083 /* FirstReviewViewController.swift */; };
 		81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA171F2180FC92003388DA /* AppLoadingViewController.swift */; };
 		81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA1721218110F7003388DA /* LoginNavigationController.swift */; };
+		81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */; };
 		81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE421E3E3890008B9A4 /* Review.swift */; };
 		81FE6AE721E3E6720008B9A4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE621E3E6720008B9A4 /* User.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,6 @@
 		68B6CEEA1D516D622CE5F1CC /* Pods-MoJoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoJoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe.release.xcconfig"; sourceTree = "<group>"; };
 		7E312B2B212C98E3009D7F83 /* MoJoe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoJoe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E312B2E212C98E3009D7F83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7E312B30212C98E3009D7F83 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		7E312B32212C98E3009D7F83 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		7E312B35212C98E3009D7F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E312B37212C98E3009D7F83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		819042F921A87987009C6083 /* FirstReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReviewViewController.swift; sourceTree = "<group>"; };
 		81EA171F2180FC92003388DA /* AppLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		81EA1721218110F7003388DA /* LoginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationController.swift; sourceTree = "<group>"; };
+		81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitReviewViewController.swift; sourceTree = "<group>"; };
 		81FE6AE421E3E3890008B9A4 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		81FE6AE621E3E6720008B9A4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		97D18275BB04A6374CA5EF50 /* Pods-MoJoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoJoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,14 +111,11 @@
 				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
 				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
 				7E312B4A212CA01B009D7F83 /* InitialViewController.swift */,
-				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
 				819042F921A87987009C6083 /* FirstReviewViewController.swift */,
-				81EA1721218110F7003388DA /* LoginNavigationController.swift */,
-				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
-				8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */,
+				81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */,
+				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
-				8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
@@ -126,6 +123,7 @@
 				7E312B3C212C98E3009D7F83 /* Info.plist */,
 				8141909921E1622D000BE77F /* GoogleService-Info.plist */,
 				8144EE8621EBEB23005FF0B6 /* UserService.swift */,
+				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
 			);
 			path = MoJoe;
 			sourceTree = "<group>";
@@ -133,7 +131,6 @@
 		8141909E21E2E649000BE77F /* Main Tab Bar Views */ = {
 			isa = PBXGroup;
 			children = (
-				7E312B30212C98E3009D7F83 /* FirstViewController.swift */,
 				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
 				7E312B32212C98E3009D7F83 /* SecondViewController.swift */,
 				7E312B42212C9DB6009D7F83 /* ThirdViewController.swift */,
@@ -149,6 +146,17 @@
 				ABE5188F47E28591D566832E /* Pods_MoJoe.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81F3444921FE4DEF00DF0E9F /* Register or Login Views */ = {
+			isa = PBXGroup;
+			children = (
+				8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */,
+				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
+				81EA1721218110F7003388DA /* LoginNavigationController.swift */,
+				8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */,
+			);
+			path = "Register or Login Views";
 			sourceTree = "<group>";
 		};
 		81FE6AE821E3EEAA0008B9A4 /* Models */ = {
@@ -308,10 +316,10 @@
 				7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
 				8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */,
+				81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */,
 				81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */,
 				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,
 				7E312B43212C9DB6009D7F83 /* ThirdViewController.swift in Sources */,
-				7E312B31212C98E3009D7F83 /* FirstViewController.swift in Sources */,
 				7E312B45212C9DFF009D7F83 /* FourthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

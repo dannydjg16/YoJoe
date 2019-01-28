@@ -33,7 +33,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         self.shopsTextField.resignFirstResponder()
     }
  
-    var danny = FirstViewController.trueFalse.realTF
+   
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

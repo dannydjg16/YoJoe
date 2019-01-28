@@ -10,11 +10,13 @@ import Foundation
 import Firebase
 
 struct Review {
-    
+    //I think i can use different combinations of the inits of review paired with the cells that will take be able to handle all of the information that goes in each type of review. I need to make those cells and inits though
     let description: String
     let reviewer: String
     let ref: DatabaseReference?
     let key: String
+    
+    //Im not sure, but i think that this may really only need to be done in the review vc. the whole get/set thing but I can look  into that later. As long as its a string here i feel like it doesnt really matter how it gets to that point, which is why that can be taken care of in the other vc.
     var date: String {
         get {
         let postDate = Date()
@@ -24,22 +26,13 @@ struct Review {
             return stringDate
         }
         
-        set{
+        set {
             let postDate = Date()
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "YYYY-MM-dd HH:mm:ss"
             var stringDate = dateFormat.string(from: postDate)
             return stringDate = newValue
         }
- 
-        /*get {
-            
-        }
-        set {
-            
-            return date =
-        }*/
-      
     }
     
     init(description: String, reviewer: String, key: String = "", date: String) {

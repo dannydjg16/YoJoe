@@ -38,6 +38,15 @@ class NearbyFeedViewController: UIViewController {
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    @IBAction func toReviewButton(_ sender: Any) {
+        let reviewTypeAlert = UIAlertController(title: "Would you like to share:", message: "", preferredStyle: .alert)
+        reviewTypeAlert.addAction(UIAlertAction(title: "A coffee you brewed yourself?", style: .default, handler: { action in self.performSegue(withIdentifier: "feedToVisit", sender: self)}))
+        reviewTypeAlert.addAction(UIAlertAction(title: "A coffee from a shop you visited?", style: .default, handler: {action in self.performSegue(withIdentifier: "feedToBrew", sender: self)}))
+        self.present(reviewTypeAlert, animated: true, completion: nil)
+    }
+    
+    
     //MARK: tap gesture recognizer
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.messageField.resignFirstResponder()
