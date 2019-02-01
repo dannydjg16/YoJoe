@@ -17,8 +17,10 @@ import Firebase
 class FirstReviewViewController: UIViewController {
 
     var imagePicker: UIImagePickerController!
+    var reviewHelpers: [ReviewHelper] = []
     
     @IBOutlet weak var coffeePicOne: UIImageView!
+    @IBOutlet weak var reviewHelperTableView: UITableView!
     
     
     //These are for making sure that the app still works and where they were when i can test it with my phone becuase i need the phone. also moved the protocols down to the extension
@@ -39,7 +41,21 @@ class FirstReviewViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+    func makeInitialArray() -> [ReviewHelper] {
+        var tempReviewHelp: [ReviewHelper] = []
+        
+        let reviewHelperBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "first"), reviewCategory: "Add Type of Brew")
+        
+        let reviewHelperRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "first"), reviewCategory: "Add Type of Roast")
+        
+        let reviewHelperRating = ReviewHelper(reviewImage: #imageLiteral(resourceName: "first"), reviewCategory: "Add Rating")
+        
+        tempReviewHelp.append(reviewHelperBrew)
+        tempReviewHelp.append(reviewHelperRoast)
+        tempReviewHelp.append(reviewHelperRating)
+        
+        return tempReviewHelp
+    }
     
     
   
@@ -58,11 +74,45 @@ class FirstReviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reviewHelpers = makeInitialArray()
+        
+        reviewHelperTableView.delegate = self
+        reviewHelperTableView.dataSource = self
     }
     
 
 
 }
+
+
+extension FirstReviewViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviewHelpers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let review = reviewHelpers[indexPath.row]
+        
+        
+        let cell =
+            reviewHelperTableView?.dequeueReusableCell(
+                withIdentifier:
+            "ReviewHelperTableViewCell")
+            as!
+        ReviewHelperTableViewCell
+        
+        cell.setReview(review: review)
+        
+        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.layer.borderWidth = 2
+        
+        return cell
+    }
+    
+    
+}
+
 
 
 extension FirstReviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
