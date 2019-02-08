@@ -66,6 +66,7 @@ class NearbyFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        messageField.delegate = self
    //using an observer to recognize changes in the database then adding it to the posts array as the newReviews array
      ref.queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
        

@@ -13,8 +13,10 @@
 import UIKit
 import Firebase
 
-
-class FirstReviewViewController: UIViewController {
+class FirstReviewViewController: UIViewController, cellTextDelegate {
+    
+   
+    
 
     var imagePicker: UIImagePickerController!
     var reviewHelpers: [ReviewHelper] = []
@@ -23,19 +25,7 @@ class FirstReviewViewController: UIViewController {
     @IBOutlet weak var reviewHelperTableView: UITableView!
     
     
-    //These are for making sure that the app still works and where they were when i can test it with my phone becuase i need the phone. also moved the protocols down to the extension
-//    @IBAction func pictureButton(_ sender: Any) {
-//        imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-//        imagePicker.sourceType = .camera
-//        self.present(imagePicker, animated: true, completion: nil)
-//    }
     
-    //One thing that i think will be less of a problem than thought is the image being in the post, i think its just blank until you add an image that you can see.
-    //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    //        imagePicker.dismiss(animated: true, completion: nil)
-    //        coffeePicOne.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-    //    }
     
     @IBAction private func postButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -44,11 +34,11 @@ class FirstReviewViewController: UIViewController {
     func makeInitialArray() -> [ReviewHelper] {
         var tempReviewHelp: [ReviewHelper] = []
         
-        let reviewHelperBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "first"), reviewCategory: "Add Type of Brew")
+        let reviewHelperBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Add Type of Brew")
         
-        let reviewHelperRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "first"), reviewCategory: "Add Type of Roast")
+        let reviewHelperRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Add Type of Roast")
         
-        let reviewHelperRating = ReviewHelper(reviewImage: #imageLiteral(resourceName: "first"), reviewCategory: "Add Rating")
+        let reviewHelperRating = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Add Rating")
         
         tempReviewHelp.append(reviewHelperBrew)
         tempReviewHelp.append(reviewHelperRoast)
@@ -56,21 +46,10 @@ class FirstReviewViewController: UIViewController {
         
         return tempReviewHelp
     }
-    
-    
-  
-    
-    
-    
-  
  
-    
-   
-    
-    
-    
-   
-  
+    func changeText(text: String) {
+        <#code#>
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +89,16 @@ extension FirstReviewViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        let currentReview = reviewHelpers[indexPath.row]
+        
+      let modalView = storyboard!.instantiateViewController(withIdentifier: "modalPresentView")
+        modalView.transitioningDelegate = self as UIViewControllerTransitioningDelegate
+        modalView.modalPresentationStyle = .custom
+        
+        self.present(modalView, animated: true, completion: nil)
+    }
     
 }
 
@@ -129,3 +118,13 @@ extension FirstReviewViewController: UIImagePickerControllerDelegate, UINavigati
     }
     
 }
+
+extension FirstReviewViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+       
+        return smallViewInBigView(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+
+

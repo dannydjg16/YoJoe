@@ -43,26 +43,9 @@ class AppLoadingViewController: UIViewController {
             
         }
         
-       // self.performSegue(withIdentifier: "firstSegue", sender: self)
+     
         
-      /*
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
       
-        //if the user is not logged in, i want them to go to the loginVC through the firstSegue
-        if isLoggedIn == false {
-      
-            self.performSegue(withIdentifier: "firstSegue", sender: self)
-        }
-       
-        
-        
-        let mainTabController = storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
-        
-        mainTabController.selectedViewController = mainTabController.viewControllers?[0]
-        
-        present(mainTabController, animated: true, completion: nil)
-        
-    }*/
 }
     // MARK: - Navigation
 

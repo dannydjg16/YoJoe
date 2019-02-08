@@ -25,10 +25,10 @@ class FourthViewController: UIViewController {
     @IBAction func setDefaultLabelText(_ sender: Any) {
         mealNameLabel.text = "Default Text"
     }
-    
+    // Think the problem is all the other stuff that is going to limit the capabilities/what it is told to do becaus i didnt import the whole file only really the one function.(should be in the other file, whoops. it can stay here for now.)
     @IBAction func modalPresentButton(_ sender: Any) {
-        let modalView = storyboard?.instantiateViewController(withIdentifier: "modalPresentView") as! UIViewController
-        modalView.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
+        let modalView = storyboard!.instantiateViewController(withIdentifier: "modalPresentView")
+        modalView.transitioningDelegate = self as UIViewControllerTransitioningDelegate
         modalView.modalPresentationStyle = .custom
         
         self.present(modalView, animated: true, completion: nil)
@@ -56,6 +56,9 @@ extension FourthViewController: UITextFieldDelegate {
 }
 
 
+
+
+
 extension FourthViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return smallViewInBigView(presentedViewController: presented, presenting: presenting)
@@ -63,14 +66,3 @@ extension FourthViewController: UIViewControllerTransitioningDelegate {
 }
 
 
-//Might want to move this into a class by itself, but for now i feel like there isnt really a problem with it being here.
-class smallViewInBigView: UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        get {
-            guard let view = containerView else {
-                return CGRect.zero
-            }
-            return CGRect(x: 0, y: view.bounds.height/3 , width: view.bounds.width, height: view.bounds.height/3 )
-        }
-    }
-}
