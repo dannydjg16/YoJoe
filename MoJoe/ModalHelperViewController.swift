@@ -23,7 +23,7 @@ class ModalHelperViewController: UIViewController {
     }
     //this will eventually turn into something else, right now im just wokring on the logic of sending whatever is typed/selected on the modal view to the review vc
     @IBAction func reviewSendButton(_ sender: Any) {
-
+//probably a problem, but i am force unwrapping the textfield and its gonna need to have some text already in it or crash. 
         textDelegate?.changeText(text: reviewTextField.text!)
         
         

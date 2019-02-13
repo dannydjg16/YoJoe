@@ -109,10 +109,9 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let reviewCell = tableView.dequeueReusableCell(withIdentifier: "Review Cell", for: indexPath)
+       
         let review = posts[indexPath.row]
-        
-    
-        
+      
         reviewCell.textLabel?.text = review.description
         reviewCell.detailTextLabel?.text = review.reviewer
         

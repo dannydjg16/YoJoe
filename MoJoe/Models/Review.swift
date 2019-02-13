@@ -16,6 +16,9 @@ struct Review {
     let ref: DatabaseReference?
     let key: String
     
+    //the new additions. first real cell (w/o the pictures bc i dont know how to store those
+    
+    
     //Im not sure, but i think that this may really only need to be done in the review vc. the whole get/set thing but I can look  into that later. As long as its a string here i feel like it doesnt really matter how it gets to that point, which is why that can be taken care of in the other vc.
     var date: String {
         get {
