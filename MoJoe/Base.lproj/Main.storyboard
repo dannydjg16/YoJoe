@@ -279,6 +279,7 @@
                     <navigationItem key="navigationItem" id="RUM-r8-nwD"/>
                     <connections>
                         <outlet property="coffeePicOne" destination="dVY-lt-TD0" id="4cl-09-YBU"/>
+                        <outlet property="detailTextField" destination="MHm-wV-6rE" id="Vd4-Qv-8vv"/>
                         <outlet property="reviewHelperTableView" destination="2Zq-5D-blf" id="7Ea-Nh-7ep"/>
                         <segue destination="GJC-y9-Cmx" kind="presentation" identifier="toBrewReview" id="W2j-Lr-DYL"/>
                         <segue destination="dTE-gI-3N8" kind="presentation" identifier="toRoastReview" id="46o-kJ-PyU"/>

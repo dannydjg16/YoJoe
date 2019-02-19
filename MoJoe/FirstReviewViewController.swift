@@ -16,7 +16,7 @@ import Firebase
 class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, ChangeCellIntDelegate {
     
     
-    
+    //MARK: These are the functions that change the value of the cells text to whatever the person picked for the roast, brew, and rating.
     //this is the function to change the third(rating) cell to whatever the rating will be. this is easy to see because of the INT in the name and row:2.
     func changeCellInt(number: Int) {
         let indexPath = IndexPath.init(row: 2, section: 0)
@@ -32,8 +32,9 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
         let cell = reviewHelperTableView.cellForRow(at: indexPath) as! ReviewHelperTableViewCell
         cell.reviewCategory.text = text
     }
-    //the function to save the data of each vc so that it can be used in the cell. sent through a segue(prepare for segue). idek if what i said before this is true. set a breakpoint on any of them and see that the code is run before the vc is presented, not after it is dismissed. thinking of maybe implemetnign anoteher switch statement like the one that decides which segue to run when whatever cell is selected.
     
+    
+    //MARK: the function that helps with throwing data between the review vc and the modally presented view.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, let brewPick = nav.topViewController as? BrewPickViewController {
             brewPick.cellDelegate = self
@@ -49,19 +50,33 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
     
    
     
-
+    @IBOutlet weak var detailTextField: UITextField!
+    
     var imagePicker: UIImagePickerController!
     var reviewHelpers: [ReviewHelper] = []
     
     @IBOutlet weak var coffeePicOne: UIImageView!
     @IBOutlet weak var reviewHelperTableView: UITableView!
+   
+    let ref = Database.database().reference(withPath: "ReviewPost")
+    
     
     
    
-    
-    
-    
     @IBAction private func postButtonPressed(_ sender: Any) {
+        guard let detail = detailTextField.text, let table = reviewHelperTableView, let cell = table.cellForRow(at: IndexPath.init(row: 0, section: 0)) else {
+            return
+        }
+        
+//        let reviewPost = ReviewPost(detail: detailTextField.text, poster: <#T##String#>, brew: cell., roast: <#T##String#>, rating: <#T##Int#>, key: <#T##String#>, date: <#T##String#>)
+        
+        print(cell.)
+        
+        
+        
+        
+        
+        
         self.dismiss(animated: true, completion: nil)
     }
     

@@ -16,8 +16,7 @@ struct Review {
     let ref: DatabaseReference?
     let key: String
     
-    //the new additions. first real cell (w/o the pictures bc i dont know how to store those
-    
+
     
     //Im not sure, but i think that this may really only need to be done in the review vc. the whole get/set thing but I can look  into that later. As long as its a string here i feel like it doesnt really matter how it gets to that point, which is why that can be taken care of in the other vc.
     var date: String {
@@ -38,6 +37,7 @@ struct Review {
         }
     }
     
+    //this shoudl be the initializer for just the message field version of the feed that takes place on just the feed vc. Im gonna try and make a new init that has all the parts of the more in depth. I think that might involve doing a new makeDictionary function also
     init(description: String, reviewer: String, key: String = "", date: String) {
         self.description = description
         self.reviewer = reviewer
@@ -46,7 +46,6 @@ struct Review {
         self.date = date
         
     }
-    
 
     
     

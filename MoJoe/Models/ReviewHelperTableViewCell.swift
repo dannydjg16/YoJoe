@@ -17,4 +17,8 @@ class ReviewHelperTableViewCell: UITableViewCell {
         reviewImage.image = review.reviewImage
         reviewCategory.text = review.reviewCategory
     }
+    
+    func returnObject(object: Any) -> Any {
+        let cell = 
+    }
 }
