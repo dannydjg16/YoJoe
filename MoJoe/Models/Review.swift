@@ -37,7 +37,7 @@ struct Review {
         }
     }
     
-    //this shoudl be the initializer for just the message field version of the feed that takes place on just the feed vc. Im gonna try and make a new init that has all the parts of the more in depth. I think that might involve doing a new makeDictionary function also
+    
     init(description: String, reviewer: String, key: String = "", date: String) {
         self.description = description
         self.reviewer = reviewer

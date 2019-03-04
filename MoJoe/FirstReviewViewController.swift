@@ -16,6 +16,39 @@ import Firebase
 class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, ChangeCellIntDelegate {
     
     
+    var user: User? {
+    var ref: DatabaseReference!
+        guard let firebaseUser = Auth.auth().currentUser,
+            let email = firebaseUser.email else {
+                return nil
+        }
+        return User(uid: firebaseUser.uid, email: email)
+    }
+    
+    @IBOutlet weak var detailTextField: UITextField!
+    
+    var imagePicker: UIImagePickerController!
+    var reviewHelpers: [ReviewHelper] = []
+    
+    @IBOutlet weak var coffeePicOne: UIImageView!
+    @IBOutlet weak var reviewHelperTableView: UITableView!
+   
+    let ref = Database.database().reference(withPath: "ReviewPosts")
+    var date: String {
+        get {
+            let postDate = Date()
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "YYYY-MM-dd HH:mm:ss"
+            let stringDate = dateFormat.string(from: postDate)
+            return stringDate
+        }
+    }
+    
+    
+    
+    
+    
+    
     //MARK: These are the functions that change the value of the cells text to whatever the person picked for the roast, brew, and rating.
     //this is the function to change the third(rating) cell to whatever the rating will be. this is easy to see because of the INT in the name and row:2.
     func changeCellInt(number: Int) {
@@ -24,7 +57,7 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
         cell.reviewCategory.text = String(number)
     }
     
-   
+    
     //this is the function to change what is in the first cell of the tableview. check row:0, section:0 to know. Tbh mad happy i did this. i used indexpathforselectedrow so that the code could realize what cell i wanted to alter. then instead of using a preset row for the indexpath to change, i just used that constant
     func changeCellText(text: String) {
         let cellOfClick = reviewHelperTableView.indexPathForSelectedRow?.row
@@ -43,42 +76,65 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
             roastPick.roastDelegate = self
         }
         if let nav2 = segue.destination as? UINavigationController, let ratePick = nav2.topViewController as? RatingPickViewController {
-                ratePick.ratingDelegate = self
+            ratePick.ratingDelegate = self
         }
         
-        }
-    
-   
-    
-    @IBOutlet weak var detailTextField: UITextField!
-    
-    var imagePicker: UIImagePickerController!
-    var reviewHelpers: [ReviewHelper] = []
-    
-    @IBOutlet weak var coffeePicOne: UIImageView!
-    @IBOutlet weak var reviewHelperTableView: UITableView!
-   
-    let ref = Database.database().reference(withPath: "ReviewPost")
-    
-    
-    
+    }
    
     @IBAction private func postButtonPressed(_ sender: Any) {
-        guard let detail = detailTextField.text, let table = reviewHelperTableView, let cell = table.cellForRow(at: IndexPath.init(row: 0, section: 0)) else {
+        
+        guard let detail = detailTextField.text,
+            let brewCell: ReviewHelperTableViewCell = self.reviewHelperTableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! ReviewHelperTableViewCell,
+            let roastCell: ReviewHelperTableViewCell = self.reviewHelperTableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! ReviewHelperTableViewCell,
+            let ratingCell: ReviewHelperTableViewCell = self.reviewHelperTableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! ReviewHelperTableViewCell else {
             return
         }
+        //MARK: These are the errors that could happen as a result of filling in the review incorecctly or just not filling it in at all.
         
-//        let reviewPost = ReviewPost(detail: detailTextField.text, poster: <#T##String#>, brew: cell., roast: <#T##String#>, rating: <#T##Int#>, key: <#T##String#>, date: <#T##String#>)
+        //This shit is here in case i want to contnu
+//        guard let detailError = detailTextField.text, let brewError = brewCell.reviewCategory.text, let roastError = roastCell.reviewCategory.text, let ratingError = ratingCell.reviewCategory.text else {
+//
+//
+//            return
+//        }
         
-        print(cell.)
+        //THings in review post -> detail, poster, brew, roast, rating, key, ref, date
+       
+//    guard let detailOfPost = detail, let poster = self.user, let brewType = brewCell.reviewCategory.text, let roastType = roastCell.reviewCategory.text, let
         
         
+        if let rating = Int(ratingCell.reviewCategory.text!) {
+       
+            
+            
+            
+            
+            let reviewPost = ReviewPost(detail: detail, poster: self.user!.email, brew: brewCell.reviewCategory.text!, roast: roastCell.reviewCategory.text!, rating: rating, date: date)
+            
+            let reviewRef = self.ref.child(detail)
+            reviewRef.setValue(reviewPost.makeDictionary())
+            
+            
+            
+        print(reviewPost.brew)
+        print(reviewPost.rating)
+        print(reviewPost.roast)
+        print(reviewPost.detail)
+        
+        } else if ratingCell.reviewCategory.text == "Add Rating" {
+            reviewErrorAlert(title: "Rating Section Not Properly Filled In", message: "Add Rating")
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+      
+        //ELSE JUST PRESENT A ALERT THAT SAYS YOU NEED TO FILL OUT THE RATING FIELD.
         
         
-        
-        
-        self.dismiss(animated: true, completion: nil)
+      self.dismiss(animated: true, completion: nil)
     }
+    
+    
     
     func makeInitialArray() -> [ReviewHelper] {
         var tempReviewHelp: [ReviewHelper] = []
@@ -107,6 +163,13 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
         reviewHelperTableView.dataSource = self
         
         
+        
+        
+        detailTextField.textAlignment = .left
+        detailTextField.contentVerticalAlignment = .top
+
+        
+        navigationController?.navigationBar.barTintColor = .gray
     }
     
 
@@ -186,4 +249,11 @@ extension FirstReviewViewController: UIViewControllerTransitioningDelegate {
 }
 
 
-
+extension FirstReviewViewController {
+    //MARK: function that will hold the alertaction to fill in the int field, or to change the roast/rating/whatever.
+    func reviewErrorAlert(title: String, message: String) {
+        let reviewError = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        reviewError.addAction(UIAlertAction(title: "Finish Review", style: .default, handler: nil))
+        self.present(reviewError, animated: true, completion: nil)
+    }
+}

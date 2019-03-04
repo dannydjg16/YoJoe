@@ -12,6 +12,8 @@ import Firebase
 class NearbyFeedViewController: UIViewController {
     //MARK: variables and constants
     var posts: [Review] = []
+    var reviewPosts: [ReviewPost] = []
+
     
     var user: User? {
     var ref: DatabaseReference!
@@ -33,6 +35,7 @@ class NearbyFeedViewController: UIViewController {
     }
     
     let ref = Database.database().reference(withPath: "Reviews")
+    let reviewPostref = Database.database().reference(withPath: "ReviewPosts")
    
     //MARK: outlets then actions
     @IBOutlet weak var messageField: UITextField!
@@ -70,7 +73,8 @@ class NearbyFeedViewController: UIViewController {
    //using an observer to recognize changes in the database then adding it to the posts array as the newReviews array
      ref.queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
        
-        var newReviews: [Review] = []
+        var newReviews: [Review]  = []
+        
         
         for child in snapshot.children {
             if let snapshot = child as? DataSnapshot,
@@ -78,9 +82,15 @@ class NearbyFeedViewController: UIViewController {
                 newReviews.append(review)
             }
         }
+        
+        
         self.posts = newReviews.reversed()
         self.tableView.reloadData()
      })
+        
+        
+        
+//        reviewPostRef.queryOrdered(byChild: "date").observe(.value, with: <#T##(DataSnapshot) -> Void#>)
     }
 
     @IBAction func sendMessage(_ sender: Any) {
@@ -108,6 +118,9 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
+        let cellType = self.posts[indexPath.row]
+       
+        if let reviewCell = cellType as? Review {
         let reviewCell = tableView.dequeueReusableCell(withIdentifier: "Review Cell", for: indexPath)
        
         let review = posts[indexPath.row]
@@ -115,7 +128,20 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
         reviewCell.textLabel?.text = review.description
         reviewCell.detailTextLabel?.text = review.reviewer
         
-        return reviewCell
+            return reviewCell
+        } else if let reviewPostCell = cellType as? ReviewPost {
+            let reviewPostCell = tableView.dequeueReusableCell(withIdentifier: "ReviewPostCell", for: indexPath) as! ReviewPostCell
+            let currentReview = reviewPosts[indexPath.row]
+            
+            reviewPostCell.posterLabel.text = currentReview.poster
+            reviewPostCell.brewLabel.text = currentReview.brew
+            reviewPostCell.detailLabel.text = currentReview.detail
+            reviewPostCell.roastLabel.text = currentReview.roast
+            reviewPostCell.ratingLabel.text = String(currentReview.rating)
+            
+            
+            return reviewPostCell
+        }
     }
 }
 

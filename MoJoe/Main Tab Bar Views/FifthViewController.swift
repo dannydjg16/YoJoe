@@ -26,24 +26,24 @@ class FifthViewController: UIViewController {
     
     
     
-    //logout
+    //logout----> this is 100% copied so i will probably have to chane it IDK though. Like literally 100%. I actually copy and pasted and the website i used popped up.
     @IBAction func logout(_ sender: Any) {
         
         
-        // 1
+      
         let user = Auth.auth().currentUser!
         let onlineRef = Database.database().reference(withPath: "online/\(user.uid)")
         
-        // 2
+     
         onlineRef.removeValue { (error, _) in
             
-            // 3
+           
             if let error = error {
                 print("Removing online failed: \(error)")
                 return
             }
             
-            // 4
+          
             do {
                 try Auth.auth().signOut()
                 self.dismiss(animated: true, completion: nil)
@@ -61,9 +61,6 @@ class FifthViewController: UIViewController {
         
         
           dismiss(animated: true, completion: nil)
-        /*UserDefaults.standard.set(false, forKey: "loggedIn")
-        UserDefaults.standard.synchronize()
- */
      
         
     }
