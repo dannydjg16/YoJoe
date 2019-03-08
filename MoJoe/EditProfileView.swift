@@ -7,18 +7,51 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
+
 
 class EditProfileView: UIViewController {
-
+    var user: User? {
+        var ref: DatabaseReference!
+        guard let firebaseUser = Auth.auth().currentUser,
+            let email = firebaseUser.email else {
+                return nil
+        }
+        return User(uid: firebaseUser.uid, email: email)
+    }
+   var userMee = Auth.auth().currentUser
+    
+    @IBOutlet weak var changeNameField: UITextField!
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        var userMe = Auth.auth().currentUser!;
+        
+       // userMe.updateProfile({
+            
+        })
+        
     }
     
+    
+    
+    
+    func changeName() {
+        if Auth.auth().currentUser != nil {
+            
+        }
+    }
     
 }

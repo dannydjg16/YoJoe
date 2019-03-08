@@ -35,7 +35,7 @@ class NearbyFeedViewController: UIViewController {
     }
     
     let ref = Database.database().reference(withPath: "Reviews")
-    let reviewPostref = Database.database().reference(withPath: "ReviewPosts")
+    let reviewPostRef = Database.database().reference(withPath: "ReviewPosts")
    
     //MARK: outlets then actions
     @IBOutlet weak var messageField: UITextField!
@@ -70,29 +70,43 @@ class NearbyFeedViewController: UIViewController {
         super.viewDidLoad()
 
         messageField.delegate = self
-   //using an observer to recognize changes in the database then adding it to the posts array as the newReviews array
+   //using an observer to recognize changes in the database then adding it to the posts array as the newReviews array. THIS IS ALL GONN ABE COMMENTED OUT AND IM GONNA TRY AND MAKE THE CODE FOR THE REVIEWPOSTS THEN COMBINE THAT SHIT
      ref.queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
-       
-        var newReviews: [Review]  = []
-        
-        
+
+        var newReviews: [Review] = []
+
+
         for child in snapshot.children {
             if let snapshot = child as? DataSnapshot,
                 let review = Review(snapshot: snapshot){
                 newReviews.append(review)
             }
         }
-        
-        
+
+
         self.posts = newReviews.reversed()
         self.tableView.reloadData()
      })
         
         
         
-//        reviewPostRef.queryOrdered(byChild: "date").observe(.value, with: <#T##(DataSnapshot) -> Void#>)
+        reviewPostRef.queryOrdered(byChild: "date").observe(.value, with: {(snapshot) in
+            
+            var newReviewPosts: [ReviewPost] = []
+            
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot, let reviewPost = ReviewPost(snapshot: snapshot){
+                    newReviewPosts.append(reviewPost)
+                }
+            }
+        self.reviewPosts = newReviewPosts.reversed()
+        self.tableView.reloadData()
+        })
+        
+      
     }
 
+   
     @IBAction func sendMessage(_ sender: Any) {
         guard let message = messageField.text,
             let user = self.user else {
@@ -112,24 +126,29 @@ class NearbyFeedViewController: UIViewController {
 
 extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 172
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        //return posts.count
+        return reviewPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
-        let cellType = self.posts[indexPath.row]
-       
-        if let reviewCell = cellType as? Review {
-        let reviewCell = tableView.dequeueReusableCell(withIdentifier: "Review Cell", for: indexPath)
-       
-        let review = posts[indexPath.row]
-      
-        reviewCell.textLabel?.text = review.description
-        reviewCell.detailTextLabel?.text = review.reviewer
-        
-            return reviewCell
-        } else if let reviewPostCell = cellType as? ReviewPost {
+       //I think this is where the/(a)problem is with trying to combine the two types. posts is an array of just type review so that could be what is causing a problem
+//        let cellType = self.posts[indexPath.row]
+//
+//        if let reviewCell = cellType as? Review {
+//        let reviewCell = tableView.dequeueReusableCell(withIdentifier: "Review Cell", for: indexPath)
+//
+//        let review = posts[indexPath.row]
+//
+//        reviewCell.textLabel?.text = review.description
+//        reviewCell.detailTextLabel?.text = review.reviewer
+//
+//            return reviewCell
+//        } else if let reviewPostCell = cellType as? ReviewPost {
             let reviewPostCell = tableView.dequeueReusableCell(withIdentifier: "ReviewPostCell", for: indexPath) as! ReviewPostCell
             let currentReview = reviewPosts[indexPath.row]
             
@@ -141,7 +160,7 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
             
             
             return reviewPostCell
-        }
+        //}
     }
 }
 

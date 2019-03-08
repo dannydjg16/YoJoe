@@ -98,8 +98,7 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
 //            return
 //        }
         
-        //THings in review post -> detail, poster, brew, roast, rating, key, ref, date
-       
+        
 //    guard let detailOfPost = detail, let poster = self.user, let brewType = brewCell.reviewCategory.text, let roastType = roastCell.reviewCategory.text, let
         
         

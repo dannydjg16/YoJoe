@@ -113,7 +113,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate  {
         let myAlert = UIAlertController(title: "Alert" , message: message, preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Fill remaining fields", style: UIAlertAction.Style.default, handler: nil)
-       
+     
        
         myAlert.addAction(UIAlertAction(title: "Hello", style: .cancel, handler: nil))
         myAlert.addAction(okAction)

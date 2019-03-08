@@ -25,6 +25,8 @@ struct ReviewPost {
     let ref: DatabaseReference?
     
     let date: String
+    
+
 // Might also needa date as it is in the review file. Im not sure where it needs to get made into a dateformat and shit. for now, imm gonna try and do it all in the other file and if that doesnt work im gonna try and do it all in this file. I actually want to put a date on the acutal post, which requires me to format it differently. right not i dont know if i need to make another date constant and have on efor storing and one for the post but ill figure that out when i have more time
     
     init(detail: String, poster: String, brew: String, roast: String, rating: Int, key: String = "", date: String) {
