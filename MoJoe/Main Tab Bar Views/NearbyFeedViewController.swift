@@ -13,6 +13,7 @@ class NearbyFeedViewController: UIViewController {
     //MARK: variables and constants
     var posts: [Review] = []
     var reviewPosts: [ReviewPost] = []
+   // var feed: 
 
     
     var user: User? {
@@ -158,7 +159,9 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
             reviewPostCell.roastLabel.text = currentReview.roast
             reviewPostCell.ratingLabel.text = String(currentReview.rating)
             
-            
+        reviewPostCell.layer.borderColor = UIColor.black.cgColor
+        reviewPostCell.layer.borderWidth = 2
+        
             return reviewPostCell
         //}
     }

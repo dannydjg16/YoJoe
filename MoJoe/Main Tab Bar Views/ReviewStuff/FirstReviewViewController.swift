@@ -25,6 +25,8 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
         return User(uid: firebaseUser.uid, email: email)
     }
     
+    var userMe = Auth.auth().currentUser
+    
     @IBOutlet weak var detailTextField: UITextField!
     
     var imagePicker: UIImagePickerController!
@@ -108,7 +110,7 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
             
             
             
-            let reviewPost = ReviewPost(detail: detail, poster: self.user!.email, brew: brewCell.reviewCategory.text!, roast: roastCell.reviewCategory.text!, rating: rating, date: date)
+            let reviewPost = ReviewPost(detail: detail, poster: (self.userMe?.displayName)!, brew: brewCell.reviewCategory.text!, roast: roastCell.reviewCategory.text!, rating: rating, date: date)
             
             let reviewRef = self.ref.child(detail)
             reviewRef.setValue(reviewPost.makeDictionary())
@@ -120,8 +122,8 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
         print(reviewPost.roast)
         print(reviewPost.detail)
         
-        } else if ratingCell.reviewCategory.text == "Add Rating" {
-            reviewErrorAlert(title: "Rating Section Not Properly Filled In", message: "Add Rating")
+        } else if ratingCell.reviewCategory.text == "Add Rating" || brewCell.reviewCategory.text == "Add Type of Brew" || roastCell.reviewCategory.text == "Add Type of Roast" {
+            reviewErrorAlert(title: "One or More Sections Not Filled Out", message: "Finish Review")
         } else {
             self.dismiss(animated: true, completion: nil)
         }
@@ -194,7 +196,7 @@ extension FirstReviewViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell.setReview(review: review)
         
-        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         
         return cell

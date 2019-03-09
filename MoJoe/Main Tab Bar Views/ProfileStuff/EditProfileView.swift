@@ -20,11 +20,18 @@ class EditProfileView: UIViewController {
         }
         return User(uid: firebaseUser.uid, email: email)
     }
-   var userMee = Auth.auth().currentUser
+ 
     
     @IBOutlet weak var changeNameField: UITextField!
     
+  
     
+    func mergeArrays(reviewArray: [Review], reviewPostArray: [ReviewPost]) -> [Any] {
+        var feedArray: [Any] = []
+        
+        
+        return feedArray
+    }
     
     
     
@@ -37,19 +44,23 @@ class EditProfileView: UIViewController {
     
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        var userMe = Auth.auth().currentUser!;
-        
-       // userMe.updateProfile({
-            
-        })
-        
+    
+    }
+    
+    @IBAction func setName(_ sender: Any) {
+        changeName()
+        let user = Auth.auth().currentUser
+        print(user?.displayName)
+        let nameOfUser = user?.displayName
+        print(nameOfUser!)
     }
     
     
     
-    
     func changeName() {
-        if Auth.auth().currentUser != nil {
+        let userNameChange = Auth.auth().currentUser?.createProfileChangeRequest()
+        userNameChange?.displayName = changeNameField.text
+        userNameChange?.commitChanges { (error) in
             
         }
     }

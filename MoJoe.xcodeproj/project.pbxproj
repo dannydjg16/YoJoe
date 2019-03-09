@@ -35,6 +35,7 @@
 		81B668E021FFA5DA00BBC025 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */; };
 		81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */; };
 		81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E3220375D300BBC025 /* ModalHelperViewController.swift */; };
+		81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC1F1622342C0500E50D21 /* ProfileOverview.swift */; };
 		81E92B3122147D1C00CD6303 /* RatingPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E92B3022147D1C00CD6303 /* RatingPickViewController.swift */; };
 		81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA171F2180FC92003388DA /* AppLoadingViewController.swift */; };
 		81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA1721218110F7003388DA /* LoginNavigationController.swift */; };
@@ -75,6 +76,7 @@
 		81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelperTableViewCell.swift; sourceTree = "<group>"; };
 		81B668E3220375D300BBC025 /* ModalHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHelperViewController.swift; sourceTree = "<group>"; };
+		81BC1F1622342C0500E50D21 /* ProfileOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOverview.swift; sourceTree = "<group>"; };
 		81E92B3022147D1C00CD6303 /* RatingPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPickViewController.swift; sourceTree = "<group>"; };
 		81EA171F2180FC92003388DA /* AppLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		81EA1721218110F7003388DA /* LoginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationController.swift; sourceTree = "<group>"; };
@@ -132,14 +134,11 @@
 				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
 				7E312B4A212CA01B009D7F83 /* InitialViewController.swift */,
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
-				819042F921A87987009C6083 /* FirstReviewViewController.swift */,
-				81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */,
 				81E92B3222147D2A00CD6303 /* ReviewPickerVCs */,
 				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
-				81789490222CB3C6001F8CE6 /* EditProfileView.swift */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
@@ -155,10 +154,12 @@
 			isa = PBXGroup;
 			children = (
 				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
+				81BC1F192234361B00E50D21 /* ReviewStuff */,
 				7E312B32212C98E3009D7F83 /* SecondViewController.swift */,
 				7E312B42212C9DB6009D7F83 /* ThirdViewController.swift */,
 				7E312B44212C9DFF009D7F83 /* FourthViewController.swift */,
 				7E312B46212C9E30009D7F83 /* FifthViewController.swift */,
+				81BC1F18223435A900E50D21 /* ProfileStuff */,
 			);
 			path = "Main Tab Bar Views";
 			sourceTree = "<group>";
@@ -169,6 +170,24 @@
 				ABE5188F47E28591D566832E /* Pods_MoJoe.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81BC1F18223435A900E50D21 /* ProfileStuff */ = {
+			isa = PBXGroup;
+			children = (
+				81789490222CB3C6001F8CE6 /* EditProfileView.swift */,
+				81BC1F1622342C0500E50D21 /* ProfileOverview.swift */,
+			);
+			path = ProfileStuff;
+			sourceTree = "<group>";
+		};
+		81BC1F192234361B00E50D21 /* ReviewStuff */ = {
+			isa = PBXGroup;
+			children = (
+				819042F921A87987009C6083 /* FirstReviewViewController.swift */,
+				81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */,
+			);
+			path = ReviewStuff;
 			sourceTree = "<group>";
 		};
 		81E92B3222147D2A00CD6303 /* ReviewPickerVCs */ = {
@@ -366,6 +385,7 @@
 				81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */,
 				81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */,
 				81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */,
+				81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */,
 				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,
 				7E312B43212C9DB6009D7F83 /* ThirdViewController.swift in Sources */,
 				7E312B45212C9DFF009D7F83 /* FourthViewController.swift in Sources */,

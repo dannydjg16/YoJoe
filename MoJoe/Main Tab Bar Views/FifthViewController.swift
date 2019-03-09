@@ -69,12 +69,14 @@ class FifthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        yourName.text = UserDefaults.standard.string(forKey: "userName") 
+        yourName.text = Auth.auth().currentUser?.displayName
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 }
