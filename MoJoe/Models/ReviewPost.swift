@@ -11,11 +11,6 @@ import Firebase
 
 struct ReviewPost {
     
-    
-    
-    
-    
-    
     let detail: String
     let poster: String
     let brew: String
