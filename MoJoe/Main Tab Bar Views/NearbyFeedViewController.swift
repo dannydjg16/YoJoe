@@ -72,7 +72,7 @@ class NearbyFeedViewController: UIViewController {
 
         messageField.delegate = self
    //using an observer to recognize changes in the database then adding it to the posts array as the newReviews array.
-     ref.queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
+     ref.queryOrdered(byChild: "date").queryLimited(toLast: 10).observe(.value, with: { (snapshot) in
 
         var newReviews: [Review] = []
         
@@ -84,14 +84,14 @@ class NearbyFeedViewController: UIViewController {
                 
                 newReviews.append(review)
                 
-               // self.feed.append(review as AnyObject)
+               
                 
             }
         }
 
 //might have to use append but idk honestly
       //  self.feed.append(newReviews as AnyObject)
-        
+       self.feed.removeAll()
         for i in newReviews {
 
             self.feed.append(i as AnyObject)
@@ -102,21 +102,27 @@ class NearbyFeedViewController: UIViewController {
         
         
         
-        reviewPostRef.queryOrdered(byChild: "date").observe(.value, with: {(snapshot) in
+        reviewPostRef.queryOrdered(byChild: "date").queryLimited(toLast: 10).observe(.value, with: {(snapshot) in
             
             var newReviewPosts: [ReviewPost] = []
-            
+            var feedPosts: [AnyObject] = []
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot, let reviewPost = ReviewPost(snapshot: snapshot){
                     newReviewPosts.append(reviewPost)
-                    //self.feed.append(reviewPost as AnyObject)
+                   
+                    
                 }
             }
             
+            feedPosts = self.feed
+            
+            self.feed.removeAll()
+            
             for i in newReviewPosts {
-                self.feed.append(i as AnyObject)
+                feedPosts.append(i as AnyObject)
             }
-       
+      // self.feed
+            //make the temp array equal to feed.
         self.tableView.reloadData()
         })
         

@@ -40,6 +40,7 @@
 		81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA171F2180FC92003388DA /* AppLoadingViewController.swift */; };
 		81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA1721218110F7003388DA /* LoginNavigationController.swift */; };
 		81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */; };
+		81F83B02223F33CB00CE0089 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F83B01223F33CB00CE0089 /* PostType.swift */; };
 		81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE421E3E3890008B9A4 /* Review.swift */; };
 		81FE6AE721E3E6720008B9A4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE621E3E6720008B9A4 /* User.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		81EA171F2180FC92003388DA /* AppLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		81EA1721218110F7003388DA /* LoginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationController.swift; sourceTree = "<group>"; };
 		81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitReviewViewController.swift; sourceTree = "<group>"; };
+		81F83B01223F33CB00CE0089 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		81FE6AE421E3E3890008B9A4 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		81FE6AE621E3E6720008B9A4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		97D18275BB04A6374CA5EF50 /* Pods-MoJoe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoJoe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				81F83B01223F33CB00CE0089 /* PostType.swift */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
@@ -385,6 +388,7 @@
 				81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */,
 				81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */,
 				81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */,
+				81F83B02223F33CB00CE0089 /* PostType.swift in Sources */,
 				81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */,
 				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,
 				7E312B43212C9DB6009D7F83 /* ThirdViewController.swift in Sources */,
