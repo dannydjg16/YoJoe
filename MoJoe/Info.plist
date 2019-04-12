@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>YoJoe</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -53,5 +55,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Selecting &quot;Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Selecting &quot;Always Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
 </dict>
 </plist>

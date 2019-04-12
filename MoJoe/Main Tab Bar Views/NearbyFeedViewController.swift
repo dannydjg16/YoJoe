@@ -123,6 +123,7 @@ class NearbyFeedViewController: UIViewController {
             }
       // self.feed
             //make the temp array equal to feed.
+            self.feed = newReviewPosts as [AnyObject]
         self.tableView.reloadData()
         })
         

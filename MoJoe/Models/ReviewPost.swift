@@ -11,11 +11,11 @@ import Firebase
 
 struct ReviewPost {
     
-    let detail: String
-    let poster: String
-    let brew: String
-    let roast: String
-    let rating: Int
+    var detail: String = ""
+    var poster: String 
+    var brew: String = ""
+    var roast: String = ""
+    var rating: Int = 100
     let key: String
     let ref: DatabaseReference?
     

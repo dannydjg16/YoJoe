@@ -37,7 +37,10 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     @IBAction func tapByeKeyboard(_ sender: Any) {
         self.userNameTField.resignFirstResponder()

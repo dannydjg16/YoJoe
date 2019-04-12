@@ -140,11 +140,11 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
     func makeInitialArray() -> [ReviewHelper] {
         var tempReviewHelp: [ReviewHelper] = []
         
-        let reviewHelperBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Add Type of Brew")
+        let reviewHelperBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "kettle"), reviewCategory: "Add Type of Brew")
         
-        let reviewHelperRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Add Type of Roast")
+        let reviewHelperRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffee-beans"), reviewCategory: "Add Type of Roast")
         
-        let reviewHelperRating = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Add Rating")
+        let reviewHelperRating = ReviewHelper(reviewImage: #imageLiteral(resourceName: "star"), reviewCategory: "Add Rating")
         
         tempReviewHelp.append(reviewHelperBrew)
         tempReviewHelp.append(reviewHelperRoast)

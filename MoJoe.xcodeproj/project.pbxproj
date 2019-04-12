@@ -27,18 +27,27 @@
 		8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */; };
 		8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8144EE8621EBEB23005FF0B6 /* UserService.swift */; };
 		8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */; };
+		816264B8224A88E100202A69 /* BrewTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816264B7224A88E100202A69 /* BrewTypeCVCell.swift */; };
 		81789491222CB3C6001F8CE6 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81789490222CB3C6001F8CE6 /* EditProfileView.swift */; };
 		81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */; };
 		81888845221309240039BE38 /* RoastPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81888844221309240039BE38 /* RoastPickViewController.swift */; };
 		818D49B0221623280027DD03 /* ReviewPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818D49AF221623280027DD03 /* ReviewPost.swift */; };
 		819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819042F921A87987009C6083 /* FirstReviewViewController.swift */; };
+		81A2CD29224D1B2200D5479E /* RoastTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */; };
 		81B668E021FFA5DA00BBC025 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */; };
 		81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */; };
 		81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E3220375D300BBC025 /* ModalHelperViewController.swift */; };
 		81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC1F1622342C0500E50D21 /* ProfileOverview.swift */; };
+		81E6CD632247F7AE00969B42 /* CMRcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD622247F7AE00969B42 /* CMRcell.swift */; };
+		81E6CD652247F97E00969B42 /* CMBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD642247F97E00969B42 /* CMBCell.swift */; };
+		81E6CD672248076D00969B42 /* CMRoastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD662248076D00969B42 /* CMRoastCell.swift */; };
+		81E6CD692248078600969B42 /* CMRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD682248078600969B42 /* CMRatingCell.swift */; };
+		81E6CD6B224807F300969B42 /* CMLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD6A224807F300969B42 /* CMLCell.swift */; };
+		81E6CD6E224808AD00969B42 /* CMICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD6D224808AD00969B42 /* CMICell.swift */; };
 		81E92B3122147D1C00CD6303 /* RatingPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E92B3022147D1C00CD6303 /* RatingPickViewController.swift */; };
 		81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA171F2180FC92003388DA /* AppLoadingViewController.swift */; };
 		81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA1721218110F7003388DA /* LoginNavigationController.swift */; };
+		81EDC5B022445B200095F59A /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EDC5AF22445B1F0095F59A /* RoundButton.swift */; };
 		81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */; };
 		81F83B02223F33CB00CE0089 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F83B01223F33CB00CE0089 /* PostType.swift */; };
 		81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE6AE421E3E3890008B9A4 /* Review.swift */; };
@@ -69,18 +78,27 @@
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
 		8144EE8621EBEB23005FF0B6 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealLoginViewController.swift; sourceTree = "<group>"; };
+		816264B7224A88E100202A69 /* BrewTypeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTypeCVCell.swift; sourceTree = "<group>"; };
 		81789490222CB3C6001F8CE6 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPostCell.swift; sourceTree = "<group>"; };
 		81888844221309240039BE38 /* RoastPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastPickViewController.swift; sourceTree = "<group>"; };
 		818D49AF221623280027DD03 /* ReviewPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPost.swift; sourceTree = "<group>"; };
 		819042F921A87987009C6083 /* FirstReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReviewViewController.swift; sourceTree = "<group>"; };
+		81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastTypeCVCell.swift; sourceTree = "<group>"; };
 		81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelperTableViewCell.swift; sourceTree = "<group>"; };
 		81B668E3220375D300BBC025 /* ModalHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHelperViewController.swift; sourceTree = "<group>"; };
 		81BC1F1622342C0500E50D21 /* ProfileOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOverview.swift; sourceTree = "<group>"; };
+		81E6CD622247F7AE00969B42 /* CMRcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRcell.swift; sourceTree = "<group>"; };
+		81E6CD642247F97E00969B42 /* CMBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMBCell.swift; sourceTree = "<group>"; };
+		81E6CD662248076D00969B42 /* CMRoastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRoastCell.swift; sourceTree = "<group>"; };
+		81E6CD682248078600969B42 /* CMRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRatingCell.swift; sourceTree = "<group>"; };
+		81E6CD6A224807F300969B42 /* CMLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMLCell.swift; sourceTree = "<group>"; };
+		81E6CD6D224808AD00969B42 /* CMICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMICell.swift; sourceTree = "<group>"; };
 		81E92B3022147D1C00CD6303 /* RatingPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPickViewController.swift; sourceTree = "<group>"; };
 		81EA171F2180FC92003388DA /* AppLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		81EA1721218110F7003388DA /* LoginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationController.swift; sourceTree = "<group>"; };
+		81EDC5AF22445B1F0095F59A /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		81F3444A21FE4E9500DF0E9F /* VisitReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitReviewViewController.swift; sourceTree = "<group>"; };
 		81F83B01223F33CB00CE0089 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		81FE6AE421E3E3890008B9A4 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -138,7 +156,6 @@
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
 				81E92B3222147D2A00CD6303 /* ReviewPickerVCs */,
 				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
-				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
 				81F83B01223F33CB00CE0089 /* PostType.swift */,
@@ -156,6 +173,7 @@
 		8141909E21E2E649000BE77F /* Main Tab Bar Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
 				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
 				81BC1F192234361B00E50D21 /* ReviewStuff */,
 				7E312B32212C98E3009D7F83 /* SecondViewController.swift */,
@@ -193,6 +211,19 @@
 			path = ReviewStuff;
 			sourceTree = "<group>";
 		};
+		81E6CD6C2248080000969B42 /* CustomMadeReviewCells */ = {
+			isa = PBXGroup;
+			children = (
+				81E6CD6D224808AD00969B42 /* CMICell.swift */,
+				81E6CD662248076D00969B42 /* CMRoastCell.swift */,
+				81E6CD682248078600969B42 /* CMRatingCell.swift */,
+				81E6CD622247F7AE00969B42 /* CMRcell.swift */,
+				81E6CD642247F97E00969B42 /* CMBCell.swift */,
+				81E6CD6A224807F300969B42 /* CMLCell.swift */,
+			);
+			path = CustomMadeReviewCells;
+			sourceTree = "<group>";
+		};
 		81E92B3222147D2A00CD6303 /* ReviewPickerVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,13 +248,17 @@
 		81FE6AE821E3EEAA0008B9A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81E6CD6C2248080000969B42 /* CustomMadeReviewCells */,
+				81EDC5AF22445B1F0095F59A /* RoundButton.swift */,
 				81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */,
 				818D49AF221623280027DD03 /* ReviewPost.swift */,
 				81FE6AE421E3E3890008B9A4 /* Review.swift */,
 				8126BA95220B7487001D7387 /* smallViewInBigView.swift */,
 				81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */,
 				81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */,
+				816264B7224A88E100202A69 /* BrewTypeCVCell.swift */,
 				81FE6AE621E3E6720008B9A4 /* User.swift */,
+				81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,11 +397,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81E6CD6B224807F300969B42 /* CMLCell.swift in Sources */,
 				81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */,
 				81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */,
 				81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */,
 				7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */,
+				81E6CD652247F97E00969B42 /* CMBCell.swift in Sources */,
 				8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */,
+				81E6CD692248078600969B42 /* CMRatingCell.swift in Sources */,
 				810A2A252211EB8500351F6D /* BrewPickViewController.swift in Sources */,
 				81888845221309240039BE38 /* RoastPickViewController.swift in Sources */,
 				81B668E021FFA5DA00BBC025 /* ReviewHelper.swift in Sources */,
@@ -374,10 +412,14 @@
 				7E312B47212C9E30009D7F83 /* FifthViewController.swift in Sources */,
 				81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */,
 				813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */,
+				81E6CD6E224808AD00969B42 /* CMICell.swift in Sources */,
 				81E92B3122147D1C00CD6303 /* RatingPickViewController.swift in Sources */,
 				811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */,
 				81789491222CB3C6001F8CE6 /* EditProfileView.swift in Sources */,
 				7E312B4B212CA01B009D7F83 /* InitialViewController.swift in Sources */,
+				81A2CD29224D1B2200D5479E /* RoastTypeCVCell.swift in Sources */,
+				81EDC5B022445B200095F59A /* RoundButton.swift in Sources */,
+				816264B8224A88E100202A69 /* BrewTypeCVCell.swift in Sources */,
 				8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */,
 				7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */,
 				7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */,
@@ -385,9 +427,11 @@
 				8126BA96220B7487001D7387 /* smallViewInBigView.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
 				8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */,
+				81E6CD672248076D00969B42 /* CMRoastCell.swift in Sources */,
 				81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */,
 				81FE6AE521E3E3890008B9A4 /* Review.swift in Sources */,
 				81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */,
+				81E6CD632247F7AE00969B42 /* CMRcell.swift in Sources */,
 				81F83B02223F33CB00CE0089 /* PostType.swift in Sources */,
 				81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */,
 				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,

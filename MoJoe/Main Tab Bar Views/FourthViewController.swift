@@ -13,8 +13,7 @@ import UIKit
 class FourthViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var mealNameLabel: UILabel!
-    
+  
    
     @IBAction func tapHideKeyBoard(_ sender: Any) {
         self.nameTextField.resignFirstResponder()
@@ -22,9 +21,7 @@ class FourthViewController: UIViewController {
     
    
     
-    @IBAction func setDefaultLabelText(_ sender: Any) {
-        mealNameLabel.text = "Default Text"
-    }
+   
     // Think the problem is all the other stuff that is going to limit the capabilities/what it is told to do becaus i didnt import the whole file only really the one function.(should be in the other file, whoops. it can stay here for now.)
     @IBAction func modalPresentButton(_ sender: Any) {
         let modalView = storyboard!.instantiateViewController(withIdentifier: "modalPresentView")
@@ -51,7 +48,7 @@ extension FourthViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        mealNameLabel.text = nameTextField.text
+        
     }
 }
 

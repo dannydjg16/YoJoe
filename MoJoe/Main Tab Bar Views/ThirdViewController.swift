@@ -9,25 +9,18 @@
 import Foundation
 import UIKit
 import MapKit
+import CoreLocation
 
-class ThirdViewController: UIViewController, UITextFieldDelegate {
+class ThirdViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var shopsTextField: UITextField!
-    
-    @IBOutlet weak var exampleButton: UILabel!
-    
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocationCoordinate2D!
     @IBOutlet weak var nearMeMap: MKMapView!
+    let mapPin = MKPointAnnotation()
     
     
     
-    
-    
-    
-    
-    
-    @IBAction func unwinded (segue: UIStoryboardSegue) {
-        exampleButton.text = "unwinded"
-    }
     
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.shopsTextField.resignFirstResponder()
@@ -46,15 +39,43 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let theCurrentLocation: CLLocationCoordinate2D = manager.location?.coordinate else {
+            return
+        }
+        currentLocation = theCurrentLocation
+        
+        guard let mostCurrentLocation = locations.last else {
+            return
+        }
+        let mapCenter = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        let mapCircle = MKCoordinateRegion(center: mapCenter, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        self.nearMeMap.setRegion(mapCircle, animated: true)
+        mapPin.coordinate = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        nearMeMap.addAnnotation(mapPin)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        var mapOrigin = CLLocationCoordinate2DMake(41.8077, 72.2540)
-        
-        var mapReach = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        
-        var mapRegion = MKCoordinateRegion(center: mapOrigin, span: mapReach)
-        
-        self.nearMeMap.setRegion(mapRegion, animated: true)
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+
     }
+    
+  
 }
+//these are gonna be the location manager functions
+
+//extension ThirdViewController {
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let theCurrentLocation: CLLocationCoordinate2D = manager.location?.coordinate else {
+//            return
+//        }
+//        currentLocation = theCurrentLocation
+//    }
+//}

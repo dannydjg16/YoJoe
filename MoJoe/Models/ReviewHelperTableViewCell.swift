@@ -12,11 +12,7 @@ class ReviewHelperTableViewCell: UITableViewCell {
 
     @IBOutlet weak var reviewImage: UIImageView!
     @IBOutlet weak var reviewCategory: UILabel!
-//    var cellText: String {
-//        reviewCategory.text = self.cellText 
-//        return cellText
-//
-//    }
+
     
     
     

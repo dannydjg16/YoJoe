@@ -11,7 +11,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-   
+    @IBOutlet weak var signUpButton: RoundButton!
+    @IBOutlet weak var signInButton: RoundButton!
+    
 
     
     
@@ -25,7 +27,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //MARK: Button Borders
+        signUpButton.layer.borderColor = UIColor.black.cgColor
+        signUpButton.layer.borderWidth = 1
         
+        signInButton.layer.borderColor = UIColor.black.cgColor
+        signInButton.layer.borderWidth = 1
     }
 
 

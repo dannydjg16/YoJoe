@@ -32,6 +32,11 @@ class EmailRegistrationViewController: UIViewController {
     
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @IBAction func emailRegisterTapped(_ sender: AnyObject) {
        
         let emailField = emailTField.text
