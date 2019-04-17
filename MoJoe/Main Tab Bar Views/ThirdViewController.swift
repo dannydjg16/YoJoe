@@ -11,19 +11,20 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ThirdViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
+class ThirdViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var shopsTextField: UITextField!
+  
     var locationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D!
     @IBOutlet weak var nearMeMap: MKMapView!
     let mapPin = MKPointAnnotation()
+    var mapSearchController: UISearchController? = nil
     
     
     
     
     @IBAction func tapHideKeyboard(_ sender: Any) {
-        self.shopsTextField.resignFirstResponder()
+        
     }
  
    
@@ -39,22 +40,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let theCurrentLocation: CLLocationCoordinate2D = manager.location?.coordinate else {
-            return
-        }
-        currentLocation = theCurrentLocation
-        
-        guard let mostCurrentLocation = locations.last else {
-            return
-        }
-        let mapCenter = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-        let mapCircle = MKCoordinateRegion(center: mapCenter, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-        self.nearMeMap.setRegion(mapCircle, animated: true)
-        mapPin.coordinate = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-        nearMeMap.addAnnotation(mapPin)
-        
-    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,20 +48,57 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+            locationManager.requestLocation()
         }
-
+        //MARK: Setting up the search controller
+        let mapSearchTable = storyboard!.instantiateViewController(withIdentifier: "MapSearchTable") as! MapSearchTable
+        mapSearchController = UISearchController(searchResultsController: mapSearchTable)
+        mapSearchController?.searchResultsUpdater = mapSearchTable
+        
+        //MARK: Setting up the search bar
+        let mapSearchBar = mapSearchController!.searchBar
+        mapSearchBar.sizeToFit()
+        mapSearchBar.placeholder = "Find a Great Coffee"
+        navigationItem.titleView = mapSearchController?.searchBar
+        
+        mapSearchController?.hidesNavigationBarDuringPresentation = false
+        mapSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+    
+        mapSearchTable.nearMeMap = nearMeMap
     }
     
   
 }
-//these are gonna be the location manager functions
 
-//extension ThirdViewController {
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let theCurrentLocation: CLLocationCoordinate2D = manager.location?.coordinate else {
-//            return
-//        }
-//        currentLocation = theCurrentLocation
-//    }
-//}
+
+extension ThirdViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let theCurrentLocation: CLLocationCoordinate2D = manager.location?.coordinate, let mostCurrentLocation = locations.last else {
+            return
+        }
+        currentLocation = theCurrentLocation
+        
+        let mapCenter = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        let mapCircle = MKCoordinateRegion(center: mapCenter, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        self.nearMeMap.setRegion(mapCircle, animated: true)
+        mapPin.coordinate = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        //nearMeMap.addAnnotation(mapPin)
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let danny = 1
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse{
+            locationManager.requestLocation()
+        }
+    }
+
+
+
+
+}

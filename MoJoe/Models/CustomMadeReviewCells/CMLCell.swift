@@ -12,6 +12,8 @@ class CMLCell: UITableViewCell, CLLocationManagerDelegate {
 
     var locationManager: CLLocationManager!
     @IBOutlet weak var locationField: UITextField!
+   
+    
     @IBAction func locationButton(_ sender: Any) {
        locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
@@ -22,14 +24,15 @@ class CMLCell: UITableViewCell, CLLocationManagerDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
+       
        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
     }
 
 }
