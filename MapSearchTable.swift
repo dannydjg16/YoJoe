@@ -30,7 +30,7 @@ class MapSearchTable: UITableViewController {
         let locationCell = tableView.dequeueReusableCell(withIdentifier: "LocationCell")!
         let locationItem = tableItems[indexPath.row].placemark
         locationCell.textLabel?.text = locationItem.name
-        locationCell.detailTextLabel?.text = ""g
+        locationCell.detailTextLabel?.text = ""
         return locationCell
     }
 
