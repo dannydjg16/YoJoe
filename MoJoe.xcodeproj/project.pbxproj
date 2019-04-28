@@ -22,10 +22,15 @@
 		810A2A252211EB8500351F6D /* BrewPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A2A242211EB8500351F6D /* BrewPickViewController.swift */; };
 		811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */; };
 		8126BA96220B7487001D7387 /* smallViewInBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126BA95220B7487001D7387 /* smallViewInBigView.swift */; };
+		813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE7226953AC008AC632 /* DebutYourBrew.swift */; };
+		813BEFEA226E9B5F008AC632 /* FeedSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */; };
+		813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */; };
 		813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CBD13219DE03E00661736 /* FeedPageViewController.swift */; };
 		8141909A21E1622D000BE77F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8141909921E1622D000BE77F /* GoogleService-Info.plist */; };
 		8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */; };
 		8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8144EE8621EBEB23005FF0B6 /* UserService.swift */; };
+		8150997D22736C5A00B81B8E /* BrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997C22736C5A00B81B8E /* BrewDebut.swift */; };
+		8150997F22739CAA00B81B8E /* BrewDebutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997E22739CAA00B81B8E /* BrewDebutCell.swift */; };
 		8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */; };
 		816264B8224A88E100202A69 /* BrewTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816264B7224A88E100202A69 /* BrewTypeCVCell.swift */; };
 		81789491222CB3C6001F8CE6 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81789490222CB3C6001F8CE6 /* EditProfileView.swift */; };
@@ -73,11 +78,16 @@
 		810A2A242211EB8500351F6D /* BrewPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewPickViewController.swift; sourceTree = "<group>"; };
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyFeedViewController.swift; sourceTree = "<group>"; };
 		8126BA95220B7487001D7387 /* smallViewInBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallViewInBigView.swift; sourceTree = "<group>"; };
+		813BEFE7226953AC008AC632 /* DebutYourBrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DebutYourBrew.swift; path = ../DebutYourBrew.swift; sourceTree = "<group>"; };
+		813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSwitcher.swift; sourceTree = "<group>"; };
+		813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShopsFeedView.swift; path = ../ShopsFeedView.swift; sourceTree = "<group>"; };
 		813CBD13219DE03E00661736 /* FeedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
 		8141909921E1622D000BE77F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegistrationViewController.swift; sourceTree = "<group>"; };
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
 		8144EE8621EBEB23005FF0B6 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8150997C22736C5A00B81B8E /* BrewDebut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebut.swift; sourceTree = "<group>"; };
+		8150997E22739CAA00B81B8E /* BrewDebutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebutCell.swift; sourceTree = "<group>"; };
 		8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealLoginViewController.swift; sourceTree = "<group>"; };
 		816264B7224A88E100202A69 /* BrewTypeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTypeCVCell.swift; sourceTree = "<group>"; };
 		81789490222CB3C6001F8CE6 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -161,6 +171,7 @@
 				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */,
 				81F83B01223F33CB00CE0089 /* PostType.swift */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
@@ -177,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
+				813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */,
+				813BEFE7226953AC008AC632 /* DebutYourBrew.swift */,
 				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
 				81BC1F192234361B00E50D21 /* ReviewStuff */,
 				7E312B32212C98E3009D7F83 /* SecondViewController.swift */,
@@ -254,6 +267,8 @@
 				81E6CD6C2248080000969B42 /* CustomMadeReviewCells */,
 				81EDC5AF22445B1F0095F59A /* RoundButton.swift */,
 				81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */,
+				8150997E22739CAA00B81B8E /* BrewDebutCell.swift */,
+				8150997C22736C5A00B81B8E /* BrewDebut.swift */,
 				818D49AF221623280027DD03 /* ReviewPost.swift */,
 				81FE6AE421E3E3890008B9A4 /* Review.swift */,
 				8126BA95220B7487001D7387 /* smallViewInBigView.swift */,
@@ -401,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81E6CD6B224807F300969B42 /* CMLCell.swift in Sources */,
+				813BEFEA226E9B5F008AC632 /* FeedSwitcher.swift in Sources */,
 				81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */,
 				81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */,
 				81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */,
@@ -413,10 +429,12 @@
 				81B668E021FFA5DA00BBC025 /* ReviewHelper.swift in Sources */,
 				819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */,
 				7E312B47212C9E30009D7F83 /* FifthViewController.swift in Sources */,
+				813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */,
 				81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */,
 				813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */,
 				81E6CD6E224808AD00969B42 /* CMICell.swift in Sources */,
 				81E92B3122147D1C00CD6303 /* RatingPickViewController.swift in Sources */,
+				8150997D22736C5A00B81B8E /* BrewDebut.swift in Sources */,
 				811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */,
 				81789491222CB3C6001F8CE6 /* EditProfileView.swift in Sources */,
 				7E312B4B212CA01B009D7F83 /* InitialViewController.swift in Sources */,
@@ -437,9 +455,11 @@
 				81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */,
 				81E6CD632247F7AE00969B42 /* CMRcell.swift in Sources */,
 				81F83B02223F33CB00CE0089 /* PostType.swift in Sources */,
+				8150997F22739CAA00B81B8E /* BrewDebutCell.swift in Sources */,
 				81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */,
 				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,
 				7E312B43212C9DB6009D7F83 /* ThirdViewController.swift in Sources */,
+				813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */,
 				7E312B45212C9DFF009D7F83 /* FourthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

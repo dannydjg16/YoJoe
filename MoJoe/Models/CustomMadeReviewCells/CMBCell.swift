@@ -18,11 +18,11 @@ class CMBCell: UITableViewCell {
     func makeBrewTypes() -> [ReviewHelper] {
         var tempViewArray: [ReviewHelper] = []
         
-        let frenchPress = ReviewHelper(reviewImage: #imageLiteral(resourceName: "search"), reviewCategory: "French Press")
-        let pourOver = ReviewHelper(reviewImage: #imageLiteral(resourceName: "shop"), reviewCategory: "Pour Over")
-        let coldBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "star"), reviewCategory: "Cold Brew")
-        let espresso = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffeeCup"), reviewCategory: "Espresso")
-        let drip = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffee-cup"), reviewCategory: "Drip")
+        let frenchPress = ReviewHelper(reviewImage: #imageLiteral(resourceName: "Messages Image(3128922777)"), reviewCategory: "French Press")
+        let pourOver = ReviewHelper(reviewImage: #imageLiteral(resourceName: "POUROVER"), reviewCategory: "Pour Over")
+        let coldBrew = ReviewHelper(reviewImage: #imageLiteral(resourceName: "Cold Brew"), reviewCategory: "Cold Brew")
+        let espresso = ReviewHelper(reviewImage: #imageLiteral(resourceName: "Espresso"), reviewCategory: "Espresso")
+        let drip = ReviewHelper(reviewImage: #imageLiteral(resourceName: "Drip"), reviewCategory: "Drip")
         let other = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffee-beans"), reviewCategory: "Other")
         
         

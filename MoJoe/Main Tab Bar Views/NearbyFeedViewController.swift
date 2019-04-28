@@ -14,7 +14,8 @@ class NearbyFeedViewController: UIViewController {
     var posts: [Review] = []
     var reviewPosts: [ReviewPost] = []
     var feed: [AnyObject] = []
-
+    
+    
     
     var user: User? {
     var ref: DatabaseReference!
@@ -96,7 +97,7 @@ class NearbyFeedViewController: UIViewController {
 
             self.feed.append(i as AnyObject)
         }
-        
+        self.feed.reverse()
         self.tableView.reloadData()
      })
         

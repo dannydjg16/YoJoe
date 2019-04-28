@@ -14,10 +14,46 @@ import Firebase
 class FifthViewController: UIViewController {
    
     @IBOutlet weak var yourName: UILabel!
+        private lazy var debutYourBrew: DebutYourBrew = {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "DebutYourBrew") as! DebutYourBrew
     
+           self.add(asChildViewController: viewController)
+    
+            return viewController
+        }()
+    
+    @IBAction func presentVC(_ sender: Any) {
+        addChild(debutYourBrew)
+    }
+    
+    private func add(asChildViewController viewController: UIViewController) {
+        // Add Child View Controller
+        addChild(viewController)
+        
+        // Add Child View as Subview
+        view.addSubview(viewController.view)
+        
+        // Configure Child View
+        viewController.view.frame = view.bounds
+        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Notify Child View Controller
+        viewController.didMove(toParent: self)
+    }
     
     @IBAction func tapKeyboardHide(_ sender: Any) {
         
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("profile view will appear")
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        print("profile view will dissapear")
     }
     
 

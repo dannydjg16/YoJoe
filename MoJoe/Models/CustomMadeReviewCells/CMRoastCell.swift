@@ -18,13 +18,14 @@ class CMRoastCell: UITableViewCell {
     func makeRoasts() -> [ReviewHelper] {
         var tempRoasts: [ReviewHelper] = []
         
-        let darkRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "shop"), reviewCategory: "Dark Roast")
-        let mediumRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "menu"), reviewCategory: "Medium Roast")
-        let lightRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "kettle"), reviewCategory: "Light Roast")
+        let darkRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffee-beans"), reviewCategory: "Dark Roast")
+        let mediumRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffee-beans"), reviewCategory: "Medium Roast")
+        let lightRoast = ReviewHelper(reviewImage: #imageLiteral(resourceName: "coffee-beans"), reviewCategory: "Light Roast")
         
-        tempRoasts.append(darkRoast)
-        tempRoasts.append(mediumRoast)
         tempRoasts.append(lightRoast)
+        tempRoasts.append(mediumRoast)
+        tempRoasts.append(darkRoast)
+       
         
         return tempRoasts
     }
@@ -77,7 +78,17 @@ extension CMRoastCell: UICollectionViewDataSource, UICollectionViewDelegate {
         lastItem.backgroundColor = UIColor.clear
         self.lastSelectedItem = roastCollectionView.cellForItem(at: tappedIndexPath)
         
-        let tappedBrew = collectionView.cellForItem(at: indexPath)
-        tappedBrew?.backgroundColor = UIColor.brown
+        guard let tappedBrew = collectionView.cellForItem(at: indexPath), let tappedBrewIndexPath = collectionView.indexPath(for: tappedBrew) else {return}
+        switch tappedBrewIndexPath.row {
+        case 0:
+            tappedBrew.backgroundColor = UIColor.init(red: 0.83, green: 0.58, blue: 0.33, alpha: 1.0)
+        case 1:
+            tappedBrew.backgroundColor = UIColor.init(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+        case 2:
+            tappedBrew.backgroundColor = UIColor.init(red: 0.4, green: 0.27, blue: 0.14, alpha: 1.0)
+        default:
+            tappedBrew.backgroundColor = UIColor.brown
+        }
+        
     }
 }

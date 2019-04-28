@@ -115,12 +115,6 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
             let reviewRef = self.ref.child(detail)
             reviewRef.setValue(reviewPost.makeDictionary())
             
-            
-            
-        print(reviewPost.brew)
-        print(reviewPost.rating)
-        print(reviewPost.roast)
-        print(reviewPost.detail)
         
         } else if ratingCell.reviewCategory.text == "Add Rating" || brewCell.reviewCategory.text == "Add Type of Brew" || roastCell.reviewCategory.text == "Add Type of Roast" {
             reviewErrorAlert(title: "One or More Sections Not Filled Out", message: "Finish Review")

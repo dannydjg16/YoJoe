@@ -30,7 +30,7 @@ class MapSearchTable: UITableViewController {
         let locationCell = tableView.dequeueReusableCell(withIdentifier: "LocationCell")!
         let locationItem = tableItems[indexPath.row].placemark
         locationCell.textLabel?.text = locationItem.name
-        locationCell.detailTextLabel?.text = ""
+        locationCell.detailTextLabel?.text = buildAddress(location: locationItem)
         return locationCell
     }
 
@@ -55,8 +55,19 @@ extension MapSearchTable: UISearchResultsUpdating {
     
 }
 
-//{ response, _ in
-//    guard let searchResponse = response else { return }
-//    self.tableItems = response.mapItems
-//    self.tableView.reloadData()
-//}
+extension MapSearchTable {
+    func buildAddress(location: MKPlacemark) -> String {
+        let numberSpace = (location.subThoroughfare != nil && location.thoroughfare != nil) ? " " : ""
+        let streetComma = (location.thoroughfare != nil  )
+        
+        var fullAddress = String(
+            format: "%@%@%@%@%@%@%@",
+            
+            location.subThoroughfare ?? "", numberSpace , location.thoroughfare ?? "" , ", ", location.locality ?? "" , ", ", location.administrativeArea ?? ""
+        )
+  
+    
+   return fullAddress
+}
+  
+}

@@ -10,7 +10,14 @@ import UIKit
 
 class CMRatingCell: UITableViewCell {
 
-   
+    @IBOutlet weak var ratingSlider: UISlider!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBAction func setRating(_ sender: UISlider) {
+        let coffeeRating = Int(sender.value) 
+        
+        ratingLabel.text = "\(coffeeRating)"
+    }
+    
     
     
     
