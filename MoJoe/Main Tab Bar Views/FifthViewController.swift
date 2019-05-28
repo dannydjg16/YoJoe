@@ -9,12 +9,28 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
 
 class FifthViewController: UIViewController {
    
+    @IBOutlet weak var profilePicture: UIImageView!
+    
+    let imagePicker = UIImagePickerController()
+
+    @IBAction func addProfilePicture(_ sender: Any) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
     @IBOutlet weak var yourName: UILabel!
-        private lazy var debutYourBrew: DebutYourBrew = {
+    
+    private lazy var debutYourBrew: DebutYourBrew = {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let viewController = storyboard.instantiateViewController(withIdentifier: "DebutYourBrew") as! DebutYourBrew
     
@@ -41,6 +57,9 @@ class FifthViewController: UIViewController {
         // Notify Child View Controller
         viewController.didMove(toParent: self)
     }
+    
+    
+    
     
     @IBAction func tapKeyboardHide(_ sender: Any) {
         
@@ -106,7 +125,7 @@ class FifthViewController: UIViewController {
         super.viewDidLoad()
        
         yourName.text = Auth.auth().currentUser?.displayName
-        
+        imagePicker.delegate = self
         
     }
     
@@ -129,5 +148,15 @@ extension FifthViewController: UITextFieldDelegate {
     //2) this function runs when the text field returns true after it is no longer the first responder
     func textFieldDidEndEditing(_ textField: UITextField)  {
         
+    }
+}
+
+
+extension FifthViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) != nil else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
     }
 }

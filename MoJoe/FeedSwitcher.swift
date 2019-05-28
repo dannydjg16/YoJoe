@@ -56,7 +56,7 @@ class FeedSwitcher: UIViewController {
         self.addChildVC(child: nearbyFeedViewController)
         lastVC = nearbyFeedViewController
         setupView()
-        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = UIColor(hue: 0.1333, saturation: 0.12, brightness: 0.94, alpha: 1.0)
     }
     
     func setupView(){

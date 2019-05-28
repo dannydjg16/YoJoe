@@ -1,23 +1,25 @@
 //
-//  CMRatingCell.swift
+//  SRRatingCell.swift
 //  MoJoe
 //
-//  Created by Daniel Grant on 3/24/19.
+//  Created by Daniel Grant on 4/28/19.
 //  Copyright © 2019 Daniel Grant. All rights reserved.
 //
 
 import UIKit
 
-class CMRatingCell: UITableViewCell {
+class SRRatingCell: UITableViewCell {
 
     @IBOutlet weak var ratingSlider: UISlider!
     @IBOutlet weak var ratingLabel: UILabel!
+  
+    
     @IBAction func setRating(_ sender: UISlider) {
-        let coffeeRating = Int(sender.value) 
+        let coffeeRating = Int(sender.value)
         
         ratingLabel.text = "\(coffeeRating)"
     }
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -16,21 +16,30 @@ class BrewDebutCell: UITableViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+   
+    @IBOutlet weak var brewPicture: UIImageView!
+    @IBOutlet weak var roastPicture: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
     
     
+    @IBAction func exampleBUtton(_ sender: Any) {
+        print("clicked")
+    }
     
     
 
     
     func setDebutCell(debut: BrewDebut){
-        userLabel.text = "\(debut.user) created.."
+        
+        userLabel.text = "\(debut.user) brewed..."
         brewLabel.text = debut.brew
         roastLabel.text = debut.roast
-        ratingLabel.text = "\(String(debut.rating)) / 10"
+        ratingLabel.text = "\(String(debut.rating)) / 10!"
         reviewLabel.text = debut.review
         dateLabel.text = debut.date
         profilePic.image = #imageLiteral(resourceName: "user")
+        brewPicture.image = #imageLiteral(resourceName: "Espresso")
+        roastPicture.image = #imageLiteral(resourceName: "coffee-beans")
     }
     
 

@@ -48,7 +48,7 @@ class CMBCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        brewCollectionView.allowsMultipleSelection = false
+       
     }
 
 }
@@ -76,26 +76,18 @@ extension CMBCell: UICollectionViewDataSource,  UICollectionViewDelegate {
         
         return brewTypeCell
     }
-   
     
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let lastItem = lastSelectedItem, let tappedIndexPath = brewCollectionView.indexPathsForSelectedItems?.first  else {
-            
-            let tappedBrew = collectionView.cellForItem(at: indexPath)
-            tappedBrew?.backgroundColor = UIColor.clear
-            self.lastSelectedItem = brewCollectionView.cellForItem(at: indexPath)
-            return
-        }
-        let lastTapped = brewCollectionView.indexPath(for: lastItem)
-        self.brewCollectionView.deselectItem(at: lastTapped!, animated: true)
-        lastItem.backgroundColor = UIColor.clear
-        self.lastSelectedItem = brewCollectionView.cellForItem(at: tappedIndexPath)
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = brewCollectionView.cellForItem(at: indexPath) else { return }
+        cell.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
         
-        let tappedBrew = collectionView.cellForItem(at: indexPath)
-        tappedBrew?.backgroundColor = UIColor.brown
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let theLastSelectedItem = brewCollectionView.cellForItem(at: indexPath)  else { return }
+        theLastSelectedItem.backgroundColor = UIColor.brown
+        lastSelectedItem = theLastSelectedItem
+    }
     
 }

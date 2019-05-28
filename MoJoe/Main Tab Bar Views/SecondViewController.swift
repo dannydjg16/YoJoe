@@ -14,6 +14,10 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
     @IBOutlet weak var searchForShops: UISearchBar!
     @IBOutlet weak var searchTField: UITextField!
     
+   
+    
+    
+    
     @IBAction func tapHideKeyboard(_ sender: Any) {
         self.searchForShops.resignFirstResponder()
         self.searchTField.resignFirstResponder()

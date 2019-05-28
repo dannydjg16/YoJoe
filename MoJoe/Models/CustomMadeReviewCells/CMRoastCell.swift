@@ -47,6 +47,7 @@ class CMRoastCell: UITableViewCell {
 
 
 extension CMRoastCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
@@ -65,30 +66,26 @@ extension CMRoastCell: UICollectionViewDataSource, UICollectionViewDelegate {
         return roastTypeCell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = roastCollectionView.cellForItem(at: indexPath) else { return }
+        cell.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let lastItem = lastSelectedItem, let tappedIndexPath = roastCollectionView.indexPathsForSelectedItems?.first  else {
-            
-            let tappedBrew = collectionView.cellForItem(at: indexPath)
-            tappedBrew?.backgroundColor = UIColor.clear
-            self.lastSelectedItem = roastCollectionView.cellForItem(at: indexPath)
-            return
-        }
-        let lastTapped = roastCollectionView.indexPath(for: lastItem)
-        self.roastCollectionView.deselectItem(at: lastTapped!, animated: true)
-        lastItem.backgroundColor = UIColor.clear
-        self.lastSelectedItem = roastCollectionView.cellForItem(at: tappedIndexPath)
+        guard let theLastSelectedItem = roastCollectionView.cellForItem(at: indexPath) else { return }
+        lastSelectedItem = theLastSelectedItem
         
-        guard let tappedBrew = collectionView.cellForItem(at: indexPath), let tappedBrewIndexPath = collectionView.indexPath(for: tappedBrew) else {return}
-        switch tappedBrewIndexPath.row {
-        case 0:
-            tappedBrew.backgroundColor = UIColor.init(red: 0.83, green: 0.58, blue: 0.33, alpha: 1.0)
-        case 1:
-            tappedBrew.backgroundColor = UIColor.init(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
-        case 2:
-            tappedBrew.backgroundColor = UIColor.init(red: 0.4, green: 0.27, blue: 0.14, alpha: 1.0)
-        default:
-            tappedBrew.backgroundColor = UIColor.brown
-        }
+        guard let tappedRoast = collectionView.cellForItem(at: indexPath), let tappedRoastIndexPath = collectionView.indexPath(for: tappedRoast) else {return}
+                switch tappedRoastIndexPath.row {
+                case 0:
+                    tappedRoast.backgroundColor = #colorLiteral(red: 1, green: 0.8864783049, blue: 0.6726394296, alpha: 1)
+                case 1:
+                    tappedRoast.backgroundColor = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
+                case 2:
+                    tappedRoast.backgroundColor = #colorLiteral(red: 0.3104858994, green: 0.2067391574, blue: 0.1192429289, alpha: 1)
+                default:
+                    tappedRoast.backgroundColor = UIColor.brown
+                }
         
     }
 }

@@ -24,7 +24,7 @@ class FeedPageViewController: UIPageViewController, UIPageViewControllerDelegate
     
     //This one and the other labaeled one are there so that this class can conform to datasource
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = feedViewContollers.index(of: viewController) else {
+        guard let viewControllerIndex = feedViewContollers.firstIndex(of: viewController) else {
             return nil
         }
         let previousIndex = viewControllerIndex - 1
@@ -42,7 +42,7 @@ class FeedPageViewController: UIPageViewController, UIPageViewControllerDelegate
     
     //this is the other one i mentioned that is a part of datasource
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = feedViewContollers.index(of: viewController) else {
+        guard let viewControllerIndex = feedViewContollers.firstIndex(of: viewController) else {
             return nil
         }
         

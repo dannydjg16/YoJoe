@@ -19,16 +19,24 @@ class DebutYourBrew: UIViewController {
     @IBOutlet weak var brewDebutTable: UITableView!
     
     
-    
+    var toReviewPage = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.toReviewPage = UIButton(type: .custom)
+        self.toReviewPage.setTitleColor(#colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), for: .normal)
+        self.toReviewPage.addTarget(self, action: #selector(displayReviewPage), for: .touchUpInside)
+        self.view.addSubview(toReviewPage)
+        
+        
         brewDebutRef.queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
             
             var newDebuts: [BrewDebut] = []
             
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
+                   
                     let brewDebut = BrewDebut(snapshot: snapshot){
                    
                     newDebuts.append(brewDebut)
@@ -36,12 +44,23 @@ class DebutYourBrew: UIViewController {
                     self.brewDebuts = newDebuts
                     self.brewDebutTable.reloadData()
                 }
-                
             }
             self.brewDebuts = newDebuts
             self.brewDebutTable.reloadData()
         })
-        
+    }
+    
+    @objc func displayReviewPage(){
+        self.performSegue(withIdentifier: "toBrewDebutSegue", sender: self)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
+        toReviewPage.backgroundColor = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
+        toReviewPage.clipsToBounds = true
+        toReviewPage.setImage(#imageLiteral(resourceName: "plus-symbol"), for: .normal)
+        toReviewPage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
         
     }
 
@@ -73,7 +92,7 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         let debutCell = brewDebutTable.dequeueReusableCell(withIdentifier: "BrewDebutCell") as! BrewDebutCell
         //set the shit that goes with the cell. like the labels and all that shit. could be done right here or with a function that is created in the cell file.
         debutCell.setDebutCell(debut: debut)
-        borderSet(cell: debutCell, color: .darkGray, width: 2)
+        borderSet(cell: debutCell, color: #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1), width: 1)
         
         
         return debutCell
