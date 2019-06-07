@@ -11,11 +11,16 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
+
+
 
 
 class FifthViewController: UIViewController {
    
     @IBOutlet weak var profilePicture: UIImageView!
+    
+    var user = Auth.auth().currentUser
     
     let imagePicker = UIImagePickerController()
 
@@ -127,6 +132,9 @@ class FifthViewController: UIViewController {
         yourName.text = Auth.auth().currentUser?.displayName
         imagePicker.delegate = self
         
+        let profileImageURL = Auth.auth().currentUser?.photoURL
+        profilePicture.setImage(from: profileImageURL?.absoluteString)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -154,9 +162,65 @@ extension FifthViewController: UITextFieldDelegate {
 
 extension FifthViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) != nil else {
+        guard let imageChosen =  info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            else {
             dismiss(animated: true, completion: nil)
             return
         }
+        var data = Data()
+        data = imageChosen.jpegData(compressionQuality: 0.75)!
+        
+        let imageRef = Storage.storage().reference().child("\(Auth.auth().currentUser?.uid)"  + "ProfilePictures" +  randomString(length: 20))
+        
+        
+        imageRef.putData(data, metadata: nil) { (metadata, err) in
+            if let err = err {
+                print(err)
+            }
+            
+            imageRef.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    
+                } else {
+                    //self.profilePicture.setImage(from: url?.absoluteString)
+                   // self.imageURL = url!.absoluteString
+                    self.changePictureURL(url: url!)
+                    
+                    
+                }
+                
+            })
+        
+        }
+
+    }
+    
+    func changePictureURL(url: URL) {
+        
+        
+        
+        let userPictureChange = Auth.auth().currentUser?.createProfileChangeRequest()
+        userPictureChange?.photoURL = url
+        userPictureChange?.commitChanges { (error) in
+            
+        }
+    }
+    
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+}
+
+extension UIImageView {
+    func setImage(from urlAddress: String?) {
+        guard let urlAddress = urlAddress, let url = URL(string: urlAddress) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data)
+            }
+        }
+        task.resume()
     }
 }

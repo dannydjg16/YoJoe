@@ -24,11 +24,14 @@ class ShopsFeedView: UIViewController {
         
         super.viewDidLoad()
         
+        //MARK: Review page button stuff
         self.toReviewPage = UIButton(type: .custom)
         self.toReviewPage.setTitleColor(#colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), for: .normal)
         self.toReviewPage.addTarget(self, action: #selector(displayReviewPage), for: .touchUpInside)
         self.view.addSubview(toReviewPage)
     
+        
+        
         
         
         shopReviewRef.queryOrdered(byChild: "date").observe(.value, with: {
@@ -53,12 +56,13 @@ class ShopsFeedView: UIViewController {
     @objc func displayReviewPage(){
         self.performSegue(withIdentifier: "toShopReviewSegue", sender: self)
     }
-    
+    //MARK: More button Stuff
     override func viewWillLayoutSubviews() {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
         toReviewPage.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
         toReviewPage.clipsToBounds = true
         toReviewPage.setImage(#imageLiteral(resourceName: "plus-symbol"), for: .normal)
+       
         toReviewPage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
         
@@ -75,7 +79,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 509
+        return 426
         
     }
     
@@ -90,11 +94,9 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
        let shopCell =  shopReviewTable.dequeueReusableCell(withIdentifier: "ShopReviewCell") as! ShopReviewCell
         
         shopCell.setShopReviewCell(review: shop)
-        //I had to set the shopTagsLabel here because I couldnt figure out how to access the array of shoptags.
-        //I think I probably could tho
-        shopCell.shopTagsLabel.text = shop.shopTags
         
-        //MARK: Collection view shit
+        shopCell.shopTagsArray = shop.shopTags.components(separatedBy: ", ")
+        
         
         
         
@@ -107,19 +109,4 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-//extension ShopsFeedView: UICollectionViewDelegate, UICollectionViewDataSource {
-//   
-//    
-//    
-//  
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-//    }
-//    
-//    
-//}
+

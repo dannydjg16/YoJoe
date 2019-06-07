@@ -20,6 +20,7 @@
 		7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B4C212CA116009D7F83 /* MainTabController.swift */; };
 		7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B4E212CA402009D7F83 /* RegisterViewController.swift */; };
 		810A2A252211EB8500351F6D /* BrewPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A2A242211EB8500351F6D /* BrewPickViewController.swift */; };
+		811B3F0722AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */; };
 		811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */; };
 		8126BA96220B7487001D7387 /* smallViewInBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126BA95220B7487001D7387 /* smallViewInBigView.swift */; };
 		813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE7226953AC008AC632 /* DebutYourBrew.swift */; };
@@ -86,6 +87,7 @@
 		7E312B4C212CA116009D7F83 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		7E312B4E212CA402009D7F83 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		810A2A242211EB8500351F6D /* BrewPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewPickViewController.swift; sourceTree = "<group>"; };
+		811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShopTagReviewFeedCVCell.swift; path = Models/ShopTagReviewFeedCVCell.swift; sourceTree = "<group>"; };
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyFeedViewController.swift; sourceTree = "<group>"; };
 		8126BA95220B7487001D7387 /* smallViewInBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallViewInBigView.swift; sourceTree = "<group>"; };
 		813BEFE7226953AC008AC632 /* DebutYourBrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DebutYourBrew.swift; path = ../DebutYourBrew.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */,
 				81A4570B22766D71008DF6D4 /* ShopReviewSheet.swift */,
 				81A4570922766814008DF6D4 /* ShopReviewCell.swift */,
 				81A45707227662E5008DF6D4 /* ShopReview.swift */,
@@ -453,6 +456,7 @@
 				81A4570E22767075008DF6D4 /* SRLocationCell.swift in Sources */,
 				81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */,
 				81A4571422767169008DF6D4 /* SRReviewCell.swift in Sources */,
+				811B3F0722AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift in Sources */,
 				81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */,
 				7E312B4F212CA402009D7F83 /* RegisterViewController.swift in Sources */,
 				81E6CD652247F97E00969B42 /* CMBCell.swift in Sources */,
