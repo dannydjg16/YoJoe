@@ -61,7 +61,7 @@ class ShopsFeedView: UIViewController {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
         toReviewPage.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
         toReviewPage.clipsToBounds = true
-        toReviewPage.setImage(#imageLiteral(resourceName: "plus-symbol"), for: .normal)
+        toReviewPage.setImage(#imageLiteral(resourceName: "coffee-beans"), for: .normal)
        
         toReviewPage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])

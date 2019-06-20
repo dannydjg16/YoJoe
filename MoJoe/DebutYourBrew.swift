@@ -12,9 +12,11 @@ import Firebase
 class DebutYourBrew: UIViewController {
 
     var userMe = Auth.auth().currentUser
+    var userDisplayName: String = ""
     var brewDebuts: [BrewDebut] = []
     //Not gonna put date here yet. it is already stored in the database, gonna see if i can just use this stored value rather than paste the whole thing in again.
     let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    let userRef = Database.database().reference(withPath: "UserSaveButton")
     
     @IBOutlet weak var brewDebutTable: UITableView!
     
@@ -92,10 +94,33 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         let debutCell = brewDebutTable.dequeueReusableCell(withIdentifier: "BrewDebutCell") as! BrewDebutCell
         //set the shit that goes with the cell. like the labels and all that shit. could be done right here or with a function that is created in the cell file.
         debutCell.setDebutCell(debut: debut)
+        
+        let uid = debut.user
+        
+        self.userRef.child(uid).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+          
+            guard let currentUserName = dataSnapshot.value as? String else { return }
+            debutCell.userLabel.text = "\(currentUserName) brewed..."
+            
+        })
+        
+        
+        self.userRef.child(uid).child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
+            
+            guard let currentProfilePicture = dataSnapshot.value as? String else { return }
+            debutCell.profilePic.setImage(from: currentProfilePicture)
+            
+        })
+
+        
+        
+        
+        //debutCell.profilePic = debut.user.
         borderSet(cell: debutCell, color: #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1), width: 1)
         
         
         return debutCell
     }
 }
+
 

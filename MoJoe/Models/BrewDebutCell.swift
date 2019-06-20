@@ -31,7 +31,7 @@ class BrewDebutCell: UITableViewCell {
     
     func setDebutCell(debut: BrewDebut){
         
-        userLabel.text = "\(debut.user) brewed..."
+        //userLabel.text = "\(debut.user) brewed..."
         brewLabel.text = debut.brew
         roastLabel.text = debut.roast
         ratingLabel.text = "\(String(debut.rating)) / 10!"

@@ -8,27 +8,42 @@
 
 import Foundation
 import UIKit
+import Firebase
+
+
 
 
 class FourthViewController: UIViewController {
+ 
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var segmentedController: UISegmentedControl!
-//    private lazy var debutYourBrew: DebutYourBrew = {
-//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "DebutYourBrew") as! DebutYourBrew
-//
-//        self.addChild(viewController)
-//
-//        return viewController
-//    }()
+    var user = Auth.auth().currentUser
+    let ref = Database.database().reference(withPath: "UserSaveButton")
     
-    @IBAction func addVC(_ sender: Any) {
-        //addChild(debutYourBrew)
+    
+    @IBAction func userSaveButton(_ sender: Any) {
+    
+        guard let userString = user?.uid else {
+            return
+        }
+    let userRef = self.ref.child(userString)
+        userRef.setValue(["UserID": user?.uid, "UserName": user?.displayName,
+                          "UserPhoto": user?.photoURL?.absoluteString
+            ] )
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func tapHideKeyBoard(_ sender: Any) {
-        self.nameTextField.resignFirstResponder()
+        
     }
     
    //DebutYourBrew
@@ -36,21 +51,6 @@ class FourthViewController: UIViewController {
    
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Think the problem is all the other stuff that is going to limit the capabilities/what it is told to do becaus i didnt import the whole file only really the one function.(should be in the other file, whoops. it can stay here for now.)
-
     
     
     

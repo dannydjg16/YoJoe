@@ -1893,8 +1893,13 @@
                                 <rect key="frame" x="164" y="310" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tk3-e8-9QC">
+                                <rect key="frame" x="132" y="431" width="111" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="UserSaveButton"/>
                                 <connections>
-                                    <action selector="addVC:" destination="Td5-P1-nc0" eventType="touchUpInside" id="4li-X8-MEL"/>
+                                    <action selector="userSaveButton:" destination="Td5-P1-nc0" eventType="touchUpInside" id="qkX-Zk-dsL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1923,9 +1928,6 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="segmentedController" destination="dEw-qu-94E" id="32v-4c-tEe"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OcD-eX-prx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="XRf-A4-tUd">
@@ -1934,7 +1936,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2638" y="707"/>
+            <point key="canvasLocation" x="2637.5999999999999" y="706.4039408866995"/>
         </scene>
         <!--Modal Helper View Controller-->
         <scene sceneID="eAV-lk-s4K">

@@ -46,19 +46,29 @@ class VisitReviewViewController: UIViewController {
             else { print("no cell")
                 return
         }
-        //let lastTapped = brewCollectionView.indexPath(for: lastItem)
+       
         guard let brew = brewCell.lastSelectedItem as? BrewTypeCVCell,
             let roast = roastCell.lastSelectedItem as? RoastTypeCVCell,
             let rating = ratingCell.ratingLabel.text,
-            let review = reviewCell.reviewTextField.text,
-            let user = user?.email
+            let review = reviewCell.reviewTextField.text
+       
         
         
+      
         
-            else {print("error")
-                return }
         
-        let debut = BrewDebut(brew: brew.brewName.text!, roast: roast.roastLabel.text!, rating: Int(rating)!, review: review, user: user, date: date)
+            else {
+                print("error")
+                return
+        }
+        
+        guard let userName = user?.uid else {
+            let userName = user?.email
+            return
+        }
+        let userReviewName = userName
+        
+        let debut = BrewDebut(brew: brew.brewName.text!, roast: roast.roastLabel.text!, rating: Int(rating)!, review: review, user: userReviewName, date: date)
         
         let brewDebutRef = self.ref.child(review)
         brewDebutRef.setValue(debut.makeDictionary())

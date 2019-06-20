@@ -15,6 +15,10 @@ struct User {
     let uid: String
     let email: String
     
+    
+//    let displayName: String
+//    let profilePicture: String
+    
     init(authData: Firebase.User) {
         uid = authData.uid
         email = authData.email!
@@ -24,6 +28,5 @@ struct User {
         self.uid = uid
         self.email = email
     }
-    
     
 }

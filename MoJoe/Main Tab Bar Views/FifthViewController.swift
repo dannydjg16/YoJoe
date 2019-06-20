@@ -21,7 +21,7 @@ class FifthViewController: UIViewController {
     @IBOutlet weak var profilePicture: UIImageView!
     
     var user = Auth.auth().currentUser
-    
+  
     let imagePicker = UIImagePickerController()
 
     @IBAction func addProfilePicture(_ sender: Any) {
@@ -133,6 +133,7 @@ class FifthViewController: UIViewController {
         imagePicker.delegate = self
         
         let profileImageURL = Auth.auth().currentUser?.photoURL
+        
         profilePicture.setImage(from: profileImageURL?.absoluteString)
         
     }
