@@ -55,6 +55,7 @@
 		81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */; };
 		81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E3220375D300BBC025 /* ModalHelperViewController.swift */; };
 		81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC1F1622342C0500E50D21 /* ProfileOverview.swift */; };
+		81BCD3DC22D137D4003D0640 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCD3DB22D137D4003D0640 /* Date.swift */; };
 		81E6CD632247F7AE00969B42 /* CMRcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD622247F7AE00969B42 /* CMRcell.swift */; };
 		81E6CD652247F97E00969B42 /* CMBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD642247F97E00969B42 /* CMBCell.swift */; };
 		81E6CD672248076D00969B42 /* CMRoastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6CD662248076D00969B42 /* CMRoastCell.swift */; };
@@ -123,6 +124,7 @@
 		81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelperTableViewCell.swift; sourceTree = "<group>"; };
 		81B668E3220375D300BBC025 /* ModalHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHelperViewController.swift; sourceTree = "<group>"; };
 		81BC1F1622342C0500E50D21 /* ProfileOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOverview.swift; sourceTree = "<group>"; };
+		81BCD3DB22D137D4003D0640 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		81E6CD622247F7AE00969B42 /* CMRcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRcell.swift; sourceTree = "<group>"; };
 		81E6CD642247F97E00969B42 /* CMBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMBCell.swift; sourceTree = "<group>"; };
 		81E6CD662248076D00969B42 /* CMRoastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRoastCell.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		81FE6AE821E3EEAA0008B9A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81BCD3DB22D137D4003D0640 /* Date.swift */,
 				81A4571D2278B012008DF6D4 /* OneLabelShopTagsCVC.swift */,
 				81A4571B2278A508008DF6D4 /* SingleLabelCollectionViewCell.swift */,
 				81E6CD6C2248080000969B42 /* CustomMadeReviewCells */,
@@ -453,6 +456,7 @@
 				813BEFEA226E9B5F008AC632 /* FeedSwitcher.swift in Sources */,
 				81A4571E2278B012008DF6D4 /* OneLabelShopTagsCVC.swift in Sources */,
 				81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */,
+				81BCD3DC22D137D4003D0640 /* Date.swift in Sources */,
 				81A4570E22767075008DF6D4 /* SRLocationCell.swift in Sources */,
 				81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */,
 				81A4571422767169008DF6D4 /* SRReviewCell.swift in Sources */,

@@ -14,7 +14,15 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
     @IBOutlet weak var searchForShops: UISearchBar!
     @IBOutlet weak var searchTField: UITextField!
     
-   
+  
+    @IBAction func printDate(_ sender: Any) {
+        let date = Date()
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions.insert(.withFractionalSeconds)
+        
+        print("\(dateFormatter.string(from: date)) FUCKKKKKKKK")
+    }
+    
     
     
     

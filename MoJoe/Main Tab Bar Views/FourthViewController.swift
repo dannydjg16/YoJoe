@@ -17,7 +17,7 @@ class FourthViewController: UIViewController {
  
     
     var user = Auth.auth().currentUser
-    let ref = Database.database().reference(withPath: "UserSaveButton")
+    let ref = Database.database().reference(withPath: "Users")
     
     
     @IBAction func userSaveButton(_ sender: Any) {
@@ -27,7 +27,7 @@ class FourthViewController: UIViewController {
         }
     let userRef = self.ref.child(userString)
         userRef.setValue(["UserID": user?.uid, "UserName": user?.displayName,
-                          "UserPhoto": user?.photoURL?.absoluteString
+                          "UserPhoto": user?.photoURL?.absoluteString, "UserEmail:": user?.email
             ] )
     }
     

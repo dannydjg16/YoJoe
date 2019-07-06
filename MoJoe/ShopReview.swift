@@ -18,13 +18,14 @@ struct ShopReivew {
     var review: String = ""
     var user: String
     let date: String
+    let readableDate: String
     
     var key: String
     var ref: DatabaseReference?
     
    
     
-    init(shop: String, coffeeType: String, shopTags: String, rating: Int, review: String, user: String, key: String = "", date: String){
+    init(shop: String, coffeeType: String, shopTags: String, rating: Int, review: String, user: String, key: String = "", date: String, readableDate: String){
         self.shop = shop
         self.coffeeType = coffeeType
         self.shopTags = shopTags
@@ -34,6 +35,7 @@ struct ShopReivew {
         self.key = key
         self.ref = nil
         self.date = date
+        self.readableDate = readableDate
     }
     
     
@@ -46,7 +48,8 @@ struct ShopReivew {
         let rating = value["rating"] as? Int,
         let review = value["review"] as? String,
         let user = value["user"] as? String,
-        let date = value["date"] as? String
+        let date = value["date"] as? String,
+        let readableDate = value["readableDate"] as? String
             else { return nil }
        
         self.ref = snapshot.ref
@@ -58,6 +61,7 @@ struct ShopReivew {
         self.review = review
         self.user = user
         self.date = date
+        self.readableDate = readableDate
         
     }
     
@@ -71,6 +75,7 @@ struct ShopReivew {
             "review": review,
             "user": user,
             "date": date,
+            "readableDate": readableDate
         ]
     }
 }

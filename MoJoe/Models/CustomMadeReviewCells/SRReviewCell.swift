@@ -13,6 +13,7 @@ class SRReviewCell: UITableViewCell {
     
     @IBOutlet weak var reviewTextField: UITextField!
     
+  
     
     
     override func awakeFromNib() {
@@ -21,6 +22,7 @@ class SRReviewCell: UITableViewCell {
         
         reviewTextField.contentVerticalAlignment = .top
         reviewTextField.textAlignment = .left
+        self.reviewTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,4 +31,14 @@ class SRReviewCell: UITableViewCell {
         
     }
 
+}
+
+
+extension SRReviewCell: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        reviewTextField.resignFirstResponder()
+        
+        return true
+    }
 }

@@ -16,6 +16,13 @@ class ShopReviewCell: UITableViewCell {
     @IBOutlet weak var shopTagsLabel: UILabel!
     @IBOutlet weak var orderLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var timeSinceLabel: UILabel!
+    
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -25,13 +32,22 @@ class ShopReviewCell: UITableViewCell {
     
     func setShopReviewCell(review: ShopReivew) {
         
-        userVisitedLabel.text = "\(review.user) visited..."
+        
         coffeeShopLabel.text = review.shop
         coffeeTypeLabel.text = review.coffeeType
-        orderLabel.text = review.review
+        //orderLabel.text = review.review
         ratingLabel.text = "\(String(review.rating)) / 10!"
-        dateLabel.text = review.date
-        profilePic.image = #imageLiteral(resourceName: "user")
+        
+        
+        switch review.coffeeType {
+        case "Cappucino", "Americano":
+            self.cupPic.image = #imageLiteral(resourceName: "coffee")
+        case "Latte", "Hot Coffee":
+            self.cupPic.image = #imageLiteral(resourceName: "iced-coffee")
+        default:
+            return
+        }
+        
     }
     
     
@@ -40,6 +56,7 @@ class ShopReviewCell: UITableViewCell {
     
     
     
+    @IBOutlet weak var cupPic: UIImageView!
     
     
     
@@ -47,11 +64,13 @@ class ShopReviewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.profilePic.layer.cornerRadius = profilePic.frame.height / 2
         
+        self.cupPic.image = #imageLiteral(resourceName: "coffee")
         self.shopTagsCollectionView.delegate = self
         self.shopTagsCollectionView.dataSource = self
-        self.shopTagsCollectionView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        self.shopTagsCollectionView.layer.borderWidth = 2
+        //self.shopTagsCollectionView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        self.shopTagsCollectionView.layer.borderWidth = 0
         self.shopTagsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
        
     }

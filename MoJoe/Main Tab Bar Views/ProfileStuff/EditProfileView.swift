@@ -52,7 +52,7 @@ class EditProfileView: UIViewController {
         let user = Auth.auth().currentUser
         print(user?.displayName)
         let nameOfUser = user?.displayName
-        print(nameOfUser!)
+        //print(nameOfUser!)
     }
     
     

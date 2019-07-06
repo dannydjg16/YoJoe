@@ -72,7 +72,9 @@ extension SRShopTagsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = shopTagsCollectionView.cellForItem(at: indexPath) as? OneLabelShopTagsCVC else { return }
+        guard let cell = shopTagsCollectionView.cellForItem(at: indexPath) as? OneLabelShopTagsCVC else { print("error")
+            return
+        }
         cell.backgroundColor = UIColor.brown
         lastSelectedItem = cell
         selectedTags.append(cell.shopTagLabel.text!)

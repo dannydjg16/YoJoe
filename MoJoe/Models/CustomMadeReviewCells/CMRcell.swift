@@ -23,7 +23,7 @@ class CMRCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        
+        self.reviewTextField.delegate = self
        reviewTextField.contentVerticalAlignment = .top
         reviewTextField.textAlignment = .left
         
@@ -36,3 +36,13 @@ class CMRCell: UITableViewCell {
     }
 
 }
+
+extension CMRCell: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        reviewTextField.resignFirstResponder()
+        
+        return true
+    }
+}
+

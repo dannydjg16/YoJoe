@@ -27,6 +27,15 @@ class VisitReviewViewController: UIViewController {
         }
     }
     
+    var isoDateOfPost: String {
+        get{
+        let date = Date()
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions.insert(.withFractionalSeconds)
+        return dateFormatter.string(from: date)
+        }
+    }
+    
     
     @IBOutlet weak var reviewTableView: UITableView!
 
@@ -40,6 +49,7 @@ class VisitReviewViewController: UIViewController {
         
         guard let brewCell: CMBCell = self.reviewTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? CMBCell,
             let roastCell: CMRoastCell = self.reviewTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? CMRoastCell,
+            let beanLocationCell: CMLCell = self.reviewTableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? CMLCell,
             let ratingCell: CMRatingCell = self.reviewTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as? CMRatingCell,
             let reviewCell: CMRCell = self.reviewTableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? CMRCell
             
@@ -50,7 +60,8 @@ class VisitReviewViewController: UIViewController {
         guard let brew = brewCell.lastSelectedItem as? BrewTypeCVCell,
             let roast = roastCell.lastSelectedItem as? RoastTypeCVCell,
             let rating = ratingCell.ratingLabel.text,
-            let review = reviewCell.reviewTextField.text
+            let review = reviewCell.reviewTextField.text,
+            let beanLocation = beanLocationCell.locationField.text
        
         
         
@@ -66,9 +77,11 @@ class VisitReviewViewController: UIViewController {
             let userName = user?.email
             return
         }
+        
         let userReviewName = userName
         
-        let debut = BrewDebut(brew: brew.brewName.text!, roast: roast.roastLabel.text!, rating: Int(rating)!, review: review, user: userReviewName, date: date)
+        
+        let debut = BrewDebut(brew: brew.brewName.text!, roast: roast.roastLabel.text!, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: userReviewName, date: date, isoDate: isoDateOfPost)
         
         let brewDebutRef = self.ref.child(review)
         brewDebutRef.setValue(debut.makeDictionary())

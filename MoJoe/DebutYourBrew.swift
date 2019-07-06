@@ -16,7 +16,7 @@ class DebutYourBrew: UIViewController {
     var brewDebuts: [BrewDebut] = []
     //Not gonna put date here yet. it is already stored in the database, gonna see if i can just use this stored value rather than paste the whole thing in again.
     let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
-    let userRef = Database.database().reference(withPath: "UserSaveButton")
+    let userRef = Database.database().reference(withPath: "Users")
     
     @IBOutlet weak var brewDebutTable: UITableView!
     
@@ -58,9 +58,11 @@ class DebutYourBrew: UIViewController {
     
     override func viewWillLayoutSubviews() {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
+        toReviewPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        toReviewPage.layer.borderWidth = 1
         toReviewPage.backgroundColor = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
         toReviewPage.clipsToBounds = true
-        toReviewPage.setImage(#imageLiteral(resourceName: "plus-symbol"), for: .normal)
+        toReviewPage.setImage(#imageLiteral(resourceName: "coffee-bean-for-a-coffee-break"), for: .normal)
         toReviewPage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
         
@@ -79,7 +81,7 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       
-        return 259
+        return 215
         
     }
         
@@ -92,6 +94,18 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         let debut = brewDebuts[indexPath.row]
         
         let debutCell = brewDebutTable.dequeueReusableCell(withIdentifier: "BrewDebutCell") as! BrewDebutCell
+        
+        switch debut.roast {
+        case "Light Roast":
+            borderSet(cell: debutCell, color: #colorLiteral(red: 1, green: 0.8202751079, blue: 0.3338571206, alpha: 1), width: 5)
+        case "Medium Roast":
+            borderSet(cell: debutCell, color: #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), width: 5)
+        case "Dark Roast":
+            borderSet(cell: debutCell, color: #colorLiteral(red: 0.254897684, green: 0.1924804384, blue: 0.08138259897, alpha: 1), width: 5)
+        default:
+            debutCell.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+        
         //set the shit that goes with the cell. like the labels and all that shit. could be done right here or with a function that is created in the cell file.
         debutCell.setDebutCell(debut: debut)
         
@@ -111,12 +125,10 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
             debutCell.profilePic.setImage(from: currentProfilePicture)
             
         })
-
         
+        let timeAgoString = Date().timeSinceBrewDebut(debut: debut)
         
-        
-        //debutCell.profilePic = debut.user.
-        borderSet(cell: debutCell, color: #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1), width: 1)
+        debutCell.timeAgoLabel.text = timeAgoString
         
         
         return debutCell

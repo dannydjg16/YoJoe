@@ -16,22 +16,26 @@ struct BrewDebut {
     var review: String = ""
     var rating: Int = 100
     var user: String
+    var beanLocation: String = ""
     
     var key: String
     var ref: DatabaseReference?
     
     let date: String
+    let isoDate: String
     
     
-    init(brew: String, roast: String, rating: Int, review: String, user: String, key: String = "", date: String) {
+    init(brew: String, roast: String, rating: Int, beanLocation: String, review: String, user: String, key: String = "", date: String, isoDate: String) {
         self.brew = brew
         self.roast = roast
         self.rating = rating
+        self.beanLocation = beanLocation
         self.review = review
         self.user = user
         self.key = key
         self.ref = nil
         self.date = date
+        self.isoDate = isoDate
     }
     
     init?(snapshot: DataSnapshot) {
@@ -40,9 +44,11 @@ struct BrewDebut {
         let brew = value["brew"] as? String,
         let roast = value["roast"] as? String,
         let rating = value["rating"] as? Int,
+        let beanLocation = value["beanLocation"] as? String,
         let review = value["review"] as? String,
         let user = value["user"] as? String,
-        let date = value["date"] as? String
+        let date = value["date"] as? String,
+        let isoDate = value["isoDate"] as? String
             else { return nil }
         
         self.ref = snapshot.ref
@@ -50,9 +56,11 @@ struct BrewDebut {
         self.brew = brew
         self.roast = roast
         self.rating = rating
+        self.beanLocation = beanLocation
         self.review = review
         self.user = user
         self.date = date
+        self.isoDate = isoDate
         
     }
     
@@ -61,9 +69,11 @@ struct BrewDebut {
             "brew": brew,
             "roast": roast,
             "rating": rating,
+            "beanLocation": beanLocation,
             "review": review,
             "user": user,
-            "date": date
+            "date": date,
+            "isoDate": isoDate
         ]
     }
     

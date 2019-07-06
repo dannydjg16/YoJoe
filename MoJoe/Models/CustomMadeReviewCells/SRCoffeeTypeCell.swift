@@ -14,7 +14,7 @@ class SRCoffeeTypeCell: UITableViewCell {
    
     var lastSelectedItem: UICollectionViewCell?
     
-    var coffeeTypes: [String] = ["Cappucino", "Americano", "Latte", "Hot Cofee"]
+    var coffeeTypes: [String] = ["Cappucino", "Americano", "Latte", "Hot Coffee"]
     
 
     

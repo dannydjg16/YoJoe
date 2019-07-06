@@ -14,7 +14,13 @@ class ShopsFeedView: UIViewController {
     var userMe = Auth.auth().currentUser
     var shopTagsArray: [String] = []
     var shopReviews: [ShopReivew] = []
+    
+    
+   
+    
+    
     let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    let userRef = Database.database().reference(withPath: "Users")
     
     @IBOutlet weak var shopReviewTable: UITableView!
     
@@ -61,12 +67,14 @@ class ShopsFeedView: UIViewController {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
         toReviewPage.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
         toReviewPage.clipsToBounds = true
-        toReviewPage.setImage(#imageLiteral(resourceName: "coffee-beans"), for: .normal)
+        toReviewPage.setImage(#imageLiteral(resourceName: "coffee-bean-for-a-coffee-break"), for: .normal)
        
         toReviewPage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
         
     }
+    
+   
 }
 
 
@@ -79,7 +87,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 426
+        return 277
         
     }
     
@@ -89,24 +97,45 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-       let shop = shopReviews[indexPath.row]
+        let shop = shopReviews[indexPath.row]
         
-       let shopCell =  shopReviewTable.dequeueReusableCell(withIdentifier: "ShopReviewCell") as! ShopReviewCell
+        let shopCell =  shopReviewTable.dequeueReusableCell(withIdentifier: "ShopReviewCell") as! ShopReviewCell
         
         shopCell.setShopReviewCell(review: shop)
         
+        let uid = shop.user
+        self.userRef.child(uid).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let currentUserName = dataSnapshot.value as? String else { return }
+           shopCell.userVisitedLabel.text = "\(currentUserName) visited..."
+            
+        })
+        
+        
+        self.userRef.child(uid).child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
+            
+            guard let currentProfilePicture = dataSnapshot.value as? String else { return }
+            
+            shopCell.profilePic.setImage(from: currentProfilePicture)
+           
+            
+        })
+       
+        
+        
+        
         shopCell.shopTagsArray = shop.shopTags.components(separatedBy: ", ")
+     
+        let timeAgoString = Date().timeSinceShopReview(theShop: shop)
         
+        shopCell.timeSinceLabel.text = timeAgoString
         
-        
-        
-        borderSet(cell: shopCell, color: .lightGray, width: 1)
+        borderSet(cell: shopCell, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), width: 3)
         
         return shopCell
     }
     
     
 }
-
 
 
