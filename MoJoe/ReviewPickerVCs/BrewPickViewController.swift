@@ -38,21 +38,7 @@ class BrewPickViewController: UIViewController {
     
     
     
-    @IBAction func praticeButton(_ sender: Any) {
-        guard let message = practiceField.text,
-            let user = self.user else {
-                return
-        }
-        
-        let review = Review(description: message, reviewer: user.email, date: date)
-        
-        
-        let reviewRef = self.ref.child(message)
-        
-        reviewRef.setValue(review.makeDictionary())
-        
-        self.practiceField.text = nil
-    }
+    
     
     
     

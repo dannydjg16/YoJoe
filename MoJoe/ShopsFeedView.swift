@@ -15,6 +15,7 @@ class ShopsFeedView: UIViewController {
     var shopTagsArray: [String] = []
     var shopReviews: [ShopReivew] = []
     
+  
     
    
     
@@ -87,7 +88,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 277
+        return 310
         
     }
     
@@ -104,6 +105,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         shopCell.setShopReviewCell(review: shop)
         
         let uid = shop.user
+        
         self.userRef.child(uid).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
             guard let currentUserName = dataSnapshot.value as? String else { return }
@@ -124,6 +126,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         
         
         
+        
         shopCell.shopTagsArray = shop.shopTags.components(separatedBy: ", ")
      
         let timeAgoString = Date().timeSinceShopReview(theShop: shop)
@@ -131,6 +134,8 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         shopCell.timeSinceLabel.text = timeAgoString
         
         borderSet(cell: shopCell, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), width: 3)
+        
+        
         
         return shopCell
     }

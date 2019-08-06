@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 class DebutYourBrew: UIViewController {
 
     var userMe = Auth.auth().currentUser
@@ -25,6 +26,9 @@ class DebutYourBrew: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+       
         
         self.toReviewPage = UIButton(type: .custom)
         self.toReviewPage.setTitleColor(#colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), for: .normal)

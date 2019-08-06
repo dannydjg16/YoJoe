@@ -26,12 +26,7 @@ class EditProfileView: UIViewController {
     
   
     
-    func mergeArrays(reviewArray: [Review], reviewPostArray: [ReviewPost]) -> [Any] {
-        var feedArray: [Any] = []
-        
-        
-        return feedArray
-    }
+   
     
     
     

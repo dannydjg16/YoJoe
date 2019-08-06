@@ -84,47 +84,7 @@ class FirstReviewViewController: UIViewController, ChangeCellTextDelegate, Chang
     }
    
     @IBAction private func postButtonPressed(_ sender: Any) {
-        
-        guard let detail = detailTextField.text,
-            let brewCell: ReviewHelperTableViewCell = self.reviewHelperTableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as! ReviewHelperTableViewCell,
-            let roastCell: ReviewHelperTableViewCell = self.reviewHelperTableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! ReviewHelperTableViewCell,
-            let ratingCell: ReviewHelperTableViewCell = self.reviewHelperTableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! ReviewHelperTableViewCell else {
-            return
-        }
-        //MARK: These are the errors that could happen as a result of filling in the review incorecctly or just not filling it in at all.
-        
-        //This shit is here in case i want to contnu
-//        guard let detailError = detailTextField.text, let brewError = brewCell.reviewCategory.text, let roastError = roastCell.reviewCategory.text, let ratingError = ratingCell.reviewCategory.text else {
-//
-//
-//            return
-//        }
-        
-        
-//    guard let detailOfPost = detail, let poster = self.user, let brewType = brewCell.reviewCategory.text, let roastType = roastCell.reviewCategory.text, let
-        
-        
-        if let rating = Int(ratingCell.reviewCategory.text!) {
        
-            
-            
-            
-            
-            let reviewPost = ReviewPost(detail: detail, poster: (self.userMe?.displayName)!, brew: brewCell.reviewCategory.text!, roast: roastCell.reviewCategory.text!, rating: rating, date: date)
-            
-            let reviewRef = self.ref.child(detail)
-            reviewRef.setValue(reviewPost.makeDictionary())
-            
-        
-        } else if ratingCell.reviewCategory.text == "Add Rating" || brewCell.reviewCategory.text == "Add Type of Brew" || roastCell.reviewCategory.text == "Add Type of Roast" {
-            reviewErrorAlert(title: "One or More Sections Not Filled Out", message: "Finish Review")
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-      
-        //ELSE JUST PRESENT A ALERT THAT SAYS YOU NEED TO FILL OUT THE RATING FIELD.
-        
         
       self.dismiss(animated: true, completion: nil)
     }

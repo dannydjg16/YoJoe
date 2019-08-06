@@ -60,7 +60,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         mapSearchBar.sizeToFit()
         mapSearchBar.placeholder = "Find a Great Coffee"
         navigationItem.titleView = mapSearchController?.searchBar
-        
+
         mapSearchController?.hidesNavigationBarDuringPresentation = false
         mapSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true

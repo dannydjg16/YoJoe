@@ -220,6 +220,7 @@ extension UIImageView {
             guard let data = data, error == nil else { return }
             DispatchQueue.main.async {
                 self.image = UIImage(data: data)
+                
             }
         }
         task.resume()

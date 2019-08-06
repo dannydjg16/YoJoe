@@ -57,6 +57,7 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // self.searchForShops.delegate = self.. this goes with searchbarSearchButtonCLicked
+        
     }
 
 
