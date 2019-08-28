@@ -15,7 +15,7 @@ class ShopsFeedView: UIViewController {
     var shopTagsArray: [String] = []
     var shopReviews: [ShopReivew] = []
     
-  
+    
     
    
     
@@ -26,6 +26,14 @@ class ShopsFeedView: UIViewController {
     @IBOutlet weak var shopReviewTable: UITableView!
     
     var toReviewPage = UIButton()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toCommentsPage", let commentsPage = segue.destination as? CommentsForShopReview {
+            commentsPage.postIDFromFeed = sender as! String
+            
+           // commentsPage.postIDFromFeed = (need to figure out how to set this from this file. could be in this function, could be somewher else. maybe ill use a closure.)
+        }
+    }
 
     override func viewDidLoad() {
         
@@ -122,11 +130,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
            
             
         })
-       
-        
-        
-        
-        
+
         shopCell.shopTagsArray = shop.shopTags.components(separatedBy: ", ")
      
         let timeAgoString = Date().timeSinceShopReview(theShop: shop)
@@ -135,10 +139,28 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         
         borderSet(cell: shopCell, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), width: 3)
         
+        shopCell.tapHandler = {
+            
+            
+            let commentsVC = CommentsForShopReview()
+            commentsVC.postIDFromFeed = shopCell.postID
+            
+           
+            
+            self.performSegue(withIdentifier: "toCommentsPage", sender: shopCell.postID)
+            
         
+        
+        }
         
         return shopCell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+    }
+    
+   
     
     
 }

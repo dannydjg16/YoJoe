@@ -22,6 +22,10 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var shopSearchTextField: UITextField!
     @IBOutlet weak var shopTableView: UITableView!
     
+  
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//    }
     
     
     

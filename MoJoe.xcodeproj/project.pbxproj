@@ -29,7 +29,6 @@
 		813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CBD13219DE03E00661736 /* FeedPageViewController.swift */; };
 		8141909A21E1622D000BE77F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8141909921E1622D000BE77F /* GoogleService-Info.plist */; };
 		8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */; };
-		8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8144EE8621EBEB23005FF0B6 /* UserService.swift */; };
 		8150997D22736C5A00B81B8E /* BrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997C22736C5A00B81B8E /* BrewDebut.swift */; };
 		8150997F22739CAA00B81B8E /* BrewDebutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997E22739CAA00B81B8E /* BrewDebutCell.swift */; };
 		8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */; };
@@ -39,6 +38,7 @@
 		81888845221309240039BE38 /* RoastPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81888844221309240039BE38 /* RoastPickViewController.swift */; };
 		819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819042F921A87987009C6083 /* FirstReviewViewController.swift */; };
 		819109AA22FA427100F776F6 /* CommentsForShopReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819109A922FA427100F776F6 /* CommentsForShopReview.swift */; };
+		819109AE22FA61F000F776F6 /* PostCellOnCommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819109AD22FA61F000F776F6 /* PostCellOnCommentsPage.swift */; };
 		81955B4922664E3200856747 /* MapSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81955B4822664E3200856747 /* MapSearchTable.swift */; };
 		81A2CD29224D1B2200D5479E /* RoastTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */; };
 		81A45708227662E5008DF6D4 /* ShopReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A45707227662E5008DF6D4 /* ShopReview.swift */; };
@@ -86,12 +86,12 @@
 		7E312B42212C9DB6009D7F83 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		7E312B44212C9DFF009D7F83 /* FourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 		7E312B46212C9E30009D7F83 /* FifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
-		7E312B4A212CA01B009D7F83 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		7E312B4A212CA01B009D7F83 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = ../InitialViewController.swift; sourceTree = "<group>"; };
 		7E312B4C212CA116009D7F83 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		7E312B4E212CA402009D7F83 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		810A2A242211EB8500351F6D /* BrewPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewPickViewController.swift; sourceTree = "<group>"; };
 		811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTagReviewFeedCVCell.swift; sourceTree = "<group>"; };
-		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyFeedViewController.swift; sourceTree = "<group>"; };
+		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearbyFeedViewController.swift; path = "../Shop Review Files/NearbyFeedViewController.swift"; sourceTree = "<group>"; };
 		8126BA95220B7487001D7387 /* smallViewInBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallViewInBigView.swift; sourceTree = "<group>"; };
 		813BEFE7226953AC008AC632 /* DebutYourBrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DebutYourBrew.swift; path = ../DebutYourBrew.swift; sourceTree = "<group>"; };
 		813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSwitcher.swift; sourceTree = "<group>"; };
@@ -100,7 +100,6 @@
 		8141909921E1622D000BE77F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegistrationViewController.swift; sourceTree = "<group>"; };
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
-		8144EE8621EBEB23005FF0B6 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		8150997C22736C5A00B81B8E /* BrewDebut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebut.swift; sourceTree = "<group>"; };
 		8150997E22739CAA00B81B8E /* BrewDebutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebutCell.swift; sourceTree = "<group>"; };
 		8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealLoginViewController.swift; sourceTree = "<group>"; };
@@ -109,8 +108,9 @@
 		81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPostCell.swift; sourceTree = "<group>"; };
 		81888844221309240039BE38 /* RoastPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastPickViewController.swift; sourceTree = "<group>"; };
 		819042F921A87987009C6083 /* FirstReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReviewViewController.swift; sourceTree = "<group>"; };
-		819109A922FA427100F776F6 /* CommentsForShopReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommentsForShopReview.swift; path = "Shop Review Files/CommentsForShopReview.swift"; sourceTree = "<group>"; };
-		81955B4822664E3200856747 /* MapSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapSearchTable.swift; path = ../MapSearchTable.swift; sourceTree = "<group>"; };
+		819109A922FA427100F776F6 /* CommentsForShopReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsForShopReview.swift; sourceTree = "<group>"; };
+		819109AD22FA61F000F776F6 /* PostCellOnCommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellOnCommentsPage.swift; sourceTree = "<group>"; };
+		81955B4822664E3200856747 /* MapSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchTable.swift; sourceTree = "<group>"; };
 		81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastTypeCVCell.swift; sourceTree = "<group>"; };
 		81A45707227662E5008DF6D4 /* ShopReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopReview.swift; sourceTree = "<group>"; };
 		81A4570922766814008DF6D4 /* ShopReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopReviewCell.swift; sourceTree = "<group>"; };
@@ -190,47 +190,75 @@
 			isa = PBXGroup;
 			children = (
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
-				819109A922FA427100F776F6 /* CommentsForShopReview.swift */,
-				81EB53DB22E556FF008B3883 /* ShopsFromAPITestCell.swift */,
-				81BCD3E222D3EEF7003D0640 /* mikesCoinThing.swift */,
-				81BCD3E022D3D10A003D0640 /* MikesAPIClient.swift */,
-				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
-				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
-				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
-				7E312B4A212CA01B009D7F83 /* InitialViewController.swift */,
-				81955B4822664E3200856747 /* MapSearchTable.swift */,
+				810DC93E2314546C008F055B /* API files */,
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
 				81E92B3222147D2A00CD6303 /* ReviewPickerVCs */,
 				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
-				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				81BCD3DD22D2C7F5003D0640 /* Shop Review Files */,
-				813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
-				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
 				7E312B3C212C98E3009D7F83 /* Info.plist */,
-				8141909921E1622D000BE77F /* GoogleService-Info.plist */,
-				8144EE8621EBEB23005FF0B6 /* UserService.swift */,
-				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
+				815292D52316C7E1008AB219 /* Stuff I never use */,
 			);
 			path = MoJoe;
+			sourceTree = "<group>";
+		};
+		810DC93E2314546C008F055B /* API files */ = {
+			isa = PBXGroup;
+			children = (
+				81EB53DB22E556FF008B3883 /* ShopsFromAPITestCell.swift */,
+				81BCD3E022D3D10A003D0640 /* MikesAPIClient.swift */,
+				81BCD3E222D3EEF7003D0640 /* mikesCoinThing.swift */,
+			);
+			name = "API files";
+			sourceTree = "<group>";
+		};
+		810DC93F23145599008F055B /* First 3 Views on First Tab */ = {
+			isa = PBXGroup;
+			children = (
+				813BEFE7226953AC008AC632 /* DebutYourBrew.swift */,
+				813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */,
+				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
+			);
+			name = "First 3 Views on First Tab";
 			sourceTree = "<group>";
 		};
 		8141909E21E2E649000BE77F /* Main Tab Bar Views */ = {
 			isa = PBXGroup;
 			children = (
+				813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */,
+				810DC93F23145599008F055B /* First 3 Views on First Tab */,
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
-				813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */,
-				813BEFE7226953AC008AC632 /* DebutYourBrew.swift */,
-				811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */,
 				81BC1F192234361B00E50D21 /* ReviewStuff */,
 				7E312B32212C98E3009D7F83 /* SecondViewController.swift */,
-				7E312B42212C9DB6009D7F83 /* ThirdViewController.swift */,
+				815292D42316C756008AB219 /* Map Stuff(3rd VC) */,
 				7E312B44212C9DFF009D7F83 /* FourthViewController.swift */,
-				7E312B46212C9E30009D7F83 /* FifthViewController.swift */,
-				81BC1F18223435A900E50D21 /* ProfileStuff */,
+				81BC1F18223435A900E50D21 /* ProfileStuff(5th VC) */,
 			);
 			path = "Main Tab Bar Views";
+			sourceTree = "<group>";
+		};
+		815292D42316C756008AB219 /* Map Stuff(3rd VC) */ = {
+			isa = PBXGroup;
+			children = (
+				81955B4822664E3200856747 /* MapSearchTable.swift */,
+				7E312B42212C9DB6009D7F83 /* ThirdViewController.swift */,
+			);
+			path = "Map Stuff(3rd VC)";
+			sourceTree = "<group>";
+		};
+		815292D52316C7E1008AB219 /* Stuff I never use */ = {
+			isa = PBXGroup;
+			children = (
+				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
+				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
+				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
+				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
+				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
+				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
+				8141909921E1622D000BE77F /* GoogleService-Info.plist */,
+			);
+			path = "Stuff I never use";
 			sourceTree = "<group>";
 		};
 		81ADB2C6FCFA71631D2CCC77 /* Frameworks */ = {
@@ -241,13 +269,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		81BC1F18223435A900E50D21 /* ProfileStuff */ = {
+		81BC1F18223435A900E50D21 /* ProfileStuff(5th VC) */ = {
 			isa = PBXGroup;
 			children = (
+				7E312B46212C9E30009D7F83 /* FifthViewController.swift */,
 				81789490222CB3C6001F8CE6 /* EditProfileView.swift */,
 				81BC1F1622342C0500E50D21 /* ProfileOverview.swift */,
 			);
-			path = ProfileStuff;
+			path = "ProfileStuff(5th VC)";
 			sourceTree = "<group>";
 		};
 		81BC1F192234361B00E50D21 /* ReviewStuff */ = {
@@ -262,6 +291,8 @@
 		81BCD3DD22D2C7F5003D0640 /* Shop Review Files */ = {
 			isa = PBXGroup;
 			children = (
+				819109A922FA427100F776F6 /* CommentsForShopReview.swift */,
+				819109AD22FA61F000F776F6 /* PostCellOnCommentsPage.swift */,
 				811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */,
 				81A4570922766814008DF6D4 /* ShopReviewCell.swift */,
 				81A4570B22766D71008DF6D4 /* ShopReviewSheet.swift */,
@@ -302,6 +333,7 @@
 		81F3444921FE4DEF00DF0E9F /* Register or Login Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E312B4A212CA01B009D7F83 /* InitialViewController.swift */,
 				8152A5BA217969FD003D7B0A /* RealLoginViewController.swift */,
 				7E312B4E212CA402009D7F83 /* RegisterViewController.swift */,
 				81EA1721218110F7003388DA /* LoginNavigationController.swift */,
@@ -522,7 +554,6 @@
 				7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */,
 				8126BA96220B7487001D7387 /* smallViewInBigView.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
-				8144EE8721EBEB23005FF0B6 /* UserService.swift in Sources */,
 				81E6CD672248076D00969B42 /* CMRoastCell.swift in Sources */,
 				81F3444B21FE4E9500DF0E9F /* VisitReviewViewController.swift in Sources */,
 				81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */,
@@ -531,6 +562,7 @@
 				81BC1F1722342C0500E50D21 /* ProfileOverview.swift in Sources */,
 				81FE6AE721E3E6720008B9A4 /* User.swift in Sources */,
 				7E312B43212C9DB6009D7F83 /* ThirdViewController.swift in Sources */,
+				819109AE22FA61F000F776F6 /* PostCellOnCommentsPage.swift in Sources */,
 				813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */,
 				7E312B45212C9DFF009D7F83 /* FourthViewController.swift in Sources */,
 			);

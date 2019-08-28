@@ -22,6 +22,19 @@ class ShopReviewCell: UITableViewCell {
     @IBOutlet weak var likesLabel: UILabel!
     
     @IBOutlet weak var commentsButton: UIButton!
+    
+    var tapHandler: (() -> Void)?
+    
+    
+    
+    @IBAction func toCommentsPage(_ sender: Any) {
+        //commentsDelegate?.triggerSegueWithInfo(info: postID)
+        
+        self.tapHandler?()
+    }
+    
+    
+    
     @IBOutlet weak var repostButton: UIButton!
     
     var postID: String = ""
@@ -121,7 +134,8 @@ class ShopReviewCell: UITableViewCell {
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         commentsButton.setImage(#imageLiteral(resourceName: "note"), for: .normal)
-        commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
+        //commented out and used ibaction instead
+        //commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
         
         repostButton.setImage(#imageLiteral(resourceName: "promotion"), for: .normal)
         repostButton.addTarget(self, action: #selector(repostButtonTapped), for: .touchUpInside)
@@ -149,7 +163,6 @@ class ShopReviewCell: UITableViewCell {
             var hasPostBeenLiked: Bool = false
             for post in self.likedPostsByUser {
                 if post == self.postID {
-                    print("liked already")
                     hasPostBeenLiked = true
                     continue
                 }
@@ -162,6 +175,8 @@ class ShopReviewCell: UITableViewCell {
         }
        
        )
+        
+     
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -230,9 +245,13 @@ class ShopReviewCell: UITableViewCell {
         })
     }
     
-    @objc func commentsButtonTapped(sender: UIButton) {
-        print("commentsButtonTapped")
-    }
+    //commented out and used ibaction instead
+//    @objc func commentsButtonTapped(sender: UIButton) {
+//        print("commentsButtonTapped")
+//        var cellName = postID
+//        self.tapHandler?()
+//
+//    }
     
     @objc func repostButtonTapped(sender: UIButton) {
         print("repostButtonTapped")
