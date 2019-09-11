@@ -40,6 +40,8 @@
 		819109AA22FA427100F776F6 /* CommentsForShopReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819109A922FA427100F776F6 /* CommentsForShopReview.swift */; };
 		819109AE22FA61F000F776F6 /* PostCellOnCommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819109AD22FA61F000F776F6 /* PostCellOnCommentsPage.swift */; };
 		81955B4922664E3200856747 /* MapSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81955B4822664E3200856747 /* MapSearchTable.swift */; };
+		81964B6623294DFA00AE9F91 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81964B6523294DFA00AE9F91 /* PostComment.swift */; };
+		81964B6823294FF100AE9F91 /* PostViewOnCommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81964B6723294FF100AE9F91 /* PostViewOnCommentsPage.swift */; };
 		81A2CD29224D1B2200D5479E /* RoastTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */; };
 		81A45708227662E5008DF6D4 /* ShopReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A45707227662E5008DF6D4 /* ShopReview.swift */; };
 		81A4570A22766814008DF6D4 /* ShopReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A4570922766814008DF6D4 /* ShopReviewCell.swift */; };
@@ -111,6 +113,8 @@
 		819109A922FA427100F776F6 /* CommentsForShopReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsForShopReview.swift; sourceTree = "<group>"; };
 		819109AD22FA61F000F776F6 /* PostCellOnCommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellOnCommentsPage.swift; sourceTree = "<group>"; };
 		81955B4822664E3200856747 /* MapSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchTable.swift; sourceTree = "<group>"; };
+		81964B6523294DFA00AE9F91 /* PostComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostComment.swift; path = ../PostComment.swift; sourceTree = "<group>"; };
+		81964B6723294FF100AE9F91 /* PostViewOnCommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostViewOnCommentsPage.swift; path = /Users/danielgrant/Desktop/MoJoe/MoJoe/Models/PostViewOnCommentsPage.swift; sourceTree = "<absolute>"; };
 		81A2CD28224D1B2200D5479E /* RoastTypeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastTypeCVCell.swift; sourceTree = "<group>"; };
 		81A45707227662E5008DF6D4 /* ShopReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopReview.swift; sourceTree = "<group>"; };
 		81A4570922766814008DF6D4 /* ShopReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopReviewCell.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 				7E312B3C212C98E3009D7F83 /* Info.plist */,
+				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
 				815292D52316C7E1008AB219 /* Stuff I never use */,
 			);
 			path = MoJoe;
@@ -251,7 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
-				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
 				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
 				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
 				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
@@ -298,6 +302,8 @@
 				81A4570B22766D71008DF6D4 /* ShopReviewSheet.swift */,
 				81A45707227662E5008DF6D4 /* ShopReview.swift */,
 				81BCD3DE22D2C89F003D0640 /* ShopLocationSearchTable.swift */,
+				81964B6723294FF100AE9F91 /* PostViewOnCommentsPage.swift */,
+				81964B6523294DFA00AE9F91 /* PostComment.swift */,
 			);
 			path = "Shop Review Files";
 			sourceTree = "<group>";
@@ -529,6 +535,7 @@
 				81888845221309240039BE38 /* RoastPickViewController.swift in Sources */,
 				81A457162276C1EA008DF6D4 /* SRCoffeeTypeCell.swift in Sources */,
 				81B668E021FFA5DA00BBC025 /* ReviewHelper.swift in Sources */,
+				81964B6823294FF100AE9F91 /* PostViewOnCommentsPage.swift in Sources */,
 				819042FA21A87987009C6083 /* FirstReviewViewController.swift in Sources */,
 				7E312B47212C9E30009D7F83 /* FifthViewController.swift in Sources */,
 				813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */,
@@ -541,6 +548,7 @@
 				811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */,
 				81789491222CB3C6001F8CE6 /* EditProfileView.swift in Sources */,
 				81A457102276709D008DF6D4 /* SRShopTagsCell.swift in Sources */,
+				81964B6623294DFA00AE9F91 /* PostComment.swift in Sources */,
 				7E312B4B212CA01B009D7F83 /* InitialViewController.swift in Sources */,
 				81A457122276714D008DF6D4 /* SRRatingCell.swift in Sources */,
 				81A45708227662E5008DF6D4 /* ShopReview.swift in Sources */,

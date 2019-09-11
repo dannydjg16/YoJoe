@@ -103,6 +103,14 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
        
     }
     
+    @IBAction func swipeGesture(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended {
+            if sender.direction == .down {
+                shopSearchTextField.resignFirstResponder()
+            }
+        }
+    }
+    
     
     
     
@@ -112,6 +120,13 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
         super.viewDidLoad()
         shopSearchTextField.placeholder = "Search for Coffee"
         shopSearchTextField.delegate = self
+        
+        
+        let bar = UIToolbar()
+        let reset = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: nil)
+        bar.items = [reset]
+        bar.sizeToFit()
+        shopSearchTextField.inputAccessoryView = bar
         
 //        APIClient.shared.GET(endpoint:"")  { result in
 //        switch result {

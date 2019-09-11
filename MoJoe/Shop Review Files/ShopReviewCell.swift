@@ -28,7 +28,7 @@ class ShopReviewCell: UITableViewCell {
     
     
     @IBAction func toCommentsPage(_ sender: Any) {
-        //commentsDelegate?.triggerSegueWithInfo(info: postID)
+        
         
         self.tapHandler?()
     }
@@ -38,6 +38,7 @@ class ShopReviewCell: UITableViewCell {
     @IBOutlet weak var repostButton: UIButton!
     
     var postID: String = ""
+    var imageURL: String = ""
     
     var date: String {
         get {
@@ -73,13 +74,39 @@ class ShopReviewCell: UITableViewCell {
     func setShopReviewCell(review: ShopReivew) {
         
         
+        //set the imageURL
+        
+        
+        
         coffeeShopLabel.text = review.shop
         coffeeTypeLabel.text = review.coffeeType
         //orderLabel.text = review.review
         ratingLabel.text = "\(String(review.rating)) / 10!"
-        shopPicture.image = #imageLiteral(resourceName: "coffeeCup")
+        //shopPicture.image = #imageLiteral(resourceName: "coffeeCup")
         likesLabel.text = "0"//review.likesAmount or whatever i decide to call it.
         postID = review.postID
+        
+        
+        
+        self.ref.child("\(review.postID)").child("imageURL").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let imageURL = dataSnapshot.value as? String else {
+                return
+            }
+            
+            //Now that I have the imageURL I just need to get it from storage.
+            let ref = Storage.storage().reference(forURL: imageURL)
+            
+            ref.getData(maxSize: 1024 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else if let data = data, let image = UIImage(data: data) {
+                    self.shopPicture.image = image
+                } }
+                
+            
+        })
+        
         
         self.ref.child("\(review.postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             

@@ -9,12 +9,16 @@
 import Foundation
 import Firebase
 
+
 class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     
    
     var user = Auth.auth().currentUser
-    
-    
+    var addPhotoButton = UIButton()
+    let imagePicker = UIImagePickerController()
+    @IBOutlet weak var shopImage: UIImageView!
+    var imageURL: String?
+    var postID: String?
     
 
     let ref = Database.database().reference(withPath: "ShopReview")
@@ -70,15 +74,15 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let dateRead = DateFormatter().string(from: Date())
-        let postID = "shopReview" + randomString(length: 20)
-        
-        guard let coffeeBoughtType = coffeeType.coffeeTypeLabel.text else {
+        //let postID = "shopReview" + randomString(length: 20)
+       
+        guard let coffeeBoughtType = coffeeType.coffeeTypeLabel.text, let shopImageURL = self.imageURL, let postID = self.postID else {
             return
         }
         
+    
         
-        
-        let shopReview = ShopReivew(shop: shop, coffeeType: coffeeBoughtType, shopTags: tagCell.selectedTags.joined(separator: ", "), rating: Int(rating)!, review: review, user: user, date: date, readableDate: dateRead, likesAmount: 0, postID: postID)
+        let shopReview = ShopReivew(shop: shop, coffeeType: coffeeBoughtType, shopTags: tagCell.selectedTags.joined(separator: ", "), rating: Int(rating)!, review: review, user: user, date: date, readableDate: dateRead, likesAmount: 0, postID: postID, imageURL: shopImageURL)
         
         let shopReviewRef = self.ref.child(postID)
         
@@ -102,11 +106,63 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         
         shopReviewSheet.delegate = self
         shopReviewSheet.dataSource = self
+        
+        imagePicker.delegate = self 
+        
+        self.addPhotoButton = UIButton(type: .custom)
+        self.addPhotoButton.setTitleColor(#colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1), for: .normal)
+        self.addPhotoButton.addTarget(self, action: #selector(addPictures), for: .touchUpInside)
+        self.view.addSubview(addPhotoButton)
+        
+        self.postID = "shopReview" + randomString(length: 20)
     }
     
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    @objc func addPictures() {
+        
+        print("pressed")
+       
+        let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
+        
+        let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        
+        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        pictureFinder.addAction(takeAPicture)
+        pictureFinder.addAction(chooseAPicture)
+        
+        self.present(pictureFinder, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    override func viewWillLayoutSubviews() {
+        
+        
+        addPhotoButton.layer.cornerRadius = addPhotoButton.layer.frame.size.width / 2
+        addPhotoButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        addPhotoButton.layer.borderWidth = 1
+        addPhotoButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        addPhotoButton.clipsToBounds = true
+        
+        addPhotoButton.setImage(#imageLiteral(resourceName: "photo-camera"), for: .normal)
+        
+        addPhotoButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([addPhotoButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),addPhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), addPhotoButton.widthAnchor.constraint(equalToConstant: 50), addPhotoButton.heightAnchor.constraint(equalToConstant: 50)])
     }
 }
 
@@ -213,4 +269,36 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
             print("hello")
         }
     }
+}
+
+
+extension ShopReviewSheet: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage,
+            let imageData = image.pngData(), let userID = user?.uid {
+            shopImage.image = image
+            let storageRef = Storage.storage().reference().child("shopPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/png"
+            storageRef.putData(imageData, metadata: metaData) {
+                (metaData, error) in
+                if error == nil, metaData != nil {
+                    storageRef.downloadURL { url, error in
+                        if let url = url {
+                            print(url)
+                            self.imageURL = url.absoluteString
+                        }
+                    }
+                }
+                else {
+                    print(error?.localizedDescription)
+                }
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

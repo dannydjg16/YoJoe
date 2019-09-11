@@ -132,6 +132,8 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         })
 
         shopCell.shopTagsArray = shop.shopTags.components(separatedBy: ", ")
+        
+        //Set the image here
      
         let timeAgoString = Date().timeSinceShopReview(theShop: shop)
         
@@ -140,24 +142,21 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         borderSet(cell: shopCell, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), width: 3)
         
         shopCell.tapHandler = {
-            
-            
-            let commentsVC = CommentsForShopReview()
-            commentsVC.postIDFromFeed = shopCell.postID
-            
-           
-            
-            self.performSegue(withIdentifier: "toCommentsPage", sender: shopCell.postID)
-            
-        
-        
-        }
+            self.performSegue(withIdentifier: "toCommentsPage", sender: shopCell.postID + "addComment")
+    }
         
         return shopCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
+       
+        
+        let cell = shopReviewTable.cellForRow(at: indexPath) as? ShopReviewCell
+        
+        let cellPostID = cell?.postID
+        
+        performSegue(withIdentifier: "toCommentsPage", sender: cellPostID)
     }
     
    

@@ -19,6 +19,11 @@ import FirebaseStorage
 class FifthViewController: UIViewController {
    
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profilePageTopOfPageLayer: UIView!
+    @IBOutlet weak var profileActionsView: UIView!
+    @IBOutlet weak var followButton: UIImageView!
+    @IBOutlet weak var dmButton: UIImageView!
+    
     
     var user = Auth.auth().currentUser
   
@@ -135,6 +140,17 @@ class FifthViewController: UIViewController {
         let profileImageURL = Auth.auth().currentUser?.photoURL
         
         profilePicture.setImage(from: profileImageURL?.absoluteString)
+        //self.profilePic.layer.cornerRadius = profilePic.frame.height / 2
+        self.profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
+        self.profilePageTopOfPageLayer.layer.borderWidth = 1
+        self.profilePageTopOfPageLayer.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+       
+        self.profileActionsView.layer.borderWidth = 1
+        self.profileActionsView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        self.followButton.image = #imageLiteral(resourceName: "follow")
+        
+        self.dmButton.image = #imageLiteral(resourceName: "speech-bubble")
         
     }
     
@@ -162,6 +178,9 @@ extension FifthViewController: UITextFieldDelegate {
 
 
 extension FifthViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let imageChosen =  info[UIImagePickerController.InfoKey.originalImage] as? UIImage
             else {
@@ -171,7 +190,11 @@ extension FifthViewController: UIImagePickerControllerDelegate, UINavigationCont
         var data = Data()
         data = imageChosen.jpegData(compressionQuality: 0.75)!
         
-        let imageRef = Storage.storage().reference().child("\(Auth.auth().currentUser?.uid)"  + "ProfilePictures" +  randomString(length: 20))
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let imageRef = Storage.storage().reference().child("ProfilePictures").child("\(userID)" +  randomString(length: 20))
         
         
         imageRef.putData(data, metadata: nil) { (metadata, err) in
@@ -184,7 +207,7 @@ extension FifthViewController: UIImagePickerControllerDelegate, UINavigationCont
                     
                 } else {
                     //self.profilePicture.setImage(from: url?.absoluteString)
-                   // self.imageURL = url!.absoluteString
+                   // self.imageURL = uorl!.absoluteString
                     self.changePictureURL(url: url!)
                     
                     

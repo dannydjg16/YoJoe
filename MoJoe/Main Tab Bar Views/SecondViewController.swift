@@ -20,7 +20,7 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.formatOptions.insert(.withFractionalSeconds)
         
-        print("\(dateFormatter.string(from: date)) FUCKKKKKKKK")
+        print("\(dateFormatter.string(from: date))")
     }
     
     
@@ -31,6 +31,12 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
         self.searchTField.resignFirstResponder()
      
     }
+    
+    @IBAction func swipeGesture(_ sender: UISwipeGestureRecognizer) {
+        
+    }
+    
+    
     
 
     private func searchBarSearchButtonClicked(searchBar: UISearchBar)
@@ -55,11 +61,20 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        // self.searchForShops.delegate = self.. this goes with searchbarSearchButtonCLicked
+       
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+        downSwipe.direction = .down
+        self.view.addGestureRecognizer(downSwipe)
         
     }
 
-
+    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+        switch gesture.direction {
+        case .down :
+            searchTField.resignFirstResponder()
+        default:
+            break
+        }
+    }
 }
 
