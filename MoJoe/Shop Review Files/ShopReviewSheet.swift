@@ -82,7 +82,7 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         
     
         
-        let shopReview = ShopReivew(shop: shop, coffeeType: coffeeBoughtType, shopTags: tagCell.selectedTags.joined(separator: ", "), rating: Int(rating)!, review: review, user: user, date: date, readableDate: dateRead, likesAmount: 0, postID: postID, imageURL: shopImageURL)
+        let shopReview = ShopReivew(shop: shop, coffeeType: coffeeBoughtType, shopTags: tagCell.selectedTags.joined(separator: ", "), rating: Int(rating)!, review: review, user: user, date: date, readableDate: dateRead, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0)
         
         let shopReviewRef = self.ref.child(postID)
         

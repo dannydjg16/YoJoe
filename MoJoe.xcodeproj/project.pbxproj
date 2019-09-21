@@ -22,6 +22,7 @@
 		810A2A252211EB8500351F6D /* BrewPickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A2A242211EB8500351F6D /* BrewPickViewController.swift */; };
 		811B3F0722AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */; };
 		811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */; };
+		8126B18823311FEE0004E885 /* comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126B18723311FEE0004E885 /* comment.swift */; };
 		8126BA96220B7487001D7387 /* smallViewInBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126BA95220B7487001D7387 /* smallViewInBigView.swift */; };
 		813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE7226953AC008AC632 /* DebutYourBrew.swift */; };
 		813BEFEA226E9B5F008AC632 /* FeedSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */; };
@@ -94,6 +95,7 @@
 		810A2A242211EB8500351F6D /* BrewPickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewPickViewController.swift; sourceTree = "<group>"; };
 		811B3F0622AAE21E006883D9 /* ShopTagReviewFeedCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTagReviewFeedCVCell.swift; sourceTree = "<group>"; };
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearbyFeedViewController.swift; path = "../Shop Review Files/NearbyFeedViewController.swift"; sourceTree = "<group>"; };
+		8126B18723311FEE0004E885 /* comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = comment.swift; sourceTree = "<group>"; };
 		8126BA95220B7487001D7387 /* smallViewInBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallViewInBigView.swift; sourceTree = "<group>"; };
 		813BEFE7226953AC008AC632 /* DebutYourBrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DebutYourBrew.swift; path = ../DebutYourBrew.swift; sourceTree = "<group>"; };
 		813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSwitcher.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				81A4570922766814008DF6D4 /* ShopReviewCell.swift */,
 				81A4570B22766D71008DF6D4 /* ShopReviewSheet.swift */,
 				81A45707227662E5008DF6D4 /* ShopReview.swift */,
+				8126B18723311FEE0004E885 /* comment.swift */,
 				81BCD3DE22D2C89F003D0640 /* ShopLocationSearchTable.swift */,
 				81964B6723294FF100AE9F91 /* PostViewOnCommentsPage.swift */,
 				81964B6523294DFA00AE9F91 /* PostComment.swift */,
@@ -513,6 +516,7 @@
 			files = (
 				81E6CD6B224807F300969B42 /* CMLCell.swift in Sources */,
 				81A4571C2278A508008DF6D4 /* SingleLabelCollectionViewCell.swift in Sources */,
+				8126B18823311FEE0004E885 /* comment.swift in Sources */,
 				813BEFEA226E9B5F008AC632 /* FeedSwitcher.swift in Sources */,
 				81A4571E2278B012008DF6D4 /* OneLabelShopTagsCVC.swift in Sources */,
 				81EA1722218110F7003388DA /* LoginNavigationController.swift in Sources */,

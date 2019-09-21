@@ -22,6 +22,7 @@ struct ShopReivew {
     var likesAmount: Int = 0
     var postID: String
     var imageURL: String
+    var comments: Int
     
     
     var key: String
@@ -29,7 +30,8 @@ struct ShopReivew {
     
    
     
-    init(shop: String, coffeeType: String, shopTags: String, rating: Int, review: String, user: String, key: String = "", date: String, readableDate: String, likesAmount: Int, postID: String, imageURL: String){
+    init(shop: String, coffeeType: String, shopTags: String, rating: Int, review: String, user: String, key: String = "", date: String, readableDate: String, likesAmount: Int, postID: String, imageURL: String, comments: Int) {
+        
         self.shop = shop
         self.coffeeType = coffeeType
         self.shopTags = shopTags
@@ -43,8 +45,8 @@ struct ShopReivew {
         self.likesAmount = likesAmount
         self.postID = postID
         self.imageURL = imageURL
+        self.comments = comments
      
-        
     }
     
     
@@ -61,7 +63,8 @@ struct ShopReivew {
         let readableDate = value["readableDate"] as? String,
         let likesAmount = value["likesAmount"] as? Int,
         let postID = value["postID"] as? String,
-        let imageURL = value["imageURL"] as? String
+        let imageURL = value["imageURL"] as? String,
+        let comments = value["comments"] as? Int
        
             
             else { return nil }
@@ -79,6 +82,7 @@ struct ShopReivew {
         self.likesAmount = likesAmount
         self.postID = postID
         self.imageURL = imageURL
+        self.comments = comments
        
         
     }
@@ -96,7 +100,8 @@ struct ShopReivew {
             "readableDate": readableDate,
             "likesAmount": likesAmount,
             "postID": postID,
-            "imageURL": imageURL
+            "imageURL": imageURL,
+            "comments": comments
         ]
     }
 }

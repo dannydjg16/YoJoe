@@ -11,9 +11,12 @@ import UIKit
 class PostComment: UITableViewCell {
 
     @IBOutlet weak var commentBubble: UIView!
-    @IBOutlet weak var comment: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
     
     
+    func setCommentCell(comment: Comment) {
+        commentLabel.text = comment.comment
+    }
     
     
     

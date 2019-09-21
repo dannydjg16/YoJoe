@@ -71,12 +71,8 @@ class ShopReviewCell: UITableViewCell {
     let userRef = Database.database().reference(withPath: "Users")
     let user = Auth.auth().currentUser
     
+    
     func setShopReviewCell(review: ShopReivew) {
-        
-        
-        //set the imageURL
-        
-        
         
         coffeeShopLabel.text = review.shop
         coffeeTypeLabel.text = review.coffeeType
@@ -85,8 +81,6 @@ class ShopReviewCell: UITableViewCell {
         //shopPicture.image = #imageLiteral(resourceName: "coffeeCup")
         likesLabel.text = "0"//review.likesAmount or whatever i decide to call it.
         postID = review.postID
-        
-        
         
         self.ref.child("\(review.postID)").child("imageURL").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             

@@ -45,10 +45,6 @@ class ShopsFeedView: UIViewController {
         self.toReviewPage.addTarget(self, action: #selector(displayReviewPage), for: .touchUpInside)
         self.view.addSubview(toReviewPage)
     
-        
-        
-        
-        
         shopReviewRef.queryOrdered(byChild: "date").observe(.value, with: {
             (snapshot) in
             
@@ -59,9 +55,10 @@ class ShopsFeedView: UIViewController {
                     let shopReview = ShopReivew(snapshot: snapshot) {
                     newShopReviews.append(shopReview)
                     
-                    self.shopReviews = newShopReviews
-                    self.shopReviewTable.reloadData()
+//                    self.shopReviews = newShopReviews
+//                    self.shopReviewTable.reloadData()
                 }
+                
             }
             self.shopReviews = newShopReviews
             self.shopReviewTable.reloadData()
@@ -71,6 +68,7 @@ class ShopsFeedView: UIViewController {
     @objc func displayReviewPage(){
         self.performSegue(withIdentifier: "toShopReviewSegue", sender: self)
     }
+    
     //MARK: More button Stuff
     override func viewWillLayoutSubviews() {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2

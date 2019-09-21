@@ -13,7 +13,20 @@ import Firebase
 class CommentsForShopReview: UIViewController {
     
     let ref = Database.database().reference(withPath: "ShopReview")
+    let commentRef = Database.database().reference(withPath: "Comments")
     var userRef = Database.database().reference(withPath: "Users")
+    var postIDFromFeed: String = ""
+    var allComments: [Comment] = []
+    
+    var date: String {
+        get {
+            let postDate = Date()
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "YYYY-MM-dd HH:mm:ss"
+            let stringDate = dateFormat.string(from: postDate)
+            return stringDate
+        }
+    }
     
     //MARK: Post Vars
     @IBOutlet weak var profilePic: UIImageView!
@@ -32,22 +45,47 @@ class CommentsForShopReview: UIViewController {
     }
     
     @IBAction func addComment(_ sender: Any) {
-       
         let stringIndexOfPostID = postIDFromFeed.prefix(30)
         let stringPostID = String(stringIndexOfPostID)
         
-        if commentTextField.text != nil {
+        guard let comment = commentTextField.text else {
+            return
+        }
         
-        let commentLocation = ref.child("\(stringPostID)").child("Comments")
-        commentLocation.setValue(["\(randomString(length: 20))": commentTextField.text])
+        if commentTextField.text == "" {
+            return
+        } else {
+        let postComment = Comment(comment: comment, date: date, likesAmount: 0)
+        
+        let commentLocation = commentRef.child("\(stringPostID)").child("\(randomString(length: 20))")
+        
+        commentLocation.setValue(postComment.makeDictionary())
+        
+       
+        self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: {(snapshot) in
+            guard let numberOfComments = snapshot.value as? Int else {
+                return
+            }
+            self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
+                (snapshot) in
+                if let shopReview = ShopReivew(snapshot: snapshot) {
+                    self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
+                }
+            }
+            )
+            
+        })
+        
+        
+        
         
         commentTextField.text = ""
         }
     }
-   
-    var postIDFromFeed: String = ""
     
-    var postRef = Database.database().reference(withPath: "ShopReview")
+    
+    
+    
     
     
     
@@ -77,13 +115,16 @@ class CommentsForShopReview: UIViewController {
         let stringPostID = String(stringIndexOfPostID)
         
         
-        self.postRef.child("\(stringPostID)").observe(.value, with: { (dataSnapshot) in
+        self.ref.child("\(stringPostID)").observe(.value, with: { (dataSnapshot) in
+            
+         
+            print("DANNY")
             
             guard let postInfo = dataSnapshot as? DataSnapshot else {
                 return
             }
             if let shopReview = ShopReivew(snapshot: postInfo){
-                
+
                 self.userRef.child("\(shopReview.user)").child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
                     
                     guard let currentProfilePicture = dataSnapshot.value as? String else { return }
@@ -93,10 +134,33 @@ class CommentsForShopReview: UIViewController {
                     self.shopLabel.text = shopReview.shop
                     self.ratingLabel.text = String(shopReview.rating) + "/10"
                     self.coffeeTypeLabel.text = shopReview.coffeeType
-                    
-                    
-                    
+     
                 })
+
+                
+                
+                if shopReview.comments == 0 {
+                    
+                } else {
+                   print("hello")
+                   
+                    self.commentRef.child("\(shopReview.postID)").observe(.value, with: {
+                        (snapshot) in
+                        var newComments: [Comment] = []
+                        
+                        for child in snapshot.children {
+                            if let snapshot = child as? DataSnapshot, let comment = Comment(snapshot: snapshot) {
+                                newComments.append(comment)
+                                
+                                self.allComments = newComments
+                                self.commentsTableView.reloadData()
+                            }
+                            
+                        }
+                    })
+                    
+                   
+                }
                 
                 //self.profilePic.image = shopre
 //                cell.setShopReviewCommentCell(review: shopReview)
@@ -146,40 +210,36 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
 //    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return allComments.count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 97
         
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = commentsTableView.dequeueReusableCell(withIdentifier: "PostComment") as! PostComment
         
-        cell.comment.text = ":)"
+        if allComments.count == 0 {
+            
+            let errorCell = commentsTableView.dequeueReusableCell(withIdentifier: "LeaveAComment")
+            return errorCell!
+            
+        } else {
+        
+        let comment = allComments[indexPath.row]
+        
+        let cell = commentsTableView.dequeueReusableCell(withIdentifier: "PostComment") as! PostComment
+
+        cell.setCommentCell(comment: comment)
         cell.commentBubble.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         cell.commentBubble.layer.borderWidth = 1
         
-        //If addComment was added to the postID by a press of the comment button instead of cell selected, it gets taken away here.
-        
-        let stringIndexOfPostID = postIDFromFeed.prefix(30)
-        let stringPostID = String(stringIndexOfPostID)
-        
-        
-       
-        
-
-        
-        
-        
-       
-        
-        
         
         return cell
-      
+        
     }
-
+        }
 
 }
