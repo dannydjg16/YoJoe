@@ -12,13 +12,8 @@ import Firebase
 class ShopsFeedView: UIViewController {
 
     var userMe = Auth.auth().currentUser
-    var shopTagsArray: [String] = []
+    
     var shopReviews: [ShopReivew] = []
-    
-    
-    
-   
-    
     
     let shopReviewRef = Database.database().reference(withPath: "ShopReview")
     let userRef = Database.database().reference(withPath: "Users")
@@ -28,10 +23,14 @@ class ShopsFeedView: UIViewController {
     var toReviewPage = UIButton()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toCommentsPage", let commentsPage = segue.destination as? CommentsForShopReview {
-            commentsPage.postIDFromFeed = sender as! String
+        
+        if segue.identifier == "toSRCommentsPage",
+            let commentsPage = segue.destination as? CommentsForShopReview {
             
-           // commentsPage.postIDFromFeed = (need to figure out how to set this from this file. could be in this function, could be somewher else. maybe ill use a closure.)
+            commentsPage.postIDFromFeed = sender as! String
+          
+        } else if segue.identifier == "toOtherUserProfile", let profilePage = segue.destination as? OtherUserProfilePage {
+            profilePage.userID = sender as! String
         }
     }
 
@@ -54,13 +53,9 @@ class ShopsFeedView: UIViewController {
                 if let snapshot = child as? DataSnapshot,
                     let shopReview = ShopReivew(snapshot: snapshot) {
                     newShopReviews.append(shopReview)
-                    
-//                    self.shopReviews = newShopReviews
-//                    self.shopReviewTable.reloadData()
                 }
-                
             }
-            self.shopReviews = newShopReviews
+            self.shopReviews = newShopReviews.reversed()
             self.shopReviewTable.reloadData()
     })
     }
@@ -75,6 +70,8 @@ class ShopsFeedView: UIViewController {
         toReviewPage.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
         toReviewPage.clipsToBounds = true
         toReviewPage.setImage(#imageLiteral(resourceName: "coffee-bean-for-a-coffee-break"), for: .normal)
+        toReviewPage.layer.borderWidth = 1
+        toReviewPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
        
         toReviewPage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
@@ -94,11 +91,14 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 310
+        return 586
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+        
         return shopReviews.count
     }
     
@@ -115,46 +115,58 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         self.userRef.child(uid).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
             guard let currentUserName = dataSnapshot.value as? String else { return }
-           shopCell.userVisitedLabel.text = "\(currentUserName) visited..."
+            shopCell.userVisitedButton.setTitle("\(currentUserName) visited...", for: .normal)   
             
         })
         
         
-        self.userRef.child(uid).child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
+        self.userRef.child(uid).child("UserPhoto").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
-            guard let currentProfilePicture = dataSnapshot.value as? String else { return }
-            
+            guard let currentProfilePicture = dataSnapshot.value as? String else { return
+                
+            }
+       
             shopCell.profilePic.setImage(from: currentProfilePicture)
-           
+          
             
         })
 
-        shopCell.shopTagsArray = shop.shopTags.components(separatedBy: ", ")
         
-        //Set the image here
+ 
      
         let timeAgoString = Date().timeSinceShopReview(theShop: shop)
         
-        shopCell.timeSinceLabel.text = timeAgoString
+        shopCell.timeSinceLabel.text =  timeAgoString
         
-        borderSet(cell: shopCell, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), width: 3)
+        
+        shopCell.profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        shopCell.profilePic.layer.borderWidth = 0.5
+        shopCell.shopPicture.layer.borderColor = #colorLiteral(red: 0.5216623545, green: 0.379847765, blue: 0.1959043145, alpha: 1)
+        shopCell.shopPicture.layer.borderWidth = 0.5
+        
+        
+        borderSet(cell: shopCell, color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), width: 2)
         
         shopCell.tapHandler = {
-            self.performSegue(withIdentifier: "toCommentsPage", sender: shopCell.postID + "addComment")
+            self.performSegue(withIdentifier: "toSRCommentsPage", sender: shopCell.postID + "addComment")
     }
+        shopCell.toUserProfileTapHandler = {
+            self.performSegue(withIdentifier: "toOtherUserProfile", sender: shop.user)
+            
+            
+            
+        }
         
         return shopCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       
-        
         let cell = shopReviewTable.cellForRow(at: indexPath) as? ShopReviewCell
         
         let cellPostID = cell?.postID
         
-        performSegue(withIdentifier: "toCommentsPage", sender: cellPostID)
+        performSegue(withIdentifier: "toSRCommentsPage", sender: cellPostID)
     }
     
    

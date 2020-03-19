@@ -20,6 +20,7 @@ class DebutYourBrew: UIViewController {
     let userRef = Database.database().reference(withPath: "Users")
     
     @IBOutlet weak var brewDebutTable: UITableView!
+   
     
     
     var toReviewPage = UIButton()
@@ -71,7 +72,22 @@ class DebutYourBrew: UIViewController {
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
         
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toBDCommentsPage",
+             let brewDebutCommentsPage = segue.destination as? CommentsForBrewDebut {
+            
+            brewDebutCommentsPage.postIDFromFeed = sender as! String
+            
+        } else if segue.identifier == "debutToOtherUser", let profilePage = segue.destination as? OtherUserProfilePage {
+            
+            profilePage.userID = sender as! String
+            
+        }
+    }
+    
+    
     
 }
 
@@ -85,7 +101,7 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       
-        return 215
+        return 302
         
     }
         
@@ -101,11 +117,11 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         
         switch debut.roast {
         case "Light Roast":
-            borderSet(cell: debutCell, color: #colorLiteral(red: 1, green: 0.8202751079, blue: 0.3338571206, alpha: 1), width: 5)
+            borderSet(cell: debutCell, color: #colorLiteral(red: 1, green: 0.8202751079, blue: 0.3338571206, alpha: 1), width: 2)
         case "Medium Roast":
-            borderSet(cell: debutCell, color: #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), width: 5)
+            borderSet(cell: debutCell, color: #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), width: 2)
         case "Dark Roast":
-            borderSet(cell: debutCell, color: #colorLiteral(red: 0.254897684, green: 0.1924804384, blue: 0.08138259897, alpha: 1), width: 5)
+            borderSet(cell: debutCell, color: #colorLiteral(red: 0.254897684, green: 0.1924804384, blue: 0.08138259897, alpha: 1), width: 2)
         default:
             debutCell.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
@@ -118,14 +134,16 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         self.userRef.child(uid).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
           
             guard let currentUserName = dataSnapshot.value as? String else { return }
-            debutCell.userLabel.text = "\(currentUserName) brewed..."
-            
+            debutCell.userBrewedLabel.setTitle("\(currentUserName) brewed...", for: .normal)
+        
         })
         
         
-        self.userRef.child(uid).child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
+        self.userRef.child(uid).child("UserPhoto").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
-            guard let currentProfilePicture = dataSnapshot.value as? String else { return }
+            guard let currentProfilePicture = dataSnapshot.value as? String else { return
+            }
+            
             debutCell.profilePic.setImage(from: currentProfilePicture)
             
         })
@@ -134,9 +152,30 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         
         debutCell.timeAgoLabel.text = timeAgoString
         
+        debutCell.tapHandler = {
+            self.performSegue(withIdentifier: "toBDCommentsPage", sender: debutCell.postID + "addComment")
+        }
+        
+        debutCell.toUserProfileTapHandler = {
+            self.performSegue(withIdentifier: "debutToOtherUser", sender: debut.user)
+            
+        }
         
         return debutCell
     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = brewDebutTable.cellForRow(at: indexPath) as? BrewDebutCell
+        
+        let cellPostID = cell?.postID
+        
+        performSegue(withIdentifier: "toBDCommentsPage", sender: cellPostID)
+    }
+    
+    
 }
 
 

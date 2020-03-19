@@ -15,7 +15,17 @@ import Firebase
 class VisitReviewViewController: UIViewController {
     
     var user = Auth.auth().currentUser
-     let ref = Database.database().reference(withPath: "BrewDebut")
+    let ref = Database.database().reference(withPath: "BrewDebut")
+    let userRef = Database.database().reference(withPath: "Users")
+    let postRef = Database.database().reference(withPath: "GenericPosts")
+    var addPhotoButton = UIButton()
+    var imageURL: String?
+    var postID: String?
+    let imagePicker = UIImagePickerController()
+    @IBOutlet weak var shopImage: UIImageView!
+    var postIDFromFeed: String = ""
+    
+    
     //This is the date for sorting through the posts. I could change the format to put it on the post though.
     var date: String {
         get {
@@ -27,14 +37,7 @@ class VisitReviewViewController: UIViewController {
         }
     }
     
-    var isoDateOfPost: String {
-        get{
-        let date = Date()
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions.insert(.withFractionalSeconds)
-        return dateFormatter.string(from: date)
-        }
-    }
+    
     
     
     @IBOutlet weak var reviewTableView: UITableView!
@@ -53,7 +56,8 @@ class VisitReviewViewController: UIViewController {
             let ratingCell: CMRatingCell = self.reviewTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as? CMRatingCell,
             let reviewCell: CMRCell = self.reviewTableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? CMRCell
             
-            else { print("no cell")
+            else {
+                print("no cell")
                 return
         }
        
@@ -61,32 +65,51 @@ class VisitReviewViewController: UIViewController {
             let roast = roastCell.lastSelectedItem as? RoastTypeCVCell,
             let rating = ratingCell.ratingLabel.text,
             let review = reviewCell.reviewTextField.text,
-            let beanLocation = beanLocationCell.locationField.text
+            let beanLocation = beanLocationCell.locationField.text,
+            let user = user?.uid
        
-        
-        
-      
-        
-        
             else {
                 print("error")
                 return
         }
         
-        guard let userName = user?.uid else {
-            let userName = user?.email
+        
+        guard let shopImageURL = self.imageURL, let postID = self.postID, let brewType = brew.brewName.text, let roastType = roast.roastLabel.text else{
             return
         }
         
-        let userReviewName = userName
+        let debut = BrewDebut(brew: brewType, roast: roastType, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: user, date: date, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0 )
+        
+        let userGenericPost = UserGenericPost(date: date, imageURL: shopImageURL, postID: postID, userID: user, postExplanation: review, rating: Int(rating)!, reviewType: "BrewDebut")
+        
+        let postPictureDatabasePoint = self.userRef.child("\(user)").child("UserPosts").child("\(postID)")
+    postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
         
         
-        let debut = BrewDebut(brew: brew.brewName.text!, roast: roast.roastLabel.text!, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: userReviewName, date: date, isoDate: isoDateOfPost)
+        let postReference = self.postRef.child("\(postID)")
+        postReference.setValue(userGenericPost.makeDictionary())
         
-        let brewDebutRef = self.ref.child(review)
+        
+        let brewDebutRef = self.ref.child(postID)
         brewDebutRef.setValue(debut.makeDictionary())
         
+       
         
+        self.userRef.child("\(user)").child("BDNumber").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let numberOfBrewDebuts = snapshot.value as? Int else {
+                print("not a number or somthing else is wrong")
+                return
+            }
+            
+            
+            self.userRef.child("\(user)").updateChildValues(["BDNumber": numberOfBrewDebuts + 1])
+            
+            let userPostDatabasePoint = self.userRef.child("\(user)").child("BrewDebuts").child(postID)
+            
+            userPostDatabasePoint.setValue(["\(postID)": self.date])
+            
+        })
         
         
         
@@ -104,12 +127,62 @@ class VisitReviewViewController: UIViewController {
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
  
-    
+        imagePicker.delegate = self
         
+        self.addPhotoButton = UIButton(type: .custom)
+        self.addPhotoButton.setTitleColor(#colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1), for: .normal)
+        self.addPhotoButton.addTarget(self, action: #selector(addPictures), for: .touchUpInside)
+        self.view.addSubview(addPhotoButton)
+    
+        self.postID = "brewDebut" + randomString(length: 20)
     }
     
     
-
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    @objc func addPictures() {
+        
+        print("pressed")
+        
+        let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
+        
+        let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        
+        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        pictureFinder.addAction(takeAPicture)
+        pictureFinder.addAction(chooseAPicture)
+        
+        self.present(pictureFinder, animated: true, completion: nil)
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        
+        
+        addPhotoButton.layer.cornerRadius = addPhotoButton.layer.frame.size.width / 2
+        addPhotoButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        addPhotoButton.layer.borderWidth = 1
+        addPhotoButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        addPhotoButton.clipsToBounds = true
+        
+        addPhotoButton.setImage(#imageLiteral(resourceName: "photo-camera"), for: .normal)
+        
+        addPhotoButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([addPhotoButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),addPhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), addPhotoButton.widthAnchor.constraint(equalToConstant: 50), addPhotoButton.heightAnchor.constraint(equalToConstant: 50)])
+    }
 
 
 }
@@ -129,13 +202,13 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 150
+            return 114
         case 1:
-            return 150
+            return 114
         case 2:
-            return 120
+            return 96
         case 3:
-            return 120
+            return 93
       case 4:
             return 106
         default:
@@ -198,5 +271,34 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
     
 }
 
-
+extension VisitReviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage,
+            let imageData = image.pngData(), let userID = user?.uid {
+            shopImage.image = image
+            let storageRef = Storage.storage().reference().child("brewPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/png"
+            storageRef.putData(imageData, metadata: metaData) {
+                (metaData, error) in
+                if error == nil, metaData != nil {
+                    storageRef.downloadURL { url, error in
+                        if let url = url {
+                            print(url)
+                            self.imageURL = url.absoluteString
+                        }
+                    }
+                }
+                else {
+                    print(error?.localizedDescription)
+                }
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
 

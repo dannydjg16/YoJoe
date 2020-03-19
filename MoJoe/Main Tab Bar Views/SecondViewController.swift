@@ -15,13 +15,7 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
     @IBOutlet weak var searchTField: UITextField!
     
   
-    @IBAction func printDate(_ sender: Any) {
-        let date = Date()
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions.insert(.withFractionalSeconds)
-        
-        print("\(dateFormatter.string(from: date))")
-    }
+  
     
     
     
@@ -36,7 +30,34 @@ class SecondViewController: UIViewController, UISearchBarDelegate, UITextFieldDe
         
     }
     
+    private lazy var debutYourBrew: DebutYourBrew = {
+              let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+              let viewController = storyboard.instantiateViewController(withIdentifier: "DebutYourBrew") as! DebutYourBrew
+      
+             self.add(asChildViewController: viewController)
+      
+              return viewController
+          }()
+      
     
+      
+      private func add(asChildViewController viewController: UIViewController) {
+          // Add Child View Controller
+          addChild(viewController)
+          
+          // Add Child View as Subview
+          view.addSubview(viewController.view)
+          
+          // Configure Child View
+          viewController.view.frame = view.bounds
+          viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+          
+          // Notify Child View Controller
+          viewController.didMove(toParent: self)
+      }
+    @IBAction func presentViewController(_ sender: Any) {
+        addChild(debutYourBrew)
+    }
     
 
     private func searchBarSearchButtonClicked(searchBar: UISearchBar)

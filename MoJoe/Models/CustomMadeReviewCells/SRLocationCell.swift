@@ -12,25 +12,27 @@ class SRLocationCell: UITableViewCell {
 
     
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var stateTextField: UITextField!
     
-    @IBOutlet weak var locationSearchBar: UISearchBar!
+    //@IBOutlet weak var locationSearchBar: UISearchBar!
     
-    var locationSearchController: UISearchController? = nil
+   // var locationSearchController: UISearchController? = nil
     //let locationTableView = 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.locationTextField.delegate = self
-        self.locationSearchBar.delegate = self
+        //self.locationSearchBar.delegate = self
         
-        
-        locationSearchBar.sizeToFit()
-        locationSearchBar.placeholder = "Coffee Shop"
-        
-        
-        locationSearchController?.hidesNavigationBarDuringPresentation = true
-        locationSearchController?.dimsBackgroundDuringPresentation = true
-        
+//
+//        locationSearchBar.sizeToFit()
+//        locationSearchBar.placeholder = "Coffee Shop"
+//
+//
+//        locationSearchController?.hidesNavigationBarDuringPresentation = true
+//        locationSearchController?.dimsBackgroundDuringPresentation = true
+//
         
     }
 
@@ -47,9 +49,9 @@ extension SRLocationCell: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var ShopLocationSearchTable = storyboard.instantiateViewController(withIdentifier: "ShopLocationSearchTable") as! ShopLocationSearchTable
-        locationSearchController = UISearchController(searchResultsController: ShopLocationSearchTable)
-        locationSearchController?.searchResultsUpdater = ShopLocationSearchTable
-        print("hello")
+//        locationSearchController = UISearchController(searchResultsController: ShopLocationSearchTable)
+//        locationSearchController?.searchResultsUpdater = ShopLocationSearchTable
+//        print("hello")
         return true
     }
 }

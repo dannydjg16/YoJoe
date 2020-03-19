@@ -16,15 +16,13 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var passwordTField: UITextField!
     
-    @IBOutlet weak var userRemember: UISwitch!
+
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        userNameTField.delegate = self
-        passwordTField.delegate = self
+        
         Auth.auth().addStateDidChangeListener() { auth, user in
             
             if user != nil {

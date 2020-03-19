@@ -12,17 +12,17 @@ import Firebase
 struct ShopReivew {
    
     var shop: String = ""
-    var coffeeType: String 
-    var shopTags: String = ""
+    var coffeeType: String
     var rating: Int = 100
     var review: String = ""
     var user: String
     let date: String
-    let readableDate: String
     var likesAmount: Int = 0
     var postID: String
     var imageURL: String
     var comments: Int
+    var city: String = ""
+    var state: String = ""
     
     
     var key: String
@@ -30,22 +30,22 @@ struct ShopReivew {
     
    
     
-    init(shop: String, coffeeType: String, shopTags: String, rating: Int, review: String, user: String, key: String = "", date: String, readableDate: String, likesAmount: Int, postID: String, imageURL: String, comments: Int) {
+    init(shop: String, coffeeType: String,  rating: Int, review: String, user: String, key: String = "", date: String, likesAmount: Int, postID: String, imageURL: String, comments: Int, city: String, state: String) {
         
         self.shop = shop
         self.coffeeType = coffeeType
-        self.shopTags = shopTags
         self.rating = rating
         self.review = review
         self.user = user
         self.key = key
         self.ref = nil
         self.date = date
-        self.readableDate = readableDate
         self.likesAmount = likesAmount
         self.postID = postID
         self.imageURL = imageURL
         self.comments = comments
+        self.city = city
+        self.state = state
      
     }
     
@@ -55,16 +55,16 @@ struct ShopReivew {
         let value = snapshot.value as? [String: AnyObject],
         let shop = value["shop"] as? String,
         let coffeeType = value["coffeeType"] as? String,
-        let shopTags = value["shopTags"] as? String,
         let rating = value["rating"] as? Int,
         let review = value["review"] as? String,
         let user = value["user"] as? String,
         let date = value["date"] as? String,
-        let readableDate = value["readableDate"] as? String,
         let likesAmount = value["likesAmount"] as? Int,
         let postID = value["postID"] as? String,
         let imageURL = value["imageURL"] as? String,
-        let comments = value["comments"] as? Int
+        let comments = value["comments"] as? Int,
+        let city = value["city"] as? String,
+        let state = value["state"] as? String
        
             
             else { return nil }
@@ -73,18 +73,16 @@ struct ShopReivew {
         self.key = snapshot.key
         self.shop = shop
         self.coffeeType = coffeeType
-        self.shopTags = shopTags
         self.rating = rating
         self.review = review
         self.user = user
         self.date = date
-        self.readableDate = readableDate
         self.likesAmount = likesAmount
         self.postID = postID
         self.imageURL = imageURL
         self.comments = comments
-       
-        
+        self.city = city
+        self.state = state
     }
     
     
@@ -92,16 +90,16 @@ struct ShopReivew {
         return [
             "shop": shop,
             "coffeeType": coffeeType,
-            "shopTags": shopTags,
             "rating": rating,
             "review": review,
             "user": user,
             "date": date,
-            "readableDate": readableDate,
             "likesAmount": likesAmount,
             "postID": postID,
             "imageURL": imageURL,
-            "comments": comments
+            "comments": comments,
+            "city": city,
+            "state": state
         ]
     }
 }

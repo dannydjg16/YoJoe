@@ -34,6 +34,9 @@ class CommentsForShopReview: UIViewController {
     @IBOutlet weak var shopLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var coffeeTypeLabel: UILabel!
+    @IBOutlet weak var postExplanation: UILabel!
+    
+    @IBOutlet weak var postViewOnCommentsPage: UIView!
     
     
     
@@ -55,31 +58,27 @@ class CommentsForShopReview: UIViewController {
         if commentTextField.text == "" {
             return
         } else {
-        let postComment = Comment(comment: comment, date: date, likesAmount: 0)
-        
-        let commentLocation = commentRef.child("\(stringPostID)").child("\(randomString(length: 20))")
-        
-        commentLocation.setValue(postComment.makeDictionary())
-        
-       
-        self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: {(snapshot) in
-            guard let numberOfComments = snapshot.value as? Int else {
-                return
-            }
-            self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
-                (snapshot) in
-                if let shopReview = ShopReivew(snapshot: snapshot) {
-                    self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
-                }
-            }
-            )
+            let postComment = Comment(comment: comment, date: date, likesAmount: 0)
             
-        })
-        
-        
-        
-        
-        commentTextField.text = ""
+            let commentLocation = commentRef.child("ShopReviewComments").child("\(stringPostID)").child("\(randomString(length: 20))")
+            
+            commentLocation.setValue(postComment.makeDictionary())
+            
+            
+            self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let numberOfComments = snapshot.value as? Int else {
+                    return
+                }
+                self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
+                    (snapshot) in
+                    if let shopReview = ShopReivew(snapshot: snapshot) {
+                        self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
+                    }
+                })
+                
+            })
+            
+            commentTextField.text = ""
         }
     }
     
@@ -98,11 +97,16 @@ class CommentsForShopReview: UIViewController {
         super.viewDidLoad()
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
-        
+        postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        postViewOnCommentsPage.layer.borderWidth = 2
+       // postExplanation.text = "fjkhsadlkfj dslfjdsfklsjdfl;asdjl;dsaf sldk f;lsd f;af s;alkf s; fsl;kf sl;f sldkf jsl;fjdsal;fjsl;adfjdsl;kjfsdajs;alfj;salfj;sa"
+        self.commentsTableView.layer.borderWidth = 2
+        self.commentsTableView.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        self.profilePic.layer.cornerRadius = profilePic.frame.height / 8
+        //MAYBE ADD A BORDER TO THE PROFILE PIC
         
         //Based on if the cell or comment button is pressed, what the first responder is when view loads.
-
-        
+         
         let endOfPostID = postIDFromFeed.suffix(10)
         let endString = String(endOfPostID)
         if endString == "addComment" {
@@ -117,15 +121,13 @@ class CommentsForShopReview: UIViewController {
         
         self.ref.child("\(stringPostID)").observe(.value, with: { (dataSnapshot) in
             
-         
-            print("DANNY")
-            
             guard let postInfo = dataSnapshot as? DataSnapshot else {
                 return
             }
             if let shopReview = ShopReivew(snapshot: postInfo){
 
-                self.userRef.child("\(shopReview.user)").child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
+               //MARK: set the post view on comments page
+                self.userRef.child("\(shopReview.user)").child("UserPhoto").observeSingleEvent(of: .value, with: { (dataSnapshot) in
                     
                     guard let currentProfilePicture = dataSnapshot.value as? String else { return }
                     //Actually setting the "views" variables
@@ -142,9 +144,7 @@ class CommentsForShopReview: UIViewController {
                 if shopReview.comments == 0 {
                     
                 } else {
-                   print("hello")
-                   
-                    self.commentRef.child("\(shopReview.postID)").observe(.value, with: {
+                   self.commentRef.child("ShopReviewComments").child("\(shopReview.postID)").observe(.value, with: {
                         (snapshot) in
                         var newComments: [Comment] = []
                         
@@ -214,7 +214,7 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 97
+        return 62
         
     }
     
@@ -224,22 +224,29 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
         if allComments.count == 0 {
             
             let errorCell = commentsTableView.dequeueReusableCell(withIdentifier: "LeaveAComment")
+            
             return errorCell!
             
         } else {
-        
-        let comment = allComments[indexPath.row]
-        
-        let cell = commentsTableView.dequeueReusableCell(withIdentifier: "PostComment") as! PostComment
-
-        cell.setCommentCell(comment: comment)
-        cell.commentBubble.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        cell.commentBubble.layer.borderWidth = 1
-        
-        
-        return cell
-        
-    }
+            
+            let comment = allComments[indexPath.row]
+            
+            let cell = commentsTableView.dequeueReusableCell(withIdentifier: "PostComment") as! PostComment
+            
+            cell.setCommentCell(comment: comment)
+            
+            
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = #colorLiteral(red: 0.5216623545, green: 0.379847765, blue: 0.1959043145, alpha: 1)
+            cell.layer.cornerRadius = cell.frame.height / 30
+            
+            
+            
+            return cell
+            
         }
-
+    }
+    
 }
+
+

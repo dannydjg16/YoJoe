@@ -11,11 +11,19 @@ import Firebase
 
 class ShopReviewCell: UITableViewCell {
 
-    @IBOutlet weak var userVisitedLabel: UILabel!
+    @IBOutlet weak var userVisitedButton: UIButton!
+    
+    
     @IBOutlet weak var coffeeShopLabel: UILabel!
+    
+    @IBOutlet weak var cityLabel: UILabel!
+    
+    @IBOutlet weak var stateLabel: UILabel!
+    
+    
     @IBOutlet weak var coffeeTypeLabel: UILabel!
-    @IBOutlet weak var shopTagsLabel: UILabel!
-    @IBOutlet weak var orderLabel: UILabel!
+   
+   
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var timeSinceLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -25,18 +33,20 @@ class ShopReviewCell: UITableViewCell {
     
     var tapHandler: (() -> Void)?
     
-    
-    
     @IBAction func toCommentsPage(_ sender: Any) {
-        
         
         self.tapHandler?()
     }
     
     
+    var toUserProfileTapHandler: (() -> Void)?
     
-    @IBOutlet weak var repostButton: UIButton!
-    
+    @IBAction func userVisitedButton(_ sender: Any) {
+        
+        self.toUserProfileTapHandler?()
+        
+    }
+ 
     var postID: String = ""
     var imageURL: String = ""
     
@@ -53,19 +63,14 @@ class ShopReviewCell: UITableViewCell {
     var likedPostsByUser: [String] = []
     
     @IBOutlet weak var postActivityBar: UIView!
-    
-    
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
+
     
     
     @IBOutlet weak var shopPicture: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
+   
     
-    @IBOutlet weak var shopTagsCollectionView: UICollectionView!
-    
-    var shopTagsArray: [String] = []
+  
     
     let ref = Database.database().reference(withPath: "ShopReview")
     let userRef = Database.database().reference(withPath: "Users")
@@ -73,33 +78,20 @@ class ShopReviewCell: UITableViewCell {
     
     
     func setShopReviewCell(review: ShopReivew) {
+    
         
         coffeeShopLabel.text = review.shop
+        cityLabel.text = review.city + ","
+        stateLabel.text = review.state
         coffeeTypeLabel.text = review.coffeeType
+    
         //orderLabel.text = review.review
-        ratingLabel.text = "\(String(review.rating)) / 10!"
+        ratingLabel.text = "\(String(review.rating)) / 10"
         //shopPicture.image = #imageLiteral(resourceName: "coffeeCup")
         likesLabel.text = "0"//review.likesAmount or whatever i decide to call it.
         postID = review.postID
-        
-        self.ref.child("\(review.postID)").child("imageURL").observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            
-            guard let imageURL = dataSnapshot.value as? String else {
-                return
-            }
-            
-            //Now that I have the imageURL I just need to get it from storage.
-            let ref = Storage.storage().reference(forURL: imageURL)
-            
-            ref.getData(maxSize: 1024 * 1024 * 1024) { data, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else if let data = data, let image = UIImage(data: data) {
-                    self.shopPicture.image = image
-                } }
-                
-            
-        })
+        shopPicture.setImage(from: review.imageURL)
+
         
         
         self.ref.child("\(review.postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
@@ -110,15 +102,7 @@ class ShopReviewCell: UITableViewCell {
             
             self.likesLabel.text = String(numberOfLikes)
         })
-        
-        switch review.coffeeType {
-        case "Cappucino", "Americano":
-            self.cupPic.image = #imageLiteral(resourceName: "coffee")
-        case "Latte", "Hot Coffee":
-            self.cupPic.image = #imageLiteral(resourceName: "iced-coffee")
-        default:
-            return
-        }
+       
         
     }
     
@@ -138,28 +122,13 @@ class ShopReviewCell: UITableViewCell {
         super.awakeFromNib()
         self.profilePic.layer.cornerRadius = profilePic.frame.height / 2
         
-        self.cupPic.image = #imageLiteral(resourceName: "coffee")
-        self.shopTagsCollectionView.delegate = self
-        self.shopTagsCollectionView.dataSource = self
-        //self.shopTagsCollectionView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        self.shopTagsCollectionView.layer.borderWidth = 0
-        self.shopTagsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-       
-       
-        postActivityBar.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        postActivityBar.layer.borderWidth = 1
-       
-        
-      
         likeButton.setImage(#imageLiteral(resourceName: "upload"), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         commentsButton.setImage(#imageLiteral(resourceName: "note"), for: .normal)
-        //commented out and used ibaction instead
-        //commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
         
-        repostButton.setImage(#imageLiteral(resourceName: "promotion"), for: .normal)
-        repostButton.addTarget(self, action: #selector(repostButtonTapped), for: .touchUpInside)
+        
+
         
         //set image stuff of like button based on wehther it is liked or not
         self.userRef.child("\(String(self.user!.uid))").child("likedPosts").observe(.value, with: { (snapshot) in
@@ -174,12 +143,10 @@ class ShopReviewCell: UITableViewCell {
                     
                 {
                     for (key, value) in value {
-                        likedPostsArray.append(key)
-                    }
+                        likedPostsArray.append(key) }
                     //set the glabal var likedPostsByUser equal to the local array likedPostsArray
                     self.likedPostsByUser = likedPostsArray
-                }
-            }
+                }}
             //iterate through the users liked posts, if post is in the likedPosts of user, it will not run the code to add a like/add post to users liked posts
             var hasPostBeenLiked: Bool = false
             for post in self.likedPostsByUser {
@@ -188,16 +155,9 @@ class ShopReviewCell: UITableViewCell {
                     continue
                 }
             }
-            if hasPostBeenLiked == true {
-                self.likeButton.layer.backgroundColor = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
-            } else {
-                self.likeButton.layer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            }
-        }
-       
-       )
+           
+        })
         
-     
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -215,15 +175,17 @@ class ShopReviewCell: UITableViewCell {
                 return
             }
             //check through the users liked posts and put them in an array
-            self.userRef.child("\(String(self.user!.uid))").child("likedPosts").observeSingleEvent(of: .value, with: { (snapshot) in
+             self.userRef.child("\(String(self.user!.uid))").child("likedPosts").observeSingleEvent(of: .value, with: { (snapshot) in
                 var likedPostsArray : [String] = []
                 //users first like (what has to happen in cse of empty likedPosts list.)
                 if snapshot.childrenCount == 0 {
                     self.ref.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
-                    
+                    //make the tab in firebase for that postID in the users likedposts
                     let likedPostDatabasePoint = self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)")
                     
+                    //set the value of the^ above point to postID: date
                     likedPostDatabasePoint.setValue(["\(self.postID)": "\(self.date)"])
+                    
                 } else {
                     for child in snapshot.children
                     {
@@ -244,8 +206,7 @@ class ShopReviewCell: UITableViewCell {
                     var hasPostBeenLiked: Bool = false
                     for post in self.likedPostsByUser {
                         if post == self.postID {
-                            print("liked already")
-                            
+                           
                             self.ref.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes - 1] )
                             
                             self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)").removeValue()
@@ -254,7 +215,9 @@ class ShopReviewCell: UITableViewCell {
                             continue
                         }
                     }
+                    
                     if hasPostBeenLiked == false {
+                        
                         self.ref.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
                         
                         let likedPostDatabasePoint = self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)")
@@ -266,44 +229,9 @@ class ShopReviewCell: UITableViewCell {
         })
     }
     
-    //commented out and used ibaction instead
-//    @objc func commentsButtonTapped(sender: UIButton) {
-//        print("commentsButtonTapped")
-//        var cellName = postID
-//        self.tapHandler?()
-//
-//    }
+
     
     @objc func repostButtonTapped(sender: UIButton) {
         print("repostButtonTapped")
     }
-}
-
-
-extension ShopReviewCell: UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    func borderSet(cell: UICollectionViewCell, color: UIColor, width: Int) {
-        cell.layer.borderColor = color.cgColor
-        cell.layer.borderWidth = CGFloat(width)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shopTagsArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let tag = self.shopTagsArray[indexPath.row]
-        
-        let shopTagCollectionViewCell = shopTagsCollectionView.dequeueReusableCell(withReuseIdentifier: "ShopTagReviewFeedCVCell", for: indexPath) as! ShopTagReviewFeedCVCell
-    
-        shopTagCollectionViewCell.shopTagLabel.text = tag
-       
-        borderSet(cell: shopTagCollectionViewCell, color: #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), width: 1)
-        
-        return shopTagCollectionViewCell
-
-        
-    }
-
-
 }

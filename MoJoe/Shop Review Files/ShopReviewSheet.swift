@@ -22,6 +22,8 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     
 
     let ref = Database.database().reference(withPath: "ShopReview")
+    let userRef = Database.database().reference(withPath: "Users")
+    let postRef = Database.database().reference(withPath: "GenericPosts")
     var date: String {
         get {
             let postDate = Date()
@@ -53,12 +55,13 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         guard
             let shopCell: SRLocationCell = shopReviewSheet.cellForRow(at: IndexPath(row: 0, section: 0)) as? SRLocationCell,
             let typeCell: SRCoffeeTypeCell = shopReviewSheet.cellForRow(at: IndexPath(row: 1, section: 0)) as? SRCoffeeTypeCell,
-            let tagCell: SRShopTagsCell = shopReviewSheet.cellForRow(at: IndexPath(row: 2, section: 0)) as? SRShopTagsCell,
-            let ratingCell: SRRatingCell = shopReviewSheet.cellForRow(at: IndexPath(row: 3, section: 0)) as? SRRatingCell,
-            let orderReviewCell: SRReviewCell = shopReviewSheet.cellForRow(at: IndexPath(row: 4, section: 0)) as? SRReviewCell
+            let ratingCell: SRRatingCell = shopReviewSheet.cellForRow(at: IndexPath(row: 2, section: 0)) as? SRRatingCell,
+            let orderReviewCell: SRReviewCell = shopReviewSheet.cellForRow(at: IndexPath(row: 3, section: 0)) as? SRReviewCell
             
-            else { print("error with cells")
-            return }
+            else {
+                print("error with cells")
+                return
+        }
         
         guard
             let shop = shopCell.locationTextField.text,
@@ -67,27 +70,54 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
             let review = orderReviewCell.reviewTextField.text,
             let user = user?.uid
         
-            else { print("error with getting info from cells")
-                return }
+            else {
+                print("error with getting info from cells")
+                return
+        }
         
-       // let readableDate: String =  DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let dateRead = DateFormatter().string(from: Date())
-        //let postID = "shopReview" + randomString(length: 20)
-       
+    
         guard let coffeeBoughtType = coffeeType.coffeeTypeLabel.text, let shopImageURL = self.imageURL, let postID = self.postID else {
             return
         }
         
     
+        let city = shopCell.cityTextField.text
+        let state = shopCell.stateTextField.text
         
-        let shopReview = ShopReivew(shop: shop, coffeeType: coffeeBoughtType, shopTags: tagCell.selectedTags.joined(separator: ", "), rating: Int(rating)!, review: review, user: user, date: date, readableDate: dateRead, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0)
+        let shopReview = ShopReivew(shop: shop, coffeeType: coffeeBoughtType, rating: Int(rating)!, review: review, user: user, date: date, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0, city: city!, state: state!)
+        
+        let userGenericPost = UserGenericPost(date: date, imageURL: shopImageURL, postID: postID, userID: user,  postExplanation: review, rating: Int(rating)!, reviewType: "ShopReview")
+        
+        let postPictureDatabasePoint = self.userRef.child("\(user)").child("UserPosts").child("\(postID)")
+        //SET post pictures shit
+        postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
+        
+        let postReference = self.postRef.child("\(postID)")
+        postReference.setValue(userGenericPost.makeDictionary())
+        
         
         let shopReviewRef = self.ref.child(postID)
-        
         shopReviewRef.setValue(shopReview.makeDictionary())
+        
+        
+        self.userRef.child("\(user)").child("SRNumber").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let numberOfShopReviews = snapshot.value as? Int else {
+                print("not a number or somthing else is wrong")
+                return
+            }
+            
+            
+            self.userRef.child("\(user)").updateChildValues(["SRNumber": numberOfShopReviews + 1])
+            
+            let userPostDatabasePoint = self.userRef.child("\(user)").child("ShopReviews").child(postID)
+            
+            userPostDatabasePoint.setValue(["\(postID)": self.date])
+            
+        })
+        
       
+        
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -106,7 +136,9 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         
         shopReviewSheet.delegate = self
         shopReviewSheet.dataSource = self
-        
+        shopReviewSheet.layer.borderWidth = 2
+        shopReviewSheet.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            
         imagePicker.delegate = self 
         
         self.addPhotoButton = UIButton(type: .custom)
@@ -115,6 +147,7 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         self.view.addSubview(addPhotoButton)
         
         self.postID = "shopReview" + randomString(length: 20)
+        
     }
     
     func randomString(length: Int) -> String {
@@ -177,23 +210,20 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 191
+            return 179
         case 1:
             return 120
-            
         case 2:
             return 120
         case 3:
-            return 120
-        case 4:
-            return 150
+            return 171
         default:
             return 60
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -214,21 +244,13 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
             return coffeeTypeCell
             
         case 2:
-            
-            let shopTagCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRShopTagsCell") as! SRShopTagsCell
-            
-            borderSet(cell: shopTagCell, color: .gray, width: 1)
-            
-            return shopTagCell
-            
-        case 3:
             let ratingCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRRatingCell") as! SRRatingCell
             
             borderSet(cell: ratingCell, color: .gray, width: 1)
             
             return ratingCell
             
-        case 4:
+        case 3:
             let reviewCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRReviewCell") as! SRReviewCell
             
             borderSet(cell: reviewCell, color: .gray, width: 1)
@@ -237,20 +259,20 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
             
        
         default:
-            let shopTagCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRShopTagsCell") as! SRShopTagsCell
+            let reviewCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRReviewCell") as! SRReviewCell
             
-            borderSet(cell: shopTagCell, color: .gray, width: 1)
+            borderSet(cell: reviewCell, color: .gray, width: 1)
             
-            return shopTagCell
+            return reviewCell
         }
         
         //This is kinda some bullshit IDK i feel like there is probably a better way to avoid this everytime.
         
-        let shopTagCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRShopTagsCell") as! SRShopTagsCell
+        let reviewCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRReviewCell") as! SRReviewCell
         
-        borderSet(cell: shopTagCell, color: .gray, width: 1)
+        borderSet(cell: reviewCell, color: .gray, width: 1)
         
-        return shopTagCell
+        return reviewCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -262,9 +284,9 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
             
             let locationCell: SRLocationCell = shopReviewSheet.cellForRow(at: IndexPath(row: 0, section: 0)) as! SRLocationCell
             
-            locationCell.locationSearchController = UISearchController(searchResultsController: locationSearchTable)
-            
-            locationCell.locationSearchController?.searchResultsUpdater = locationSearchTable
+//            locationCell.locationSearchController = UISearchController(searchResultsController: locationSearchTable)
+//
+//            locationCell.locationSearchController?.searchResultsUpdater = locationSearchTable
             
             print("hello")
         }
@@ -279,6 +301,7 @@ extension ShopReviewSheet: UIImagePickerControllerDelegate, UINavigationControll
         if let image = info[.originalImage] as? UIImage,
             let imageData = image.pngData(), let userID = user?.uid {
             shopImage.image = image
+            //might want to move this storage into the
             let storageRef = Storage.storage().reference().child("shopPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")
             let metaData = StorageMetadata()
             metaData.contentType = "image/png"

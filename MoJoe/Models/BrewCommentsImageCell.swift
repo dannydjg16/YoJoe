@@ -1,18 +1,18 @@
 //
-//  ShopsFromAPITestCell.swift
+//  BrewCommentsImageCell.swift
 //  MoJoe
 //
-//  Created by Daniel Grant on 7/21/19.
-//  Copyright © 2019 Daniel Grant. All rights reserved.
+//  Created by Daniel Grant on 2/6/20.
+//  Copyright © 2020 Daniel Grant. All rights reserved.
 //
 
 import UIKit
 
-class ShopsFromAPITestCell: UITableViewCell {
+class BrewCommentsImageCell: UITableViewCell {
 
+  
     
-    
-    @IBOutlet weak var shopLabel: UILabel!
+    @IBOutlet weak var brewImage: UIImageView!
     
     
     
@@ -21,7 +21,10 @@ class ShopsFromAPITestCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

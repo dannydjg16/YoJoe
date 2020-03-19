@@ -17,15 +17,19 @@ struct BrewDebut {
     var rating: Int = 100
     var user: String
     var beanLocation: String = ""
+    var likesAmount: Int = 0
+    var postID: String
+    var imageURL: String
+    var comments: Int
     
     var key: String
     var ref: DatabaseReference?
     
     let date: String
-    let isoDate: String
     
     
-    init(brew: String, roast: String, rating: Int, beanLocation: String, review: String, user: String, key: String = "", date: String, isoDate: String) {
+    
+    init(brew: String, roast: String, rating: Int, beanLocation: String, review: String, user: String, key: String = "", date: String, likesAmount: Int, postID: String, imageURL: String, comments: Int) {
         self.brew = brew
         self.roast = roast
         self.rating = rating
@@ -35,7 +39,11 @@ struct BrewDebut {
         self.key = key
         self.ref = nil
         self.date = date
-        self.isoDate = isoDate
+        self.likesAmount = likesAmount
+        self.postID = postID
+        self.imageURL = imageURL
+        self.comments = comments
+        
     }
     
     init?(snapshot: DataSnapshot) {
@@ -48,7 +56,11 @@ struct BrewDebut {
         let review = value["review"] as? String,
         let user = value["user"] as? String,
         let date = value["date"] as? String,
-        let isoDate = value["isoDate"] as? String
+        let likesAmount = value["likesAmount"] as? Int,
+        let postID = value["postID"] as? String,
+        let imageURL = value["imageURL"] as? String,
+        let comments = value["comments"] as? Int
+            
             else { return nil }
         
         self.ref = snapshot.ref
@@ -60,7 +72,10 @@ struct BrewDebut {
         self.review = review
         self.user = user
         self.date = date
-        self.isoDate = isoDate
+        self.likesAmount = likesAmount
+        self.postID = postID
+        self.imageURL = imageURL
+        self.comments = comments
         
     }
     
@@ -73,7 +88,10 @@ struct BrewDebut {
             "review": review,
             "user": user,
             "date": date,
-            "isoDate": isoDate
+            "likesAmount": likesAmount,
+            "postID": postID,
+            "imageURL": imageURL,
+            "comments": comments
         ]
     }
     
