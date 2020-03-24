@@ -50,6 +50,11 @@ class ShopReviewCell: UITableViewCell {
     var postID: String = ""
     var imageURL: String = ""
     
+    
+    
+    var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
+
+    
     var date: String {
         get {
             let postDate = Date()
@@ -90,6 +95,8 @@ class ShopReviewCell: UITableViewCell {
         //shopPicture.image = #imageLiteral(resourceName: "coffeeCup")
         likesLabel.text = "0"//review.likesAmount or whatever i decide to call it.
         postID = review.postID
+        genericReview = GenericPostForLikes(date: review.date, imageURL: review.imageURL, postID: review.postID, userID: review.user, postExplanation: review.review, rating: review.rating, reviewType: "shopReview", likeDate: date)
+        
         shopPicture.setImage(from: review.imageURL)
 
         
@@ -111,16 +118,17 @@ class ShopReviewCell: UITableViewCell {
     
     
     
-    
-    @IBOutlet weak var cupPic: UIImageView!
-    
-    
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.profilePic.layer.cornerRadius = profilePic.frame.height / 2
+        
+        profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        profilePic.layer.borderWidth = 0.5
+        profilePic.contentMode = .scaleAspectFill
+        
+        
+        shopPicture.contentMode = .scaleAspectFill
+        
         
         likeButton.setImage(#imageLiteral(resourceName: "upload"), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
@@ -184,10 +192,13 @@ class ShopReviewCell: UITableViewCell {
                     let likedPostDatabasePoint = self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)")
                     
                     //set the value of the^ above point to postID: date
-                    likedPostDatabasePoint.setValue(["\(self.postID)": "\(self.date)"])
+                    let genericLikedPost = self.genericReview
+                    likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
                     
                 } else {
+                    //These next few lines are what happens when there is at least one like on the post. "else" above is that split
                     for child in snapshot.children
+                        //^child is the usersLikedPosts. now i have to decide what to do with each of the posts. probably
                     {
                         
                         if let snapshot = child as? DataSnapshot,
@@ -220,9 +231,12 @@ class ShopReviewCell: UITableViewCell {
                         
                         self.ref.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
                         
+                        //make the tab in firebase for that postID in the users likedposts
                         let likedPostDatabasePoint = self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)")
                         
-                        likedPostDatabasePoint.setValue(["\(self.postID)": "\(self.date)"])
+                        //set the value of the^ above point to postID: date
+                        let genericLikedPost = self.genericReview
+                        likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
                     }
                 }
             })

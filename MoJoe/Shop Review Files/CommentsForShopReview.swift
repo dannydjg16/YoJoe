@@ -30,7 +30,12 @@ class CommentsForShopReview: UIViewController {
     
     //MARK: Post Vars
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var timeSinceLabel: UILabel!
+    
+    
     @IBOutlet weak var shopLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var coffeeTypeLabel: UILabel!
@@ -90,23 +95,36 @@ class CommentsForShopReview: UIViewController {
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.postIDFromFeed = ""
+        self.postIDFromFeed = "viewDidDissapear comments for shop review"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let tapGestureOnPicture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        postImageView.addGestureRecognizer(tapGestureOnPicture)
+        postImageView.isUserInteractionEnabled = true
+        
+        postImageView.contentMode = .scaleAspectFill
+        
+        
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
-        postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         postViewOnCommentsPage.layer.borderWidth = 2
-       // postExplanation.text = "fjkhsadlkfj dslfjdsfklsjdfl;asdjl;dsaf sldk f;lsd f;af s;alkf s; fsl;kf sl;f sldkf jsl;fjdsal;fjsl;adfjdsl;kjfsdajs;alfj;salfj;sa"
-        self.commentsTableView.layer.borderWidth = 2
-        self.commentsTableView.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        self.profilePic.layer.cornerRadius = profilePic.frame.height / 8
-        //MAYBE ADD A BORDER TO THE PROFILE PIC
+        // postExplanation.text = "fjkhsadlkfj dslfjdsfklsjdfl;asdjl;dsaf sldk f;lsd f;af s;alkf s; fsl;kf sl;f sldkf jsl;fjdsal;fjsl;adfjdsl;kjfsdajs;alfj;salfj;sa"
+        commentsTableView.layer.borderWidth = 2
+        commentsTableView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        profilePic.layer.cornerRadius = profilePic.frame.height / 2
+        profilePic.layer.borderWidth = 0.5
+        profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        profilePic.contentMode = .scaleAspectFill
+        
         
         //Based on if the cell or comment button is pressed, what the first responder is when view loads.
-         
+        
         let endOfPostID = postIDFromFeed.suffix(10)
         let endString = String(endOfPostID)
         if endString == "addComment" {
@@ -125,26 +143,52 @@ class CommentsForShopReview: UIViewController {
                 return
             }
             if let shopReview = ShopReivew(snapshot: postInfo){
-
-               //MARK: set the post view on comments page
+                
+                //MARK: set the post view on comments page
+                
+                
+                self.postImageView.setImage(from: shopReview.imageURL)
+                
+                self.postExplanation.text = shopReview.review
+                
+                let timeAgoString = Date().timeSincePostFromString(postDate: shopReview.date)
+                self.timeSinceLabel.text = timeAgoString
+                
                 self.userRef.child("\(shopReview.user)").child("UserPhoto").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+                    
+                    
+                    
                     
                     guard let currentProfilePicture = dataSnapshot.value as? String else { return }
                     //Actually setting the "views" variables
                     self.profilePic.setImage(from: currentProfilePicture)
+                    
+                    
+                    self.userRef.child(shopReview.user).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+                        
+                        guard let currentUserName = dataSnapshot.value as? String else { return }
+                        
+                        
+                        self.nameLabel.text = currentUserName + "visited..."
+                        
+                        
+                    })
+                    
+                    
+                    
                     self.nameLabel.text = shopReview.user
                     self.shopLabel.text = shopReview.shop
                     self.ratingLabel.text = String(shopReview.rating) + "/10"
                     self.coffeeTypeLabel.text = shopReview.coffeeType
-     
+                    
                 })
-
+                
                 
                 
                 if shopReview.comments == 0 {
                     
                 } else {
-                   self.commentRef.child("ShopReviewComments").child("\(shopReview.postID)").observe(.value, with: {
+                    self.commentRef.child("ShopReviewComments").child("\(shopReview.postID)").observe(.value, with: {
                         (snapshot) in
                         var newComments: [Comment] = []
                         
@@ -159,18 +203,18 @@ class CommentsForShopReview: UIViewController {
                         }
                     })
                     
-                   
+                    
                 }
                 
                 //self.profilePic.image = shopre
-//                cell.setShopReviewCommentCell(review: shopReview)
+                //                cell.setShopReviewCommentCell(review: shopReview)
                 //Now i need to do this^ but for a view. i still think Im gonna make a function but idk if id need to make a class first, that is where setshopreviewcell is from. 
             }
             
         })
         
         
-       
+        
         
         
         
@@ -195,8 +239,21 @@ class CommentsForShopReview: UIViewController {
         }
     }
     
-
-   
+    @objc func tapHandler(sender: UITapGestureRecognizer){
+        
+        
+       // let image = sender.view as! UIImageView
+        
+       // postImageView.contentMode = .scaleAspectFill
+        
+        
+       // image.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 375, height: 740))
+            
+            //self.view.frame
+        
+        
+    }
+    
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
@@ -205,16 +262,16 @@ class CommentsForShopReview: UIViewController {
 
 
 extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
-
+    //    func numberOfSections(in tableView: UITableView) -> Int {
+    //        return 2
+    //    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allComments.count
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 62
+        return 47
         
     }
     
@@ -237,8 +294,8 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
             
             
             cell.layer.borderWidth = 1
-            cell.layer.borderColor = #colorLiteral(red: 0.5216623545, green: 0.379847765, blue: 0.1959043145, alpha: 1)
-            cell.layer.cornerRadius = cell.frame.height / 30
+            cell.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            cell.layer.cornerRadius = cell.frame.height / 14
             
             
             

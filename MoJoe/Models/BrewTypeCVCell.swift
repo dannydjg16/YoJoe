@@ -15,7 +15,10 @@ class BrewTypeCVCell: UICollectionViewCell {
     
     func setCell(brew: ReviewHelper) {
         brewImage.image = brew.reviewImage
+        brewImage.contentMode = .scaleAspectFill
+        
         brewName.text = brew.reviewCategory
+        
     }
     
     override func draw(_ rect: CGRect) {

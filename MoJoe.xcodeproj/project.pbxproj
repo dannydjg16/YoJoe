@@ -24,6 +24,8 @@
 		811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */; };
 		8126B18823311FEE0004E885 /* comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126B18723311FEE0004E885 /* comment.swift */; };
 		8126BA96220B7487001D7387 /* smallViewInBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126BA95220B7487001D7387 /* smallViewInBigView.swift */; };
+		8139D205242A8753004EC947 /* UserLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8139D204242A8753004EC947 /* UserLikesViewController.swift */; };
+		8139D207242A94E1004EC947 /* likedPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8139D206242A94E1004EC947 /* likedPostTableViewCell.swift */; };
 		813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE7226953AC008AC632 /* DebutYourBrew.swift */; };
 		813BEFEA226E9B5F008AC632 /* FeedSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */; };
 		813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */; };
@@ -66,6 +68,7 @@
 		81A8B5292389E27E000C8E34 /* CoffeeShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8B5282389E27E000C8E34 /* CoffeeShopView.swift */; };
 		81ACF53E23EC9ACD00610AF3 /* BrewCommentsImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ACF53D23EC9ACD00610AF3 /* BrewCommentsImageCell.swift */; };
 		81ACF54023F321AC00610AF3 /* GenericPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ACF53F23F321AC00610AF3 /* GenericPostTableViewCell.swift */; };
+		81AD0BD6242ACAB500B17C62 /* GenericPostForLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD0BD5242ACAB500B17C62 /* GenericPostForLikes.swift */; };
 		81B668E021FFA5DA00BBC025 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */; };
 		81B668E221FFA72E00BBC025 /* ReviewHelperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */; };
 		81B668E4220375D300BBC025 /* ModalHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B668E3220375D300BBC025 /* ModalHelperViewController.swift */; };
@@ -111,6 +114,8 @@
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearbyFeedViewController.swift; path = "../Shop Review Files/NearbyFeedViewController.swift"; sourceTree = "<group>"; };
 		8126B18723311FEE0004E885 /* comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = comment.swift; sourceTree = "<group>"; };
 		8126BA95220B7487001D7387 /* smallViewInBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smallViewInBigView.swift; sourceTree = "<group>"; };
+		8139D204242A8753004EC947 /* UserLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLikesViewController.swift; sourceTree = "<group>"; };
+		8139D206242A94E1004EC947 /* likedPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likedPostTableViewCell.swift; sourceTree = "<group>"; };
 		813BEFE7226953AC008AC632 /* DebutYourBrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DebutYourBrew.swift; path = ../DebutYourBrew.swift; sourceTree = "<group>"; };
 		813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSwitcher.swift; sourceTree = "<group>"; };
 		813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShopsFeedView.swift; path = ../ShopsFeedView.swift; sourceTree = "<group>"; };
@@ -154,6 +159,7 @@
 		81A8B5282389E27E000C8E34 /* CoffeeShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopView.swift; sourceTree = "<group>"; };
 		81ACF53D23EC9ACD00610AF3 /* BrewCommentsImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewCommentsImageCell.swift; sourceTree = "<group>"; };
 		81ACF53F23F321AC00610AF3 /* GenericPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPostTableViewCell.swift; sourceTree = "<group>"; };
+		81AD0BD5242ACAB500B17C62 /* GenericPostForLikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPostForLikes.swift; sourceTree = "<group>"; };
 		81B668DF21FFA5DA00BBC025 /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		81B668E121FFA72E00BBC025 /* ReviewHelperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelperTableViewCell.swift; sourceTree = "<group>"; };
 		81B668E3220375D300BBC025 /* ModalHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHelperViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				8139D204242A8753004EC947 /* UserLikesViewController.swift */,
 				810DC93E2314546C008F055B /* API files */,
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
 				81E92B3222147D2A00CD6303 /* ReviewPickerVCs */,
@@ -306,6 +313,7 @@
 		81BC1F18223435A900E50D21 /* ProfileStuff(5th VC) */ = {
 			isa = PBXGroup;
 			children = (
+				8139D206242A94E1004EC947 /* likedPostTableViewCell.swift */,
 				8154DA0123CB98AE00F61909 /* EditProfile.swift */,
 				81F8B8FE23A8408F0074F03C /* currentUserShops.swift */,
 				81F8B90023A840A80074F03C /* CurrentUserBrews.swift */,
@@ -388,6 +396,7 @@
 		81FE6AE821E3EEAA0008B9A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81AD0BD5242ACAB500B17C62 /* GenericPostForLikes.swift */,
 				813C126223E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift */,
 				81ACF53D23EC9ACD00610AF3 /* BrewCommentsImageCell.swift */,
 				8183C88823E36929009A91AC /* UserPostPictureCollectionViewCell.swift */,
@@ -589,6 +598,7 @@
 				813BEFE8226953AC008AC632 /* DebutYourBrew.swift in Sources */,
 				81A4570A22766814008DF6D4 /* ShopReviewCell.swift in Sources */,
 				81EA17202180FC92003388DA /* AppLoadingViewController.swift in Sources */,
+				8139D207242A94E1004EC947 /* likedPostTableViewCell.swift in Sources */,
 				813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */,
 				81E6CD6E224808AD00969B42 /* CMICell.swift in Sources */,
 				81E92B3122147D1C00CD6303 /* RatingPickViewController.swift in Sources */,
@@ -609,6 +619,7 @@
 				81BCD3E322D3EEF7003D0640 /* mikesCoinThing.swift in Sources */,
 				816264B8224A88E100202A69 /* BrewTypeCVCell.swift in Sources */,
 				8152A5BB217969FD003D7B0A /* RealLoginViewController.swift in Sources */,
+				81AD0BD6242ACAB500B17C62 /* GenericPostForLikes.swift in Sources */,
 				81ACF54023F321AC00610AF3 /* GenericPostTableViewCell.swift in Sources */,
 				7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */,
 				7E312B33212C98E3009D7F83 /* SecondViewController.swift in Sources */,
@@ -632,6 +643,7 @@
 				813C126323E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift in Sources */,
 				813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */,
 				7E312B45212C9DFF009D7F83 /* FourthViewController.swift in Sources */,
+				8139D205242A8753004EC947 /* UserLikesViewController.swift in Sources */,
 				815FF81823466AB3002F4D88 /* BrewDebutCommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

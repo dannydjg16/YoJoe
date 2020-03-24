@@ -16,6 +16,8 @@ class OtherUserImageCollectionViewCell: UICollectionViewCell {
     func setCell(post: UserGenericPost) {
         postPhoto.setImage(from: post.imageURL)
         postID = post.postID
+        
+        postPhoto.contentMode = .scaleAspectFill
     }
     
     

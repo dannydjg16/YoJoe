@@ -107,17 +107,17 @@ class BrewDebutCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-       self.profilePic.layer.cornerRadius = profilePic.frame.height / 2
-        
-//        postActivityBar.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        postActivityBar.layer.borderWidth = 1
-        
-
+       profilePic.layer.cornerRadius = profilePic.frame.height / 2
+        profilePic.layer.borderWidth = 0.5
+        profilePic.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        profilePic.contentMode = .scaleAspectFill
 
         likeButton.setImage(#imageLiteral(resourceName: "upload"), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         commentsButton.setImage(#imageLiteral(resourceName: "note"), for: .normal)
+        
+        brewPicture.contentMode = .scaleAspectFill
         
       //set image stuff of like button based on wehther it is liked or not
         self.userRef.child("\(String(self.user!.uid))").child("likedPosts").observe(.value, with: { (snapshot) in

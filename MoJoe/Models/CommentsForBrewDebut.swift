@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class CommentsForBrewDebut: UIViewController {
-
+    
     
     let ref = Database.database().reference(withPath: "BrewDebut")
     let commentRef = Database.database().reference(withPath: "Comments")
@@ -23,10 +23,24 @@ class CommentsForBrewDebut: UIViewController {
     
     
     //MARK: post labels and images
+    @IBOutlet weak var postViewOnCommentsPage: UIView!
+    
     @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
+    
+    @IBOutlet weak var timeSinceLabel: UILabel!
+    @IBOutlet weak var brewLabel: UILabel!
+    @IBOutlet weak var brandLabel: UILabel!
+    @IBOutlet weak var postLabel: UILabel!
+    @IBOutlet weak var roastLabel: UILabel!
+    
+    @IBOutlet weak var ratingLabel: UILabel!
+    
+    
+    @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var profilePicture: UIImageView!
+    
     @IBOutlet weak var commentTextField: UITextField!
+    
     @IBAction func leaveComment(_ sender: Any) {
         
         let stringIndexOfPostID = postIDFromFeed.prefix(29)
@@ -79,8 +93,23 @@ class CommentsForBrewDebut: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        brewDebutCommentsTableView.delegate = self
-//        brewDebutCommentsTableView.dataSource = self
+        //        brewDebutCommentsTableView.delegate = self
+        //        brewDebutCommentsTableView.dataSource = self
+        
+        postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        postViewOnCommentsPage.layer.borderWidth = 2
+        brewDebutCommentsTableView.layer.borderWidth = 2
+        brewDebutCommentsTableView.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        
+        profilePicture.layer.borderWidth = 1
+        profilePicture.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
+        profilePicture.contentMode = .scaleAspectFill
+        
+        
+        postImageView.contentMode = .scaleAspectFill
+        
+        
         
         let endOfPostID = postIDFromFeed.suffix(10)
         let endString = String(endOfPostID)
@@ -97,25 +126,33 @@ class CommentsForBrewDebut: UIViewController {
             guard let postInfo = dataSnapshot as? DataSnapshot else {
                 return
             }
-            if let brewDebut = BrewDebut(snapshot: postInfo){
+            if let brewDebut = BrewDebut(snapshot: postInfo) {
                 //MARK: set the post view on comments page
+                
+                self.ref.child("Users").child(brewDebut.user).child("UserName").observe(.value, with: {(snapshot) in
+                    guard let userName = snapshot.value as? String else {
+                        return
+                    }
+                    self.userLabel.text = userName
+                })
+                self.postImageView.setImage(from: brewDebut.imageURL)
+                
+                let timeAgoString = Date().timeSincePostFromString(postDate: brewDebut.date)
+                self.timeSinceLabel.text = timeAgoString
+                
                
-                self.brewImageURL = brewDebut.imageURL
+                self.postLabel.text = brewDebut.review
+                self.brewLabel.text = brewDebut.brew
+                self.roastLabel.text = brewDebut.roast
+                self.ratingLabel.text = String(brewDebut.rating) + "/10"
+                self.brandLabel.text = brewDebut.beanLocation
                 self.userRef.child("\(brewDebut.user)").child("UserPhoto").observeSingleEvent(of: .value, with: { (dataSnapshot) in
                     
                     guard let currentProfilePicture = dataSnapshot.value as? String else {
                         return
                     }
-                    
-                    
-                    let ref = Storage.storage().reference(forURL: currentProfilePicture)
-                    
-                    
-                    
-                    
-                    //MARK: set the labels and imageview
                     self.profilePicture.setImage(from: currentProfilePicture)
-                    self.userLabel.text = brewDebut.user
+                    
                 })
                 
                 if brewDebut.comments == 0 {
@@ -162,52 +199,55 @@ class CommentsForBrewDebut: UIViewController {
 
 
 
-extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource{
+extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return allComments.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 47
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         
         if allComments.count == 0 {
-           
+            
             let errorCell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "CommentErrorCell")
             
             return errorCell!
         }
-        
+            
         else {
             
             
-            switch indexPath.row {
-            case 0:
-                let imageCell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "BrewImageCell") as! BrewCommentsImageCell
-                imageCell.brewImage.setImage(from: self.brewImageURL)
-            
-            default:
-                let comment = allComments[indexPath.row - 1]
-                let cell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "BrewDebutCommentCell") as! BrewDebutCommentCell
-                
-                cell.setCommentCell(comment: comment)
-                
-                return cell
-            }
-            
-            
             let comment = allComments[indexPath.row]
+            
             let cell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "BrewDebutCommentCell") as! BrewDebutCommentCell
+            
+            
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+            
             
             cell.setCommentCell(comment: comment)
             
             return cell
         }
+        
+        
+        let comment = allComments[indexPath.row]
+        let cell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "BrewDebutCommentCell") as! BrewDebutCommentCell
+        
+        cell.setCommentCell(comment: comment)
+        
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        
+        return cell
     }
-    
-    
 }
+
+
+

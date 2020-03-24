@@ -14,10 +14,9 @@ import CoreLocation
 class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
     
     var posts: [UserGenericPost] = []
-    var shopReviews: [ShopReivew] = []
+    
     var following: [String] = []
-    var postsStrings: [String] = []
-    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    
     let userRef = Database.database().reference(withPath: "Users")
     let postsRef = Database.database().reference(withPath: "GenericPosts")
     var theUser = Auth.auth().currentUser
@@ -124,7 +123,8 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 376
+        return 550
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -155,13 +155,22 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
                let string = String(postID.prefix(2))
                switch string {
                case "sh":
+                
                 cell.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
                 cell.layer.borderWidth = 2
                 cell.postAccentLine.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                
+                cell.profilePic.layer.borderWidth = 0.5
+                cell.profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+               
                case "br":
                 cell.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
                 cell.layer.borderWidth = 2
                 cell.postAccentLine.backgroundColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+                
+                cell.profilePic.layer.borderWidth = 0.5
+                cell.profilePic.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+                
                default:
                    print("Border Switch")
                }
@@ -173,10 +182,23 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
+        cell.commentsPageClosure = {
+            let postIDPre = String(postID.prefix(2))
+            switch postIDPre {
+            case "sh":
+                self.performSegue(withIdentifier: "genericToShopComments", sender: postID + "addComment")
+            case "br":
+                self.performSegue(withIdentifier: "genericToBrewComments", sender: postID + "addComment")
+            default:
+                print("commentsPageClosure in Cell for Row at")
+            }
+        }
+        
+        
+        
         let timeAgoString = Date().timeSincePost(post: post)
         cell.timeLabel.text =  timeAgoString
         
-  
         
         return cell
     }

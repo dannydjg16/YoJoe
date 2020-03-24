@@ -20,14 +20,7 @@ class UserPostPictureCollectionViewCell: UICollectionViewCell {
         let ref = Storage.storage().reference(forURL: "\(post.imageURL)")
         self.userPostPicture.setImage(from: post.imageURL)
         
-//        ref.getData(maxSize: 1024 * 1024 * 1024) { data, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else if let data = data, let image = UIImage(data: data) {
-//                self.userPostPicture.image = image
-//                self.userPostPicture.layer.cornerRadius = self.userPostPicture.frame.height / 2
-//            }
-//        }
+        userPostPicture.contentMode = .scaleAspectFill
         
     }
     

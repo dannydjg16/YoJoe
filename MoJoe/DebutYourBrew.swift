@@ -101,7 +101,7 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       
-        return 302
+        return 566
         
     }
         
@@ -115,16 +115,9 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         
         let debutCell = brewDebutTable.dequeueReusableCell(withIdentifier: "BrewDebutCell") as! BrewDebutCell
         
-        switch debut.roast {
-        case "Light Roast":
-            borderSet(cell: debutCell, color: #colorLiteral(red: 1, green: 0.8202751079, blue: 0.3338571206, alpha: 1), width: 2)
-        case "Medium Roast":
-            borderSet(cell: debutCell, color: #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), width: 2)
-        case "Dark Roast":
-            borderSet(cell: debutCell, color: #colorLiteral(red: 0.254897684, green: 0.1924804384, blue: 0.08138259897, alpha: 1), width: 2)
-        default:
-            debutCell.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        }
+    
+            borderSet(cell: debutCell, color: #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1), width: 2)
+       
         
         //set the shit that goes with the cell. like the labels and all that shit. could be done right here or with a function that is created in the cell file.
         debutCell.setDebutCell(debut: debut)

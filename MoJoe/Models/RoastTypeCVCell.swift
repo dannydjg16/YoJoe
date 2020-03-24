@@ -17,6 +17,8 @@ class RoastTypeCVCell: UICollectionViewCell {
     
     func setCell(roast: ReviewHelper) {
         roastImage.image = roast.reviewImage
+        roastImage.contentMode = .scaleAspectFill
+        
         roastLabel.text = roast.reviewCategory
     }
     

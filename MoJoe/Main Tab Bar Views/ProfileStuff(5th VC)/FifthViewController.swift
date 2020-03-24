@@ -30,6 +30,8 @@ class FifthViewController: UIViewController {
     @IBOutlet weak var brewNumberLabel: UILabel!
     @IBOutlet weak var followingNumberLabel: UILabel!
     @IBOutlet weak var followersNumberLabel: UILabel!
+    @IBOutlet weak var likesButton: UIButton!
+    
     
     var user = Auth.auth().currentUser
     var userProfilePicture = Auth.auth().currentUser?.photoURL
@@ -100,7 +102,7 @@ class FifthViewController: UIViewController {
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
        
         
-        usersPicturesCollectionView.layer.borderWidth = 2
+        usersPicturesCollectionView.layer.borderWidth = 1
         usersPicturesCollectionView.layer.borderColor = #colorLiteral(red: 0.5216623545, green: 0.379847765, blue: 0.1959043145, alpha: 1)
         usersPicturesCollectionView.layer.cornerRadius = usersPicturesCollectionView.frame.height / 50
         
@@ -289,7 +291,7 @@ extension FifthViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        return CGSize(width: 176, height: 176)
     }
     
     

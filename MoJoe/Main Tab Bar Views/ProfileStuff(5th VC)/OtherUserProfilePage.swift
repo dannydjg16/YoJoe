@@ -56,6 +56,7 @@ class OtherUserProfilePage: UIViewController {
         profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePic.layer.borderWidth = 1
         profilePic.layer.cornerRadius = profilePic.frame.height / 2
+        profilePic.contentMode = .scaleAspectFill
        
         
         userRef.child("\(userID)").child("UserPosts").observe(.value
@@ -226,7 +227,7 @@ extension OtherUserProfilePage: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        return CGSize(width: 176, height: 176)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

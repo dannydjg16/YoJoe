@@ -129,12 +129,14 @@ class VisitReviewViewController: UIViewController {
  
         imagePicker.delegate = self
         
-        self.addPhotoButton = UIButton(type: .custom)
-        self.addPhotoButton.setTitleColor(#colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1), for: .normal)
-        self.addPhotoButton.addTarget(self, action: #selector(addPictures), for: .touchUpInside)
-        self.view.addSubview(addPhotoButton)
+        addPhotoButton = UIButton(type: .custom)
+        addPhotoButton.setTitleColor(#colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1), for: .normal)
+        addPhotoButton.addTarget(self, action: #selector(addPictures), for: .touchUpInside)
+        view.addSubview(addPhotoButton)
     
-        self.postID = "brewDebut" + randomString(length: 20)
+        postID = "brewDebut" + randomString(length: 20)
+        
+        shopImage.contentMode = .scaleAspectFill
     }
     
     

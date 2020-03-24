@@ -139,10 +139,9 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         shopCell.timeSinceLabel.text =  timeAgoString
         
         
-        shopCell.profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        shopCell.profilePic.layer.borderWidth = 0.5
-        shopCell.shopPicture.layer.borderColor = #colorLiteral(red: 0.5216623545, green: 0.379847765, blue: 0.1959043145, alpha: 1)
-        shopCell.shopPicture.layer.borderWidth = 0.5
+
+       
+       
         
         
         borderSet(cell: shopCell, color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), width: 2)
@@ -153,9 +152,9 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         shopCell.toUserProfileTapHandler = {
             self.performSegue(withIdentifier: "toOtherUserProfile", sender: shop.user)
             
-            
-            
         }
+        
+        
         
         return shopCell
     }

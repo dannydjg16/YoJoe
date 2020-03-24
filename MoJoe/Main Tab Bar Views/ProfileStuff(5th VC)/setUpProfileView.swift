@@ -149,8 +149,11 @@ class setUpProfileView: UIViewController {
         
         let profileImageURL = Auth.auth().currentUser?.photoURL
         profilePicture.setImage(from: profileImageURL?.absoluteString)
-        //Find the difference in setting up the profile in the 5th view controller with the image picker and shit. maybe somehwhere i made it an optional or soemthing IDK but find the difference between that and setting it with the stock photo image. i can search that up everywhere but i cant get it to pop up on the setupprofile or profile view. maybe i just have to go find it in storage everytome. in that case i have t ofigure out how to look through the storage a little more
-     
+        profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
+        profilePicture.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        profilePicture.layer.borderWidth = 1
+        profilePicture.contentMode = .scaleAspectFill
+        
         
         guard let userEmail = Auth.auth().currentUser?.email else {
                    return
