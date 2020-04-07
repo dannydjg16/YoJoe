@@ -23,6 +23,9 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userNameTField.delegate = self
+        passwordTField.delegate = self
+        
         Auth.auth().addStateDidChangeListener() { auth, user in
             
             if user != nil {
@@ -33,7 +36,20 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
                 self.present(mainTabController, animated: true, completion: nil)
             }
         }
-    }
+    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+           downSwipe.direction = .down
+           self.view.addGestureRecognizer(downSwipe)
+           
+       }
+       
+       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+           switch gesture.direction {
+           case .down :
+            self.view.endEditing(true)
+           default:
+               break
+           }
+       }
     
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

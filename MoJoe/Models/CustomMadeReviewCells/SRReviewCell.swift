@@ -37,7 +37,7 @@ class SRReviewCell: UITableViewCell {
 extension SRReviewCell: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        reviewTextField.resignFirstResponder()
+        textField.resignFirstResponder()
         
         return true
     }

@@ -93,13 +93,13 @@ class CommentsForBrewDebut: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        brewDebutCommentsTableView.delegate = self
-        //        brewDebutCommentsTableView.dataSource = self
-        
-        postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        commentTextField.delegate = self
+        commentTextField.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        commentTextField.layer.borderWidth = 1
+        postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         postViewOnCommentsPage.layer.borderWidth = 2
         brewDebutCommentsTableView.layer.borderWidth = 2
-        brewDebutCommentsTableView.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
+        brewDebutCommentsTableView.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         
         profilePicture.layer.borderWidth = 1
         profilePicture.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
@@ -129,11 +129,14 @@ class CommentsForBrewDebut: UIViewController {
             if let brewDebut = BrewDebut(snapshot: postInfo) {
                 //MARK: set the post view on comments page
                 
-                self.ref.child("Users").child(brewDebut.user).child("UserName").observe(.value, with: {(snapshot) in
-                    guard let userName = snapshot.value as? String else {
-                        return
-                    }
-                    self.userLabel.text = userName
+                self.userRef.child(brewDebut.user).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+                    
+                    guard let currentUserName = dataSnapshot.value as? String else { return }
+                    
+                    
+                    self.userLabel.text = currentUserName + "brewed..."
+                    
+                    
                 })
                 self.postImageView.setImage(from: brewDebut.imageURL)
                 
@@ -165,7 +168,9 @@ class CommentsForBrewDebut: UIViewController {
                             for child in snapshot.children {
                                 if let snapshot = child as? DataSnapshot, let comment = Comment(snapshot: snapshot) {
                                     newComments.append(comment)
-                                    self.allComments = newComments
+                                    self.allComments = newComments.sorted(by: {
+                                        $0.date > $1.date
+                                    })
                                     self.brewDebutCommentsTableView.reloadData()
                                 }
                             }
@@ -203,10 +208,21 @@ extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allComments.count
+        if allComments.count == 0 {
+            return 1
+        } else {
+            return allComments.count
+        }
+        
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 47
+        if allComments.count == 0 {
+            return 193
+        } else {
+            return 47
+        }
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -249,5 +265,45 @@ extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
+extension CommentsForBrewDebut: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        
+        
+        let stringIndexOfPostID = postIDFromFeed.prefix(29)
+        let stringPostID = String(stringIndexOfPostID)
+        
+        guard let comment = commentTextField.text else {
+            return true
+        }
+        
+        if commentTextField.text == "" {
+            return true
+        } else {
+            let postComment = Comment(comment: comment, date: date, likesAmount: 0)
+            
+            let commentLocation = commentRef.child("BrewDebutComments").child("\(stringPostID)").child("\(randomString(length: 20))")
+            
+            commentLocation.setValue(postComment.makeDictionary())
+            
+            self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let numberOfComments = snapshot.value as? Int
+                    else {
+                        return
+                }
+                self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let brewDebut = BrewDebut(snapshot: snapshot) {
+                        self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
+                    }
+                })
+            })
+            commentTextField.text = ""
+        }
+        
+        
+        
+        self.view.endEditing(true)
+        return true
+    }
+}
 

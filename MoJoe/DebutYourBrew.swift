@@ -52,22 +52,48 @@ class DebutYourBrew: UIViewController {
                     self.brewDebutTable.reloadData()
                 }
             }
-            self.brewDebuts = newDebuts
+            self.brewDebuts = newDebuts.reversed()
             self.brewDebutTable.reloadData()
         })
     }
     
     @objc func displayReviewPage(){
-        self.performSegue(withIdentifier: "toBrewDebutSegue", sender: self)
+        
+
+
+        let pictureFinder = UIAlertController(title: "Create New Post", message: "Show Us Your Creation!" , preferredStyle: .actionSheet)
+
+        let cancelPost = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
+            
+            self.performSegue(withIdentifier: "toBrewDebutSegue", sender: "camera")
+            
+        })
+
+        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            
+
+            self.performSegue(withIdentifier: "toBrewDebutSegue", sender: "photoAlbum")
+        })
+        pictureFinder.addAction(cancelPost)
+        pictureFinder.addAction(takeAPicture)
+        pictureFinder.addAction(chooseAPicture)
+
+        self.present(pictureFinder, animated: true, completion: nil)
+
+
+        
+        
+        //self.performSegue(withIdentifier: "toBrewDebutSegue", sender: self)
     }
     
     override func viewWillLayoutSubviews() {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
         toReviewPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         toReviewPage.layer.borderWidth = 1
-        toReviewPage.backgroundColor = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
+        toReviewPage.backgroundColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
         toReviewPage.clipsToBounds = true
-        toReviewPage.setImage(#imageLiteral(resourceName: "coffee-bean-for-a-coffee-break"), for: .normal)
+        toReviewPage.setImage(#imageLiteral(resourceName: "photo-camera"), for: .normal)
         toReviewPage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([toReviewPage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),toReviewPage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), toReviewPage.widthAnchor.constraint(equalToConstant: 50), toReviewPage.heightAnchor.constraint(equalToConstant: 50)])
         
@@ -84,6 +110,8 @@ class DebutYourBrew: UIViewController {
             
             profilePage.userID = sender as! String
             
+        } else if segue.identifier == "toBrewDebutSegue", let visitReview = segue.destination as? VisitReviewViewController {
+            visitReview.typeOfPicture = sender as! String
         }
     }
     

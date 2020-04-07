@@ -18,23 +18,59 @@ class setUpProfileView: UIViewController {
     @IBOutlet weak var lastNameTField: UITextField!
     @IBOutlet weak var userNameTField: UITextField!
     
+    var firstNameOfUser: String = "First Name"
+    var lastNameOfUser: String = "Last Name"
+    var userNameOfUser: String = "UserName"
+    var profilePictureString: String = ""
     
     @IBOutlet weak var userEmailTextField: UITextField!
     let imagePicker = UIImagePickerController()
     
     @IBAction func toProfile(_ sender: Any) {
-        let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
         
-        mainTabController.selectedViewController = mainTabController.viewControllers?[1]
         
-        self.present(mainTabController, animated: true, completion: nil)
+        if self.firstNameOfUser == "First Name" || self.lastNameOfUser == "Last Name" || self.userNameOfUser == "UserName" || profilePictureString == "" {
+            let fillBlanksAlert = UIAlertController(title: "Please add a profile picture, First/Last name, and Username", message: "", preferredStyle: .alert)
+            let fillBlanksAction = UIAlertAction(title: "Complete", style: .cancel, handler: nil)
+            fillBlanksAlert.addAction(fillBlanksAction)
+            self.present(fillBlanksAlert, animated: true, completion: nil)
+        } else {
+            let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+            
+            mainTabController.selectedViewController = mainTabController.viewControllers?[1]
+            
+            self.present(mainTabController, animated: true, completion: nil)
+        }
+        
+        
+       
     }
     
     @IBAction func saveProfilePicture(_ sender: Any) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
+       
+        let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .actionSheet)
         
-        present(imagePicker, animated: true, completion: nil)
+        let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .camera
+
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+
+        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .photoLibrary
+
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        
+        pictureFinder.addAction(cancelPicture)
+        pictureFinder.addAction(takeAPicture)
+        pictureFinder.addAction(chooseAPicture)
+
+        self.present(pictureFinder, animated: true, completion: nil)
     }
     
    
@@ -139,6 +175,12 @@ class setUpProfileView: UIViewController {
     }
     
     
+    @IBAction func tapGestureAction(_ sender: Any) {
+        self.lastNameTField.resignFirstResponder()
+        self.firstNameTField.resignFirstResponder()
+        self.userNameTField.resignFirstResponder()
+        self.userEmailTextField.resignFirstResponder()
+    }
     
     
     
@@ -146,6 +188,12 @@ class setUpProfileView: UIViewController {
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        
+        userNameTField.delegate = self
+        firstNameTField.delegate = self
+        lastNameTField.delegate = self
+        userEmailTextField.delegate = self
+        
         
         let profileImageURL = Auth.auth().currentUser?.photoURL
         profilePicture.setImage(from: profileImageURL?.absoluteString)
@@ -155,11 +203,83 @@ class setUpProfileView: UIViewController {
         profilePicture.contentMode = .scaleAspectFill
         
         
-        guard let userEmail = Auth.auth().currentUser?.email else {
-                   return
-               }
-               userEmailTextField.placeholder = userEmail
-    }
+        userRef.child(userID!).child("UserEmail").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.userEmailTextField.placeholder = value
+                self.userEmailTextField.text = ""
+                self.firstNameOfUser = value
+                
+            }
+        })
+        
+        userRef.child(userID!).child("UserFirstName").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.firstNameTField.placeholder = value
+                self.firstNameTField.text = ""
+                self.firstNameOfUser = value
+                
+            }
+        })
+        
+        userRef.child(userID!).child("UserLastName").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.lastNameTField.placeholder = value
+                self.lastNameTField.text = ""
+                self.lastNameOfUser = value
+            }
+        })
+        
+        ///Check all the placeholders and see if they are working.
+        
+        userRef.child(userID!).child("UserName").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.userNameTField.placeholder = value
+                self.userNameTField.text = ""
+                self.userNameOfUser = value
+            }
+        })
+    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+           downSwipe.direction = .down
+           self.view.addGestureRecognizer(downSwipe)
+           
+       }
+       
+       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+           switch gesture.direction {
+           case .down :
+            self.view.endEditing(true)
+           default:
+               break
+           }
+       }
     
     func changePictureURL(url: URL) {
         
@@ -213,11 +333,16 @@ extension setUpProfileView: UIImagePickerControllerDelegate, UINavigationControl
                         //here is where the picture is changed in firebase database and then the profile picture is set(like the imageview)
                         self.userRef.child(userID).updateChildValues(["UserPhoto": picURL.absoluteString])
                         self.profilePicture.setImage(from: url?.absoluteString)
+                        self.profilePictureString = picURL.absoluteString
                     }
                  })
         }}
 }
 
+
+extension setUpProfileView: UITextFieldDelegate {
+    
+}
 
 
 

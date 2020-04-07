@@ -69,20 +69,45 @@ class OtherUserProfilePage: UIViewController {
                         
                         allUserPosts.append(post)
                         
-                        self.usersPosts = allUserPosts
+                        self.usersPosts = allUserPosts.sorted(by: {
+                            $0.date > $1.date
+                        })
                         self.otherUserCollectionView.reloadData()
                     }
                 }
                 
         })
-        self.userRef.child("\(userID)").child("UserName").observe(.value, with: { (snapshot) in
+        
+
+        userRef.child("\(self.user!)").child("following").observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            var followingArray: [String] = []
+            
+            for child in snapshot.children {
+                
+                if let snapshot = child as? DataSnapshot,
+                    
+                    let value = snapshot.value as? [String: AnyObject] {
+                    
+                    for (key, value) in value {
+                        followingArray.append(key)
+                    }
+                    if followingArray.contains(self.userID) {
+                        self.followUser.layer.backgroundColor = #colorLiteral(red: 0.6991856694, green: 0.475196898, blue: 0.2837665677, alpha: 1)
+                    } else {
+                        self.followUser.layer.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9137254902, blue: 0.8196078431, alpha: 1)
+                    }
+                }
+            }
+        })
+        userRef.child("\(userID)").child("UserName").observe(.value, with: { (snapshot) in
 
             guard let snapshot = snapshot.value as? String else {
                 return
             }
             self.nameLabel.text = snapshot
         })
-        self.userRef.child("\(userID)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
+        userRef.child("\(userID)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
 
             guard let currentProfilePicture = dataSnapshot.value as? String else { return
 
@@ -223,15 +248,31 @@ extension OtherUserProfilePage: UICollectionViewDelegate, UICollectionViewDataSo
    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return usersPosts.count
+        if usersPosts.count == 0 {
+            return 1
+        } else {
+            return usersPosts.count
+        }
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 176, height: 176)
+        
+        if usersPosts.count == 0 {
+            return CGSize(width: 300, height: 300)
+        } else {
+            return CGSize(width: 176, height: 176)
+        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if usersPosts.count == 0 {
+            let cell = otherUserCollectionView.dequeueReusableCell(withReuseIdentifier: "NoPostsCVC", for: indexPath)
+            return cell
+        }
         let post = usersPosts[indexPath.row]
         
         

@@ -25,6 +25,7 @@ class CMLCell: UITableViewCell, CLLocationManagerDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
        self.locationField.delegate = self
+        
        
        
     }
@@ -40,18 +41,10 @@ class CMLCell: UITableViewCell, CLLocationManagerDelegate {
 extension CMLCell: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        locationField.resignFirstResponder()
+        textField.resignFirstResponder()
         
         return true
     }
 }
 
-//extension CMLCell: CLLocationManagerDelegate, UITextFieldDelegate {
-//
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        locationManager = CLLocationManager()
-//        locationManager.requestWhenInUseAuthorization()
-//    }
-//
-//
-//}
+

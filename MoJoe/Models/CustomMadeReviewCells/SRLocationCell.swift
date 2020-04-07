@@ -22,7 +22,9 @@ class SRLocationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.locationTextField.delegate = self
+        locationTextField.delegate = self
+        cityTextField.delegate = self
+        stateTextField.delegate = self
         //self.locationSearchBar.delegate = self
         
 //
@@ -62,8 +64,10 @@ extension SRLocationCell: UITextFieldDelegate{
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        locationTextField.resignFirstResponder()
+        textField.resignFirstResponder()
         
         return true
     }
 }
+
+

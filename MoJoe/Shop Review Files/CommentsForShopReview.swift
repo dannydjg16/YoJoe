@@ -16,6 +16,7 @@ class CommentsForShopReview: UIViewController {
     let commentRef = Database.database().reference(withPath: "Comments")
     var userRef = Database.database().reference(withPath: "Users")
     var postIDFromFeed: String = ""
+    
     var allComments: [Comment] = []
     
     var date: String {
@@ -108,6 +109,9 @@ class CommentsForShopReview: UIViewController {
         
         postImageView.contentMode = .scaleAspectFill
         
+        commentTextField.delegate = self
+        commentTextField.layer.borderWidth = 1
+        commentTextField.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
@@ -176,7 +180,7 @@ class CommentsForShopReview: UIViewController {
                     
                     
                     
-                    self.nameLabel.text = shopReview.user
+                    
                     self.shopLabel.text = shopReview.shop
                     self.ratingLabel.text = String(shopReview.rating) + "/10"
                     self.coffeeTypeLabel.text = shopReview.coffeeType
@@ -196,9 +200,12 @@ class CommentsForShopReview: UIViewController {
                             if let snapshot = child as? DataSnapshot, let comment = Comment(snapshot: snapshot) {
                                 newComments.append(comment)
                                 
-                                self.allComments = newComments
+                                self.allComments = newComments.sorted(by: {
+                                    $0.date > $1.date
+                                })
                                 self.commentsTableView.reloadData()
                             }
+                        
                             
                         }
                     })
@@ -218,11 +225,11 @@ class CommentsForShopReview: UIViewController {
         
         
         
-        let bar = UIToolbar()
-        let reset = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: nil)
-        bar.items = [reset]
-        bar.sizeToFit()
-        commentTextField.inputAccessoryView = bar
+//        let bar = UIToolbar()
+//        let reset = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: nil)
+//        bar.items = [reset]
+//        bar.sizeToFit()
+//        commentTextField.inputAccessoryView = bar
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
         downSwipe.direction = .down
@@ -233,7 +240,7 @@ class CommentsForShopReview: UIViewController {
     @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
         switch gesture.direction {
         case .down :
-            commentTextField.resignFirstResponder()
+            self.view.endEditing(true)
         default:
             break
         }
@@ -262,16 +269,24 @@ class CommentsForShopReview: UIViewController {
 
 
 extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
-    //    func numberOfSections(in tableView: UITableView) -> Int {
-    //        return 2
-    //    }
+  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allComments.count
+        
+        if allComments.count == 0 {
+            return 1
+        } else {
+            return allComments.count
+        }
+       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 47
+        if allComments.count == 0 {
+            return 193
+        } else  {
+            return 47
+        }
         
     }
     
@@ -306,4 +321,41 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
+extension CommentsForShopReview: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let stringIndexOfPostID = postIDFromFeed.prefix(30)
+              let stringPostID = String(stringIndexOfPostID)
+              
+              guard let comment = commentTextField.text else {
+                  return true
+              }
+              
+              if commentTextField.text == "" {
+                  return true
+              } else {
+                  let postComment = Comment(comment: comment, date: date, likesAmount: 0)
+                  
+                  let commentLocation = commentRef.child("ShopReviewComments").child("\(stringPostID)").child("\(randomString(length: 20))")
+                  
+                  commentLocation.setValue(postComment.makeDictionary())
+                  
+                  
+                  self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+                      guard let numberOfComments = snapshot.value as? Int else {
+                          return
+                      }
+                      self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
+                          (snapshot) in
+                          if let shopReview = ShopReivew(snapshot: snapshot) {
+                              self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
+                          }
+                      })
+                      
+                  })
+                  
+                  commentTextField.text = ""
+              }
+        textField.resignFirstResponder()
+        return true
+    }
+}

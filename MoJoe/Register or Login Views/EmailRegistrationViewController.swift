@@ -29,7 +29,9 @@ class EmailRegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        emailTField.delegate = self
+        passwordTField.delegate = self
+        duplicatePassField.delegate = self
         
         Auth.auth().addStateDidChangeListener() {auth, user in
             
@@ -40,7 +42,20 @@ class EmailRegistrationViewController: UIViewController {
             }
         }
     
-    }
+    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+           downSwipe.direction = .down
+           self.view.addGestureRecognizer(downSwipe)
+           
+       }
+       
+       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+           switch gesture.direction {
+           case .down :
+            self.view.endEditing(true)
+           default:
+               break
+           }
+       }
     
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -122,4 +137,13 @@ class EmailRegistrationViewController: UIViewController {
     
     
 
+}
+
+
+extension EmailRegistrationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
 }

@@ -41,9 +41,10 @@ class EditProfile: UIViewController {
     
     @IBAction func changeProfilePic(_ sender: Any) {
         
-        print("pressed")
         
         let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .actionSheet)
+        
+        let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
             self.imagePicker.allowsEditing = false
@@ -58,8 +59,10 @@ class EditProfile: UIViewController {
             
             self.present(self.imagePicker, animated: true, completion: nil)
         })
+        pictureFinder.addAction(cancelPicture)
         pictureFinder.addAction(takeAPicture)
         pictureFinder.addAction(chooseAPicture)
+        
         
         self.present(pictureFinder, animated: true, completion: nil)
         
@@ -87,6 +90,11 @@ class EditProfile: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailTField.delegate = self
+        userNameTField.delegate = self
+        firstNameTF.delegate = self
+        lastNameTF.delegate = self
+        
         profilePicture.setImage(from: profileImageURL?.absoluteString)
         profilePicture.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePicture.layer.borderWidth = 1
@@ -97,7 +105,81 @@ class EditProfile: UIViewController {
         
         imagePicker.delegate = self
         
-    }
+        
+        
+        
+        userRef.child(userID!).child("UserFirstName").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.firstNameTF.placeholder = value
+                self.firstNameTF.text = ""
+            }
+        })
+        
+        userRef.child(userID!).child("UserLastName").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.lastNameTF.placeholder = value
+                self.lastNameTF.text = ""
+            }
+        })
+        
+      
+        
+        userRef.child(userID!).child("UserName").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.userNameTField.placeholder = value
+                self.userNameTField.text = ""
+            }
+        })
+        
+       userRef.child(userID!).child("UserEmail").observe(.value, with: {
+            (snapshot) in
+            
+            guard let value = snapshot.value as? String else {
+                return
+            }
+            if value == "" {
+                return
+            } else {
+                self.emailTField.placeholder = value
+                self.emailTField.text = ""
+            }
+        })
+        
+    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+           downSwipe.direction = .down
+           self.view.addGestureRecognizer(downSwipe)
+           
+       }
+       
+       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+           switch gesture.direction {
+           case .down :
+            self.view.endEditing(true)
+           default:
+               break
+           }
+       }
     
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -154,4 +236,12 @@ class EditProfile: UIViewController {
         }
         
         
+}
+
+extension EditProfile: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
 }

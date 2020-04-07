@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedSwitcher: UIViewController {
 
+    let userID = Auth.auth().currentUser?.uid
+    let userRef = Database.database().reference(withPath: "Users")
+    var followingArray: [String] = []
     @IBOutlet weak var feedSwitcherSC: UISegmentedControl!
     
     var lastVC: UIViewController?
@@ -18,7 +22,7 @@ class FeedSwitcher: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         let viewController = storyboard.instantiateViewController(withIdentifier: "NearbyFeedViewController") as! NearbyFeedViewController
-        
+        viewController.following = self.followingArray
         self.addChildVC(child: viewController)
         
         return viewController
@@ -55,12 +59,21 @@ class FeedSwitcher: UIViewController {
         super.viewDidLoad()
         self.addChildVC(child: nearbyFeedViewController)
         lastVC = nearbyFeedViewController
-        setupView()
+     
         navigationController?.navigationBar.barTintColor = UIColor(hue: 0.1333, saturation: 0.12, brightness: 0.94, alpha: 1.0)
+        
+        
+     
+
+        setupView()
+        
     }
     
     func setupView(){
         segmentSetup()
+        
+       
+        
         
         loadNextView()
     }
@@ -81,7 +94,11 @@ class FeedSwitcher: UIViewController {
             guard let lastView = lastVC else {return}
             //let lastView = nearbyFeedViewController
             removeChildVC(child: lastView)
-            addChildVC(child: nearbyFeedViewController)
+            let nearbyFeedVC = nearbyFeedViewController
+            
+          
+            nearbyFeedVC.following = self.followingArray
+            addChildVC(child: nearbyFeedVC)
             lastVC = nearbyFeedViewController
         } else if feedSwitcherSC.selectedSegmentIndex == 1 {
             guard let lastView = lastVC else {return}

@@ -10,10 +10,10 @@ import UIKit
 
 class CMRCell: UITableViewCell {
 
+  
+    
     
     @IBOutlet weak var reviewTextField: UITextField!
-    
-    
     
     
     
@@ -40,7 +40,7 @@ class CMRCell: UITableViewCell {
 extension CMRCell: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        reviewTextField.resignFirstResponder()
+        textField.resignFirstResponder()
         
         return true
     }

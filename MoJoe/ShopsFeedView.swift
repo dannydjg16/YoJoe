@@ -31,6 +31,8 @@ class ShopsFeedView: UIViewController {
           
         } else if segue.identifier == "toOtherUserProfile", let profilePage = segue.destination as? OtherUserProfilePage {
             profilePage.userID = sender as! String
+        } else if segue.identifier == "toShopReviewSegue", let visitReview = segue.destination as? ShopReviewSheet {
+            visitReview.typeOfPicture = sender as! String
         }
     }
 
@@ -61,15 +63,36 @@ class ShopsFeedView: UIViewController {
     }
     
     @objc func displayReviewPage(){
-        self.performSegue(withIdentifier: "toShopReviewSegue", sender: self)
+        
+
+        let pictureFinder = UIAlertController(title: "Create New Post", message: "Review a Shop!" , preferredStyle: .actionSheet)
+
+        let cancelPost = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
+            
+            self.performSegue(withIdentifier: "toShopReviewSegue", sender: "camera")
+            
+        })
+
+        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            
+
+            self.performSegue(withIdentifier: "toShopReviewSegue", sender: "photoAlbum")
+        })
+        pictureFinder.addAction(cancelPost)
+        pictureFinder.addAction(takeAPicture)
+        pictureFinder.addAction(chooseAPicture)
+
+        self.present(pictureFinder, animated: true, completion: nil)
+
     }
     
     //MARK: More button Stuff
     override func viewWillLayoutSubviews() {
         toReviewPage.layer.cornerRadius = toReviewPage.layer.frame.size.width / 2
-        toReviewPage.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
+        toReviewPage.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         toReviewPage.clipsToBounds = true
-        toReviewPage.setImage(#imageLiteral(resourceName: "coffee-bean-for-a-coffee-break"), for: .normal)
+        toReviewPage.setImage(#imageLiteral(resourceName: "photo-camera"), for: .normal)
         toReviewPage.layer.borderWidth = 1
         toReviewPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
        

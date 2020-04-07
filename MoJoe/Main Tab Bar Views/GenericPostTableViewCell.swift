@@ -30,7 +30,9 @@ class GenericPostTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var postExplanationLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
-    var postID: String = ""
+    var postID: String = "a"
+    
+    var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
     
     @IBOutlet weak var postAccentLine: UIView!
     
@@ -39,7 +41,7 @@ class GenericPostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var likesButton: UIButton!
     
- 
+    
     @IBOutlet weak var likesLabel: UILabel!
     
     
@@ -47,7 +49,7 @@ class GenericPostTableViewCell: UITableViewCell {
     
     var commentsPageClosure: (() -> Void)?
     
-   
+    
     @IBAction func commentsButtonFunction(_ sender: Any) {
         
         self.commentsPageClosure?()
@@ -63,6 +65,7 @@ class GenericPostTableViewCell: UITableViewCell {
     let postsRef = Database.database().reference(withPath: "GenericPosts")
     let shopReviewRef = Database.database().reference(withPath: "ShopReview")
     let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    let postLikesRef = Database.database().reference(withPath: "PostLikes")
     
     var toUserProfileTapHandler: (() -> Void)?
     
@@ -71,21 +74,12 @@ class GenericPostTableViewCell: UITableViewCell {
         self.toUserProfileTapHandler?()
     }
     
-//    var postLikeClosure: (() -> Void)?
-//
-//
-//    @IBAction func postLikeFunction(_ sender: Any) {
-//
-//        self.postLikeClosure?()
-//
-//    }
-    
     
     
     
     func setGenericCell(post: UserGenericPost) {
         
-        
+        genericReview = GenericPostForLikes(date: post.date, imageURL: post.imageURL, postID: post.postID, userID: post.userID, postExplanation: post.postExplanation, rating: post.rating, reviewType: post.reviewType, likeDate: date)
         ratingLabel.text = String(post.rating) + "/10"
         postExplanationLabel.text = post.postExplanation
         
@@ -95,7 +89,7 @@ class GenericPostTableViewCell: UITableViewCell {
         
         userRef.child("\(post.userID)").child("UserPhoto").observe(.value, with: { (snapshot) in
             guard let child = snapshot.value as? String else {
-               return
+                return
             }
             self.profilePic.setImage(from: child)
         })
@@ -108,35 +102,23 @@ class GenericPostTableViewCell: UITableViewCell {
                 case "sh":
                     self.nameButton.setTitle("\(child)" + " visited...", for: .normal)
                     
-                    self.shopReviewRef.child("\(post.postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
-                        
-                        guard let numberOfLikes = dataSnapshot.value as? Int else {
-                            return
-                        }
-                        
-                        self.likesLabel.text = String(numberOfLikes)
-                    })
-                    
-                    
-                    
                 case "br":
                     self.nameButton.setTitle("\(child)" + " brewed...", for: .normal)
-                    
-                    self.brewDebutRef.child("\(post.postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
-                        
-                        guard let numberOfLikes = dataSnapshot.value as? Int else {
-                            return
-                        }
-                        
-                        self.likesLabel.text = String(numberOfLikes)
-                    })
-                    
                     
                     
                 default:
                     print("nameButtonSwitch")
                 }
             }
+        })
+        
+        postLikesRef.child("\(post.postID)").child("likesAmount").observe(.value, with: {
+            (snapshot) in
+            
+            guard let likesNumber = snapshot.value as? Int else {
+                return
+            }
+            self.likesLabel.text = String(likesNumber)
         })
         
         
@@ -158,6 +140,36 @@ class GenericPostTableViewCell: UITableViewCell {
         
         self.isUserInteractionEnabled = true
         
+        
+        
+        
+        
+        userRef.child("\(String(self.user!))").child("likedPosts").observe(.value, with: { (snapshot) in
+            var likedPostsArray : [String] = []
+            
+            for child in snapshot.children
+            {
+                
+                if let snapshot = child as? DataSnapshot,
+                    
+                    let valueDictionary = snapshot.value as? [String: AnyObject]
+                    
+                {
+                    
+                    likedPostsArray.append(valueDictionary["postID"] as! String)
+                    
+                }
+                //set the glabal var likedPostsByUser equal to the local array likedPostsArray
+                self.likedPostsByUser = likedPostsArray
+            }
+            if likedPostsArray.contains(self.postID){
+                self.likesButton.layer.borderWidth = 1
+                self.likesButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            } else {
+                self.likesButton.layer.borderWidth = 0
+            }
+        })
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -168,74 +180,65 @@ class GenericPostTableViewCell: UITableViewCell {
     
     
     @objc func likeButtonTapped(sender: UIButton) {
-        let postIDPre = String(self.postID.prefix(2))
-
-        switch postIDPre {
-        case "sh":
-             //get # of likes from database
-                   self.shopReviewRef.child("\(postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
-
-                       guard let numberOfLikes = dataSnapshot.value as? Int else {
-                           return
-                       }
-                       //check through the users liked posts and put them in an array
-                    self.userRef.child("\(String(self.user!))").child("likedPosts").observeSingleEvent(of: .value, with: { (snapshot) in
-                           var likedPostsArray : [String] = []
-                           //users first like (what has to happen in cse of empty likedPosts list.)
-                           if snapshot.childrenCount == 0 {
-                               self.shopReviewRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
-                               //make the tab in firebase for that postID in the users likedposts
-                               let likedPostDatabasePoint = self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)")
-
-                               //set the value of the^ above point to postID: date
-                               likedPostDatabasePoint.setValue(["\(self.postID)": "\(self.date)"])
-
-                           } else {
-                               for child in snapshot.children
-                               {
-
-                                   if let snapshot = child as? DataSnapshot,
-
-                                       let value = snapshot.value as? [String: AnyObject]
-
-                                   {
-                                       for (key, value) in value {
-                                           likedPostsArray.append(key)
-                                       }
-                                       //set the glabal var likedPostsByUser equal to the local array likedPostsArray
-                                       self.likedPostsByUser = likedPostsArray
-                                   }
-                               }
-                               //iterate through the users liked posts, if post is in the likedPosts of user, it will not run the code to add a like/add post to users liked posts
-                               var hasPostBeenLiked: Bool = false
-                               for post in self.likedPostsByUser {
-                                   if post == self.postID {
-
-                                       self.shopReviewRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes - 1] )
-
-                                       self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)").removeValue()
-
-                                       hasPostBeenLiked = true
-                                       continue
-                                   }
-                               }
-
-                               if hasPostBeenLiked == false {
-
-                                   self.shopReviewRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
-
-                                   let likedPostDatabasePoint = self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)")
-
-                                   likedPostDatabasePoint.setValue(["\(self.postID)": "\(self.date)"])
-                               }
-                           }
-                       })
-                   })
-        case "br":
-            print("bd")
-        default:
-            print("likeButtonTapped")
-        }
+        
+        //get # of likes from database
+        self.postLikesRef.child("\(postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let numberOfLikes = dataSnapshot.value as? Int else {
+                return
+            }
+            //check through the users liked posts and put them in an array
+            self.userRef.child("\(String(self.user!))").child("likedPosts").observeSingleEvent(of: .value, with: { (snapshot) in
+                var likedPostsArray : [String] = []
+                //users first like (what has to happen in cse of empty likedPosts list.)
+                if snapshot.childrenCount == 0 {
+                    self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
+                    //make the tab in firebase for that postID in the users likedposts
+                    let likedPostDatabasePoint = self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)")
+                    let genericLikedPost = self.genericReview
+                    
+                    //set the value of the^ above point to postID: date
+                    likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
+                    
+                } else {
+                    for child in snapshot.children
+                    {
+                        
+                        if let snapshot = child as? DataSnapshot,
+                            
+                            let value = snapshot.value as? [String: AnyObject]
+                            
+                        {
+                            likedPostsArray.append(value["postID"] as! String)
+                        }
+                        self.likedPostsByUser = likedPostsArray
+                    }
+                    //iterate through the users liked posts, if post is in the likedPosts of user, it will not run the code to add a like/add post to users liked posts
+                    var hasPostBeenLiked: Bool = false
+                    for post in self.likedPostsByUser {
+                        if post == self.postID {
+                            
+                            self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes - 1] )
+                            
+                            self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)").removeValue()
+                            
+                            hasPostBeenLiked = true
+                            continue
+                        }
+                    }
+                    
+                    if hasPostBeenLiked == false {
+                        
+                        self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
+                        
+                        let likedPostDatabasePoint = self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)")
+                        let genericLikedPost = self.genericReview
+                        
+                        //set the value of the^ above point to postID: date
+                        likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
+                    }
+                }
+            })
+        })
     }
-    
 }

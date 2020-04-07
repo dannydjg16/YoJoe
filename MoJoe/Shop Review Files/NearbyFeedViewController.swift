@@ -26,7 +26,7 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
     let searchText: String? = ""
     let user = Auth.auth().currentUser?.uid
     
-    
+    var exString: String = "exString"
 
     
     
@@ -47,33 +47,6 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        postsRef.observe(.value, with: {
-            (snapshot) in
-
-            var followingPosts: [UserGenericPost] = []
-            
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot {
-
-                    guard let genericPost = UserGenericPost(snapshot: snapshot) else {
-                        return
-                    }
-                    
-                    if self.following.contains(genericPost.userID) {
-                        followingPosts.append(genericPost)
-                    }
-
-                }
-                self.posts = followingPosts
-                self.shopTableView.reloadData()
-            }
-        })
-    }
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,7 +66,32 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
                 }
             }
             self.following = userFollowing
+            
+            self.postsRef.queryOrdered(byChild: "date").observe(.value, with: {
+                (snapshot) in
+                
+                var followingPosts: [UserGenericPost] = []
+                
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot {
+                        
+                        guard let genericPost = UserGenericPost(snapshot: snapshot) else {
+                            return
+                        }
+                        
+                        if self.following.contains(genericPost.userID) {
+                            followingPosts.append(genericPost)
+                        }
+                        
+                        
+                    }
+                    self.posts = followingPosts.reversed()
+                    self.shopTableView.reloadData()
+                }
+            })
+            
         })
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,11 +117,19 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return posts.count
+        if posts.count >= 1 {
+            return posts.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 550
+         if posts.count >= 1 {
+                   return 550
+               } else {
+                   return 381
+               }
 
     }
     
@@ -144,6 +150,14 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        if posts.count == 0 {
+            let cell = shopTableView.dequeueReusableCell(withIdentifier: "NoGenericPostTableViewCell", for: indexPath)
+            
+            return cell
+        } else {
+        
+        
         
         let cell = shopTableView.dequeueReusableCell(withIdentifier: "GenericPostTVC", for: indexPath) as! GenericPostTableViewCell
         
@@ -201,6 +215,7 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         return cell
+    }
     }
 }
 

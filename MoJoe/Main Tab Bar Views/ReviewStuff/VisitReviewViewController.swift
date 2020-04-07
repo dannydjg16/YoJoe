@@ -23,8 +23,9 @@ class VisitReviewViewController: UIViewController {
     var postID: String?
     let imagePicker = UIImagePickerController()
     @IBOutlet weak var shopImage: UIImageView!
-    var postIDFromFeed: String = ""
-    
+    var typeOfPicture: String = ""
+    var pictureTaken: Bool = false
+    var originalImagePicker: Bool = false
     
     //This is the date for sorting through the posts. I could change the format to put it on the post though.
     var date: String {
@@ -69,14 +70,20 @@ class VisitReviewViewController: UIViewController {
             let user = user?.uid
        
             else {
-                print("error")
+                print("Please Fill All Fields")
                 return
         }
         
         
         guard let shopImageURL = self.imageURL, let postID = self.postID, let brewType = brew.brewName.text, let roastType = roast.roastLabel.text else{
+            
+            print("Please Add Picture")
             return
+            
         }
+        
+        
+        
         
         let debut = BrewDebut(brew: brewType, roast: roastType, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: user, date: date, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0 )
         
@@ -117,7 +124,26 @@ class VisitReviewViewController: UIViewController {
     }
     
 
-   
+    override func viewDidAppear(_ animated: Bool) {
+        if UIImagePickerController.isCameraDeviceAvailable(.front), typeOfPicture == "camera" {
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            
+            if self.pictureTaken == false, self.originalImagePicker == false {
+                present(imagePicker, animated: true, completion: nil)
+                self.originalImagePicker = true
+            }
+        
+        } else {
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .photoLibrary
+            
+                present(imagePicker, animated: true, completion: nil)
+            
+        }
+    }
     
    
     
@@ -127,7 +153,6 @@ class VisitReviewViewController: UIViewController {
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
  
-        imagePicker.delegate = self
         
         addPhotoButton = UIButton(type: .custom)
         addPhotoButton.setTitleColor(#colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1), for: .normal)
@@ -137,8 +162,34 @@ class VisitReviewViewController: UIViewController {
         postID = "brewDebut" + randomString(length: 20)
         
         shopImage.contentMode = .scaleAspectFill
-    }
-    
+        
+        
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+//        imagePicker.sourceType = .photoLibrary
+//        imagePicker.allowsEditing = true
+//       // imagePicker.mediaTypes = ["public.image"]
+//        imagePicker.modalTransitionStyle = .coverVertical
+//
+//        self.present(imagePicker, animated: false, completion: nil)
+//
+//
+        
+        
+    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+           downSwipe.direction = .down
+           self.view.addGestureRecognizer(downSwipe)
+           
+       }
+       
+       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+           switch gesture.direction {
+           case .down :
+            self.view.endEditing(true)
+           default:
+               break
+           }
+       }
     
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -146,42 +197,45 @@ class VisitReviewViewController: UIViewController {
     }
     
     @objc func addPictures() {
-        
-        print("pressed")
-        
+
+
+
         let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
-        
+        let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
         let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
-            self.imagePicker.allowsEditing = false
+            self.imagePicker.allowsEditing = true
             self.imagePicker.sourceType = .camera
-            
+
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+
+        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .photoLibrary
+
             self.present(self.imagePicker, animated: true, completion: nil)
         })
         
-        let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
-            self.imagePicker.allowsEditing = false
-            self.imagePicker.sourceType = .photoLibrary
-            
-            self.present(self.imagePicker, animated: true, completion: nil)
-        })
+        pictureFinder.addAction(cancelPicture)
         pictureFinder.addAction(takeAPicture)
         pictureFinder.addAction(chooseAPicture)
-        
+
         self.present(pictureFinder, animated: true, completion: nil)
-        
+
     }
     
     override func viewWillLayoutSubviews() {
-        
-        
+
+
         addPhotoButton.layer.cornerRadius = addPhotoButton.layer.frame.size.width / 2
         addPhotoButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         addPhotoButton.layer.borderWidth = 1
         addPhotoButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addPhotoButton.clipsToBounds = true
-        
+
         addPhotoButton.setImage(#imageLiteral(resourceName: "photo-camera"), for: .normal)
-        
+
         addPhotoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([addPhotoButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),addPhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), addPhotoButton.widthAnchor.constraint(equalToConstant: 50), addPhotoButton.heightAnchor.constraint(equalToConstant: 50)])
     }
@@ -212,7 +266,7 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
         case 3:
             return 93
       case 4:
-            return 106
+            return 150
         default:
             return 60
         }
@@ -280,6 +334,8 @@ extension VisitReviewViewController: UIImagePickerControllerDelegate, UINavigati
         if let image = info[.originalImage] as? UIImage,
             let imageData = image.pngData(), let userID = user?.uid {
             shopImage.image = image
+            
+            self.pictureTaken = true
             let storageRef = Storage.storage().reference().child("brewPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")
             let metaData = StorageMetadata()
             metaData.contentType = "image/png"

@@ -24,6 +24,9 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     let ref = Database.database().reference(withPath: "ShopReview")
     let userRef = Database.database().reference(withPath: "Users")
     let postRef = Database.database().reference(withPath: "GenericPosts")
+    var typeOfPicture: String = ""
+    var pictureTaken: Bool = false
+    var originalImagePicker: Bool = false
     var date: String {
         get {
             let postDate = Date()
@@ -128,7 +131,26 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     
     
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        if UIImagePickerController.isCameraDeviceAvailable(.front), typeOfPicture == "camera" {
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            
+            if self.pictureTaken == false, self.originalImagePicker == false {
+                present(imagePicker, animated: true, completion: nil)
+                self.originalImagePicker = true
+            }
+        
+        } else {
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .photoLibrary
+            
+                present(imagePicker, animated: true, completion: nil)
+            
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -150,7 +172,20 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         
         shopImage.contentMode = .scaleAspectFill
         
-    }
+    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+           downSwipe.direction = .down
+           self.view.addGestureRecognizer(downSwipe)
+           
+       }
+       
+       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+           switch gesture.direction {
+           case .down:
+            self.view.endEditing(true)
+           default:
+               break
+           }
+       }
     
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -159,10 +194,9 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     
     @objc func addPictures() {
         
-        print("pressed")
        
         let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
-        
+        let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
             self.imagePicker.allowsEditing = false
             self.imagePicker.sourceType = .camera
@@ -176,6 +210,8 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
             
             self.present(self.imagePicker, animated: true, completion: nil)
         })
+        
+        pictureFinder.addAction(cancelPicture)
         pictureFinder.addAction(takeAPicture)
         pictureFinder.addAction(chooseAPicture)
         
@@ -303,6 +339,7 @@ extension ShopReviewSheet: UIImagePickerControllerDelegate, UINavigationControll
         if let image = info[.originalImage] as? UIImage,
             let imageData = image.pngData(), let userID = user?.uid {
             shopImage.image = image
+            self.pictureTaken = true
             //might want to move this storage into the
             let storageRef = Storage.storage().reference().child("shopPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")
             let metaData = StorageMetadata()

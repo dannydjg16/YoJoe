@@ -14,7 +14,7 @@ class SRCoffeeTypeCell: UITableViewCell {
    
     var lastSelectedItem: UICollectionViewCell?
     
-    var coffeeTypes: [String] = ["Cappucino", "Americano", "Latte", "Hot Coffee"]
+    var coffeeTypes: [String] = ["Cappucino", "Americano", "Latte", "Hot Coffee", "Cold Brew", "Iced Coffee", "Other"]
     
 
     
@@ -37,7 +37,7 @@ class SRCoffeeTypeCell: UITableViewCell {
 extension SRCoffeeTypeCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

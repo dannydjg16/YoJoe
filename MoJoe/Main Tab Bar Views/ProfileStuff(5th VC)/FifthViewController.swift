@@ -33,16 +33,48 @@ class FifthViewController: UIViewController {
     @IBOutlet weak var likesButton: UIButton!
     
     
+    @IBAction func likesButtonActoin(_ sender: Any) {
+        
+       
+
+        let likesVC: UserLikesViewController = storyboard!.instantiateViewController(withIdentifier: "UserLikesViewController") as! UserLikesViewController
+
+        likesVC.modalPresentationStyle = .popover
+
+        self.present(likesVC, animated: true, completion: nil)
+
+       
+        
+    }
+    
+    
+    
+    
     var user = Auth.auth().currentUser
     var userProfilePicture = Auth.auth().currentUser?.photoURL
     let userID = Auth.auth().currentUser?.uid
     
     var userRef = Database.database().reference(withPath: "Users")
+    var postLikeRef = Database.database().reference(withPath: "PostLikes")
     let imagePicker = UIImagePickerController()
     
     var usersPosts: [UserGenericPost] = []
     
     
+    @IBAction func makeDatabasePt(_ sender: Any) {
+
+        let postReference = self.postLikeRef.child("shopReview2gwuSvku53T91XY1T4B3")
+        
+        postReference.setValue(["likesAmount": 29])
+        
+        let postReferenceO = self.postLikeRef.child("brewDebutJbfpFo5Z9MA4DOAzsT5b")
+        
+        postReferenceO.setValue(["likesAmount": 1])
+        
+        let postReferenceQ = self.postLikeRef.child("brewDebutXVPMXCzaWW5i9A1IC3IS")
+        
+        postReferenceQ.setValue(["likesAmount": 7])
+    }
     
     
     
@@ -104,7 +136,7 @@ class FifthViewController: UIViewController {
         
         usersPicturesCollectionView.layer.borderWidth = 1
         usersPicturesCollectionView.layer.borderColor = #colorLiteral(red: 0.5216623545, green: 0.379847765, blue: 0.1959043145, alpha: 1)
-        usersPicturesCollectionView.layer.cornerRadius = usersPicturesCollectionView.frame.height / 50
+        
         
 //        profileImages.register(profilePostImage.self, forCellWithReuseIdentifier: "profilePostImage")
         
@@ -118,7 +150,9 @@ class FifthViewController: UIViewController {
                         
                         allUserPosts.append(post)
                         
-                        self.usersPosts = allUserPosts
+                        self.usersPosts = allUserPosts.sorted(by: {
+                            $0.date > $1.date
+                        })
                         self.usersPicturesCollectionView.reloadData()
                     }
                 }
@@ -291,13 +325,22 @@ extension FifthViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 176, height: 176)
+        if usersPosts.count == 0 {
+            return CGSize(width: 300, height: 300)
+        } else {
+            return CGSize(width: 176, height: 176)
+        }
+        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if usersPosts.count == 0 {
+            return 1
+        } else {
+            return usersPosts.count
+        }
         
-        return usersPosts.count
         
     }
     
@@ -307,28 +350,28 @@ extension FifthViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
-        let post = usersPosts[indexPath.row]
-        
-        if post.date == "" {
-            
+        if usersPosts.count == 0 {
             let noPostCell = usersPicturesCollectionView.dequeueReusableCell(withReuseIdentifier: "NoPostsCell", for: indexPath)
             
             return noPostCell
-            
         }
-      
+        else {
+            let post = usersPosts[indexPath.row]
+            
+            let cell = usersPicturesCollectionView.dequeueReusableCell(withReuseIdentifier: "UserPictureCell", for: indexPath) as! UserPostPictureCollectionViewCell
+            
+            
+            
+            cell.setPostImage(post: post)
+            
+            cell.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            cell.layer.borderWidth = 1
+            cell.layer.cornerRadius = cell.frame.height / 20
+            
+            return cell
+        }
         
-        let cell = usersPicturesCollectionView.dequeueReusableCell(withReuseIdentifier: "UserPictureCell", for: indexPath) as! UserPostPictureCollectionViewCell 
         
-        
-        
-        cell.setPostImage(post: post)
-        
-        cell.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = cell.frame.height / 20
-        
-        return cell
     }
     
     
