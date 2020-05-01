@@ -65,7 +65,7 @@ class ShopsFeedView: UIViewController {
     @objc func displayReviewPage(){
         
 
-        let pictureFinder = UIAlertController(title: "Create New Post", message: "Review a Shop!" , preferredStyle: .actionSheet)
+        let pictureFinder = UIAlertController(title: "Create New Post", message: "Review a Shop!" , preferredStyle: .alert)
 
         let cancelPost = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
@@ -175,6 +175,13 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         shopCell.toUserProfileTapHandler = {
             self.performSegue(withIdentifier: "toOtherUserProfile", sender: shop.user)
             
+        }
+        
+        shopCell.reportButton = {
+            let reportAlert = UIAlertController(title: "Thank You For Reporting", message: "Post Under Review", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Back", style: .cancel, handler: nil)
+            reportAlert.addAction(cancelAction)
+            self.present(reportAlert, animated: true, completion: nil)
         }
         
         

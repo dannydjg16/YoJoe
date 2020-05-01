@@ -48,7 +48,7 @@ class setUpProfileView: UIViewController {
     
     @IBAction func saveProfilePicture(_ sender: Any) {
        
-        let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .actionSheet)
+        let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .alert)
         
         let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
@@ -85,6 +85,10 @@ class setUpProfileView: UIViewController {
         let firstName = firstNameTField.text
         let lastName = lastNameTField.text
         let fullName = firstName! + " " + lastName!
+            self.firstNameOfUser = firstNameTField.text!
+            self.lastNameOfUser = lastNameTField.text!
+            
+            
        
         
             userRef.child("\(userID!)").updateChildValues(["UserFullName": fullName, "UserFirstName": firstName!, "UserLastName": lastName!])
@@ -96,7 +100,7 @@ class setUpProfileView: UIViewController {
             return
         } else {
             let userName = userNameTField.text
-            
+            self.userNameOfUser = userNameTField.text!
             userRef.child("\(userID!)").updateChildValues(["UserName": userName!])
         }
         
@@ -112,26 +116,7 @@ class setUpProfileView: UIViewController {
         }
         
     }
-    
-    @IBAction func saveAllUserSettings(_ sender: Any) {
-        if firstNameTField.text == "" || lastNameTField.text == "" || userNameTField.text == "" || userEmailTextField.text == "" {
-            
-            let emptyFieldAlert = UIAlertController(title: "One or More Fields Blank", message: nil, preferredStyle: .actionSheet)
-            let fillEmptyField = UIAlertAction(title: "Fill blank fields", style: .cancel, handler: nil)
-            emptyFieldAlert.addAction(fillEmptyField)
-            self.present(emptyFieldAlert, animated: true, completion: nil)
-            
-        } else {
-            
-            let firstName = firstNameTField.text
-            let lastName = lastNameTField.text
-            let fullName = firstName! + " " + lastName!
-            let userName = userNameTField.text
-            let email = userEmailTextField.text
-            
-             userRef.child("\(userID!)").updateChildValues(["UserFullName": fullName, "UserFirstName": firstName!, "UserLastName": lastName!, "UserName": userName!, "UserEmail": email!])
-        }
-    }
+
     
     @IBAction func cancelUser(_ sender: Any) {
         
@@ -195,14 +180,22 @@ class setUpProfileView: UIViewController {
         userEmailTextField.delegate = self
         
         
-        let profileImageURL = Auth.auth().currentUser?.photoURL
-        profilePicture.setImage(from: profileImageURL?.absoluteString)
+        self.userRef.child("\(userID!)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
+
+            guard let currentProfilePicture = dataSnapshot.value as? String else { return
+
+            }
+            
+            self.profilePicture.setImage(from: currentProfilePicture)
+        })
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePicture.layer.borderWidth = 1
         profilePicture.contentMode = .scaleAspectFill
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         userRef.child(userID!).child("UserEmail").observe(.value, with: {
             (snapshot) in
             
@@ -271,6 +264,19 @@ class setUpProfileView: UIViewController {
            self.view.addGestureRecognizer(downSwipe)
            
        }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+         self.view.frame.origin.y = -300
+       
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+        
+    }
        
        @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
            switch gesture.direction {
@@ -335,6 +341,7 @@ extension setUpProfileView: UIImagePickerControllerDelegate, UINavigationControl
                         self.profilePicture.setImage(from: url?.absoluteString)
                         self.profilePictureString = picURL.absoluteString
                     }
+                    picker.dismiss(animated: true, completion: nil)
                  })
         }}
 }

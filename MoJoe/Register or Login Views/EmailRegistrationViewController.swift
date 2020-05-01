@@ -33,6 +33,10 @@ class EmailRegistrationViewController: UIViewController {
         passwordTField.delegate = self
         duplicatePassField.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         Auth.auth().addStateDidChangeListener() {auth, user in
             
             if user != nil {
@@ -47,6 +51,7 @@ class EmailRegistrationViewController: UIViewController {
            self.view.addGestureRecognizer(downSwipe)
            
        }
+    
        
        @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
            switch gesture.direction {
@@ -56,6 +61,19 @@ class EmailRegistrationViewController: UIViewController {
                break
            }
        }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+//        if self.view.frame.origin.y == -300 {
+//            self.view.frame.origin.y = 0
+//        } else {
+//            self.view.frame.origin.y = -300
+//        }
+//        
+    }
     
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

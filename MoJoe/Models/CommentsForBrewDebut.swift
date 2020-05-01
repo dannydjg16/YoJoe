@@ -96,6 +96,12 @@ class CommentsForBrewDebut: UIViewController {
         commentTextField.delegate = self
         commentTextField.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         commentTextField.layer.borderWidth = 1
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
         postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         postViewOnCommentsPage.layer.borderWidth = 2
         brewDebutCommentsTableView.layer.borderWidth = 2
@@ -134,7 +140,7 @@ class CommentsForBrewDebut: UIViewController {
                     guard let currentUserName = dataSnapshot.value as? String else { return }
                     
                     
-                    self.userLabel.text = currentUserName + "brewed..."
+                    self.userLabel.text = currentUserName + " " + "brewed..."
                     
                     
                 })
@@ -194,6 +200,19 @@ class CommentsForBrewDebut: UIViewController {
         default:
             break
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if self.view.frame.origin.y == -300 {
+            self.view.frame.origin.y = 0
+        } else {
+            self.view.frame.origin.y = -300
+        }
+        
     }
     
     func randomString(length: Int) -> String {

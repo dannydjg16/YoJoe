@@ -47,6 +47,13 @@ class ShopReviewCell: UITableViewCell {
         
     }
     
+    var reportButton: (() -> Void)?
+    
+    @IBAction func reportButtonPressed(_ sender: Any) {
+        self.reportButton?()
+    }
+    
+    
     var postID: String = ""
     var imageURL: String = ""
     
@@ -102,7 +109,7 @@ class ShopReviewCell: UITableViewCell {
         
         
         
-    postLikesRef.child("\(review.postID)").child("likesAmount").observeSingleEvent(of: .value, with: {
+    postLikesRef.child("\(review.postID)").child("likesAmount").observe(.value, with: {
             (dataSnapshot) in
             
             guard let numberOfLikes = dataSnapshot.value as? Int else {
@@ -114,8 +121,6 @@ class ShopReviewCell: UITableViewCell {
         
         
     }
-    
-    
     
     
     

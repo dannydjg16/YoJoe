@@ -113,6 +113,11 @@ class CommentsForShopReview: UIViewController {
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
         postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -173,7 +178,7 @@ class CommentsForShopReview: UIViewController {
                         guard let currentUserName = dataSnapshot.value as? String else { return }
                         
                         
-                        self.nameLabel.text = currentUserName + "visited..."
+                        self.nameLabel.text = currentUserName + " " + "visited..."
                         
                         
                     })
@@ -234,6 +239,19 @@ class CommentsForShopReview: UIViewController {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
         downSwipe.direction = .down
         self.view.addGestureRecognizer(downSwipe)
+        
+    }
+    
+   deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if self.view.frame.origin.y == -300 {
+            self.view.frame.origin.y = 0
+        } else {
+            self.view.frame.origin.y = -300
+        }
         
     }
     

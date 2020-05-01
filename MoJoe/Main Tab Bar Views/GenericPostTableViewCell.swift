@@ -56,6 +56,12 @@ class GenericPostTableViewCell: UITableViewCell {
         
     }
     
+    var reportButton: (() -> Void)?
+    
+    @IBAction func reportButtonPressed(_ sender: Any) {
+        self.reportButton?()
+    }
+    
     
     
     

@@ -42,7 +42,7 @@ class EditProfile: UIViewController {
     @IBAction func changeProfilePic(_ sender: Any) {
         
         
-        let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .actionSheet)
+        let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .alert)
         
         let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -95,7 +95,14 @@ class EditProfile: UIViewController {
         firstNameTF.delegate = self
         lastNameTF.delegate = self
         
-        profilePicture.setImage(from: profileImageURL?.absoluteString)
+        self.userRef.child("\(userID!)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
+            
+            guard let currentProfilePicture = dataSnapshot.value as? String else { return
+                
+            }
+            
+            self.profilePicture.setImage(from: currentProfilePicture)
+        })
         profilePicture.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePicture.layer.borderWidth = 1
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
@@ -105,7 +112,9 @@ class EditProfile: UIViewController {
         
         imagePicker.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
         userRef.child(userID!).child("UserFirstName").observe(.value, with: {
@@ -136,7 +145,7 @@ class EditProfile: UIViewController {
             }
         })
         
-      
+        
         
         userRef.child(userID!).child("UserName").observe(.value, with: {
             (snapshot) in
@@ -152,7 +161,7 @@ class EditProfile: UIViewController {
             }
         })
         
-       userRef.child(userID!).child("UserEmail").observe(.value, with: {
+        userRef.child(userID!).child("UserEmail").observe(.value, with: {
             (snapshot) in
             
             guard let value = snapshot.value as? String else {
@@ -166,20 +175,33 @@ class EditProfile: UIViewController {
             }
         })
         
-    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
-           downSwipe.direction = .down
-           self.view.addGestureRecognizer(downSwipe)
-           
-       }
-       
-       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
-           switch gesture.direction {
-           case .down :
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+        downSwipe.direction = .down
+        self.view.addGestureRecognizer(downSwipe)
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if self.view.frame.origin.y == -300 {
+            self.view.frame.origin.y = 0
+        } else {
+            self.view.frame.origin.y = -300
+        }
+        
+    }
+    
+    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+        switch gesture.direction {
+        case .down :
             self.view.endEditing(true)
-           default:
-               break
-           }
-       }
+        default:
+            break
+        }
+    }
     
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -194,48 +216,48 @@ class EditProfile: UIViewController {
             
         }
     }
+    
+    
+}
+
+
+extension EditProfile: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        
+        if let image = info[.originalImage] as? UIImage,
+            let imageData = image.pngData(), let userID = user?.uid {
+            profilePicture.image = image
+            //might want to move this storage into the
+            let imageRef = Storage.storage().reference().child("ProfilePictures").child("\(userID)").child("\(randomString(length: 10))")
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/png"
+            imageRef.putData(imageData, metadata: metaData) {
+                (metaData, error) in
+                if error == nil, metaData != nil {
+                    imageRef.downloadURL { url, error in
+                        if let url = url {
+                            //change picture url accd to firebase auth
+                            self.changePictureURL(url: url)
+                            
+                            //change pricture url accd to database
+                            self.userRef.child(userID).updateChildValues(["UserPhoto": url.absoluteString])
+                            
+                            print(url)
+                            self.imageURL = url.absoluteString
+                            
+                        }
+                    }
+                }
+                else {
+                    print(error?.localizedDescription)
+                }
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
     
     
-    extension EditProfile: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            
-            if let image = info[.originalImage] as? UIImage,
-                let imageData = image.pngData(), let userID = user?.uid {
-                profilePicture.image = image
-                //might want to move this storage into the
-                let imageRef = Storage.storage().reference().child("ProfilePictures").child("\(userID)").child("\(randomString(length: 10))")
-                let metaData = StorageMetadata()
-                metaData.contentType = "image/png"
-                imageRef.putData(imageData, metadata: metaData) {
-                    (metaData, error) in
-                    if error == nil, metaData != nil {
-                        imageRef.downloadURL { url, error in
-                            if let url = url {
-                               //change picture url accd to firebase auth
-                                self.changePictureURL(url: url)
-                                
-                               //change pricture url accd to database
-                                 self.userRef.child(userID).updateChildValues(["UserPhoto": url.absoluteString])
-                                
-                                print(url)
-                                self.imageURL = url.absoluteString
-                                
-                            }
-                        }
-                    }
-                    else {
-                        print(error?.localizedDescription)
-                    }
-                }
-            }
-            picker.dismiss(animated: true, completion: nil)
-        }
-        
-        
 }
 
 extension EditProfile: UITextFieldDelegate {

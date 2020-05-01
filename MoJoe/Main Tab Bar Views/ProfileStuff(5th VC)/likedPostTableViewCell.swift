@@ -156,16 +156,7 @@ class likedPostTableViewCell: UITableViewCell {
             self.userRef.child("\(String(self.user!))").child("likedPosts").observeSingleEvent(of: .value, with: { (snapshot) in
                 var likedPostsArray : [String] = []
                 //users first like (what has to happen in cse of empty likedPosts list.)
-                if snapshot.childrenCount == 0 {
-                    self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
-                    //make the tab in firebase for that postID in the users likedposts
-                    let likedPostDatabasePoint = self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)")
-                    let genericLikedPost = self.genericReview
-                    
-                    //set the value of the^ above point to postID: date
-                    likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
-                    
-                } else {
+                 
                     for child in snapshot.children
                     {
                         
@@ -192,17 +183,8 @@ class likedPostTableViewCell: UITableViewCell {
                         }
                     }
                     
-                    if hasPostBeenLiked == false {
-                        
-                        self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
-                        
-                        let likedPostDatabasePoint = self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)")
-                        let genericLikedPost = self.genericReview
-                        
-                        //set the value of the^ above point to postID: date
-                        likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
-                    }
-                }
+                   
+                
             })
         })
     }

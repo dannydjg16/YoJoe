@@ -19,18 +19,22 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Take a great photo!</string>
+	<string>Allow access to take pictures!</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Selecting &quot;Always Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Selecting &quot;Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to upload photos from your library!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>arm64</string>
 	</array>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
@@ -45,8 +49,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -55,9 +57,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Selecting &quot;Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Selecting &quot;Always Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
 </dict>
 </plist>

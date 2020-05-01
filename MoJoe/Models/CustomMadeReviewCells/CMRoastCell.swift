@@ -36,6 +36,8 @@ class CMRoastCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.roastCollectionView.delegate = self
+        self.roastCollectionView.dataSource = self
         roastTypes = makeRoasts()
     }
 

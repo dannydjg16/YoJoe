@@ -93,7 +93,7 @@ class OtherUserProfilePage: UIViewController {
                         followingArray.append(key)
                     }
                     if followingArray.contains(self.userID) {
-                        self.followUser.layer.backgroundColor = #colorLiteral(red: 0.6991856694, green: 0.475196898, blue: 0.2837665677, alpha: 1)
+                        self.followUser.layer.backgroundColor = #colorLiteral(red: 0.8150097728, green: 0.5620573163, blue: 0.3381011486, alpha: 1)
                     } else {
                         self.followUser.layer.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9137254902, blue: 0.8196078431, alpha: 1)
                     }

@@ -30,7 +30,6 @@
 		813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */; };
 		813C126323E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C126223E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift */; };
 		813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CBD13219DE03E00661736 /* FeedPageViewController.swift */; };
-		8141909A21E1622D000BE77F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8141909921E1622D000BE77F /* GoogleService-Info.plist */; };
 		8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */; };
 		8150997D22736C5A00B81B8E /* BrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997C22736C5A00B81B8E /* BrewDebut.swift */; };
 		8150997F22739CAA00B81B8E /* BrewDebutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997E22739CAA00B81B8E /* BrewDebutCell.swift */; };
@@ -38,6 +37,7 @@
 		8154DA0223CB98AE00F61909 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8154DA0123CB98AE00F61909 /* EditProfile.swift */; };
 		815FF81823466AB3002F4D88 /* BrewDebutCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FF81723466AB3002F4D88 /* BrewDebutCommentCell.swift */; };
 		816264B8224A88E100202A69 /* BrewTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816264B7224A88E100202A69 /* BrewTypeCVCell.swift */; };
+		8166FFFD24468BF600C9705D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8166FFFC24468BF600C9705D /* GoogleService-Info.plist */; };
 		81789491222CB3C6001F8CE6 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81789490222CB3C6001F8CE6 /* EditProfileView.swift */; };
 		81789493222DB4F7001F8CE6 /* ReviewPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */; };
 		8183C87F23D78EB1009A91AC /* ViewWithBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8183C87E23D78EB1009A91AC /* ViewWithBorder.swift */; };
@@ -120,7 +120,6 @@
 		813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShopsFeedView.swift; path = ../ShopsFeedView.swift; sourceTree = "<group>"; };
 		813C126223E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		813CBD13219DE03E00661736 /* FeedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
-		8141909921E1622D000BE77F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegistrationViewController.swift; sourceTree = "<group>"; };
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
 		8150997C22736C5A00B81B8E /* BrewDebut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebut.swift; sourceTree = "<group>"; };
@@ -129,6 +128,7 @@
 		8154DA0123CB98AE00F61909 /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		815FF81723466AB3002F4D88 /* BrewDebutCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebutCommentCell.swift; sourceTree = "<group>"; };
 		816264B7224A88E100202A69 /* BrewTypeCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewTypeCVCell.swift; sourceTree = "<group>"; };
+		8166FFFC24468BF600C9705D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81789490222CB3C6001F8CE6 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		81789492222DB4F7001F8CE6 /* ReviewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPostCell.swift; sourceTree = "<group>"; };
 		8183C87E23D78EB1009A91AC /* ViewWithBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWithBorder.swift; sourceTree = "<group>"; };
@@ -291,12 +291,12 @@
 		815292D52316C7E1008AB219 /* Stuff I never use */ = {
 			isa = PBXGroup;
 			children = (
+				8166FFFC24468BF600C9705D /* GoogleService-Info.plist */,
 				81B668E3220375D300BBC025 /* ModalHelperViewController.swift */,
 				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
 				813CBD13219DE03E00661736 /* FeedPageViewController.swift */,
 				81EA171F2180FC92003388DA /* AppLoadingViewController.swift */,
 				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
-				8141909921E1622D000BE77F /* GoogleService-Info.plist */,
 			);
 			path = "Stuff I never use";
 			sourceTree = "<group>";
@@ -491,7 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E312B3B212C98E3009D7F83 /* LaunchScreen.storyboard in Resources */,
-				8141909A21E1622D000BE77F /* GoogleService-Info.plist in Resources */,
+				8166FFFD24468BF600C9705D /* GoogleService-Info.plist in Resources */,
 				7E312B38212C98E3009D7F83 /* Assets.xcassets in Resources */,
 				7E312B36212C98E3009D7F83 /* Main.storyboard in Resources */,
 			);
@@ -789,12 +789,14 @@
 				CODE_SIGN_ENTITLEMENTS = MoJoe/MoJoe.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = H9YG269PFG;
 				INFOPLIST_FILE = MoJoe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = daniel.grant.MoJoe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daniel.grant.YoJoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -808,10 +810,11 @@
 				CODE_SIGN_ENTITLEMENTS = MoJoe/MoJoe.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = H9YG269PFG;
 				INFOPLIST_FILE = MoJoe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = daniel.grant.MoJoe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daniel.grant.YoJoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

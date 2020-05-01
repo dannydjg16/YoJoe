@@ -32,21 +32,21 @@ class FifthViewController: UIViewController {
     @IBOutlet weak var followersNumberLabel: UILabel!
     @IBOutlet weak var likesButton: UIButton!
     
-    
-    @IBAction func likesButtonActoin(_ sender: Any) {
-        
-       
-
-        let likesVC: UserLikesViewController = storyboard!.instantiateViewController(withIdentifier: "UserLikesViewController") as! UserLikesViewController
-
-        likesVC.modalPresentationStyle = .popover
-
-        self.present(likesVC, animated: true, completion: nil)
-
-       
-        
-    }
-    
+//    
+//    @IBAction func likesButtonActoin(_ sender: Any) {
+//        
+//       
+//
+//        let likesVC: UserLikesViewController = storyboard!.instantiateViewController(withIdentifier: "UserLikesViewController") as! UserLikesViewController
+//
+//        likesVC.modalPresentationStyle = .popover
+//
+//        self.present(likesVC, animated: true, completion: nil)
+//
+//       
+//        
+//    }
+//    
     
     
     
@@ -60,23 +60,7 @@ class FifthViewController: UIViewController {
     
     var usersPosts: [UserGenericPost] = []
     
-    
-    @IBAction func makeDatabasePt(_ sender: Any) {
 
-        let postReference = self.postLikeRef.child("shopReview2gwuSvku53T91XY1T4B3")
-        
-        postReference.setValue(["likesAmount": 29])
-        
-        let postReferenceO = self.postLikeRef.child("brewDebutJbfpFo5Z9MA4DOAzsT5b")
-        
-        postReferenceO.setValue(["likesAmount": 1])
-        
-        let postReferenceQ = self.postLikeRef.child("brewDebutXVPMXCzaWW5i9A1IC3IS")
-        
-        postReferenceQ.setValue(["likesAmount": 7])
-    }
-    
-    
     
     
     
@@ -159,7 +143,7 @@ class FifthViewController: UIViewController {
                 
         })
         
-        self.userRef.child("\(userID)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
+        self.userRef.child("\(userID!)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
 
             guard let currentProfilePicture = dataSnapshot.value as? String else { return
 
@@ -285,6 +269,7 @@ extension FifthViewController: UIImagePickerControllerDelegate, UINavigationCont
                     self.profilePicture.setImage(from: url?.absoluteString)
 
                 }
+                picker.dismiss(animated: true, completion: nil)
                 
             })
         

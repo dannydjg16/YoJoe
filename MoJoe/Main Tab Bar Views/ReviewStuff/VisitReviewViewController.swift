@@ -18,6 +18,7 @@ class VisitReviewViewController: UIViewController {
     let ref = Database.database().reference(withPath: "BrewDebut")
     let userRef = Database.database().reference(withPath: "Users")
     let postRef = Database.database().reference(withPath: "GenericPosts")
+    let postLikesRef = Database.database().reference(withPath: "PostLikes")
     var addPhotoButton = UIButton()
     var imageURL: String?
     var postID: String?
@@ -54,8 +55,8 @@ class VisitReviewViewController: UIViewController {
         guard let brewCell: CMBCell = self.reviewTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? CMBCell,
             let roastCell: CMRoastCell = self.reviewTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? CMRoastCell,
             let beanLocationCell: CMLCell = self.reviewTableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? CMLCell,
-            let ratingCell: CMRatingCell = self.reviewTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as? CMRatingCell,
-            let reviewCell: CMRCell = self.reviewTableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? CMRCell
+            let ratingCell: CMRatingCell = self.reviewTableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? CMRatingCell,
+            let reviewCell: CMRCell = self.reviewTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as? CMRCell
             
             else {
                 print("no cell")
@@ -68,16 +69,22 @@ class VisitReviewViewController: UIViewController {
             let review = reviewCell.reviewTextField.text,
             let beanLocation = beanLocationCell.locationField.text,
             let user = user?.uid
+            
        
             else {
-                print("Please Fill All Fields")
+                warningAlert(title: "One or more fields empty", message: "Please fill remaining fields")
                 return
+        }
+        
+        if rating == "" || review == "" || beanLocation == "" {
+            warningAlert(title: "One or more fields empty", message: "Please fill remaining fields")
+            return
         }
         
         
         guard let shopImageURL = self.imageURL, let postID = self.postID, let brewType = brew.brewName.text, let roastType = roast.roastLabel.text else{
             
-            print("Please Add Picture")
+            warningAlert(title: "No picture added", message: "Please add picture to review")
             return
             
         }
@@ -91,6 +98,10 @@ class VisitReviewViewController: UIViewController {
         
         let postPictureDatabasePoint = self.userRef.child("\(user)").child("UserPosts").child("\(postID)")
     postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
+        
+        
+        let postLikesDatabasePoint = self.postLikesRef.child("\(postID)")
+        postLikesDatabasePoint.setValue(["likesAmount": 0])
         
         
         let postReference = self.postRef.child("\(postID)")
@@ -123,6 +134,14 @@ class VisitReviewViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    func warningAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Return", style: .cancel, handler: nil)
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         if UIImagePickerController.isCameraDeviceAvailable(.front), typeOfPicture == "camera" {
@@ -258,15 +277,15 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 114
+            return 117
         case 1:
             return 114
         case 2:
             return 96
         case 3:
-            return 93
+            return 140
       case 4:
-            return 150
+            return 93
         default:
             return 60
         }
@@ -300,7 +319,7 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
            
             return locationCell
         
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             let ratingCell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRatingCell") as! CMRatingCell
             
             borderSet(cell: ratingCell, color: .darkGray, width: 1)
@@ -310,7 +329,7 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
             
             
         }
-      else if  indexPath.row == 4 {
+      else if  indexPath.row == 3 {
         let cell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRCell") as! CMRCell
         
         borderSet(cell: cell, color: .darkGray, width: 1)

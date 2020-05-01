@@ -61,8 +61,8 @@ class DebutYourBrew: UIViewController {
         
 
 
-        let pictureFinder = UIAlertController(title: "Create New Post", message: "Show Us Your Creation!" , preferredStyle: .actionSheet)
-
+        let pictureFinder = UIAlertController(title: "Create New Post", message: "Show Us Your Creation!" , preferredStyle: .alert)
+ 
         let cancelPost = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
             
@@ -180,6 +180,12 @@ extension DebutYourBrew: UITableViewDelegate, UITableViewDataSource {
         debutCell.toUserProfileTapHandler = {
             self.performSegue(withIdentifier: "debutToOtherUser", sender: debut.user)
             
+        }
+        debutCell.reportButton = {
+            let reportAlert = UIAlertController(title: "Thank You For Reporting", message: "Post Under Review", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Back", style: .cancel, handler: nil)
+            reportAlert.addAction(cancelAction)
+            self.present(reportAlert, animated: true, completion: nil)
         }
         
         return debutCell

@@ -166,12 +166,12 @@ extension UserLikesViewController: UITableViewDelegate, UITableViewDataSource {
         case "sh":
             let commentsPageVC: CommentsForShopReview = self.storyboard!.instantiateViewController(withIdentifier: "CommentsForShopReview") as! CommentsForShopReview
             commentsPageVC.postIDFromFeed = postID
-            commentsPageVC.modalPresentationStyle = .popover
+            commentsPageVC.modalPresentationStyle = .pageSheet
             self.present(commentsPageVC, animated: true, completion: nil)
         case "br":
             let commentsPageVC: CommentsForBrewDebut = self.storyboard!.instantiateViewController(withIdentifier: "CommentsForBrewDebut") as! CommentsForBrewDebut
             commentsPageVC.postIDFromFeed = postID
-            commentsPageVC.modalPresentationStyle = .popover
+            commentsPageVC.modalPresentationStyle = .pageSheet
             self.present(commentsPageVC, animated: true, completion: nil)
         default:
             print("didselesctrow")

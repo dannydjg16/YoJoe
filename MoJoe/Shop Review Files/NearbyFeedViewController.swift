@@ -195,6 +195,13 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
             self.performSegue(withIdentifier: "toUserProfile", sender: post.userID)
             
         }
+            
+            cell.reportButton = {
+                let reportAlert = UIAlertController(title: "Thank You For Reporting", message: "Post Under Review", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Back", style: .cancel, handler: nil)
+                reportAlert.addAction(cancelAction)
+                self.present(reportAlert, animated: true, completion: nil)
+            }
         
         cell.commentsPageClosure = {
             let postIDPre = String(postID.prefix(2))

@@ -72,8 +72,11 @@ class BrewDebutCell: UITableViewCell {
         
     }
     
+    var reportButton: (() -> Void)?
     
-    
+    @IBAction func reportButtonPressed(_ sender: Any) {
+        self.reportButton?()
+    }
     
     
     func setDebutCell(debut: BrewDebut){
@@ -91,7 +94,7 @@ class BrewDebutCell: UITableViewCell {
         
         
         
-        self.postLikesRef.child("\(debut.postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+        self.postLikesRef.child("\(debut.postID)").child("likesAmount").observe(.value, with: { (dataSnapshot) in
             
             guard let numberOfLikes = dataSnapshot.value as? Int else {
                 return
@@ -200,7 +203,6 @@ class BrewDebutCell: UITableViewCell {
                     var hasPostBeenLiked: Bool = false
                     for post in self.likedPostsByUser {
                         if post == self.postID {
-                            print("liked already")
                             
                             self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes - 1] )
                             

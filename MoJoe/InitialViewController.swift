@@ -13,6 +13,9 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var signUpButton: RoundButton!
     @IBOutlet weak var signInButton: RoundButton!
+   
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

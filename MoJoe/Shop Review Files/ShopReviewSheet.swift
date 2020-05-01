@@ -24,6 +24,8 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     let ref = Database.database().reference(withPath: "ShopReview")
     let userRef = Database.database().reference(withPath: "Users")
     let postRef = Database.database().reference(withPath: "GenericPosts")
+    let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    
     var typeOfPicture: String = ""
     var pictureTaken: Bool = false
     var originalImagePicker: Bool = false
@@ -58,8 +60,8 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         guard
             let shopCell: SRLocationCell = shopReviewSheet.cellForRow(at: IndexPath(row: 0, section: 0)) as? SRLocationCell,
             let typeCell: SRCoffeeTypeCell = shopReviewSheet.cellForRow(at: IndexPath(row: 1, section: 0)) as? SRCoffeeTypeCell,
-            let ratingCell: SRRatingCell = shopReviewSheet.cellForRow(at: IndexPath(row: 2, section: 0)) as? SRRatingCell,
-            let orderReviewCell: SRReviewCell = shopReviewSheet.cellForRow(at: IndexPath(row: 3, section: 0)) as? SRReviewCell
+            let ratingCell: SRRatingCell = shopReviewSheet.cellForRow(at: IndexPath(row: 3, section: 0)) as? SRRatingCell,
+            let orderReviewCell: SRReviewCell = shopReviewSheet.cellForRow(at: IndexPath(row: 2, section: 0)) as? SRReviewCell
             
             else {
                 print("error with cells")
@@ -74,12 +76,18 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
             let user = user?.uid
         
             else {
-                print("error with getting info from cells")
+                warningAlert(title: "One or more fields empty", message: "Please fill remaining fields")
                 return
+        }
+        
+        if rating == "" || shop == "" || shopCell.cityTextField.text == "" || shopCell.stateTextField.text == "" || review == "" {
+            warningAlert(title: "One or more fields empty", message: "Please fill remaining fields")
+            return
         }
         
     
         guard let coffeeBoughtType = coffeeType.coffeeTypeLabel.text, let shopImageURL = self.imageURL, let postID = self.postID else {
+            warningAlert(title: "No picture added", message: "Please add picture to review")
             return
         }
         
@@ -94,6 +102,10 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         let postPictureDatabasePoint = self.userRef.child("\(user)").child("UserPosts").child("\(postID)")
         //SET post pictures shit
         postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
+        
+        let postLikesDatabasePoint = self.postLikesRef.child("\(postID)")
+        postLikesDatabasePoint.setValue(["likesAmount": 0])
+        
         
         let postReference = self.postRef.child("\(postID)")
         postReference.setValue(userGenericPost.makeDictionary())
@@ -128,7 +140,13 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     
   
     
-    
+    func warningAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Return", style: .cancel, handler: nil)
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -252,9 +270,9 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
         case 1:
             return 120
         case 2:
-            return 120
+            return 150
         case 3:
-            return 171
+            return 120
         default:
             return 60
         }
@@ -281,14 +299,14 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
             
             return coffeeTypeCell
             
-        case 2:
+        case 3:
             let ratingCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRRatingCell") as! SRRatingCell
             
             borderSet(cell: ratingCell, color: .gray, width: 1)
             
             return ratingCell
             
-        case 3:
+        case 2:
             let reviewCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRReviewCell") as! SRReviewCell
             
             borderSet(cell: reviewCell, color: .gray, width: 1)

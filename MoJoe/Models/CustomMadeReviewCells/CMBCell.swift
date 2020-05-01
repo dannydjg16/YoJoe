@@ -41,6 +41,10 @@ class CMBCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+//        brewCollectionView.delegate = self
+//        brewCollectionView.dataSource = self
         brewTypes = makeBrewTypes()
         
         
