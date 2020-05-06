@@ -322,13 +322,7 @@ extension ShopReviewSheet: UITableViewDelegate, UITableViewDataSource{
             return reviewCell
         }
         
-        //This is kinda some bullshit IDK i feel like there is probably a better way to avoid this everytime.
-        
-        let reviewCell = shopReviewSheet.dequeueReusableCell(withIdentifier: "SRReviewCell") as! SRReviewCell
-        
-        borderSet(cell: reviewCell, color: .gray, width: 1)
-        
-        return reviewCell
+       
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

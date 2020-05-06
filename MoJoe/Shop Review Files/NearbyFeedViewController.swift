@@ -12,7 +12,7 @@ import CoreLocation
 
 
 class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
-    
+   
     var posts: [UserGenericPost] = []
     
     var following: [String] = []

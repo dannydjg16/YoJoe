@@ -1,8 +1,8 @@
 {
   "images" : [
     {
+      "filename" : "IMG_6017.PNG",
       "idiom" : "universal",
-      "filename" : "IMG_6017-1.PNG",
       "scale" : "1x"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

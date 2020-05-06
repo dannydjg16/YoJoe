@@ -21,20 +21,22 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to take pictures!</string>
+	<string>Enable YoJoe to access your camera to upload pictures with the app.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Selecting &quot;Always Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
+	<string>Selecting "Always Allow" helps YoJoe to find your favorite coffee near you!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Selecting &quot;Allow&quot; helps YoJoe to find your favorite coffee near you!</string>
+	<string>Selecting "Allow" helps YoJoe to find your favorite coffee near you!</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Enable YoJoe to access your camera roll to save pictures you've taken with the app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to upload photos from your library!</string>
+	<string>Enable YoJoe to access your camera roll to upload pictures and save pictures you've taken with the app.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>arm64</string>
+		<string>armv7</string>
 	</array>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
