@@ -99,7 +99,7 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
         let userGenericPost = UserGenericPost(date: date, imageURL: shopImageURL, postID: postID, userID: user,  postExplanation: review, rating: Int(rating)!, reviewType: "ShopReview")
         
         let postPictureDatabasePoint = self.userRef.child("\(user)").child("UserPosts").child("\(postID)")
-        //SET post pictures shit
+        
         postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
         
         let postLikesDatabasePoint = self.postLikesRef.child("\(postID)")
