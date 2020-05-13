@@ -164,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				7E312B2D212C98E3009D7F83 /* MoJoe */,
+				7E312B3C212C98E3009D7F83 /* Info.plist */,
+				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
 				7E312B2C212C98E3009D7F83 /* Products */,
 				53E66F58F74544B70ED04B4E /* Pods */,
 				81ADB2C6FCFA71631D2CCC77 /* Frameworks */,
@@ -181,15 +183,13 @@
 		7E312B2D212C98E3009D7F83 /* MoJoe */ = {
 			isa = PBXGroup;
 			children = (
-				813BEFE7226953AC008AC632 /* DebutYourBrew.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
+				813BEFE7226953AC008AC632 /* DebutYourBrew.swift */,
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
-				7E312B3C212C98E3009D7F83 /* Info.plist */,
-				8141909D21E18E7B000BE77F /* MoJoe.entitlements */,
 				815292D52316C7E1008AB219 /* Stuff I never use */,
-				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
 				81BCD3DD22D2C7F5003D0640 /* Shop Review Files */,
+				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 				81F3444921FE4DEF00DF0E9F /* Register or Login Views */,
 			);
 			path = MoJoe;
@@ -212,18 +212,10 @@
 				810DC93F23145599008F055B /* First 3 Views on First Tab */,
 				7E312B4C212CA116009D7F83 /* MainTabController.swift */,
 				81BC1F192234361B00E50D21 /* ReviewStuff */,
-				815292D42316C756008AB219 /* Map Stuff(3rd VC) */,
 				81A8B5282389E27E000C8E34 /* CoffeeShopView.swift */,
 				81BC1F18223435A900E50D21 /* ProfileStuff(5th VC) */,
 			);
 			path = "Main Tab Bar Views";
-			sourceTree = "<group>";
-		};
-		815292D42316C756008AB219 /* Map Stuff(3rd VC) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Map Stuff(3rd VC)";
 			sourceTree = "<group>";
 		};
 		815292D52316C7E1008AB219 /* Stuff I never use */ = {
@@ -318,8 +310,8 @@
 				81AD0BD5242ACAB500B17C62 /* GenericPostForLikes.swift */,
 				813C126223E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift */,
 				8183C88823E36929009A91AC /* UserPostPictureCollectionViewCell.swift */,
-				8183C88623E0BF9B009A91AC /* UserGenericPost.swift */,
 				815FF81723466AB3002F4D88 /* BrewDebutCommentCell.swift */,
+				8183C88623E0BF9B009A91AC /* UserGenericPost.swift */,
 				81846AC0234646BC00296A92 /* CommentsForBrewDebut.swift */,
 				81BCD3DB22D137D4003D0640 /* Date.swift */,
 				81A4571B2278A508008DF6D4 /* SingleLabelCollectionViewCell.swift */,
