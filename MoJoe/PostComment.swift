@@ -10,28 +10,24 @@ import UIKit
 
 class PostComment: UITableViewCell {
 
-    @IBOutlet weak var commentBubble: UIView!
     @IBOutlet weak var commentLabel: UILabel!
     
-    
+
     func setCommentCell(comment: Comment) {
         commentLabel.text = comment.comment
     }
     
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
-        
     }
 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-       
     }
+    
 
 }

@@ -16,12 +16,9 @@ class UserPostPictureCollectionViewCell: UICollectionViewCell {
     
     func setPostImage(post: UserGenericPost){
         
-        
-        let ref = Storage.storage().reference(forURL: "\(post.imageURL)")
         self.userPostPicture.setImage(from: post.imageURL)
         
         userPostPicture.contentMode = .scaleAspectFill
-        
     }
     
     

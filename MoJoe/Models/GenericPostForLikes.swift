@@ -21,8 +21,6 @@ struct GenericPostForLikes {
     var reviewType: String = ""
     var likeDate: String = ""
     
-    
-    
     var key: String
     var ref: DatabaseReference?
     
@@ -40,20 +38,21 @@ struct GenericPostForLikes {
         
         self.key = key
         self.ref = nil
-        
     }
     
     init?(snapshot: DataSnapshot) {
         guard
+            
             let value = snapshot.value as? [String: AnyObject],
-        let date = value["date"] as? String,
-        let imageURL = value["imageURL"] as? String,
-        let postID = value["postID"] as? String,
-        let userID = value["userID"] as? String,
-        let postExplanation = value["postExplanation"] as? String,
-        let rating = value["rating"] as? Int,
-        let reviewType = value["reviewType"] as? String,
-        let likeDate = value["likeDate"] as? String
+            let date = value["date"] as? String,
+            let imageURL = value["imageURL"] as? String,
+            let postID = value["postID"] as? String,
+            let userID = value["userID"] as? String,
+            let postExplanation = value["postExplanation"] as? String,
+            let rating = value["rating"] as? Int,
+            let reviewType = value["reviewType"] as? String,
+            let likeDate = value["likeDate"] as? String
+            
             else {
                 return nil
         }
@@ -69,10 +68,10 @@ struct GenericPostForLikes {
         self.rating = rating
         self.reviewType = reviewType
         self.likeDate = likeDate
-        
     }
     
     func makeDictionary() -> Any {
+        
         return [
             "date": date,
             "postID": postID,

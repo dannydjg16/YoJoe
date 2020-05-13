@@ -14,16 +14,18 @@ class BrewTypeCVCell: UICollectionViewCell {
     @IBOutlet weak var brewName: UILabel!
     
     func setCell(brew: ReviewHelper) {
+        
         brewImage.image = brew.reviewImage
         brewImage.contentMode = .scaleAspectFill
         
         brewName.text = brew.reviewCategory
-        
     }
     
     override func draw(_ rect: CGRect) {
+        
         super.draw(rect)
         self.layer.cornerRadius = self.frame.size.width / 3
-        
     }
+    
+    
 }

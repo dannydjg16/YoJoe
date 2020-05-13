@@ -10,12 +10,14 @@ import UIKit
 
 class CMBCell: UITableViewCell {
 
-    @IBOutlet weak var brewCollectionView: UICollectionView!
     var lastSelectedItem: UICollectionViewCell?
     var brewTypes: [ReviewHelper] = []
     
+    @IBOutlet weak var brewCollectionView: UICollectionView!
+    
     
     func makeBrewTypes() -> [ReviewHelper] {
+        
         var tempViewArray: [ReviewHelper] = []
         
         let frenchPress = ReviewHelper(reviewImage: #imageLiteral(resourceName: "Messages Image(3128922777)"), reviewCategory: "French Press")
@@ -40,14 +42,8 @@ class CMBCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        
-//        brewCollectionView.delegate = self
-//        brewCollectionView.dataSource = self
+    
         brewTypes = makeBrewTypes()
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,12 +51,11 @@ class CMBCell: UITableViewCell {
        
     }
 
+    
 }
 
 
 extension CMBCell: UICollectionViewDataSource,  UICollectionViewDelegate {
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
@@ -82,16 +77,23 @@ extension CMBCell: UICollectionViewDataSource,  UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = brewCollectionView.cellForItem(at: indexPath) else { return }
-        cell.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
         
+        guard let cell = brewCollectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
+        cell.backgroundColor = #colorLiteral(red: 0.812450707, green: 0.7277771831, blue: 0.3973348141, alpha: 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let theLastSelectedItem = brewCollectionView.cellForItem(at: indexPath)  else { return }
+        guard let theLastSelectedItem = brewCollectionView.cellForItem(at: indexPath)  else {
+            return
+        }
+        
         theLastSelectedItem.backgroundColor = UIColor.brown
         lastSelectedItem = theLastSelectedItem
     }
+    
     
 }

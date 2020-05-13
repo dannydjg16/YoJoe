@@ -28,8 +28,8 @@ struct BrewDebut {
     let date: String
     
     
-    
     init(brew: String, roast: String, rating: Int, beanLocation: String, review: String, user: String, key: String = "", date: String, likesAmount: Int, postID: String, imageURL: String, comments: Int) {
+        
         self.brew = brew
         self.roast = roast
         self.rating = rating
@@ -43,7 +43,6 @@ struct BrewDebut {
         self.postID = postID
         self.imageURL = imageURL
         self.comments = comments
-        
     }
     
     init?(snapshot: DataSnapshot) {
@@ -76,10 +75,10 @@ struct BrewDebut {
         self.postID = postID
         self.imageURL = imageURL
         self.comments = comments
-        
     }
     
     func makeDictionary() -> Any {
+        
         return [
             "brew": brew,
             "roast": roast,

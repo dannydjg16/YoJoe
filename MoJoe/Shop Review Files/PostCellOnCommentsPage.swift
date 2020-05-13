@@ -11,39 +11,44 @@ import Firebase
 
 class PostCellOnCommentsPage: UITableViewCell {
 
+    //MARK:Constants/Vars
+    var userRef = Database.database().reference(withPath: "Users")
+    
+    
+    //MARK: Connections
     @IBOutlet weak var userPic: UIImageView!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var coffeeShopLabel: UILabel!
     @IBOutlet weak var coffeeType: UILabel!
     
-    var userRef = Database.database().reference(withPath: "Users")
     
     func setShopReviewCommentCell(review: ShopReivew) {
+        
         userLabel.text = "\(review.user) reviewed..."
         coffeeShopLabel.text = review.shop
         coffeeType.text = review.coffeeType
+        
         self.userRef.child("\(review.user)").child("UserPhoto").observeSingleEvent(of: .value, with: {(dataSnapshot) in
             
-            guard let currentProfilePicture = dataSnapshot.value as? String else { return }
+            guard let currentProfilePicture = dataSnapshot.value as? String else {
+                return
+            }
             
             self.userPic.setImage(from: currentProfilePicture)
-            
-            
         })
         
     }
     
     
-    
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+        
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
+    
 }

@@ -19,8 +19,6 @@ struct UserGenericPost {
     var rating: Int = 0
     var reviewType: String = ""
     
-    
-    
     var key: String
     var ref: DatabaseReference?
     
@@ -37,19 +35,19 @@ struct UserGenericPost {
         
         self.key = key
         self.ref = nil
-        
     }
     
     init?(snapshot: DataSnapshot) {
         guard
             let value = snapshot.value as? [String: AnyObject],
-        let date = value["date"] as? String,
-        let imageURL = value["imageURL"] as? String,
-        let postID = value["postID"] as? String,
-        let userID = value["userID"] as? String,
-        let postExplanation = value["postExplanation"] as? String,
-        let rating = value["rating"] as? Int,
-        let reviewType = value["reviewType"] as? String
+            let date = value["date"] as? String,
+            let imageURL = value["imageURL"] as? String,
+            let postID = value["postID"] as? String,
+            let userID = value["userID"] as? String,
+            let postExplanation = value["postExplanation"] as? String,
+            let rating = value["rating"] as? Int,
+            let reviewType = value["reviewType"] as? String
+            
             else {
                 return nil
         }
@@ -64,10 +62,10 @@ struct UserGenericPost {
         self.postExplanation = postExplanation
         self.rating = rating
         self.reviewType = reviewType
-        
     }
     
     func makeDictionary() -> Any {
+        
         return [
             "date": date,
             "postID": postID,

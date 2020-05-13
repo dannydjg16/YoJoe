@@ -46,11 +46,11 @@ struct ShopReivew {
         self.comments = comments
         self.city = city
         self.state = state
-     
     }
     
     
     init?(snapshot: DataSnapshot){
+       
         guard
         let value = snapshot.value as? [String: AnyObject],
         let shop = value["shop"] as? String,
@@ -66,7 +66,6 @@ struct ShopReivew {
         let city = value["city"] as? String,
         let state = value["state"] as? String
        
-            
             else { return nil }
        
         self.ref = snapshot.ref
@@ -87,6 +86,7 @@ struct ShopReivew {
     
     
     func makeDictionary() -> Any {
+        
         return [
             "shop": shop,
             "coffeeType": coffeeType,

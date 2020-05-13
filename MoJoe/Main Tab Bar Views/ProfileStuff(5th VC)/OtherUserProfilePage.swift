@@ -10,31 +10,14 @@ import UIKit
 import Firebase
 
 class OtherUserProfilePage: UIViewController {
-   
+    
+    //MARK: Constants/Vars
     var userID: String = ""
     var allFolllowing: [String] = []
     var usersPosts: [UserGenericPost] = []
-    
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profilePic: UIImageView!
-    
-    @IBOutlet weak var shopsNumberLabel: UILabel!
-    @IBOutlet weak var brewNumberLabel: UILabel!
-    @IBOutlet weak var followingNumberLabel: UILabel!
-    @IBOutlet weak var followersNumberLabel: UILabel!
-    
-    
-    
-    
-    
-    
-    @IBOutlet weak var otherUserCollectionView: UICollectionView!
-    
     var userRef = Database.database().reference(withPath: "Users")
     let user = Auth.auth().currentUser?.uid
     
-    @IBOutlet weak var followUser: UIButton!
     var date: String {
         get {
             let postDate = Date()
@@ -44,20 +27,30 @@ class OtherUserProfilePage: UIViewController {
             return stringDate
         }
     }
+    
+    //MARK: Connections
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var shopsNumberLabel: UILabel!
+    @IBOutlet weak var brewNumberLabel: UILabel!
+    @IBOutlet weak var followingNumberLabel: UILabel!
+    @IBOutlet weak var followersNumberLabel: UILabel!
+    @IBOutlet weak var otherUserCollectionView: UICollectionView!
+    @IBOutlet weak var followUser: UIButton!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         followUser.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         followUser.layer.borderWidth = 1
         followUser.addTarget(self, action: #selector(followUserAction), for: .touchUpInside)
-        
-        
         
         profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePic.layer.borderWidth = 1
         profilePic.layer.cornerRadius = profilePic.frame.height / 2
         profilePic.contentMode = .scaleAspectFill
-       
         
         userRef.child("\(userID)").child("UserPosts").observe(.value
             , with: { (snapshot) in
@@ -65,6 +58,7 @@ class OtherUserProfilePage: UIViewController {
                 var allUserPosts: [UserGenericPost] = []
                 
                 for child in snapshot.children {
+                    
                     if let snapshot = child as? DataSnapshot, let post = UserGenericPost(snapshot: snapshot) {
                         
                         allUserPosts.append(post)
@@ -78,7 +72,6 @@ class OtherUserProfilePage: UIViewController {
                 
         })
         
-
         userRef.child("\(self.user!)").child("following").observeSingleEvent(of: .value, with: {
             (snapshot) in
             var followingArray: [String] = []
@@ -92,52 +85,69 @@ class OtherUserProfilePage: UIViewController {
                     for (key, value) in value {
                         followingArray.append(key)
                     }
+                    
                     if followingArray.contains(self.userID) {
                         self.followUser.layer.backgroundColor = #colorLiteral(red: 0.8150097728, green: 0.5620573163, blue: 0.3381011486, alpha: 1)
                     } else {
                         self.followUser.layer.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9137254902, blue: 0.8196078431, alpha: 1)
                     }
+                    
                 }
             }
         })
+        
         userRef.child("\(userID)").child("UserName").observe(.value, with: { (snapshot) in
-
+            
             guard let snapshot = snapshot.value as? String else {
                 return
             }
+            
             self.nameLabel.text = snapshot
         })
+        
         userRef.child("\(userID)").child("UserPhoto").observe( .value, with: { (dataSnapshot) in
-
-            guard let currentProfilePicture = dataSnapshot.value as? String else { return
-
+            
+            guard let currentProfilePicture = dataSnapshot.value as? String else {
+                return
             }
+            
             self.profilePic.setImage(from: currentProfilePicture)
         })
         
         userRef.child("\(userID)").child("BDNumber").observe(.value, with: { (snapshot) in
+            
             guard let numberOfBD = snapshot.value as? Int else {
                 return
             }
+            
             self.brewNumberLabel.text = String(numberOfBD)
         })
+        
         userRef.child("\(userID)").child("SRNumber").observe(.value, with: { (snapshot) in
+            
             guard let numberOfSR = snapshot.value as? Int else {
                 return
             }
+            
             self.shopsNumberLabel.text = String(numberOfSR)
         })
+        
         userRef.child("\(userID)").child("followersNumber").observe(.value, with: { (snapshot) in
+            
             guard let followersNumber = snapshot.value as? Int else {
                 return
             }
+            
             let numberOfFollowers = followersNumber - 1
             self.followersNumberLabel.text = String(numberOfFollowers)
         })
+        
         userRef.child("\(userID)").child("followingNumber").observe(.value, with: { (snapshot) in
+            
             guard let followingNumber = snapshot.value as? Int else {
                 return
             }
+            
             let numberOfFollowing = followingNumber - 1
             self.followingNumberLabel.text = String(numberOfFollowing)
         })
@@ -145,7 +155,7 @@ class OtherUserProfilePage: UIViewController {
         
         
         
-       
+        
         
     }
     
@@ -156,6 +166,7 @@ class OtherUserProfilePage: UIViewController {
         } else {
             
             self.userRef.child("\(user!)").child("followingNumber").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+                
                 //check for number of following. this works right now.
                 guard let numberOfFollowing = dataSnapshot.value as? Int else {
                     return
@@ -164,6 +175,7 @@ class OtherUserProfilePage: UIViewController {
                 //check through users following and put them on an array
                 self.userRef.child("\(self.user!)").child("following").observeSingleEvent(of: .value, with: {
                     (snapshot) in
+                    
                     var followingArray: [String] = []
                     
                     for child in snapshot.children {
@@ -220,7 +232,9 @@ class OtherUserProfilePage: UIViewController {
                         
                         //User who gets followed
                         let newUserFollowedLocation =  self.userRef.child("\(self.userID)").child("followers").child("\(self.user!)")
+                        
                         newUserFollowedLocation.setValue(["\(self.user)": "\(self.date)"])
+                        
                         self.userRef.child("\(self.userID)").child("followersNumber").observeSingleEvent(of: .value, with: {
                             (snapshotNumber) in
                             
@@ -231,7 +245,6 @@ class OtherUserProfilePage: UIViewController {
                             self.userRef.child("\(self.userID)").updateChildValues(["followersNumber": numberofFollowers + 1])
                             
                         })
-                        
                         hasUserBeenFollowed = true
                     }
                 })
@@ -245,16 +258,18 @@ class OtherUserProfilePage: UIViewController {
 
 
 extension OtherUserProfilePage: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-   
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       
         if usersPosts.count == 0 {
             return 1
         } else {
             return usersPosts.count
         }
-    
+        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -264,15 +279,18 @@ extension OtherUserProfilePage: UICollectionViewDelegate, UICollectionViewDataSo
             return CGSize(width: 176, height: 176)
         }
         
-        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if usersPosts.count == 0 {
+            
             let cell = otherUserCollectionView.dequeueReusableCell(withReuseIdentifier: "NoPostsCVC", for: indexPath)
+            
             return cell
         }
+        
         let post = usersPosts[indexPath.row]
         
         

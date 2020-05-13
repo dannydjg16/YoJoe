@@ -10,10 +10,13 @@ import UIKit
 
 class OtherUserImageCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var postPhoto: UIImageView!
     var postID: String = ""
     
+    @IBOutlet weak var postPhoto: UIImageView!
+    
+    
     func setCell(post: UserGenericPost) {
+        
         postPhoto.setImage(from: post.imageURL)
         postID = post.postID
         

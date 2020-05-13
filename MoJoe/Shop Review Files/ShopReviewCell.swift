@@ -11,56 +11,20 @@ import Firebase
 
 class ShopReviewCell: UITableViewCell {
     
-    @IBOutlet weak var userVisitedButton: UIButton!
-    
-    
-    @IBOutlet weak var coffeeShopLabel: UILabel!
-    
-    @IBOutlet weak var cityLabel: UILabel!
-    
-    @IBOutlet weak var stateLabel: UILabel!
-    
-    
-    @IBOutlet weak var coffeeTypeLabel: UILabel!
-    
-    
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var timeSinceLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likesLabel: UILabel!
-    
-    @IBOutlet weak var commentsButton: UIButton!
-    
-    var tapHandler: (() -> Void)?
-    
-    @IBAction func toCommentsPage(_ sender: Any) {
-        
-        self.tapHandler?()
-    }
-    
-    
-    var toUserProfileTapHandler: (() -> Void)?
-    
-    @IBAction func userVisitedButton(_ sender: Any) {
-        
-        self.toUserProfileTapHandler?()
-        
-    }
-    
-    var reportButton: (() -> Void)?
-    
-    @IBAction func reportButtonPressed(_ sender: Any) {
-        self.reportButton?()
-    }
-    
-    
+    //MARK: Constants/Vars
     var postID: String = ""
     var imageURL: String = ""
-    
-    
-    
+    var likedPostsByUser: [String] = []
     var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
     
+    var tapHandler: (() -> Void)?
+    var toUserProfileTapHandler: (() -> Void)?
+    var reportButton: (() -> Void)?
+    
+    let ref = Database.database().reference(withPath: "ShopReview")
+    let userRef = Database.database().reference(withPath: "Users")
+    let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    let user = Auth.auth().currentUser
     
     var date: String {
         get {
@@ -71,45 +35,55 @@ class ShopReviewCell: UITableViewCell {
             return stringDate
         }
     }
+
     
-    var likedPostsByUser: [String] = []
-    
-    @IBOutlet weak var postActivityBar: UIView!
-    
-    
-    
+    //MARK: Connections
+    @IBOutlet weak var userVisitedButton: UIButton!
+    @IBOutlet weak var coffeeShopLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var coffeeTypeLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var timeSinceLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var shopPicture: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var postActivityBar: UIView!
     
+    @IBAction func toCommentsPage(_ sender: Any) {
+        
+        self.tapHandler?()
+    }
     
+    @IBAction func userVisitedButton(_ sender: Any) {
+        
+        self.toUserProfileTapHandler?()
+    }
     
+    @IBAction func reportButtonPressed(_ sender: Any) {
+        
+        self.reportButton?()
+    }
     
-    let ref = Database.database().reference(withPath: "ShopReview")
-    let userRef = Database.database().reference(withPath: "Users")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    let user = Auth.auth().currentUser
     
     
     func setShopReviewCell(review: ShopReivew) {
-        
         
         coffeeShopLabel.text = review.shop
         cityLabel.text = review.city + ","
         stateLabel.text = review.state
         coffeeTypeLabel.text = review.coffeeType
-        
-        //orderLabel.text = review.review
         ratingLabel.text = "\(String(review.rating)) / 10"
-        //shopPicture.image = #imageLiteral(resourceName: "coffeeCup")
-        likesLabel.text = "0"//review.likesAmount or whatever i decide to call it.
+        likesLabel.text = "0"
         postID = review.postID
+        
         genericReview = GenericPostForLikes(date: review.date, imageURL: review.imageURL, postID: review.postID, userID: review.user, postExplanation: review.review, rating: review.rating, reviewType: "shopReview", likeDate: date)
         
         shopPicture.setImage(from: review.imageURL)
         
-        
-        
-    postLikesRef.child("\(review.postID)").child("likesAmount").observe(.value, with: {
+        postLikesRef.child("\(review.postID)").child("likesAmount").observe(.value, with: {
             (dataSnapshot) in
             
             guard let numberOfLikes = dataSnapshot.value as? Int else {
@@ -119,34 +93,27 @@ class ShopReviewCell: UITableViewCell {
             self.likesLabel.text = String(numberOfLikes)
         })
         
-        
     }
-    
-    
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.profilePic.layer.cornerRadius = profilePic.frame.height / 2
         
+        profilePic.layer.cornerRadius = profilePic.frame.height / 2
         profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePic.layer.borderWidth = 0.5
         profilePic.contentMode = .scaleAspectFill
         
-        
         shopPicture.contentMode = .scaleAspectFill
-        
         
         likeButton.setImage(#imageLiteral(resourceName: "upload"), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         commentsButton.setImage(#imageLiteral(resourceName: "note"), for: .normal)
         
-        
-        
-        
         //set image stuff of like button based on wehther it is liked or not
         self.userRef.child("\(String(self.user!.uid))").child("likedPosts").observe(.value, with: { (snapshot) in
+           
             var likedPostsArray : [String] = []
             
             for child in snapshot.children
@@ -157,30 +124,28 @@ class ShopReviewCell: UITableViewCell {
                     let valueDictionary = snapshot.value as? [String: AnyObject]
                     
                 {
-                    
                     likedPostsArray.append(valueDictionary["postID"] as! String)
-                    
                 }
-                //set the glabal var likedPostsByUser equal to the local array likedPostsArray
+        
                 self.likedPostsByUser = likedPostsArray
             }
             
             if likedPostsArray.contains(self.postID) {
+                
                 self.likeButton.layer.borderWidth = 1
                 self.likeButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                
             } else {
+                
                 self.likeButton.layer.borderWidth = 0
             }
-            
-            
-            
         })
         
     }
     
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         
     }
     
@@ -194,16 +159,17 @@ class ShopReviewCell: UITableViewCell {
             }
             //check through the users liked posts and put them in an array
             self.userRef.child("\(String(self.user!.uid))").child("likedPosts").observeSingleEvent(of: .value, with: { (snapshot) in
+                
                 var likedPostsArray : [String] = []
                 //users first like (what has to happen in cse of empty likedPosts list.)
                 if snapshot.childrenCount == 0 {
-                    self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
-                    //make the tab in firebase for that postID in the users likedposts
+                    
+                    self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1])
+                    
+                    
                     let likedPostDatabasePoint = self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)")
-                    
-                    //set the value of the^ above point to postID: date
-                    
                     let genericLikedPost = self.genericReview
+                    
                     likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
                     
                 } else {
@@ -222,8 +188,11 @@ class ShopReviewCell: UITableViewCell {
                         //set the glabal var likedPostsByUser equal to the local array likedPostsArray
                         self.likedPostsByUser = likedPostsArray
                     }
+                    
                     var hasPostBeenLiked: Bool = false
+                    
                     for post in self.likedPostsByUser {
+                        
                         if post == self.postID {
                             
                             self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes - 1] )
@@ -231,6 +200,7 @@ class ShopReviewCell: UITableViewCell {
                             self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)").removeValue()
                             
                             hasPostBeenLiked = true
+                            
                             continue
                         }
                     }
@@ -239,11 +209,9 @@ class ShopReviewCell: UITableViewCell {
                         
                         self.postLikesRef.child("\(self.postID)").updateChildValues(["likesAmount": numberOfLikes + 1] )
                         
-                        //make the tab in firebase for that postID in the users likedposts
                         let likedPostDatabasePoint = self.userRef.child("\(String(self.user!.uid))").child("likedPosts").child("\(self.postID)")
-                        
-                        //set the value of the^ above point to postID: date
                         let genericLikedPost = self.genericReview
+                        
                         likedPostDatabasePoint.setValue(genericLikedPost.makeDictionary())
                     }
                 }
@@ -252,8 +220,4 @@ class ShopReviewCell: UITableViewCell {
     }
     
     
-    
-    @objc func repostButtonTapped(sender: UIButton) {
-        print("repostButtonTapped")
-    }
 }

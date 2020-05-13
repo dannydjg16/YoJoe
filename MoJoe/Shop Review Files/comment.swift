@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 struct Comment {
+    
     var comment: String
     var date: String
     var likesAmount: Int = 0
@@ -18,6 +19,7 @@ struct Comment {
     var ref: DatabaseReference?
     
     init(comment: String, date: String, likesAmount: Int, key: String = "") {
+       
         self.comment = comment
         self.date = date
         self.likesAmount = likesAmount
@@ -44,6 +46,7 @@ struct Comment {
     }
     
     func makeDictionary() -> Any {
+        
         return ["comment": comment,
                 "date": date,
                 "likesAmount": likesAmount]

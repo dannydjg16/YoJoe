@@ -10,11 +10,12 @@ import UIKit
 
 class SRRatingCell: UITableViewCell {
 
+    
     @IBOutlet weak var ratingSlider: UISlider!
     @IBOutlet weak var ratingLabel: UILabel!
   
-    
     @IBAction func setRating(_ sender: UISlider) {
+        
         let coffeeRating = Int(sender.value)
         
         ratingLabel.text = "\(coffeeRating)"
@@ -23,13 +24,14 @@ class SRRatingCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+  
     }
 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
+    
 }

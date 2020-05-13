@@ -12,11 +12,11 @@ import Firebase
 
 class CommentsForShopReview: UIViewController {
     
+    //MARK: Constants/Vars
     let ref = Database.database().reference(withPath: "ShopReview")
     let commentRef = Database.database().reference(withPath: "Comments")
     var userRef = Database.database().reference(withPath: "Users")
     var postIDFromFeed: String = ""
-    
     var allComments: [Comment] = []
     
     var date: String {
@@ -29,31 +29,27 @@ class CommentsForShopReview: UIViewController {
         }
     }
     
-    //MARK: Post Vars
+    
+    
+    //MARK: Connections
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var timeSinceLabel: UILabel!
-    
-    
     @IBOutlet weak var shopLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var coffeeTypeLabel: UILabel!
     @IBOutlet weak var postExplanation: UILabel!
-    
     @IBOutlet weak var postViewOnCommentsPage: UIView!
-    
-    
-    
     @IBOutlet weak var commentsTableView: UITableView!
-    
     @IBOutlet weak var commentTextField: UITextField!
+    
     @IBAction func hideKeyboard(_ sender: Any) {
         self.commentTextField.resignFirstResponder()
     }
     
     @IBAction func addComment(_ sender: Any) {
+        
         let stringIndexOfPostID = postIDFromFeed.prefix(30)
         let stringPostID = String(stringIndexOfPostID)
         
@@ -64,6 +60,7 @@ class CommentsForShopReview: UIViewController {
         if commentTextField.text == "" {
             return
         } else {
+            
             let postComment = Comment(comment: comment, date: date, likesAmount: 0)
             
             let commentLocation = commentRef.child("ShopReviewComments").child("\(stringPostID)").child("\(randomString(length: 20))")
@@ -72,27 +69,22 @@ class CommentsForShopReview: UIViewController {
             
             
             self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+                
                 guard let numberOfComments = snapshot.value as? Int else {
                     return
                 }
                 self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
                     (snapshot) in
+                    
                     if let shopReview = ShopReivew(snapshot: snapshot) {
+                        
                         self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
                     }
                 })
-                
             })
-            
             commentTextField.text = ""
         }
     }
-    
-    
-    
-    
-    
-    
     
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -109,6 +101,8 @@ class CommentsForShopReview: UIViewController {
         
         postImageView.contentMode = .scaleAspectFill
         
+        commentsTableView.delegate = self
+        commentsTableView.dataSource = self
         commentTextField.delegate = self
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -117,12 +111,9 @@ class CommentsForShopReview: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        
-        commentsTableView.delegate = self
-        commentsTableView.dataSource = self
         postViewOnCommentsPage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         postViewOnCommentsPage.layer.borderWidth = 2
-        // postExplanation.text = "fjkhsadlkfj dslfjdsfklsjdfl;asdjl;dsaf sldk f;lsd f;af s;alkf s; fsl;kf sl;f sldkf jsl;fjdsal;fjsl;adfjdsl;kjfsdajs;alfj;salfj;sa"
+        
         commentsTableView.layer.borderWidth = 2
         commentsTableView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
@@ -131,31 +122,26 @@ class CommentsForShopReview: UIViewController {
         profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePic.contentMode = .scaleAspectFill
         
-        
         //Based on if the cell or comment button is pressed, what the first responder is when view loads.
-        
         let endOfPostID = postIDFromFeed.suffix(10)
         let endString = String(endOfPostID)
         if endString == "addComment" {
             commentTextField.becomeFirstResponder()
         }
         
-        
         //MARK: Making the Post View
         let stringIndexOfPostID = postIDFromFeed.prefix(30)
         let stringPostID = String(stringIndexOfPostID)
-        
         
         self.ref.child("\(stringPostID)").observe(.value, with: { (dataSnapshot) in
             
             guard let postInfo = dataSnapshot as? DataSnapshot else {
                 return
             }
+            
             if let shopReview = ShopReivew(snapshot: postInfo){
                 
                 //MARK: set the post view on comments page
-                
-                
                 self.postImageView.setImage(from: shopReview.imageURL)
                 
                 self.postExplanation.text = shopReview.review
@@ -165,88 +151,61 @@ class CommentsForShopReview: UIViewController {
                 
                 self.userRef.child("\(shopReview.user)").child("UserPhoto").observeSingleEvent(of: .value, with: { (dataSnapshot) in
                     
-                    
-                    
-                    
                     guard let currentProfilePicture = dataSnapshot.value as? String else { return }
                     //Actually setting the "views" variables
                     self.profilePic.setImage(from: currentProfilePicture)
-                    
                     
                     self.userRef.child(shopReview.user).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
                         
                         guard let currentUserName = dataSnapshot.value as? String else { return }
                         
-                        
                         self.nameLabel.text = currentUserName + " " + "visited..."
-                        
-                        
                     })
-                    
-                    
-                    
                     
                     self.shopLabel.text = shopReview.shop
                     self.ratingLabel.text = String(shopReview.rating) + "/10"
                     self.coffeeTypeLabel.text = shopReview.coffeeType
-                    
                 })
-                
-                
-                
                 if shopReview.comments == 0 {
                     
                 } else {
+                    
                     self.commentRef.child("ShopReviewComments").child("\(shopReview.postID)").observe(.value, with: {
                         (snapshot) in
+                        
                         var newComments: [Comment] = []
                         
                         for child in snapshot.children {
+                            
                             if let snapshot = child as? DataSnapshot, let comment = Comment(snapshot: snapshot) {
+                                
                                 newComments.append(comment)
                                 
                                 self.allComments = newComments.sorted(by: {
                                     $0.date > $1.date
                                 })
+                                
                                 self.commentsTableView.reloadData()
                             }
-                        
-                            
                         }
                     })
-                    
-                    
                 }
-                
-                //self.profilePic.image = shopre
-                //                cell.setShopReviewCommentCell(review: shopReview)
-                //Now i need to do this^ but for a view. i still think Im gonna make a function but idk if id need to make a class first, that is where setshopreviewcell is from. 
             }
-            
         })
-        
-        
-        
-        
-        
-        
-//        let bar = UIToolbar()
-//        let reset = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: nil)
-//        bar.items = [reset]
-//        bar.sizeToFit()
-//        commentTextField.inputAccessoryView = bar
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
         downSwipe.direction = .down
         self.view.addGestureRecognizer(downSwipe)
-        
     }
     
-   deinit {
+    
+    deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    
     @objc func keyboardNotification(notification: NSNotification) {
+        
         if self.view.frame.origin.y == -300 {
             self.view.frame.origin.y = 0
         } else {
@@ -255,7 +214,8 @@ class CommentsForShopReview: UIViewController {
         
     }
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+    @objc func swipeHandler(gesture: UISwipeGestureRecognizer) {
+        
         switch gesture.direction {
         case .down :
             self.view.endEditing(true)
@@ -267,15 +227,6 @@ class CommentsForShopReview: UIViewController {
     @objc func tapHandler(sender: UITapGestureRecognizer){
         
         
-       // let image = sender.view as! UIImageView
-        
-       // postImageView.contentMode = .scaleAspectFill
-        
-        
-       // image.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 375, height: 740))
-            
-            //self.view.frame
-        
         
     }
     
@@ -283,11 +234,13 @@ class CommentsForShopReview: UIViewController {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
+    
+    
 }
 
 
 extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
-  
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -296,10 +249,11 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
         } else {
             return allComments.count
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if allComments.count == 0 {
             return 193
         } else  {
@@ -330,50 +284,53 @@ extension CommentsForShopReview: UITableViewDelegate, UITableViewDataSource {
             cell.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             cell.layer.cornerRadius = cell.frame.height / 14
             
-            
-            
             return cell
-            
         }
     }
+    
     
 }
 
 extension CommentsForShopReview: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         let stringIndexOfPostID = postIDFromFeed.prefix(30)
-              let stringPostID = String(stringIndexOfPostID)
-              
-              guard let comment = commentTextField.text else {
-                  return true
-              }
-              
-              if commentTextField.text == "" {
-                  return true
-              } else {
-                  let postComment = Comment(comment: comment, date: date, likesAmount: 0)
-                  
-                  let commentLocation = commentRef.child("ShopReviewComments").child("\(stringPostID)").child("\(randomString(length: 20))")
-                  
-                  commentLocation.setValue(postComment.makeDictionary())
-                  
-                  
-                  self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
-                      guard let numberOfComments = snapshot.value as? Int else {
-                          return
-                      }
-                      self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
-                          (snapshot) in
-                          if let shopReview = ShopReivew(snapshot: snapshot) {
-                              self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
-                          }
-                      })
-                      
-                  })
-                  
-                  commentTextField.text = ""
-              }
+        let stringPostID = String(stringIndexOfPostID)
+        
+        guard let comment = commentTextField.text else {
+            return true
+        }
+        
+        if commentTextField.text == "" {
+            return true
+        } else {
+            
+            let postComment = Comment(comment: comment, date: date, likesAmount: 0)
+            
+            let commentLocation = commentRef.child("ShopReviewComments").child("\(stringPostID)").child("\(randomString(length: 20))")
+            commentLocation.setValue(postComment.makeDictionary())
+            
+            self.ref.child("\(stringPostID)").child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let numberOfComments = snapshot.value as? Int else {
+                    return
+                }
+                
+                self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
+                    (snapshot) in
+                    
+                    if let shopReview = ShopReivew(snapshot: snapshot) {
+                        self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
+                    }
+                })
+            })
+            commentTextField.text = ""
+        }
+        
         textField.resignFirstResponder()
         return true
     }
+    
+    
 }

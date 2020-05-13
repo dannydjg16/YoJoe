@@ -14,8 +14,8 @@ class RoastTypeCVCell: UICollectionViewCell {
     @IBOutlet weak var roastLabel: UILabel!
     
     
-    
     func setCell(roast: ReviewHelper) {
+        
         roastImage.image = roast.reviewImage
         roastImage.contentMode = .scaleAspectFill
         
@@ -24,6 +24,7 @@ class RoastTypeCVCell: UICollectionViewCell {
     
     
     override func draw(_ rect: CGRect) {
+        
         super.draw(rect)
         self.layer.cornerRadius = self.frame.width / 2.5
     }

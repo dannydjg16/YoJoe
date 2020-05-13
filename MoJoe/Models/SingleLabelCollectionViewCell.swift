@@ -13,9 +13,9 @@ class SingleLabelCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var coffeeTypeLabel: UILabel!
     
     override func draw(_ rect: CGRect) {
+        
         super.draw(rect)
         self.layer.cornerRadius = self.frame.size.width / 15
-
     }
     
 }

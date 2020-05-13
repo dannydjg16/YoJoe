@@ -10,6 +10,7 @@ import Foundation
 extension Date {
     
     func timeSinceBrewDebut(debut: BrewDebut) -> String {
+        
         let dateOfPostString = debut.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
@@ -60,6 +61,7 @@ extension Date {
     }
     
     func timeSinceShopReview(theShop: ShopReivew) -> String {
+        
         let dateOfPostString = theShop.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
@@ -111,6 +113,7 @@ extension Date {
     
     
     func timeSincePost(post: UserGenericPost) -> String {
+        
         let dateOfPostString = post.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
@@ -162,6 +165,7 @@ extension Date {
     
     
     func timeSinceLikedGenericPost(post: GenericPostForLikes) -> String {
+        
         let dateOfPostString = post.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
@@ -212,6 +216,7 @@ extension Date {
     }
     
     func timeSincePostFromString(postDate: String) -> String {
+        
         let dateOfPostString = postDate
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"

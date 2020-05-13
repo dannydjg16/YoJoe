@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
-//THESE are the cells on the reviewhelper screen, just to compile the different aspects of the review.
+
+
 class ReviewHelper {
    
     var reviewImage: UIImage
     var reviewCategory: String
     
     init(reviewImage: UIImage, reviewCategory: String) {
+        
         self.reviewImage = reviewImage
         self.reviewCategory = reviewCategory
     }

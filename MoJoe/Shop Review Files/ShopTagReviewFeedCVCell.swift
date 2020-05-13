@@ -10,12 +10,14 @@ import UIKit
 
 class ShopTagReviewFeedCVCell: UICollectionViewCell {
     
+    //MARK: Connections
     @IBOutlet weak var shopTagLabel: UILabel!
     
     
     override func draw(_ rect: CGRect) {
+        
         super.draw(rect)
         self.layer.cornerRadius = self.frame.size.width / 15
-        
     }
+    
 }

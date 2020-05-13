@@ -14,6 +14,7 @@ import Firebase
 
 class VisitReviewViewController: UIViewController {
     
+    //MARK: Constants/Variables
     var user = Auth.auth().currentUser
     let ref = Database.database().reference(withPath: "BrewDebut")
     let userRef = Database.database().reference(withPath: "Users")
@@ -23,12 +24,10 @@ class VisitReviewViewController: UIViewController {
     var imageURL: String?
     var postID: String?
     let imagePicker = UIImagePickerController()
-    @IBOutlet weak var shopImage: UIImageView!
     var typeOfPicture: String = ""
     var pictureTaken: Bool = false
     var originalImagePicker: Bool = false
     
-    //This is the date for sorting through the posts. I could change the format to put it on the post though.
     var date: String {
         get {
             let postDate = Date()
@@ -40,14 +39,14 @@ class VisitReviewViewController: UIViewController {
     }
     
     
-    
-    
+    //MARK: Connections
+    @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var reviewTableView: UITableView!
-
     @IBAction func backButton(_ sender: Any) {
+        
         self.dismiss(animated: true, completion: nil)
+        
     }
-    
     
     
     @IBAction private func postButtonPress(_ sender: Any) {
@@ -62,7 +61,7 @@ class VisitReviewViewController: UIViewController {
                 print("no cell")
                 return
         }
-       
+        
         guard let brew = brewCell.lastSelectedItem as? BrewTypeCVCell,
             let roast = roastCell.lastSelectedItem as? RoastTypeCVCell,
             let rating = ratingCell.ratingLabel.text,
@@ -70,34 +69,32 @@ class VisitReviewViewController: UIViewController {
             let beanLocation = beanLocationCell.locationField.text,
             let user = user?.uid
             
-       
+            
             else {
+                
                 warningAlert(title: "One or more fields empty", message: "Please fill remaining fields")
                 return
         }
         
         if rating == "" || review == "" || beanLocation == "" {
+            
             warningAlert(title: "One or more fields empty", message: "Please fill remaining fields")
             return
         }
         
         
-        guard let shopImageURL = self.imageURL, let postID = self.postID, let brewType = brew.brewName.text, let roastType = roast.roastLabel.text else{
+        guard let shopImageURL = self.imageURL, let postID = self.postID, let brewType = brew.brewName.text, let roastType = roast.roastLabel.text else {
             
             warningAlert(title: "No picture added", message: "Please add picture to review")
             return
-            
         }
-        
-        
-        
-        
-        let debut = BrewDebut(brew: brewType, roast: roastType, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: user, date: date, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0 )
+        //MARK: Database Entries
+        let debut = BrewDebut(brew: brewType, roast: roastType, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: user, date: date, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0)
         
         let userGenericPost = UserGenericPost(date: date, imageURL: shopImageURL, postID: postID, userID: user, postExplanation: review, rating: Int(rating)!, reviewType: "BrewDebut")
         
         let postPictureDatabasePoint = self.userRef.child("\(user)").child("UserPosts").child("\(postID)")
-    postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
+        postPictureDatabasePoint.setValue(userGenericPost.makeDictionary())
         
         
         let postLikesDatabasePoint = self.postLikesRef.child("\(postID)")
@@ -111,15 +108,15 @@ class VisitReviewViewController: UIViewController {
         let brewDebutRef = self.ref.child(postID)
         brewDebutRef.setValue(debut.makeDictionary())
         
-       
+        
         
         self.userRef.child("\(user)").child("BDNumber").observeSingleEvent(of: .value, with: { (snapshot) in
             
             guard let numberOfBrewDebuts = snapshot.value as? Int else {
+                
                 print("not a number or somthing else is wrong")
                 return
             }
-            
             
             self.userRef.child("\(user)").updateChildValues(["BDNumber": numberOfBrewDebuts + 1])
             
@@ -128,138 +125,132 @@ class VisitReviewViewController: UIViewController {
             userPostDatabasePoint.setValue(["\(postID)": self.date])
             
         })
-        
-        
-        
+
         self.dismiss(animated: true, completion: nil)
     }
     
     
     func warningAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Return", style: .cancel, handler: nil)
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-
+               
+               let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+               let action = UIAlertAction(title: "Return", style: .cancel, handler: nil)
+               alert.addAction(action)
+               
+               self.present(alert, animated: true, completion: nil)
+           }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
+        
         if UIImagePickerController.isCameraDeviceAvailable(.front), typeOfPicture == "camera" {
+            
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .camera
             
             if self.pictureTaken == false, self.originalImagePicker == false {
+                
                 present(imagePicker, animated: true, completion: nil)
                 self.originalImagePicker = true
             }
-        
+            
         } else {
+            
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .photoLibrary
             
-                present(imagePicker, animated: true, completion: nil)
-            
+            present(imagePicker, animated: true, completion: nil)
         }
     }
     
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
- 
+        
         
         addPhotoButton = UIButton(type: .custom)
         addPhotoButton.setTitleColor(#colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1), for: .normal)
         addPhotoButton.addTarget(self, action: #selector(addPictures), for: .touchUpInside)
         view.addSubview(addPhotoButton)
-    
+        
         postID = "brewDebut" + randomString(length: 20)
         
         shopImage.contentMode = .scaleAspectFill
         
         
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-//        imagePicker.sourceType = .photoLibrary
-//        imagePicker.allowsEditing = true
-//       // imagePicker.mediaTypes = ["public.image"]
-//        imagePicker.modalTransitionStyle = .coverVertical
-//
-//        self.present(imagePicker, animated: false, completion: nil)
-//
-//
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+        downSwipe.direction = .down
+        self.view.addGestureRecognizer(downSwipe)
+    }
+    
+    
+    @objc func swipeHandler(gesture: UISwipeGestureRecognizer) {
         
-        
-    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
-           downSwipe.direction = .down
-           self.view.addGestureRecognizer(downSwipe)
-           
-       }
-       
-       @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
-           switch gesture.direction {
-           case .down :
+        switch gesture.direction {
+        case .down :
             self.view.endEditing(true)
-           default:
-               break
-           }
-       }
+        default:
+            break
+        }
+    }
+    
     
     func randomString(length: Int) -> String {
+        
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
+    
+    
     @objc func addPictures() {
-
-
-
+        
         let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
         let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
+        
         let takeAPicture = UIAlertAction(title: "Take a Picture", style: .default, handler: { action in
+            
             self.imagePicker.allowsEditing = true
             self.imagePicker.sourceType = .camera
-
+            
             self.present(self.imagePicker, animated: true, completion: nil)
         })
-
+        
         let chooseAPicture = UIAlertAction(title: "Choose Picture ", style: .default, handler: { action in
+            
             self.imagePicker.allowsEditing = true
             self.imagePicker.sourceType = .photoLibrary
-
+            
             self.present(self.imagePicker, animated: true, completion: nil)
         })
         
         pictureFinder.addAction(cancelPicture)
         pictureFinder.addAction(takeAPicture)
         pictureFinder.addAction(chooseAPicture)
-
+        
         self.present(pictureFinder, animated: true, completion: nil)
-
     }
     
     override func viewWillLayoutSubviews() {
-
-
+    
         addPhotoButton.layer.cornerRadius = addPhotoButton.layer.frame.size.width / 2
         addPhotoButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         addPhotoButton.layer.borderWidth = 1
         addPhotoButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addPhotoButton.clipsToBounds = true
-
+        
         addPhotoButton.setImage(#imageLiteral(resourceName: "photo-camera"), for: .normal)
-
+        
         addPhotoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([addPhotoButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),addPhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100.0), addPhotoButton.widthAnchor.constraint(equalToConstant: 50), addPhotoButton.heightAnchor.constraint(equalToConstant: 50)])
     }
-
-
+    
+    
 }
 
 extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource {
@@ -269,12 +260,13 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
         cell.layer.borderWidth = CGFloat(width)
     }
     
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         switch indexPath.row {
         case 0:
             return 117
@@ -284,7 +276,7 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
             return 96
         case 3:
             return 140
-      case 4:
+        case 4:
             return 93
         default:
             return 60
@@ -294,13 +286,11 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        //THIS WHOLE THING BELOW CAN BE AN ENUM WHICH MIGHT LOOK A LITTLE CLEANER
-      if indexPath.row == 0 {
+        if indexPath.row == 0 {
             let brewCell = reviewTableView.dequeueReusableCell(withIdentifier: "CMBCell") as! CMBCell
-           
+            
             borderSet(cell: brewCell, color: .darkGray, width: 1)
-          
+            
             
             return brewCell
             
@@ -308,7 +298,7 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
             let roastCell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRoastCell") as! CMRoastCell
             
             borderSet(cell: roastCell, color: .darkGray, width: 1)
-           
+            
             return roastCell
             
             
@@ -316,33 +306,30 @@ extension VisitReviewViewController: UITableViewDelegate, UITableViewDataSource 
             let locationCell = reviewTableView.dequeueReusableCell(withIdentifier: "CMLCell") as! CMLCell
             
             borderSet(cell: locationCell, color: .darkGray, width: 1)
-           
+            
             return locationCell
-        
+            
         } else if indexPath.row == 4 {
             let ratingCell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRatingCell") as! CMRatingCell
             
             borderSet(cell: ratingCell, color: .darkGray, width: 1)
-          
+            
             
             return ratingCell
             
             
+        } else if  indexPath.row == 3 {
+            let cell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRCell") as! CMRCell
+            
+            borderSet(cell: cell, color: .darkGray, width: 1)
+            
+            return cell
         }
-      else if  indexPath.row == 3 {
-        let cell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRCell") as! CMRCell
         
-        borderSet(cell: cell, color: .darkGray, width: 1)
-        
-        return cell
-        }
         let cell = reviewTableView.dequeueReusableCell(withIdentifier: "CMRCell") as! CMRCell
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
     
 }
 
@@ -352,12 +339,15 @@ extension VisitReviewViewController: UIImagePickerControllerDelegate, UINavigati
         
         if let image = info[.originalImage] as? UIImage,
             let imageData = image.pngData(), let userID = user?.uid {
-            shopImage.image = image
             
+            shopImage.image = image
             self.pictureTaken = true
+            
             let storageRef = Storage.storage().reference().child("brewPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")
+            
             let metaData = StorageMetadata()
             metaData.contentType = "image/png"
+            
             storageRef.putData(imageData, metadata: metaData) {
                 (metaData, error) in
                 if error == nil, metaData != nil {
@@ -367,8 +357,7 @@ extension VisitReviewViewController: UIImagePickerControllerDelegate, UINavigati
                             self.imageURL = url.absoluteString
                         }
                     }
-                }
-                else {
+                } else {
                     print(error?.localizedDescription)
                 }
             }

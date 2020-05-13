@@ -29,14 +29,4 @@ class LoginViewController: UIViewController {
     }
 
 
-   
-    
-    @IBAction func registerTapped(_ sender: Any) {
-       
-      
-        
-        
-        
-    }
-    
 }

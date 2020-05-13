@@ -12,11 +12,10 @@ import CoreLocation
 
 
 class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
-   
+    
     var posts: [UserGenericPost] = []
     
     var following: [String] = []
-    
     let userRef = Database.database().reference(withPath: "Users")
     let postsRef = Database.database().reference(withPath: "GenericPosts")
     var theUser = Auth.auth().currentUser
@@ -26,26 +25,15 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
     let searchText: String? = ""
     let user = Auth.auth().currentUser?.uid
     
-    var exString: String = "exString"
-
+    
+    
     
     
     
     @IBOutlet weak var shopTableView: UITableView!
-
     
-    //MARK: tap gesture recognizer
-    @IBAction func tapHideKeyboard(_ sender: Any) {
-       
-    }
     
-    @IBAction func swipeGesture(_ sender: UISwipeGestureRecognizer) {
-        if sender.state == .ended {
-            if sender.direction == .down {
-                //shopSearchTextField.resignFirstResponder()
-            }
-        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +42,10 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
         self.shopTableView.delegate = self
         self.shopTableView.dataSource = self
         shopTableView.allowsSelection = true
-       
+        
         
         userRef.child("\(user!)").child("following").observe(.value, with: { (snapshot) in
-        
+            
             var userFollowing: [String] = []
             
             for child in snapshot.children {
@@ -94,14 +82,21 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
         
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "toUserProfile",
             let profilePage = segue.destination as? OtherUserProfilePage {
+            
             profilePage.userID = sender as! String
+            
         } else if segue.identifier == "genericToShopComments",
             let shopReview = segue.destination as? CommentsForShopReview {
+            
             shopReview.postIDFromFeed = sender as! String
+            
         } else if segue.identifier == "genericToBrewComments", let brewDebut = segue.destination as? CommentsForBrewDebut {
+            
             brewDebut.postIDFromFeed = sender as! String
         }
         
@@ -113,7 +108,7 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
 
 extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -125,19 +120,22 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         if posts.count >= 1 {
-                   return 550
-               } else {
-                   return 381
-               }
-
+        if posts.count >= 1 {
+            return 550
+        } else {
+            return 381
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let cell = shopTableView.cellForRow(at: indexPath) as? GenericPostTableViewCell
-
-        guard let postID = cell?.postID else {return}
+        
+        guard let postID = cell?.postID else {
+            return
+        }
+        
         let string = String(postID.prefix(2))
         switch string {
         case "sh":
@@ -147,28 +145,27 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             print("def")
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         if posts.count == 0 {
+            
             let cell = shopTableView.dequeueReusableCell(withIdentifier: "NoGenericPostTableViewCell", for: indexPath)
             
             return cell
+            
         } else {
-        
-        
-        
-        let cell = shopTableView.dequeueReusableCell(withIdentifier: "GenericPostTVC", for: indexPath) as! GenericPostTableViewCell
-        
-        let post = posts[indexPath.row]
-        
-        
-        
-         let postID = post.postID
-               let string = String(postID.prefix(2))
-               switch string {
-               case "sh":
+            
+            let cell = shopTableView.dequeueReusableCell(withIdentifier: "GenericPostTVC", for: indexPath) as! GenericPostTableViewCell
+            
+            let post = posts[indexPath.row]
+            
+            let postID = post.postID
+            let string = String(postID.prefix(2))
+            switch string {
+            case "sh":
                 
                 cell.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
                 cell.layer.borderWidth = 2
@@ -176,8 +173,9 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.profilePic.layer.borderWidth = 0.5
                 cell.profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-               
-               case "br":
+                
+            case "br":
+                
                 cell.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
                 cell.layer.borderWidth = 2
                 cell.postAccentLine.backgroundColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
@@ -185,131 +183,47 @@ extension NearbyFeedViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.profilePic.layer.borderWidth = 0.5
                 cell.profilePic.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
                 
-               default:
-                   print("Border Switch")
-               }
-     
-        cell.setGenericCell(post: post)
-        
-        cell.toUserProfileTapHandler = {
-            self.performSegue(withIdentifier: "toUserProfile", sender: post.userID)
+            default:
+                print("Border Switch")
+            }
             
-        }
+            //MARK: Set Generic Cell
+            cell.setGenericCell(post: post)
+            
+            //MARK: Handler Closures
+            cell.toUserProfileTapHandler = {
+                
+                self.performSegue(withIdentifier: "toUserProfile", sender: post.userID)
+                
+            }
             
             cell.reportButton = {
+                
                 let reportAlert = UIAlertController(title: "Thank You For Reporting", message: "Post Under Review", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Back", style: .cancel, handler: nil)
                 reportAlert.addAction(cancelAction)
                 self.present(reportAlert, animated: true, completion: nil)
             }
-        
-        cell.commentsPageClosure = {
-            let postIDPre = String(postID.prefix(2))
-            switch postIDPre {
-            case "sh":
-                self.performSegue(withIdentifier: "genericToShopComments", sender: postID + "addComment")
-            case "br":
-                self.performSegue(withIdentifier: "genericToBrewComments", sender: postID + "addComment")
-            default:
-                print("commentsPageClosure in Cell for Row at")
+            
+            cell.commentsPageClosure = {
+                
+                let postIDPre = String(postID.prefix(2))
+                switch postIDPre {
+                case "sh":
+                    self.performSegue(withIdentifier: "genericToShopComments", sender: postID + "addComment")
+                case "br":
+                    self.performSegue(withIdentifier: "genericToBrewComments", sender: postID + "addComment")
+                default:
+                    print("commentsPageClosure in Cell for Row at")
+                }
             }
+            
+            let timeAgoString = Date().timeSincePost(post: post)
+            cell.timeLabel.text =  timeAgoString
+            
+            
+            return cell
         }
-        
-        
-        
-        let timeAgoString = Date().timeSincePost(post: post)
-        cell.timeLabel.text =  timeAgoString
-        
-        
-        return cell
-    }
     }
 }
 
-
-
-
-
-
-
-extension NearbyFeedViewController: UITextFieldDelegate {
-    //UITextFieldDelegate(2) 1)- this is the function called when you hit the enter/retur/done button
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //hide keyboard
-        
-        //shopSearchTextField.resignFirstResponder()
-        return true
-    }
-    //2) this function runs when the text field returns true after it is no longer the first responder
-    func textFieldDidEndEditing(_ textField: UITextField)  {
-        
-        
-    }
-    
-    
-}
-
-
-  
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//    }
-    
-    
-    
-    
-//    @IBAction func shopSearchButton(_ sender: Any) {
-//
-//        guard let searchText = searchText
-//            //shopSearchTextField.text
-//            else {
-//
-//            return
-//        }
-//        if CLLocationManager.locationServicesEnabled() {
-//
-//            currentLocation = locationManager.location
-//            let latitude = currentLocation.coordinate.latitude
-//            let longitude = currentLocation.coordinate.longitude
-//            let theEndPoint = "https://api.yelp.com/v3/businesses/search?term=coffee shop&latitude=37.786882&longitude=-122.399972"
-//
-//        APIClient.shared.GET(endpoint: theEndPoint){ result in
-//            switch result {
-//            case .success(let json):
-//                DispatchQueue.main.async {
-//                    self.data = json
-//                    print(json)
-//
-//
-//                }
-//            case .failure:
-//                break
-//            }
-//
-//        }
-//    }
-//    }
-
-//        if shops.count == 0 {
-//            return
-//        } else {
-//            func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//                guard let theCurrentLocation: CLLocationCoordinate2D = manager.location?.coordinate, let mostCurrentLocation = locations.last else {
-//                    return
-//                }
-//                 let theEndPoint = "term=\(shopSearchTextField.text)&latitude=\(theCurrentLocation.latitude)&longitude=\(theCurrentLocation.longitude)"
-//
-//                APIClient.shared.GET(endpoint: theEndPoint){ result in
-//                    switch result {
-//                    case .success(let json):
-//                        DispatchQueue.main.async {
-//                            self.data = json
-//                            print(json)
-//                        }
-//                    case .failure:
-//                        break
-//                    }
-//                }
-//        }
-//    }
-    

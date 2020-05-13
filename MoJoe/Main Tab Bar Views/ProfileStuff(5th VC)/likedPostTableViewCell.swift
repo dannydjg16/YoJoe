@@ -11,7 +11,17 @@ import Firebase
 
 class likedPostTableViewCell: UITableViewCell {
     
+    //MARK: Constants/Variables
     let user = Auth.auth().currentUser?.uid
+    var postID: String = ""
+    var commentsPageClosure: (() -> Void)?
+    var likedPostsByUser: [String] = []
+    
+    let userRef = Database.database().reference(withPath: "Users")
+    let postsRef = Database.database().reference(withPath: "GenericPosts")
+    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    let postLikesRef = Database.database().reference(withPath: "PostLikes")
     
     var date: String {
         get {
@@ -22,51 +32,25 @@ class likedPostTableViewCell: UITableViewCell {
             return stringDate
         }
     }
+
     
-    var likedPostsByUser: [String] = []
-    
-    
+    //MARK: Connections
     @IBOutlet weak var nameLabel: UILabel!
-    
-    
     @IBOutlet weak var timeLabel: UILabel!
-    
-    
     @IBOutlet weak var postExplanationLabel: UILabel!
-    
     @IBOutlet weak var ratingLabel: UILabel!
-    
-    var postID: String = ""
-    
     @IBOutlet weak var postAccentLine: UIView!
-    
-    
     @IBOutlet weak var postImage: UIImageView!
-    
     @IBOutlet weak var profilePic: UIImageView!
-    
     @IBOutlet weak var likesButton: UIButton!
-    
-    
     @IBOutlet weak var likesLabel: UILabel!
-    
     @IBOutlet weak var commentsButton: UIButton!
     
-    var commentsPageClosure: (() -> Void)?
-    
-    
+    //MARK: Completion Closure
     @IBAction func commentsButtonFunction(_ sender: Any) {
         self.commentsPageClosure?()
         
     }
-    
-    
-    let userRef = Database.database().reference(withPath: "Users")
-    let postsRef = Database.database().reference(withPath: "GenericPosts")
-    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
-    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    
     
     
     
@@ -171,6 +155,7 @@ class likedPostTableViewCell: UITableViewCell {
                     }
                     //iterate through the users liked posts, if post is in the likedPosts of user, it will not run the code to add a like/add post to users liked posts
                     var hasPostBeenLiked: Bool = false
+                
                     for post in self.likedPostsByUser {
                         if post == self.postID {
                             
@@ -182,11 +167,11 @@ class likedPostTableViewCell: UITableViewCell {
                             continue
                         }
                     }
-                    
-                   
-                
+
             })
         })
     }
+    
+    
     
 }

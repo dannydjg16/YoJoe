@@ -11,7 +11,23 @@ import Firebase
 
 class GenericPostTableViewCell: UITableViewCell {
     
+    //MARK: Constants/Variables
     let user = Auth.auth().currentUser?.uid
+    var likedPostsByUser: [String] = []
+    var postID: String = "a"
+    var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
+    
+    
+    var commentsPageClosure: (() -> Void)?
+    var reportButton: (() -> Void)?
+    var toUserProfileTapHandler: (() -> Void)?
+    
+    let userRef = Database.database().reference(withPath: "Users")
+    let postsRef = Database.database().reference(withPath: "GenericPosts")
+    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    
     
     var date: String {
         get {
@@ -23,66 +39,37 @@ class GenericPostTableViewCell: UITableViewCell {
         }
     }
     
-    var likedPostsByUser: [String] = []
     
+    //MARK: Connections
     @IBOutlet weak var nameButton: UIButton!
-    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var postExplanationLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
-    var postID: String = "a"
-    
-    var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
-    
     @IBOutlet weak var postAccentLine: UIView!
-    
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
-    
     @IBOutlet weak var likesButton: UIButton!
-    
-    
     @IBOutlet weak var likesLabel: UILabel!
-    
-    
     @IBOutlet weak var commentsButton: UIButton!
-    
-    var commentsPageClosure: (() -> Void)?
-    
     
     @IBAction func commentsButtonFunction(_ sender: Any) {
         
         self.commentsPageClosure?()
-        
     }
     
-    var reportButton: (() -> Void)?
-    
     @IBAction func reportButtonPressed(_ sender: Any) {
+        
         self.reportButton?()
     }
     
-    
-    
-    
-    
-    
-    let userRef = Database.database().reference(withPath: "Users")
-    let postsRef = Database.database().reference(withPath: "GenericPosts")
-    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
-    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    
-    var toUserProfileTapHandler: (() -> Void)?
-    
-    
     @IBAction func userButtonAction(_ sender: Any) {
+        
         self.toUserProfileTapHandler?()
     }
     
     
     
-    
+    //MARK: Set Generic Cell
     func setGenericCell(post: UserGenericPost) {
         
         genericReview = GenericPostForLikes(date: post.date, imageURL: post.imageURL, postID: post.postID, userID: post.userID, postExplanation: post.postExplanation, rating: post.rating, reviewType: post.reviewType, likeDate: date)
@@ -97,20 +84,24 @@ class GenericPostTableViewCell: UITableViewCell {
             guard let child = snapshot.value as? String else {
                 return
             }
+            
             self.profilePic.setImage(from: child)
+            
         })
+        
+        
         userRef.child("\(post.userID)").child("UserName").observe(.value, with: { (snapshot) in
             
             if let child = snapshot.value as? String {
                 
                 let postIDPre = post.postID.prefix(2)
                 switch postIDPre {
+                    
                 case "sh":
                     self.nameButton.setTitle("\(child)" + " visited...", for: .normal)
                     
                 case "br":
                     self.nameButton.setTitle("\(child)" + " brewed...", for: .normal)
-                    
                     
                 default:
                     print("nameButtonSwitch")
@@ -124,7 +115,9 @@ class GenericPostTableViewCell: UITableViewCell {
             guard let likesNumber = snapshot.value as? Int else {
                 return
             }
+            
             self.likesLabel.text = String(likesNumber)
+            
         })
         
         
@@ -146,21 +139,13 @@ class GenericPostTableViewCell: UITableViewCell {
         
         self.isUserInteractionEnabled = true
         
-        
-        
-        
-        
         userRef.child("\(String(self.user!))").child("likedPosts").observe(.value, with: { (snapshot) in
+            
             var likedPostsArray : [String] = []
             
-            for child in snapshot.children
-            {
+            for child in snapshot.children {
                 
-                if let snapshot = child as? DataSnapshot,
-                    
-                    let valueDictionary = snapshot.value as? [String: AnyObject]
-                    
-                {
+                if let snapshot = child as? DataSnapshot, let valueDictionary = snapshot.value as? [String: AnyObject] {
                     
                     likedPostsArray.append(valueDictionary["postID"] as! String)
                     
@@ -168,11 +153,15 @@ class GenericPostTableViewCell: UITableViewCell {
                 //set the glabal var likedPostsByUser equal to the local array likedPostsArray
                 self.likedPostsByUser = likedPostsArray
             }
-            if likedPostsArray.contains(self.postID){
+            if likedPostsArray.contains(self.postID) {
+                
                 self.likesButton.layer.borderWidth = 1
                 self.likesButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                
             } else {
+                
                 self.likesButton.layer.borderWidth = 0
+                
             }
         })
         
@@ -181,7 +170,6 @@ class GenericPostTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
     
     
