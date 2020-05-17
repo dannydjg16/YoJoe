@@ -98,7 +98,7 @@ extension DataRequest {
     
     /// ImmutableMappable Array Serializer
     public static func ObjectMapperImmutableSerializer<T: ImmutableMappable>(_ keyPath: String?, context: MapContext? = nil) -> DataResponseSerializer<T> {
-       return DataResponseSerializer { request, response, data, error in
+        return DataResponseSerializer { request, response, data, error in
             if let error = checkResponseForError(request: request, response: response, data: data, error: error){
                 return .failure(error)
             }
@@ -106,7 +106,7 @@ extension DataRequest {
             let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
             
             if let JSONObject = JSONObject,
-                let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject) as T){
+                let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject)){
                 return .success(parsedObject)
             }
             
@@ -164,7 +164,7 @@ extension DataRequest {
             
             if let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath){
                 
-                if let parsedObject = try? Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject) as [T] {
+                if let parsedObject = try? Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject){
                     return .success(parsedObject)
                 }
             }
