@@ -23,6 +23,7 @@
 		813BEFEC226F91EB008AC632 /* ShopsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */; };
 		813C126323E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C126223E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift */; };
 		813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CBD13219DE03E00661736 /* FeedPageViewController.swift */; };
+		813FDC002481942A00AF86EE /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813FDBFF2481942A00AF86EE /* DebutYourBrew.swift */; };
 		8141909C21E18B5B000BE77F /* EmailRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */; };
 		8150997D22736C5A00B81B8E /* BrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997C22736C5A00B81B8E /* BrewDebut.swift */; };
 		8150997F22739CAA00B81B8E /* BrewDebutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150997E22739CAA00B81B8E /* BrewDebutCell.swift */; };
@@ -31,7 +32,6 @@
 		815FF81823466AB3002F4D88 /* BrewDebutCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FF81723466AB3002F4D88 /* BrewDebutCommentCell.swift */; };
 		816264B8224A88E100202A69 /* BrewTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816264B7224A88E100202A69 /* BrewTypeCVCell.swift */; };
 		8166FFFD24468BF600C9705D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8166FFFC24468BF600C9705D /* GoogleService-Info.plist */; };
-		816D7E03246C67B600B925E5 /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BEFE7226953AC008AC632 /* DebutYourBrew.swift */; };
 		8183C88723E0BF9B009A91AC /* UserGenericPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8183C88623E0BF9B009A91AC /* UserGenericPost.swift */; };
 		8183C88923E3692A009A91AC /* UserPostPictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8183C88823E36929009A91AC /* UserPostPictureCollectionViewCell.swift */; };
 		81846AC1234646BC00296A92 /* CommentsForBrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81846AC0234646BC00296A92 /* CommentsForBrewDebut.swift */; };
@@ -85,11 +85,11 @@
 		811C6EBF2198A06500DA8B19 /* NearbyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NearbyFeedViewController.swift; path = "../Shop Review Files/NearbyFeedViewController.swift"; sourceTree = "<group>"; };
 		8126B18723311FEE0004E885 /* comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = comment.swift; sourceTree = "<group>"; };
 		8139D206242A94E1004EC947 /* likedPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likedPostTableViewCell.swift; sourceTree = "<group>"; };
-		813BEFE7226953AC008AC632 /* DebutYourBrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebutYourBrew.swift; sourceTree = "<group>"; };
 		813BEFE9226E9B5F008AC632 /* FeedSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSwitcher.swift; sourceTree = "<group>"; };
 		813BEFEB226F91EB008AC632 /* ShopsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShopsFeedView.swift; path = ../ShopsFeedView.swift; sourceTree = "<group>"; };
 		813C126223E63BFD00040C55 /* OtherUserImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		813CBD13219DE03E00661736 /* FeedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
+		813FDBFF2481942A00AF86EE /* DebutYourBrew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebutYourBrew.swift; sourceTree = "<group>"; };
 		8141909B21E18B5B000BE77F /* EmailRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegistrationViewController.swift; sourceTree = "<group>"; };
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
 		8150997C22736C5A00B81B8E /* BrewDebut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewDebut.swift; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		7E312B2D212C98E3009D7F83 /* MoJoe */ = {
 			isa = PBXGroup;
 			children = (
+				813FDBFF2481942A00AF86EE /* DebutYourBrew.swift */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
-				813BEFE7226953AC008AC632 /* DebutYourBrew.swift */,
 				8141909E21E2E649000BE77F /* Main Tab Bar Views */,
 				815292D52316C7E1008AB219 /* Stuff I never use */,
 				81FE6AE821E3EEAA0008B9A4 /* Models */,
@@ -338,7 +338,7 @@
 				7E312B27212C98E3009D7F83 /* Sources */,
 				7E312B28212C98E3009D7F83 /* Frameworks */,
 				7E312B29212C98E3009D7F83 /* Resources */,
-				5DBA17026095EB2EF58BE657 /* [CP] Embed Pods Frameworks */,
+				ECB03876B670BCC8DE9E175D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -426,7 +426,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5DBA17026095EB2EF58BE657 /* [CP] Embed Pods Frameworks */ = {
+		ECB03876B670BCC8DE9E175D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -492,7 +492,6 @@
 				8139D207242A94E1004EC947 /* likedPostTableViewCell.swift in Sources */,
 				813CBD14219DE03E00661736 /* FeedPageViewController.swift in Sources */,
 				81E6CD6E224808AD00969B42 /* CMICell.swift in Sources */,
-				816D7E03246C67B600B925E5 /* DebutYourBrew.swift in Sources */,
 				8150997D22736C5A00B81B8E /* BrewDebut.swift in Sources */,
 				811C6EC02198A06500DA8B19 /* NearbyFeedViewController.swift in Sources */,
 				81846AC1234646BC00296A92 /* CommentsForBrewDebut.swift in Sources */,
@@ -509,6 +508,7 @@
 				81AD0BD6242ACAB500B17C62 /* GenericPostForLikes.swift in Sources */,
 				81ACF54023F321AC00610AF3 /* GenericPostTableViewCell.swift in Sources */,
 				7E312B4D212CA116009D7F83 /* MainTabController.swift in Sources */,
+				813FDC002481942A00AF86EE /* DebutYourBrew.swift in Sources */,
 				8154DA0223CB98AE00F61909 /* EditProfile.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
 				81E6CD672248076D00969B42 /* CMRoastCell.swift in Sources */,
