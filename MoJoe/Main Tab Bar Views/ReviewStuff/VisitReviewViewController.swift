@@ -358,7 +358,7 @@ extension VisitReviewViewController: UIImagePickerControllerDelegate, UINavigati
                         }
                     }
                 } else {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription as Any)
                 }
             }
         }

@@ -361,7 +361,7 @@ extension ShopReviewSheet: UIImagePickerControllerDelegate, UINavigationControll
                     }
                 }
                 else {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription as Any)
                 }
             }
         }

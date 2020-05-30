@@ -154,7 +154,6 @@ class likedPostTableViewCell: UITableViewCell {
                         self.likedPostsByUser = likedPostsArray
                     }
                     //iterate through the users liked posts, if post is in the likedPosts of user, it will not run the code to add a like/add post to users liked posts
-                    var hasPostBeenLiked: Bool = false
                 
                     for post in self.likedPostsByUser {
                         if post == self.postID {
@@ -163,7 +162,6 @@ class likedPostTableViewCell: UITableViewCell {
                             
                             self.userRef.child("\(String(self.user!))").child("likedPosts").child("\(self.postID)").removeValue()
                             
-                            hasPostBeenLiked = true
                             continue
                         }
                     }

@@ -82,7 +82,8 @@ class OtherUserProfilePage: UIViewController {
                     
                     let value = snapshot.value as? [String: AnyObject] {
                     
-                    for (key, value) in value {
+                    for (key, _) in value {
+                        
                         followingArray.append(key)
                     }
                     
@@ -184,7 +185,7 @@ class OtherUserProfilePage: UIViewController {
                             
                             let value = snapshot.value as? [String: AnyObject] {
                             
-                            for (key, value) in value {
+                            for (key, _) in value {
                                 followingArray.append(key)
                             }
                             self.allFolllowing = followingArray
@@ -233,7 +234,7 @@ class OtherUserProfilePage: UIViewController {
                         //User who gets followed
                         let newUserFollowedLocation =  self.userRef.child("\(self.userID)").child("followers").child("\(self.user!)")
                         
-                        newUserFollowedLocation.setValue(["\(self.user)": "\(self.date)"])
+                        newUserFollowedLocation.setValue(["\(self.user!)": "\(self.date)"])
                         
                         self.userRef.child("\(self.userID)").child("followersNumber").observeSingleEvent(of: .value, with: {
                             (snapshotNumber) in

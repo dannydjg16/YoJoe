@@ -76,10 +76,7 @@ class CommentsForShopReview: UIViewController {
                 self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
                     (snapshot) in
                     
-                    if let shopReview = ShopReivew(snapshot: snapshot) {
-                        
                         self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
-                    }
                 })
             })
             commentTextField.text = ""
@@ -317,14 +314,9 @@ extension CommentsForShopReview: UITextFieldDelegate {
                     return
                 }
                 
-                self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: {
-                    (snapshot) in
-                    
-                    if let shopReview = ShopReivew(snapshot: snapshot) {
                         self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
-                    }
-                })
             })
+            
             commentTextField.text = ""
         }
         

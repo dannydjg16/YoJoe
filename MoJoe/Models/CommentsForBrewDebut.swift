@@ -67,14 +67,9 @@ class CommentsForBrewDebut: UIViewController {
                         return
                 }
                 
-                self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    if let brewDebut = BrewDebut(snapshot: snapshot) {
-                        
                         self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
-                    }
-                })
             })
+            
             commentTextField.text = ""
         }
     }
@@ -136,7 +131,7 @@ class CommentsForBrewDebut: UIViewController {
                 let timeAgoString = Date().timeSincePostFromString(postDate: brewDebut.date)
                 self.timeSinceLabel.text = timeAgoString
                 
-               
+                
                 self.postLabel.text = brewDebut.review
                 self.brewLabel.text = brewDebut.brew
                 self.roastLabel.text = brewDebut.roast
@@ -242,7 +237,7 @@ extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         if allComments.count == 0 {
             
             let errorCell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "CommentErrorCell")
@@ -251,7 +246,7 @@ extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource {
         }
             
         else {
-        
+            
             let comment = allComments[indexPath.row]
             
             let cell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "BrewDebutCommentCell") as! BrewDebutCommentCell
@@ -263,17 +258,9 @@ extension CommentsForBrewDebut: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-        
-        let comment = allComments[indexPath.row]
-        let cell = brewDebutCommentsTableView.dequeueReusableCell(withIdentifier: "BrewDebutCommentCell") as! BrewDebutCommentCell
-        
-        cell.setCommentCell(comment: comment)
-        
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
-        
-        return cell
     }
+    
+    
 }
 
 extension CommentsForBrewDebut: UITextFieldDelegate {
@@ -302,15 +289,12 @@ extension CommentsForBrewDebut: UITextFieldDelegate {
                         return
                 }
                 
-                self.ref.child("\(stringPostID)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    if let brewDebut = BrewDebut(snapshot: snapshot) {
-                        self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
-                    }
-                })
+                self.ref.child("\(stringPostID)").updateChildValues(["comments": numberOfComments + 1])
             })
+            
             commentTextField.text = ""
         }
+        
         self.view.endEditing(true)
         return true
     }

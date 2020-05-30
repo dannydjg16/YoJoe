@@ -83,6 +83,7 @@ class FifthViewController: UIViewController {
         
         profilePicture.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePicture.layer.borderWidth = 1
+        profilePicture.contentMode = .scaleAspectFill
         
         imagePicker.delegate = self
         
