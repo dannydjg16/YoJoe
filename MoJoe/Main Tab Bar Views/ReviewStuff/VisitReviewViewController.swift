@@ -88,6 +88,7 @@ class VisitReviewViewController: UIViewController {
             warningAlert(title: "No picture added", message: "Please add picture to review")
             return
         }
+        
         //MARK: Database Entries
         let debut = BrewDebut(brew: brewType, roast: roastType, rating: Int(rating)!, beanLocation: beanLocation, review: review, user: user, date: date, likesAmount: 0, postID: postID, imageURL: shopImageURL, comments: 0)
         

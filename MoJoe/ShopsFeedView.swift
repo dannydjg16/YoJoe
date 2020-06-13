@@ -174,6 +174,7 @@ extension ShopsFeedView: UITableViewDataSource, UITableViewDelegate {
         shopCell.tapHandler = {
             self.performSegue(withIdentifier: "toSRCommentsPage", sender: shopCell.postID + "addComment")
         }
+        
         shopCell.toUserProfileTapHandler = {
             self.performSegue(withIdentifier: "toOtherUserProfile", sender: shop.user)
             

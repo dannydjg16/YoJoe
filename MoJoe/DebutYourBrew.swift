@@ -23,6 +23,7 @@ class DebutYourBrew: UIViewController {
     //MARK: Connections
     @IBOutlet weak var brewDebutTable: UITableView!
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,7 @@ class DebutYourBrew: UIViewController {
         pictureFinder.addAction(chooseAPicture)
         
         self.present(pictureFinder, animated: true, completion: nil)
+        
     }
     
     override func viewWillLayoutSubviews() {
