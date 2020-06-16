@@ -15,6 +15,8 @@ class BrewDebutCell: UITableViewCell {
     let ref = Database.database().reference(withPath: "BrewDebut")
     let userRef = Database.database().reference(withPath: "Users")
     let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    let reportRef = Database.database().reference(withPath: "Reports")
+    
     var postID: String = ""
     var imageURL: String = ""
     var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
@@ -63,6 +65,9 @@ class BrewDebutCell: UITableViewCell {
     }
     
     @IBAction func reportButtonPressed(_ sender: Any) {
+        
+        let reportLocation = reportRef.child("\(self.postID)")
+        reportLocation.setValue(["\(self.postID)": date])
         
         self.reportButton?()
     }

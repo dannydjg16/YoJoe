@@ -27,6 +27,7 @@ class GenericPostTableViewCell: UITableViewCell {
     let shopReviewRef = Database.database().reference(withPath: "ShopReview")
     let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
     let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    let reportRef = Database.database().reference(withPath: "Reports")
     
     
     var date: String {
@@ -58,6 +59,9 @@ class GenericPostTableViewCell: UITableViewCell {
     }
     
     @IBAction func reportButtonPressed(_ sender: Any) {
+        
+        let reportLocation = reportRef.child("\(self.postID)")
+        reportLocation.setValue(["\(self.postID)": date])
         
         self.reportButton?()
     }

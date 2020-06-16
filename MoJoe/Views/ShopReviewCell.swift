@@ -24,6 +24,7 @@ class ShopReviewCell: UITableViewCell {
     let ref = Database.database().reference(withPath: "ShopReview")
     let userRef = Database.database().reference(withPath: "Users")
     let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    let reportRef = Database.database().reference(withPath: "Reports")
     let user = Auth.auth().currentUser
     
     var date: String {
@@ -63,6 +64,9 @@ class ShopReviewCell: UITableViewCell {
     }
     
     @IBAction func reportButtonPressed(_ sender: Any) {
+        
+        let reportLocation = reportRef.child("\(self.postID)")
+        reportLocation.setValue(["\(self.postID)": date])
         
         self.reportButton?()
     }

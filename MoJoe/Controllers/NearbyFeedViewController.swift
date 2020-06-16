@@ -26,13 +26,7 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
     let user = Auth.auth().currentUser?.uid
     
     
-    
-    
-    
-    
     @IBOutlet weak var shopTableView: UITableView!
-    
-    
     
     
     override func viewDidLoad() {
@@ -47,14 +41,14 @@ class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
         userRef.child("\(user!)").child("following").observe(.value, with: { (snapshot) in
             
             var userFollowing: [String] = []
-            
+            //Create the follwoing array
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot {
                     userFollowing.append(snapshot.key)
                 }
             }
             self.following = userFollowing
-            
+            //following array created, go through posts and check if the post's cerator is followed by the user(in the follownig array) if so then add it
             self.postsRef.queryOrdered(byChild: "date").observe(.value, with: {
                 (snapshot) in
                 

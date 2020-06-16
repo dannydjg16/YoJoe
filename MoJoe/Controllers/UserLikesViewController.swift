@@ -34,11 +34,14 @@ class UserLikesViewController: UIViewController {
             
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot {
+                    
                     guard let likedPost = GenericPostForLikes(snapshot: snapshot) else {
                         return
                     }
+                    
                     likedPosts.append(likedPost)
                 }
+                
                 self.posts = likedPosts.reversed()
                 self.userLikesTableView.reloadData()
             }
