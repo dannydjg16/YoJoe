@@ -65,7 +65,6 @@
 		8178ACBE2495BC4100AB42C2 /* CMRcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA32495BC4100AB42C2 /* CMRcell.swift */; };
 		8178ACBF2495BC4100AB42C2 /* CMRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA42495BC4100AB42C2 /* CMRatingCell.swift */; };
 		8178ACC02495BC4100AB42C2 /* SRReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA52495BC4100AB42C2 /* SRReviewCell.swift */; };
-		8178ACC12495BC4100AB42C2 /* postActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA62495BC4100AB42C2 /* postActivityBar.swift */; };
 		8178ACC22495BC4100AB42C2 /* likedPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA72495BC4100AB42C2 /* likedPostTableViewCell.swift */; };
 		8178ACC32495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA82495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift */; };
 		8178ACC42495BC4100AB42C2 /* ShopReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA92495BC4100AB42C2 /* ShopReviewCell.swift */; };
@@ -134,7 +133,6 @@
 		8178ACA32495BC4100AB42C2 /* CMRcell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMRcell.swift; sourceTree = "<group>"; };
 		8178ACA42495BC4100AB42C2 /* CMRatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMRatingCell.swift; sourceTree = "<group>"; };
 		8178ACA52495BC4100AB42C2 /* SRReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRReviewCell.swift; sourceTree = "<group>"; };
-		8178ACA62495BC4100AB42C2 /* postActivityBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postActivityBar.swift; sourceTree = "<group>"; };
 		8178ACA72495BC4100AB42C2 /* likedPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = likedPostTableViewCell.swift; sourceTree = "<group>"; };
 		8178ACA82495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostPictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		8178ACA92495BC4100AB42C2 /* ShopReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopReviewCell.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 				8178AC992495BC4100AB42C2 /* ShopTagReviewFeedCVCell.swift */,
 				8178AC9A2495BC4100AB42C2 /* BrewDebutCommentCell.swift */,
 				8178AC9B2495BC4100AB42C2 /* CustomMadeReviewCells */,
-				8178ACA62495BC4100AB42C2 /* postActivityBar.swift */,
 				8178ACA72495BC4100AB42C2 /* likedPostTableViewCell.swift */,
 				8178ACA82495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift */,
 				8178ACA92495BC4100AB42C2 /* ShopReviewCell.swift */,
@@ -439,7 +436,6 @@
 				8178ACBD2495BC4100AB42C2 /* SRLocationCell.swift in Sources */,
 				8178ACAC2495BC4100AB42C2 /* OneLabelCollectionViewCell.swift in Sources */,
 				8178ACC02495BC4100AB42C2 /* SRReviewCell.swift in Sources */,
-				8178ACC12495BC4100AB42C2 /* postActivityBar.swift in Sources */,
 				8178AC6E2495BC2500AB42C2 /* FifthViewController.swift in Sources */,
 				8178AC8A2495BC3800AB42C2 /* BrewDebut.swift in Sources */,
 				8178AC8C2495BC3800AB42C2 /* ReviewHelper.swift in Sources */,

@@ -132,11 +132,7 @@ class CommentsForShopReview: UIViewController {
         
         self.ref.child("\(stringPostID)").observe(.value, with: { (dataSnapshot) in
             
-            guard let postInfo = dataSnapshot as? DataSnapshot else {
-                return
-            }
-            
-            if let shopReview = ShopReivew(snapshot: postInfo){
+            if let shopReview = ShopReivew(snapshot: dataSnapshot){
                 
                 //MARK: set the post view on comments page
                 self.postImageView.setImage(from: shopReview.imageURL)

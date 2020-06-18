@@ -51,7 +51,7 @@ class ShopReviewCell: UITableViewCell {
     @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var shopPicture: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var postActivityBar: UIView!
+
     
     @IBAction func toCommentsPage(_ sender: Any) {
         

@@ -51,7 +51,6 @@ class BrewDebutCell: UITableViewCell {
     @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var brewTakePic: UIImageView!
     @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var postActivityBar: UIView!
     
     
     @IBAction func toCommentsPage(_ sender: Any) {

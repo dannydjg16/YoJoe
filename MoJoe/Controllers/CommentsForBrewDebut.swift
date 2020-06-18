@@ -109,11 +109,7 @@ class CommentsForBrewDebut: UIViewController {
         //find the post
         self.ref.child("\(stringPostID)").observe(.value, with: { (dataSnapshot) in
             
-            guard let postInfo = dataSnapshot as? DataSnapshot else {
-                return
-            }
-            
-            if let brewDebut = BrewDebut(snapshot: postInfo) {
+            if let brewDebut = BrewDebut(snapshot: dataSnapshot) {
                 
                 self.userRef.child(brewDebut.user).child("UserName").observeSingleEvent(of: .value, with: { (dataSnapshot) in
                     
