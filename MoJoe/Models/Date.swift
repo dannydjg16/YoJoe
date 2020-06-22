@@ -54,7 +54,7 @@ extension Date {
             
         } else if timeAgo < (2592000 * 12) {
             //one year
-            return "\(timeAgo / (2592000))mon  ago"
+            return "\(timeAgo / (2592000))mon ago"
         }
         else {
             return "\(timeAgo / (2592000 * 12)) yr ago"
@@ -105,7 +105,7 @@ extension Date {
             
         } else if timeAgo < (2592000 * 12) {
             //one year
-            return "\(timeAgo / (2592000))mon  ago"
+            return "\(timeAgo / (2592000))mon ago"
         }
         else {
             return "\(timeAgo / (2592000 * 12)) yr ago"
@@ -157,7 +157,7 @@ extension Date {
             
         } else if timeAgo < (2592000 * 12) {
             //one year
-            return "\(timeAgo / (2592000))mon  ago"
+            return "\(timeAgo / (2592000))mon ago"
         }
         else {
             return "\(timeAgo / (2592000 * 12)) yr ago"
@@ -209,7 +209,7 @@ extension Date {
             
         } else if timeAgo < (2592000 * 12) {
             //one year
-            return "\(timeAgo / (2592000))mon  ago"
+            return "\(timeAgo / (2592000))mon ago"
         }
         else {
             return "\(timeAgo / (2592000 * 12)) yr ago"
@@ -260,7 +260,7 @@ extension Date {
             
         } else if timeAgo < (2592000 * 12) {
             //one year
-            return "\(timeAgo / (2592000))mon  ago"
+            return "\(timeAgo / (2592000))mon ago"
         }
         else {
             return "\(timeAgo / (2592000 * 12)) yr ago"

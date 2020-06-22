@@ -37,6 +37,36 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "81CD57C924A05D47006311CC"
+               BuildableName = "MoJoeDateTests.xctest"
+               BlueprintName = "MoJoeDateTests"
+               ReferencedContainer = "container:MoJoe.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "818416CA249BEB28003E8D98"
+               BuildableName = "MoJoeShopReviewTests.xctest"
+               BlueprintName = "MoJoeShopReviewTests"
+               ReferencedContainer = "container:MoJoe.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "81CD57D724A062BC006311CC"
+               BuildableName = "MoJoeUITests.xctest"
+               BlueprintName = "MoJoeUITests"
+               ReferencedContainer = "container:MoJoe.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

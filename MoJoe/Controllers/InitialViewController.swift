@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var signUpButton: RoundButton!
     @IBOutlet weak var signInButton: RoundButton!
-   
-
+    
+    
     
     
     override func viewDidLoad() {
@@ -26,7 +27,26 @@ class LoginViewController: UIViewController {
         
         signInButton.layer.borderColor = UIColor.black.cgColor
         signInButton.layer.borderWidth = 1
+        
+        //MARK: Check log in status
+        Auth.auth().addStateDidChangeListener{ auth, user in
+            
+            if user != nil {
+                
+                let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+                
+                mainTabController.selectedViewController = mainTabController.viewControllers?[0]
+                
+                
+                self.present(mainTabController, animated: true, completion: nil)
+            }
+            
+            if user == nil {
+                
+//                self.performSegue(withIdentifier: "firstSegue", sender: self)
+            }
+        }
     }
-
-
+    
+    
 }

@@ -340,7 +340,6 @@ extension ShopReviewSheet: UIImagePickerControllerDelegate, UINavigationControll
             let imageData = image.pngData(), let userID = user?.uid {
             
             shopImage.image = image
-            
             self.pictureTaken = true
             
             let storageRef = Storage.storage().reference().child("shopPictures").child("\(userID)").child("\(self.postID ?? "postPicture")")

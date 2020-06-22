@@ -11,28 +11,31 @@ import Firebase
 
 class AppLoadingViewController: UIViewController {
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         //MARK: Check log in status
         Auth.auth().addStateDidChangeListener{ auth, user in
-            
+
             if user != nil {
-                
+
                 let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
-                
-                mainTabController.selectedViewController = mainTabController.viewControllers?[1]
-                
-                
+
+                mainTabController.selectedViewController = mainTabController.viewControllers?[0]
+
+
                 self.present(mainTabController, animated: true, completion: nil)
             }
-            
+
             if user == nil {
-                
+
                 self.performSegue(withIdentifier: "firstSegue", sender: self)
             }
         }
-        
+     
+  
     }
     
     

@@ -49,7 +49,7 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
-           
+            
             if let error = error, user == nil {
                 
                 let alert = UIAlertController(title: "Sign In Failed",
@@ -65,39 +65,39 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
     
     
     override func viewDidLoad() {
-          super.viewDidLoad()
-          
-          userNameTField.delegate = self
-          passwordTField.delegate = self
-          
-          Auth.auth().addStateDidChangeListener() { auth, user in
-
-              if user != nil {
-                  
-                  let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
-                  
-                  mainTabController.selectedViewController = mainTabController.viewControllers?[0]
-                  
-                  self.present(mainTabController, animated: true, completion: nil)
-              }
-          }
-          
-          
-          let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
-          downSwipe.direction = .down
-          self.view.addGestureRecognizer(downSwipe)
-      }
-      
-      
-      @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
-         
-          switch gesture.direction {
-          case .down :
-              self.view.endEditing(true)
-          default:
-              break
-          }
-      }
-      
+        super.viewDidLoad()
+        
+        userNameTField.delegate = self
+        passwordTField.delegate = self
+        
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            
+            if user != nil {
+                
+                let mainTabController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
+                
+                mainTabController.selectedViewController = mainTabController.viewControllers?[0]
+                
+                self.present(mainTabController, animated: true, completion: nil)
+            }
+        }
+        
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler))
+        downSwipe.direction = .down
+        self.view.addGestureRecognizer(downSwipe)
+    }
+    
+    
+    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+        
+        switch gesture.direction {
+        case .down :
+            self.view.endEditing(true)
+        default:
+            break
+        }
+    }
+    
     
 }
