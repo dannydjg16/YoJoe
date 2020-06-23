@@ -25,7 +25,7 @@ email danielgrant.joseph@gmail.com for questions, comments, or concerns regardin
 
 ##
 
-#Application Use 
+Application Use 
 
 Refer to the below video in order to view the UI and inspect some of the actions a user may make use of. 
 https://www.youtube.com/watch?v=Etas_6aLUaU
