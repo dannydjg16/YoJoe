@@ -12,22 +12,22 @@ import Firebase
 class BrewDebutCell: UITableViewCell {
    
     //MARK: Constants/Vars
-    let ref = Database.database().reference(withPath: "BrewDebut")
-    let userRef = Database.database().reference(withPath: "Users")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    let reportRef = Database.database().reference(withPath: "Reports")
+    private let ref = Database.database().reference(withPath: "BrewDebut")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    private let reportRef = Database.database().reference(withPath: "Reports")
     
     var postID: String = ""
     var imageURL: String = ""
-    var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
-    let user = Auth.auth().currentUser
+    private var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
+    private let user = Auth.auth().currentUser
     
     var likedPostsByUser: [String] = []
     var tapHandler: (() -> Void)?
     var toUserProfileTapHandler: (() -> Void)?
     var reportButton: (() -> Void)?
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -40,17 +40,17 @@ class BrewDebutCell: UITableViewCell {
     
     //MARK: Connections
     @IBOutlet weak var userBrewedLabel: UIButton!
-    @IBOutlet weak var brewLabel: UILabel!
-    @IBOutlet weak var roastLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet private weak var brewLabel: UILabel!
+    @IBOutlet private weak var roastLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
     @IBOutlet weak var timeAgoLabel: UILabel!
-    @IBOutlet weak var beanLocationLabel: UILabel!
-    @IBOutlet weak var brewPicture: UIImageView!
+    @IBOutlet private weak var beanLocationLabel: UILabel!
+    @IBOutlet private weak var brewPicture: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var commentsButton: UIButton!
-    @IBOutlet weak var brewTakePic: UIImageView!
-    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet private weak var likeButton: UIButton!
+    @IBOutlet private weak var commentsButton: UIButton!
+    @IBOutlet private weak var brewTakePic: UIImageView!
+    @IBOutlet private weak var likesLabel: UILabel!
     
     
     @IBAction func toCommentsPage(_ sender: Any) {
@@ -151,7 +151,7 @@ class BrewDebutCell: UITableViewCell {
     }
     
     
-    @objc func likeButtonTapped(sender: UIButton) {
+    @objc private  func likeButtonTapped(sender: UIButton) {
         //get # of likes from database
         self.postLikesRef.child("\(postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             

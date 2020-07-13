@@ -12,18 +12,18 @@ import Firebase
 class likedPostTableViewCell: UITableViewCell {
     
     //MARK: Constants/Variables
-    let user = Auth.auth().currentUser?.uid
+    private let user = Auth.auth().currentUser?.uid
     var postID: String = ""
     var commentsPageClosure: (() -> Void)?
-    var likedPostsByUser: [String] = []
+    private var likedPostsByUser: [String] = []
     
-    let userRef = Database.database().reference(withPath: "Users")
-    let postsRef = Database.database().reference(withPath: "GenericPosts")
-    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
-    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postsRef = Database.database().reference(withPath: "GenericPosts")
+    private let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    private let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    private let postLikesRef = Database.database().reference(withPath: "PostLikes")
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -35,16 +35,16 @@ class likedPostTableViewCell: UITableViewCell {
 
     
     //MARK: Connections
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var postExplanationLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet private weak var postExplanationLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
     @IBOutlet weak var postAccentLine: UIView!
-    @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet private weak var postImage: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var likesButton: UIButton!
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var commentsButton: UIButton!
+    @IBOutlet private weak var likesButton: UIButton!
+    @IBOutlet private weak var likesLabel: UILabel!
+    @IBOutlet private weak var commentsButton: UIButton!
     
     //MARK: Completion Closure
     @IBAction func commentsButtonFunction(_ sender: Any) {

@@ -10,7 +10,7 @@ import UIKit
 
 class BrewTypeCVCell: UICollectionViewCell {
   
-    @IBOutlet weak var brewImage: UIImageView!
+    @IBOutlet private weak var brewImage: UIImageView!
     @IBOutlet weak var brewName: UILabel!
     
     func setCell(brew: ReviewHelper) {

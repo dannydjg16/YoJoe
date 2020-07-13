@@ -11,12 +11,12 @@ import UIKit
 class CMBCell: UITableViewCell {
 
     var lastSelectedItem: UICollectionViewCell?
-    var brewTypes: [ReviewHelper] = []
+    private var brewTypes: [ReviewHelper] = []
     
-    @IBOutlet weak var brewCollectionView: UICollectionView!
+    @IBOutlet private weak var brewCollectionView: UICollectionView!
     
     
-    func makeBrewTypes() -> [ReviewHelper] {
+    private func makeBrewTypes() -> [ReviewHelper] {
         
         var tempViewArray: [ReviewHelper] = []
         

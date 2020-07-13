@@ -13,15 +13,15 @@ import Firebase
 class DebutYourBrew: UIViewController {
     
     //MARK: Contstants/Variables
-    var userMe = Auth.auth().currentUser
-    var userDisplayName: String = ""
-    var brewDebuts: [BrewDebut] = []
-    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
-    let userRef = Database.database().reference(withPath: "Users")
+    private var userMe = Auth.auth().currentUser
+    private var userDisplayName: String = ""
+    private var brewDebuts: [BrewDebut] = []
+    private let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    private let userRef = Database.database().reference(withPath: "Users")
     var toReviewPage = UIButton()
     
     //MARK: Connections
-    @IBOutlet weak var brewDebutTable: UITableView!
+    @IBOutlet private weak var brewDebutTable: UITableView!
     
 
     
@@ -53,7 +53,7 @@ class DebutYourBrew: UIViewController {
         })
     }
     
-    @objc func displayReviewPage(){
+    @objc private func displayReviewPage(){
         
         let pictureFinder = UIAlertController(title: "Create New Post", message: "Show Us Your Creation!" , preferredStyle: .alert)
         

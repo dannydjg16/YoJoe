@@ -10,7 +10,7 @@ import UIKit
 
 class PostComment: UITableViewCell {
 
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet private weak var commentLabel: UILabel!
     
 
     func setCommentCell(comment: Comment) {

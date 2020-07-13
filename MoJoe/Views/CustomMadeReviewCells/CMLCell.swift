@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import CoreLocation
-class CMLCell: UITableViewCell, CLLocationManagerDelegate {
-    
-    var locationManager: CLLocationManager!
+
+class CMLCell: UITableViewCell {
+
     
     @IBOutlet weak var locationField: UITextField!
     
@@ -21,12 +20,14 @@ class CMLCell: UITableViewCell, CLLocationManagerDelegate {
         
     }
     
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
     }
     
 }
+
 
 extension CMLCell: UITextFieldDelegate{
     

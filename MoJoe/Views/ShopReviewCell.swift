@@ -14,20 +14,20 @@ class ShopReviewCell: UITableViewCell {
     //MARK: Constants/Vars
     var postID: String = ""
     var imageURL: String = ""
-    var likedPostsByUser: [String] = []
-    var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
+    private var likedPostsByUser: [String] = []
+    private var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
     
     var tapHandler: (() -> Void)?
     var toUserProfileTapHandler: (() -> Void)?
     var reportButton: (() -> Void)?
     
-    let ref = Database.database().reference(withPath: "ShopReview")
-    let userRef = Database.database().reference(withPath: "Users")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    let reportRef = Database.database().reference(withPath: "Reports")
-    let user = Auth.auth().currentUser
+    private let ref = Database.database().reference(withPath: "ShopReview")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    private let reportRef = Database.database().reference(withPath: "Reports")
+    private let user = Auth.auth().currentUser
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -40,16 +40,16 @@ class ShopReviewCell: UITableViewCell {
     
     //MARK: Connections
     @IBOutlet weak var userVisitedButton: UIButton!
-    @IBOutlet weak var coffeeShopLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
-    @IBOutlet weak var coffeeTypeLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet private weak var coffeeShopLabel: UILabel!
+    @IBOutlet private weak var cityLabel: UILabel!
+    @IBOutlet private weak var stateLabel: UILabel!
+    @IBOutlet private weak var coffeeTypeLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
     @IBOutlet weak var timeSinceLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var commentsButton: UIButton!
-    @IBOutlet weak var shopPicture: UIImageView!
+    @IBOutlet private weak var likeButton: UIButton!
+    @IBOutlet private weak var likesLabel: UILabel!
+    @IBOutlet private weak var commentsButton: UIButton!
+    @IBOutlet private weak var shopPicture: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
 
     

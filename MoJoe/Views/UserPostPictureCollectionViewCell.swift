@@ -11,7 +11,7 @@ import Firebase
 
 class UserPostPictureCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var userPostPicture: UIImageView!
+    @IBOutlet private weak var userPostPicture: UIImageView!
     
     
     func setPostImage(post: UserGenericPost){

@@ -11,10 +11,10 @@ import UIKit
 class SRRatingCell: UITableViewCell {
 
     
-    @IBOutlet weak var ratingSlider: UISlider!
+    @IBOutlet private weak var ratingSlider: UISlider!
     @IBOutlet weak var ratingLabel: UILabel!
   
-    @IBAction func setRating(_ sender: UISlider) {
+    @IBAction private func setRating(_ sender: UISlider) {
         
         let coffeeRating = Int(sender.value)
         

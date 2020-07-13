@@ -10,14 +10,14 @@ import Firebase
 class CommentsForBrewDebut: UIViewController {
     
     //MARK: Constants/Vars
-    let ref = Database.database().reference(withPath: "BrewDebut")
-    let commentRef = Database.database().reference(withPath: "Comments")
-    var userRef = Database.database().reference(withPath: "Users")
+    private let ref = Database.database().reference(withPath: "BrewDebut")
+    private let commentRef = Database.database().reference(withPath: "Comments")
+    private var userRef = Database.database().reference(withPath: "Users")
     var postIDFromFeed: String = ""
     var brewImageURL: String = ""
-    var allComments: [Comment] = []
+    private var allComments: [Comment] = []
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -29,19 +29,20 @@ class CommentsForBrewDebut: UIViewController {
     
     
     //MARK: Connections
-    @IBOutlet weak var brewDebutCommentsTableView: UITableView!
-    @IBOutlet weak var postViewOnCommentsPage: UIView!
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var timeSinceLabel: UILabel!
-    @IBOutlet weak var brewLabel: UILabel!
-    @IBOutlet weak var brandLabel: UILabel!
-    @IBOutlet weak var postLabel: UILabel!
-    @IBOutlet weak var roastLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var commentTextField: UITextField!
-    @IBAction func leaveComment(_ sender: Any) {
+    @IBOutlet private weak var brewDebutCommentsTableView: UITableView!
+    @IBOutlet private weak var postViewOnCommentsPage: UIView!
+    @IBOutlet private weak var userLabel: UILabel!
+    @IBOutlet private weak var timeSinceLabel: UILabel!
+    @IBOutlet private weak var brewLabel: UILabel!
+    @IBOutlet private weak var brandLabel: UILabel!
+    @IBOutlet private weak var postLabel: UILabel!
+    @IBOutlet private weak var roastLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
+    @IBOutlet private weak var postImageView: UIImageView!
+    @IBOutlet private weak var profilePicture: UIImageView!
+    @IBOutlet private weak var commentTextField: UITextField!
+    
+    @IBAction private func leaveComment(_ sender: Any) {
         
         let stringIndexOfPostID = postIDFromFeed.prefix(29)
         let stringPostID = String(stringIndexOfPostID)
@@ -96,7 +97,8 @@ class CommentsForBrewDebut: UIViewController {
         profilePicture.contentMode = .scaleAspectFill
         
         postImageView.contentMode = .scaleAspectFill
-        
+        postImageView.layer.borderWidth = 1
+        postImageView.layer.borderColor = #colorLiteral(red: 0.8148726821, green: 0.725468874, blue: 0.3972408772, alpha: 1)
         let endOfPostID = postIDFromFeed.suffix(10)
         let endString = String(endOfPostID)
         if endString == "addComment" {
@@ -174,7 +176,7 @@ class CommentsForBrewDebut: UIViewController {
     }
     
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer){
         
         switch gesture.direction {
         case .down :
@@ -190,7 +192,7 @@ class CommentsForBrewDebut: UIViewController {
     }
     
     
-    @objc func keyboardNotification(notification: NSNotification) {
+    @objc private func keyboardNotification(notification: NSNotification) {
         
         if self.view.frame.origin.y == -300 {
             self.view.frame.origin.y = 0
@@ -200,7 +202,7 @@ class CommentsForBrewDebut: UIViewController {
         
     }
     
-    func randomString(length: Int) -> String {
+    private func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }

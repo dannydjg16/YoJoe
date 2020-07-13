@@ -42,7 +42,7 @@ class VisitReviewViewController: UIViewController {
     //MARK: Connections
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var reviewTableView: UITableView!
-    @IBAction func backButton(_ sender: Any) {
+    @IBAction private func backButton(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
         

@@ -12,14 +12,14 @@ import Firebase
 class PostCellOnCommentsPage: UITableViewCell {
 
     //MARK:Constants/Vars
-    var userRef = Database.database().reference(withPath: "Users")
+    private var userRef = Database.database().reference(withPath: "Users")
     
     
     //MARK: Connections
-    @IBOutlet weak var userPic: UIImageView!
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var coffeeShopLabel: UILabel!
-    @IBOutlet weak var coffeeType: UILabel!
+    @IBOutlet private weak var userPic: UIImageView!
+    @IBOutlet private weak var userLabel: UILabel!
+    @IBOutlet private weak var coffeeShopLabel: UILabel!
+    @IBOutlet private weak var coffeeType: UILabel!
     
     
     func setShopReviewCommentCell(review: ShopReivew) {

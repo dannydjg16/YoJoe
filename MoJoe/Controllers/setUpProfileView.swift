@@ -12,20 +12,20 @@ import Firebase
 class setUpProfileView: UIViewController {
     
     //MARK: Constants/Variables
-    var userID = Auth.auth().currentUser?.uid
-    var firstNameOfUser: String = "First Name"
-    var lastNameOfUser: String = "Last Name"
-    var userNameOfUser: String = "UserName"
-    var profilePictureString: String = ""
-    let imagePicker = UIImagePickerController()
-    let userRef = Database.database().reference(withPath:"Users")
+    private var userID = Auth.auth().currentUser?.uid
+    private var firstNameOfUser: String = "First Name"
+    private var lastNameOfUser: String = "Last Name"
+    private var userNameOfUser: String = "UserName"
+    private var profilePictureString: String = ""
+    private let imagePicker = UIImagePickerController()
+    private let userRef = Database.database().reference(withPath:"Users")
     
     //MARK: Connections
-    @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var firstNameTField: UITextField!
-    @IBOutlet weak var lastNameTField: UITextField!
-    @IBOutlet weak var userNameTField: UITextField!
-    @IBOutlet weak var userEmailTextField: UITextField!
+    @IBOutlet private weak var profilePicture: UIImageView!
+    @IBOutlet private weak var firstNameTField: UITextField!
+    @IBOutlet private weak var lastNameTField: UITextField!
+    @IBOutlet private weak var userNameTField: UITextField!
+    @IBOutlet private weak var userEmailTextField: UITextField!
     
     @IBAction func toProfile(_ sender: Any) {
         

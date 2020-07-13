@@ -12,7 +12,6 @@
 		7E312B36212C98E3009D7F83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B34212C98E3009D7F83 /* Main.storyboard */; };
 		7E312B38212C98E3009D7F83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B37212C98E3009D7F83 /* Assets.xcassets */; };
 		7E312B3B212C98E3009D7F83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */; };
-		8122F6AB24A06D11002F7623 /* AppLoadedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8122F6AA24A06D11002F7623 /* AppLoadedViewController.swift */; };
 		8166FFFD24468BF600C9705D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8166FFFC24468BF600C9705D /* GoogleService-Info.plist */; };
 		8178AC672495BC2500AB42C2 /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC512495BC2500AB42C2 /* AppLoadingViewController.swift */; };
 		8178AC682495BC2500AB42C2 /* CommentsForBrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC522495BC2500AB42C2 /* CommentsForBrewDebut.swift */; };
@@ -45,21 +44,18 @@
 		8178AC8C2495BC3800AB42C2 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC842495BC3800AB42C2 /* ReviewHelper.swift */; };
 		8178AC8D2495BC3800AB42C2 /* GenericPostForLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC852495BC3800AB42C2 /* GenericPostForLikes.swift */; };
 		8178ACAB2495BC4100AB42C2 /* BrewTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC8F2495BC4100AB42C2 /* BrewTypeCVCell.swift */; };
-		8178ACAC2495BC4100AB42C2 /* OneLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC902495BC4100AB42C2 /* OneLabelCollectionViewCell.swift */; };
 		8178ACAD2495BC4100AB42C2 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC912495BC4100AB42C2 /* PostComment.swift */; };
 		8178ACAE2495BC4100AB42C2 /* RoastTypeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC922495BC4100AB42C2 /* RoastTypeCVCell.swift */; };
 		8178ACAF2495BC4100AB42C2 /* GenericPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC932495BC4100AB42C2 /* GenericPostTableViewCell.swift */; };
 		8178ACB02495BC4100AB42C2 /* PostCellOnCommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC942495BC4100AB42C2 /* PostCellOnCommentsPage.swift */; };
 		8178ACB12495BC4100AB42C2 /* SingleLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC952495BC4100AB42C2 /* SingleLabelCollectionViewCell.swift */; };
 		8178ACB22495BC4100AB42C2 /* OtherUserImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC962495BC4100AB42C2 /* OtherUserImageCollectionViewCell.swift */; };
-		8178ACB32495BC4100AB42C2 /* PostViewOnCommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC972495BC4100AB42C2 /* PostViewOnCommentsPage.swift */; };
 		8178ACB42495BC4100AB42C2 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC982495BC4100AB42C2 /* RoundButton.swift */; };
 		8178ACB52495BC4100AB42C2 /* ShopTagReviewFeedCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC992495BC4100AB42C2 /* ShopTagReviewFeedCVCell.swift */; };
 		8178ACB62495BC4100AB42C2 /* BrewDebutCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC9A2495BC4100AB42C2 /* BrewDebutCommentCell.swift */; };
 		8178ACB72495BC4100AB42C2 /* SRRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC9C2495BC4100AB42C2 /* SRRatingCell.swift */; };
 		8178ACB82495BC4100AB42C2 /* CMRoastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC9D2495BC4100AB42C2 /* CMRoastCell.swift */; };
 		8178ACB92495BC4100AB42C2 /* CMBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC9E2495BC4100AB42C2 /* CMBCell.swift */; };
-		8178ACBA2495BC4100AB42C2 /* CMICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC9F2495BC4100AB42C2 /* CMICell.swift */; };
 		8178ACBB2495BC4100AB42C2 /* CMLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA02495BC4100AB42C2 /* CMLCell.swift */; };
 		8178ACBC2495BC4100AB42C2 /* SRCoffeeTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA12495BC4100AB42C2 /* SRCoffeeTypeCell.swift */; };
 		8178ACBD2495BC4100AB42C2 /* SRLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA22495BC4100AB42C2 /* SRLocationCell.swift */; };
@@ -107,7 +103,6 @@
 		7E312B37212C98E3009D7F83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E312B3A212C98E3009D7F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E312B3C212C98E3009D7F83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8122F6AA24A06D11002F7623 /* AppLoadedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadedViewController.swift; sourceTree = "<group>"; };
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
 		8166FFFC24468BF600C9705D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8178AC512495BC2500AB42C2 /* AppLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
@@ -141,21 +136,18 @@
 		8178AC842495BC3800AB42C2 /* ReviewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		8178AC852495BC3800AB42C2 /* GenericPostForLikes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericPostForLikes.swift; sourceTree = "<group>"; };
 		8178AC8F2495BC4100AB42C2 /* BrewTypeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrewTypeCVCell.swift; sourceTree = "<group>"; };
-		8178AC902495BC4100AB42C2 /* OneLabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneLabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		8178AC912495BC4100AB42C2 /* PostComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostComment.swift; sourceTree = "<group>"; };
 		8178AC922495BC4100AB42C2 /* RoastTypeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoastTypeCVCell.swift; sourceTree = "<group>"; };
 		8178AC932495BC4100AB42C2 /* GenericPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericPostTableViewCell.swift; sourceTree = "<group>"; };
 		8178AC942495BC4100AB42C2 /* PostCellOnCommentsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellOnCommentsPage.swift; sourceTree = "<group>"; };
 		8178AC952495BC4100AB42C2 /* SingleLabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		8178AC962495BC4100AB42C2 /* OtherUserImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		8178AC972495BC4100AB42C2 /* PostViewOnCommentsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewOnCommentsPage.swift; sourceTree = "<group>"; };
 		8178AC982495BC4100AB42C2 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		8178AC992495BC4100AB42C2 /* ShopTagReviewFeedCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopTagReviewFeedCVCell.swift; sourceTree = "<group>"; };
 		8178AC9A2495BC4100AB42C2 /* BrewDebutCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrewDebutCommentCell.swift; sourceTree = "<group>"; };
 		8178AC9C2495BC4100AB42C2 /* SRRatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRRatingCell.swift; sourceTree = "<group>"; };
 		8178AC9D2495BC4100AB42C2 /* CMRoastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMRoastCell.swift; sourceTree = "<group>"; };
 		8178AC9E2495BC4100AB42C2 /* CMBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMBCell.swift; sourceTree = "<group>"; };
-		8178AC9F2495BC4100AB42C2 /* CMICell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMICell.swift; sourceTree = "<group>"; };
 		8178ACA02495BC4100AB42C2 /* CMLCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMLCell.swift; sourceTree = "<group>"; };
 		8178ACA12495BC4100AB42C2 /* SRCoffeeTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRCoffeeTypeCell.swift; sourceTree = "<group>"; };
 		8178ACA22495BC4100AB42C2 /* SRLocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRLocationCell.swift; sourceTree = "<group>"; };
@@ -273,7 +265,6 @@
 		8178AC502495BC2500AB42C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8122F6AA24A06D11002F7623 /* AppLoadedViewController.swift */,
 				8178AC512495BC2500AB42C2 /* AppLoadingViewController.swift */,
 				8178AC522495BC2500AB42C2 /* CommentsForBrewDebut.swift */,
 				8178AC532495BC2500AB42C2 /* DebutYourBrew.swift */,
@@ -319,14 +310,12 @@
 			isa = PBXGroup;
 			children = (
 				8178AC8F2495BC4100AB42C2 /* BrewTypeCVCell.swift */,
-				8178AC902495BC4100AB42C2 /* OneLabelCollectionViewCell.swift */,
 				8178AC912495BC4100AB42C2 /* PostComment.swift */,
 				8178AC922495BC4100AB42C2 /* RoastTypeCVCell.swift */,
 				8178AC932495BC4100AB42C2 /* GenericPostTableViewCell.swift */,
 				8178AC942495BC4100AB42C2 /* PostCellOnCommentsPage.swift */,
 				8178AC952495BC4100AB42C2 /* SingleLabelCollectionViewCell.swift */,
 				8178AC962495BC4100AB42C2 /* OtherUserImageCollectionViewCell.swift */,
-				8178AC972495BC4100AB42C2 /* PostViewOnCommentsPage.swift */,
 				8178AC982495BC4100AB42C2 /* RoundButton.swift */,
 				8178AC992495BC4100AB42C2 /* ShopTagReviewFeedCVCell.swift */,
 				8178AC9A2495BC4100AB42C2 /* BrewDebutCommentCell.swift */,
@@ -345,7 +334,6 @@
 				8178AC9C2495BC4100AB42C2 /* SRRatingCell.swift */,
 				8178AC9D2495BC4100AB42C2 /* CMRoastCell.swift */,
 				8178AC9E2495BC4100AB42C2 /* CMBCell.swift */,
-				8178AC9F2495BC4100AB42C2 /* CMICell.swift */,
 				8178ACA02495BC4100AB42C2 /* CMLCell.swift */,
 				8178ACA12495BC4100AB42C2 /* SRCoffeeTypeCell.swift */,
 				8178ACA22495BC4100AB42C2 /* SRLocationCell.swift */,
@@ -620,13 +608,11 @@
 				8178ACAE2495BC4100AB42C2 /* RoastTypeCVCell.swift in Sources */,
 				8178AC872495BC3800AB42C2 /* UserGenericPost.swift in Sources */,
 				8178ACBD2495BC4100AB42C2 /* SRLocationCell.swift in Sources */,
-				8178ACAC2495BC4100AB42C2 /* OneLabelCollectionViewCell.swift in Sources */,
 				8178ACC02495BC4100AB42C2 /* SRReviewCell.swift in Sources */,
 				8178AC6E2495BC2500AB42C2 /* FifthViewController.swift in Sources */,
 				8178AC8A2495BC3800AB42C2 /* BrewDebut.swift in Sources */,
 				8178AC8C2495BC3800AB42C2 /* ReviewHelper.swift in Sources */,
 				8178ACC52495BC4100AB42C2 /* BrewDebutCell.swift in Sources */,
-				8178ACBA2495BC4100AB42C2 /* CMICell.swift in Sources */,
 				8178AC892495BC3800AB42C2 /* ShopReview.swift in Sources */,
 				8178ACBF2495BC4100AB42C2 /* CMRatingCell.swift in Sources */,
 				8178AC722495BC2500AB42C2 /* currentUserShops.swift in Sources */,
@@ -649,12 +635,10 @@
 				8178ACB42495BC4100AB42C2 /* RoundButton.swift in Sources */,
 				8178AC882495BC3800AB42C2 /* comment.swift in Sources */,
 				8178ACB72495BC4100AB42C2 /* SRRatingCell.swift in Sources */,
-				8122F6AB24A06D11002F7623 /* AppLoadedViewController.swift in Sources */,
 				8178AC6F2495BC2500AB42C2 /* FeedSwitcher.swift in Sources */,
 				8178ACAD2495BC4100AB42C2 /* PostComment.swift in Sources */,
 				8178AC7A2495BC2500AB42C2 /* CoffeeShopView.swift in Sources */,
 				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
-				8178ACB32495BC4100AB42C2 /* PostViewOnCommentsPage.swift in Sources */,
 				8178AC782495BC2500AB42C2 /* EditProfile.swift in Sources */,
 				8178ACB02495BC4100AB42C2 /* PostCellOnCommentsPage.swift in Sources */,
 				8178AC792495BC2500AB42C2 /* RealLoginViewController.swift in Sources */,

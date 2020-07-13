@@ -12,8 +12,8 @@ import Firebase
 class GenericPostTableViewCell: UITableViewCell {
     
     //MARK: Constants/Variables
-    let user = Auth.auth().currentUser?.uid
-    var likedPostsByUser: [String] = []
+    private let user = Auth.auth().currentUser?.uid
+    private var likedPostsByUser: [String] = []
     var postID: String = "a"
     var genericReview: GenericPostForLikes = GenericPostForLikes(date: "", imageURL: "", postID: "", userID: "", postExplanation: "", rating: 0, reviewType: "", likeDate: "")
     
@@ -22,15 +22,15 @@ class GenericPostTableViewCell: UITableViewCell {
     var reportButton: (() -> Void)?
     var toUserProfileTapHandler: (() -> Void)?
     
-    let userRef = Database.database().reference(withPath: "Users")
-    let postsRef = Database.database().reference(withPath: "GenericPosts")
-    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
-    let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    let reportRef = Database.database().reference(withPath: "Reports")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postsRef = Database.database().reference(withPath: "GenericPosts")
+    private let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    private let brewDebutRef = Database.database().reference(withPath: "BrewDebut")
+    private let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    private let reportRef = Database.database().reference(withPath: "Reports")
     
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -42,16 +42,16 @@ class GenericPostTableViewCell: UITableViewCell {
     
     
     //MARK: Connections
-    @IBOutlet weak var nameButton: UIButton!
+    @IBOutlet private weak var nameButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var postExplanationLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet private weak var postExplanationLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
     @IBOutlet weak var postAccentLine: UIView!
-    @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet private weak var postImage: UIImageView!
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var likesButton: UIButton!
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var commentsButton: UIButton!
+    @IBOutlet private weak var likesButton: UIButton!
+    @IBOutlet private weak var likesLabel: UILabel!
+    @IBOutlet private weak var commentsButton: UIButton!
     
     @IBAction func commentsButtonFunction(_ sender: Any) {
         
@@ -177,7 +177,7 @@ class GenericPostTableViewCell: UITableViewCell {
     }
     
     
-    @objc func likeButtonTapped(sender: UIButton) {
+    @objc private func likeButtonTapped(sender: UIButton) {
         
         //get # of likes from database
         self.postLikesRef.child("\(postID)").child("likesAmount").observeSingleEvent(of: .value, with: { (dataSnapshot) in

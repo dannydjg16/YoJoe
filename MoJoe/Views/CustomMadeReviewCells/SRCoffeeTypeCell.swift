@@ -11,9 +11,9 @@ import UIKit
 class SRCoffeeTypeCell: UITableViewCell {
 
     var lastSelectedItem: UICollectionViewCell?
-    var coffeeTypes: [String] = ["Cappucino", "Americano", "Latte", "Hot Coffee", "Cold Brew", "Iced Coffee", "Other"]
+    private var coffeeTypes: [String] = ["Cappucino", "Americano", "Latte", "Hot Coffee", "Cold Brew", "Iced Coffee", "Other"]
     
-    @IBOutlet weak var coffeeTypeCV: UICollectionView!
+    @IBOutlet private weak var coffeeTypeCV: UICollectionView!
    
 
     override func awakeFromNib() {

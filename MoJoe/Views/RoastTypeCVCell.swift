@@ -10,7 +10,7 @@ import UIKit
 
 class RoastTypeCVCell: UICollectionViewCell {
   
-    @IBOutlet weak var roastImage: UIImageView!
+    @IBOutlet private weak var roastImage: UIImageView!
     @IBOutlet weak var roastLabel: UILabel!
     
     

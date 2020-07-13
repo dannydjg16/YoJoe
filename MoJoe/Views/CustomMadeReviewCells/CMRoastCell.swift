@@ -10,13 +10,13 @@ import UIKit
 
 class CMRoastCell: UITableViewCell {
     
-    var roastTypes: [ReviewHelper] = []
+    private var roastTypes: [ReviewHelper] = []
     var lastSelectedItem: UICollectionViewCell?
     
-    @IBOutlet weak var roastCollectionView: UICollectionView!
+    @IBOutlet private weak var roastCollectionView: UICollectionView!
     
     
-    func makeRoasts() -> [ReviewHelper] {
+    private func makeRoasts() -> [ReviewHelper] {
         
         var tempRoasts: [ReviewHelper] = []
         

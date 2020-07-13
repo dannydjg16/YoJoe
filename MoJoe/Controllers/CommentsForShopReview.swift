@@ -95,7 +95,8 @@ class CommentsForShopReview: UIViewController {
         let tapGestureOnPicture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
         postImageView.addGestureRecognizer(tapGestureOnPicture)
         postImageView.isUserInteractionEnabled = true
-        
+        postImageView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        postImageView.layer.borderWidth = 1
         postImageView.contentMode = .scaleAspectFill
         
         commentsTableView.delegate = self
@@ -118,6 +119,8 @@ class CommentsForShopReview: UIViewController {
         profilePic.layer.borderWidth = 0.5
         profilePic.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         profilePic.contentMode = .scaleAspectFill
+        
+        
         
         //Based on if the cell or comment button is pressed, what the first responder is when view loads.
         let endOfPostID = postIDFromFeed.suffix(10)
