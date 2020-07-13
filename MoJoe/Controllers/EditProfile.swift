@@ -12,22 +12,22 @@ import Firebase
 class EditProfile: UIViewController {
     
     //MARK: Constants/Vars
-    var userID = Auth.auth().currentUser?.uid
-    var user = Auth.auth().currentUser
-    var imageURL: String?
-    let profileImageURL = Auth.auth().currentUser?.photoURL
-    let userRef = Database.database().reference(withPath:"Users")
-    var imagePicker = UIImagePickerController()
+    private var userID = Auth.auth().currentUser?.uid
+    private var user = Auth.auth().currentUser
+    private var imageURL: String?
+    private let profileImageURL = Auth.auth().currentUser?.photoURL
+    private let userRef = Database.database().reference(withPath:"Users")
+    private var imagePicker = UIImagePickerController()
     
     //MARK: Connections
-    @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var firstNameTF: UITextField!
-    @IBOutlet weak var lastNameTF: UITextField!
-    @IBOutlet weak var emailTField: UITextField!
-    @IBOutlet weak var userNameTField: UITextField!
+    @IBOutlet private weak var profilePicture: UIImageView!
+    @IBOutlet private weak var firstNameTF: UITextField!
+    @IBOutlet private weak var lastNameTF: UITextField!
+    @IBOutlet private weak var emailTField: UITextField!
+    @IBOutlet private weak var userNameTField: UITextField!
     
     
-    @IBAction func tapGesture(_ sender: Any) {
+    @IBAction private func tapGesture(_ sender: Any) {
         
         firstNameTF.resignFirstResponder()
         lastNameTF.resignFirstResponder()
@@ -37,7 +37,7 @@ class EditProfile: UIViewController {
     }
     
     
-    @IBAction func changeProfilePic(_ sender: Any) {
+    @IBAction private func changeProfilePic(_ sender: Any) {
         
         let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .alert)
         
@@ -67,7 +67,7 @@ class EditProfile: UIViewController {
     }
     
     
-    @IBAction func saveName(_ sender: Any) {
+    @IBAction private func saveName(_ sender: Any) {
         
         if firstNameTF.text == "" || lastNameTF.text == "" {
             return
@@ -176,7 +176,7 @@ class EditProfile: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func keyboardNotification(notification: NSNotification) {
+    @objc private func keyboardNotification(notification: NSNotification) {
         
         if self.view.frame.origin.y == -300 {
             self.view.frame.origin.y = 0
@@ -186,7 +186,7 @@ class EditProfile: UIViewController {
         
     }
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer){
         
         switch gesture.direction {
         case .down :
@@ -196,12 +196,12 @@ class EditProfile: UIViewController {
         }
     }
     
-    func randomString(length: Int) -> String {
+    private func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    func changePictureURL(url: URL) {
+    private func changePictureURL(url: URL) {
         
         let userPictureChange = Auth.auth().currentUser?.createProfileChangeRequest()
         userPictureChange?.photoURL = url

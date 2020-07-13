@@ -13,21 +13,21 @@ import Firebase
 class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     
     //MARK: Constants/Vars
-    var user = Auth.auth().currentUser
-    var addPhotoButton = UIButton()
-    let imagePicker = UIImagePickerController()
-    var imageURL: String?
-    var postID: String?
+    private var user = Auth.auth().currentUser
+    private var addPhotoButton = UIButton()
+    private let imagePicker = UIImagePickerController()
+    private var imageURL: String?
+    private var postID: String?
     var typeOfPicture: String = ""
-    var pictureTaken: Bool = false
-    var originalImagePicker: Bool = false
+    private var pictureTaken: Bool = false
+    private var originalImagePicker: Bool = false
     
-    let ref = Database.database().reference(withPath: "ShopReview")
-    let userRef = Database.database().reference(withPath: "Users")
-    let postRef = Database.database().reference(withPath: "GenericPosts")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    private let ref = Database.database().reference(withPath: "ShopReview")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postRef = Database.database().reference(withPath: "GenericPosts")
+    private let postLikesRef = Database.database().reference(withPath: "PostLikes")
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -38,15 +38,15 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: Connections
-    @IBOutlet weak var shopImage: UIImageView!
-    @IBOutlet weak var shopReviewSheet: UITableView!
+    @IBOutlet private weak var shopImage: UIImageView!
+    @IBOutlet private weak var shopReviewSheet: UITableView!
     
-    @IBAction func backButton(_ sender: Any) {
+    @IBAction private func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func postButtonPressed(_ sender: Any) {
+    @IBAction private func postButtonPressed(_ sender: Any) {
         
         guard
             let shopCell: SRLocationCell = shopReviewSheet.cellForRow(at: IndexPath(row: 0, section: 0)) as? SRLocationCell,
@@ -132,7 +132,7 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     }
     
     
-    func warningAlert(title: String, message: String) {
+    private func warningAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Return", style: .cancel, handler: nil)
@@ -142,7 +142,7 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     }
     
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer){
         
         switch gesture.direction {
         case .down:
@@ -153,13 +153,13 @@ class ShopReviewSheet: UIViewController, UITextFieldDelegate {
     }
     
     
-    func randomString(length: Int) -> String {
+    private func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     
-    @objc func addPictures() {
+    @objc private func addPictures() {
         
         let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
         let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

@@ -13,20 +13,15 @@ import CoreLocation
 
 class NearbyFeedViewController: UIViewController, CLLocationManagerDelegate{
     
-    var posts: [UserGenericPost] = []
+    private var posts: [UserGenericPost] = []
     
     var following: [String] = []
-    let userRef = Database.database().reference(withPath: "Users")
-    let postsRef = Database.database().reference(withPath: "GenericPosts")
-    var theUser = Auth.auth().currentUser
-    var currentLocation: CLLocation!
-    var locationManager = CLLocationManager()
-    var data: Any = ""
-    let searchText: String? = ""
-    let user = Auth.auth().currentUser?.uid
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postsRef = Database.database().reference(withPath: "GenericPosts")
+    private let user = Auth.auth().currentUser?.uid
     
     
-    @IBOutlet weak var shopTableView: UITableView!
+    @IBOutlet private weak var shopTableView: UITableView!
     
     
     override func viewDidLoad() {

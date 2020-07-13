@@ -12,10 +12,8 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var signUpButton: RoundButton!
-    @IBOutlet weak var signInButton: RoundButton!
-    
-    
+    @IBOutlet private weak var signUpButton: RoundButton!
+    @IBOutlet private weak var signInButton: RoundButton!
     
     
     override func viewDidLoad() {

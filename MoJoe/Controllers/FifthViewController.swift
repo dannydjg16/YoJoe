@@ -19,31 +19,27 @@ import FirebaseStorage
 class FifthViewController: UIViewController {
     
     //MARK: Constant/Vars
-    var user = Auth.auth().currentUser
-    var userProfilePicture = Auth.auth().currentUser?.photoURL
-    let userID = Auth.auth().currentUser?.uid
-    var userRef = Database.database().reference(withPath: "Users")
-    var postLikeRef = Database.database().reference(withPath: "PostLikes")
-    let imagePicker = UIImagePickerController()
-    var usersPosts: [UserGenericPost] = []
+    private var user = Auth.auth().currentUser
+    private var userProfilePicture = Auth.auth().currentUser?.photoURL
+    private let userID = Auth.auth().currentUser?.uid
+    private var userRef = Database.database().reference(withPath: "Users")
+    private var postLikeRef = Database.database().reference(withPath: "PostLikes")
+    private let imagePicker = UIImagePickerController()
+    private var usersPosts: [UserGenericPost] = []
     
     //MARK:Connections
-    @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var usersPicturesCollectionView: UICollectionView!
-    @IBOutlet weak var yourName: UILabel!
-    @IBOutlet weak var yourUserName: UILabel!
-    @IBOutlet weak var shopsNumberLabel: UILabel!
-    @IBOutlet weak var brewNumberLabel: UILabel!
-    @IBOutlet weak var followingNumberLabel: UILabel!
-    @IBOutlet weak var followersNumberLabel: UILabel!
-    @IBOutlet weak var likesButton: UIButton!
+    @IBOutlet private weak var profilePicture: UIImageView!
+    @IBOutlet private weak var usersPicturesCollectionView: UICollectionView!
+    @IBOutlet private  weak var yourName: UILabel!
+    @IBOutlet private weak var yourUserName: UILabel!
+    @IBOutlet private weak var shopsNumberLabel: UILabel!
+    @IBOutlet private weak var brewNumberLabel: UILabel!
+    @IBOutlet private weak var followingNumberLabel: UILabel!
+    @IBOutlet private weak var followersNumberLabel: UILabel!
+    @IBOutlet private weak var likesButton: UIButton!
     
-    
-    @IBAction func tapKeyboardHide(_ sender: Any) {
-        
-    }
-    
-    @IBAction func logout(_ sender: Any) {
+
+    @IBAction private func logout(_ sender: Any) {
         
         let user = Auth.auth().currentUser!
         let onlineRef = Database.database().reference(withPath: "online/\(user.uid)")
@@ -69,7 +65,7 @@ class FifthViewController: UIViewController {
     }
     
     
-    @IBAction func changeProfilePicture(_ sender: Any) {
+    @IBAction private func changeProfilePicture(_ sender: Any) {
         
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary

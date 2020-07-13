@@ -13,13 +13,13 @@ import Firebase
 class CommentsForShopReview: UIViewController {
     
     //MARK: Constants/Vars
-    let ref = Database.database().reference(withPath: "ShopReview")
-    let commentRef = Database.database().reference(withPath: "Comments")
-    var userRef = Database.database().reference(withPath: "Users")
+    private let ref = Database.database().reference(withPath: "ShopReview")
+    private let commentRef = Database.database().reference(withPath: "Comments")
+    private var userRef = Database.database().reference(withPath: "Users")
     var postIDFromFeed: String = ""
-    var allComments: [Comment] = []
+    private var allComments: [Comment] = []
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -32,23 +32,23 @@ class CommentsForShopReview: UIViewController {
     
     
     //MARK: Connections
-    @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timeSinceLabel: UILabel!
-    @IBOutlet weak var shopLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var coffeeTypeLabel: UILabel!
-    @IBOutlet weak var postExplanation: UILabel!
-    @IBOutlet weak var postViewOnCommentsPage: UIView!
-    @IBOutlet weak var commentsTableView: UITableView!
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet private weak var profilePic: UIImageView!
+    @IBOutlet private weak var postImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var timeSinceLabel: UILabel!
+    @IBOutlet private weak var shopLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
+    @IBOutlet private weak var coffeeTypeLabel: UILabel!
+    @IBOutlet private weak var postExplanation: UILabel!
+    @IBOutlet private weak var postViewOnCommentsPage: UIView!
+    @IBOutlet private weak var commentsTableView: UITableView!
+    @IBOutlet private weak var commentTextField: UITextField!
     
-    @IBAction func hideKeyboard(_ sender: Any) {
+    @IBAction private func hideKeyboard(_ sender: Any) {
         self.commentTextField.resignFirstResponder()
     }
     
-    @IBAction func addComment(_ sender: Any) {
+    @IBAction private func addComment(_ sender: Any) {
         
         let stringIndexOfPostID = postIDFromFeed.prefix(30)
         let stringPostID = String(stringIndexOfPostID)
@@ -200,7 +200,7 @@ class CommentsForShopReview: UIViewController {
     }
     
     
-    @objc func keyboardNotification(notification: NSNotification) {
+    @objc private func keyboardNotification(notification: NSNotification) {
         
         if self.view.frame.origin.y == -300 {
             self.view.frame.origin.y = 0
@@ -210,7 +210,7 @@ class CommentsForShopReview: UIViewController {
         
     }
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer) {
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer) {
         
         switch gesture.direction {
         case .down :
@@ -220,13 +220,13 @@ class CommentsForShopReview: UIViewController {
         }
     }
     
-    @objc func tapHandler(sender: UITapGestureRecognizer){
+    @objc private func tapHandler(sender: UITapGestureRecognizer){
         
         
         
     }
     
-    func randomString(length: Int) -> String {
+    private func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }

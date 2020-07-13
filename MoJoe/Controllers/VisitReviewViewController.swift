@@ -15,20 +15,20 @@ import Firebase
 class VisitReviewViewController: UIViewController {
     
     //MARK: Constants/Variables
-    var user = Auth.auth().currentUser
-    let ref = Database.database().reference(withPath: "BrewDebut")
-    let userRef = Database.database().reference(withPath: "Users")
-    let postRef = Database.database().reference(withPath: "GenericPosts")
-    let postLikesRef = Database.database().reference(withPath: "PostLikes")
-    var addPhotoButton = UIButton()
-    var imageURL: String?
+    private var user = Auth.auth().currentUser
+    private let ref = Database.database().reference(withPath: "BrewDebut")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private let postRef = Database.database().reference(withPath: "GenericPosts")
+    private let postLikesRef = Database.database().reference(withPath: "PostLikes")
+    private var addPhotoButton = UIButton()
+    private var imageURL: String?
     var postID: String?
-    let imagePicker = UIImagePickerController()
+    private let imagePicker = UIImagePickerController()
     var typeOfPicture: String = ""
-    var pictureTaken: Bool = false
-    var originalImagePicker: Bool = false
+    private var pictureTaken: Bool = false
+    private var originalImagePicker: Bool = false
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -40,8 +40,9 @@ class VisitReviewViewController: UIViewController {
     
     
     //MARK: Connections
-    @IBOutlet weak var shopImage: UIImageView!
-    @IBOutlet weak var reviewTableView: UITableView!
+    @IBOutlet private weak var shopImage: UIImageView!
+    @IBOutlet private weak var reviewTableView: UITableView!
+    
     @IBAction private func backButton(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
@@ -131,7 +132,7 @@ class VisitReviewViewController: UIViewController {
     }
     
     
-    func warningAlert(title: String, message: String) {
+    private func warningAlert(title: String, message: String) {
                
                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                let action = UIAlertAction(title: "Return", style: .cancel, handler: nil)
@@ -190,7 +191,7 @@ class VisitReviewViewController: UIViewController {
     }
     
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer) {
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer) {
         
         switch gesture.direction {
         case .down :
@@ -201,7 +202,7 @@ class VisitReviewViewController: UIViewController {
     }
     
     
-    func randomString(length: Int) -> String {
+    private func randomString(length: Int) -> String {
         
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
@@ -209,7 +210,7 @@ class VisitReviewViewController: UIViewController {
     
     
     
-    @objc func addPictures() {
+    @objc private func addPictures() {
         
         let pictureFinder = UIAlertController(title: "Add Picture", message: "" , preferredStyle: .actionSheet)
         let cancelPicture = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

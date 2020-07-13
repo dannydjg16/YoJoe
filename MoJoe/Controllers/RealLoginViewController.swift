@@ -12,16 +12,16 @@ import Firebase
 class RealLoginViewController: UIViewController,UITextFieldDelegate {
     
     //MARK: Connections
-    @IBOutlet weak var userNameTField: UITextField!
-    @IBOutlet weak var passwordTField: UITextField!
+    @IBOutlet private weak var userNameTField: UITextField!
+    @IBOutlet private weak var passwordTField: UITextField!
     
     
-    @IBAction func backButton(_ sender: Any) {
+    @IBAction private func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func tapByeKeyboard(_ sender: Any) {
+    @IBAction private func tapByeKeyboard(_ sender: Any) {
         
         self.userNameTField.resignFirstResponder()
         self.passwordTField.resignFirstResponder()
@@ -39,7 +39,7 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    @IBAction func loginToApp(_ sender: Any) {
+    @IBAction private func loginToApp(_ sender: Any) {
         
         guard let email = userNameTField.text,
             let password = passwordTField.text,
@@ -89,7 +89,7 @@ class RealLoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer){
         
         switch gesture.direction {
         case .down :

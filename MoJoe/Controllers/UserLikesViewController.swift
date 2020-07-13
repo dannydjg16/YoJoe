@@ -11,13 +11,12 @@ import Firebase
 
 class UserLikesViewController: UIViewController {
     
-    var posts: [GenericPostForLikes] = []
-    var postStrings: [String] = []
-    let uid = Auth.auth().currentUser?.uid
-    let userRef = Database.database().reference(withPath: "Users")
+    private var posts: [GenericPostForLikes] = []
+    private let uid = Auth.auth().currentUser?.uid
+    private let userRef = Database.database().reference(withPath: "Users")
     
     
-    @IBOutlet weak var userLikesTableView: UITableView!
+    @IBOutlet private weak var userLikesTableView: UITableView!
     
     
     override func viewDidLoad() {

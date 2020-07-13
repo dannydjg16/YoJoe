@@ -19,7 +19,6 @@
 		8178AC6A2495BC2500AB42C2 /* setUpProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC542495BC2500AB42C2 /* setUpProfileView.swift */; };
 		8178AC6B2495BC2500AB42C2 /* ShopsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC552495BC2500AB42C2 /* ShopsFeedView.swift */; };
 		8178AC6C2495BC2500AB42C2 /* OtherUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC562495BC2500AB42C2 /* OtherUserProfilePage.swift */; };
-		8178AC6D2495BC2500AB42C2 /* CurrentUserBrews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC572495BC2500AB42C2 /* CurrentUserBrews.swift */; };
 		8178AC6E2495BC2500AB42C2 /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC582495BC2500AB42C2 /* FifthViewController.swift */; };
 		8178AC6F2495BC2500AB42C2 /* FeedSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC592495BC2500AB42C2 /* FeedSwitcher.swift */; };
 		8178AC702495BC2500AB42C2 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC5A2495BC2500AB42C2 /* InitialViewController.swift */; };
@@ -111,7 +110,6 @@
 		8178AC542495BC2500AB42C2 /* setUpProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUpProfileView.swift; sourceTree = "<group>"; };
 		8178AC552495BC2500AB42C2 /* ShopsFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopsFeedView.swift; sourceTree = "<group>"; };
 		8178AC562495BC2500AB42C2 /* OtherUserProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage.swift; sourceTree = "<group>"; };
-		8178AC572495BC2500AB42C2 /* CurrentUserBrews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserBrews.swift; sourceTree = "<group>"; };
 		8178AC582495BC2500AB42C2 /* FifthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
 		8178AC592495BC2500AB42C2 /* FeedSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedSwitcher.swift; sourceTree = "<group>"; };
 		8178AC5A2495BC2500AB42C2 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 				8178AC542495BC2500AB42C2 /* setUpProfileView.swift */,
 				8178AC552495BC2500AB42C2 /* ShopsFeedView.swift */,
 				8178AC562495BC2500AB42C2 /* OtherUserProfilePage.swift */,
-				8178AC572495BC2500AB42C2 /* CurrentUserBrews.swift */,
 				8178AC582495BC2500AB42C2 /* FifthViewController.swift */,
 				8178AC592495BC2500AB42C2 /* FeedSwitcher.swift */,
 				8178AC5A2495BC2500AB42C2 /* InitialViewController.swift */,
@@ -647,7 +644,6 @@
 				8178AC762495BC2500AB42C2 /* FeedPageViewController.swift in Sources */,
 				8178ACBB2495BC4100AB42C2 /* CMLCell.swift in Sources */,
 				8178AC682495BC2500AB42C2 /* CommentsForBrewDebut.swift in Sources */,
-				8178AC6D2495BC2500AB42C2 /* CurrentUserBrews.swift in Sources */,
 				8178ACBC2495BC4100AB42C2 /* SRCoffeeTypeCell.swift in Sources */,
 				8178ACAB2495BC4100AB42C2 /* BrewTypeCVCell.swift in Sources */,
 				8178AC862495BC3800AB42C2 /* Date.swift in Sources */,

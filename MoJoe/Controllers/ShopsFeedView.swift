@@ -12,14 +12,14 @@ import Firebase
 class ShopsFeedView: UIViewController {
     
     //MARK: Constants/Variables
-    var userMe = Auth.auth().currentUser
-    var shopReviews: [ShopReivew] = []
-    let shopReviewRef = Database.database().reference(withPath: "ShopReview")
-    let userRef = Database.database().reference(withPath: "Users")
-    var toReviewPage = UIButton()
+    private var userMe = Auth.auth().currentUser
+    private var shopReviews: [ShopReivew] = []
+    private let shopReviewRef = Database.database().reference(withPath: "ShopReview")
+    private let userRef = Database.database().reference(withPath: "Users")
+    private var toReviewPage = UIButton()
     
     //MARK: Connections
-    @IBOutlet weak var shopReviewTable: UITableView!
+    @IBOutlet private weak var shopReviewTable: UITableView!
     
     
     
@@ -67,7 +67,7 @@ class ShopsFeedView: UIViewController {
         })
     }
     
-    @objc func displayReviewPage(){
+    @objc private func displayReviewPage(){
         
         
         let pictureFinder = UIAlertController(title: "Create New Post", message: "Review a Shop!" , preferredStyle: .alert)

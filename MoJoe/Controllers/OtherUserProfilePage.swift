@@ -13,12 +13,12 @@ class OtherUserProfilePage: UIViewController {
     
     //MARK: Constants/Vars
     var userID: String = ""
-    var allFolllowing: [String] = []
-    var usersPosts: [UserGenericPost] = []
-    var userRef = Database.database().reference(withPath: "Users")
-    let user = Auth.auth().currentUser?.uid
+    private var allFolllowing: [String] = []
+    private var usersPosts: [UserGenericPost] = []
+    private var userRef = Database.database().reference(withPath: "Users")
+    private let user = Auth.auth().currentUser?.uid
     
-    var date: String {
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -29,14 +29,14 @@ class OtherUserProfilePage: UIViewController {
     }
     
     //MARK: Connections
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var shopsNumberLabel: UILabel!
-    @IBOutlet weak var brewNumberLabel: UILabel!
-    @IBOutlet weak var followingNumberLabel: UILabel!
-    @IBOutlet weak var followersNumberLabel: UILabel!
-    @IBOutlet weak var otherUserCollectionView: UICollectionView!
-    @IBOutlet weak var followUser: UIButton!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var profilePic: UIImageView!
+    @IBOutlet private weak var shopsNumberLabel: UILabel!
+    @IBOutlet private weak var brewNumberLabel: UILabel!
+    @IBOutlet private weak var followingNumberLabel: UILabel!
+    @IBOutlet private weak var followersNumberLabel: UILabel!
+    @IBOutlet private weak var otherUserCollectionView: UICollectionView!
+    @IBOutlet private weak var followUser: UIButton!
     
     
     
@@ -160,7 +160,7 @@ class OtherUserProfilePage: UIViewController {
         
     }
     
-    @objc func followUserAction(){
+    @objc private func followUserAction(){
         
         if self.user! == self.userID {
             return

@@ -51,7 +51,7 @@ class setUpProfileView: UIViewController {
         
     }
     
-    @IBAction func saveProfilePicture(_ sender: Any) {
+    @IBAction private func saveProfilePicture(_ sender: Any) {
         
         let pictureFinder = UIAlertController(title: "Change Profile Picture", message: "" , preferredStyle: .alert)
         
@@ -84,7 +84,7 @@ class setUpProfileView: UIViewController {
     
     
     
-    @IBAction func saveUserFullName(_ sender: Any) {
+    @IBAction private func saveUserFullName(_ sender: Any) {
         
         if firstNameTField.text == "" || lastNameTField.text == "" {
             return
@@ -102,7 +102,7 @@ class setUpProfileView: UIViewController {
     }
     
     
-    @IBAction func saveUserName(_ sender: Any) {
+    @IBAction private func saveUserName(_ sender: Any) {
         
         if userNameTField.text == "" {
             return
@@ -115,7 +115,7 @@ class setUpProfileView: UIViewController {
         
     }
     
-    @IBAction func saveUserEmail(_ sender: Any) {
+    @IBAction private func saveUserEmail(_ sender: Any) {
        
         if userEmailTextField.text == "" //ADD a nonvalid email option
         {
@@ -129,7 +129,7 @@ class setUpProfileView: UIViewController {
     }
     
     
-    @IBAction func cancelUser(_ sender: Any) {
+    @IBAction private func cancelUser(_ sender: Any) {
         
         
         guard let user = Auth.auth().currentUser else {
@@ -178,7 +178,7 @@ class setUpProfileView: UIViewController {
     }
     
     
-    @IBAction func tapGestureAction(_ sender: Any) {
+    @IBAction private func tapGestureAction(_ sender: Any) {
         
         self.lastNameTField.resignFirstResponder()
         self.firstNameTField.resignFirstResponder()
@@ -311,7 +311,7 @@ class setUpProfileView: UIViewController {
         }
     }
     
-    func changePictureURL(url: URL) {
+    private func changePictureURL(url: URL) {
         
         let userPictureChange = Auth.auth().currentUser?.createProfileChangeRequest()
         userPictureChange?.photoURL = url
@@ -320,7 +320,7 @@ class setUpProfileView: UIViewController {
         }
     }
     
-    func randomString(length: Int) -> String {
+    private func randomString(length: Int) -> String {
         
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })

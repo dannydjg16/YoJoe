@@ -12,8 +12,8 @@ import Firebase
 class EmailRegistrationViewController: UIViewController {
     
     //MARK: Constants/Vars
-    var userRef = Database.database().reference(withPath: "Users")
-    var date: String {
+    private var userRef = Database.database().reference(withPath: "Users")
+    private var date: String {
         get {
             let postDate = Date()
             let dateFormat = DateFormatter()
@@ -24,9 +24,9 @@ class EmailRegistrationViewController: UIViewController {
     }
     
     //MARK: Connections
-    @IBOutlet weak var emailTField: UITextField!
-    @IBOutlet weak var passwordTField: UITextField!
-    @IBOutlet weak var duplicatePassField: UITextField!
+    @IBOutlet private weak var emailTField: UITextField!
+    @IBOutlet private weak var passwordTField: UITextField!
+    @IBOutlet private weak var duplicatePassField: UITextField!
     
     
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class EmailRegistrationViewController: UIViewController {
     }
     
     
-    @objc func swipeHandler(gesture: UISwipeGestureRecognizer){
+    @objc private func swipeHandler(gesture: UISwipeGestureRecognizer){
         
         switch gesture.direction {
         case .down :
@@ -69,7 +69,7 @@ class EmailRegistrationViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func keyboardNotification(notification: NSNotification) {
+    @objc private func keyboardNotification(notification: NSNotification) {
         //        if self.view.frame.origin.y == -300 {
         //            self.view.frame.origin.y = 0
         //        } else {
@@ -78,11 +78,11 @@ class EmailRegistrationViewController: UIViewController {
         //
     }
     
-    @IBAction func backButton(_ sender: Any) {
+    @IBAction private func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func tapGesture(_ sender: Any) {
+    @IBAction private func tapGesture(_ sender: Any) {
         
         emailTField.resignFirstResponder()
         passwordTField.resignFirstResponder()
@@ -144,7 +144,7 @@ class EmailRegistrationViewController: UIViewController {
     }
     
     //Make a function with a message that can be added
-    func emailRegisterAlert(title: String, message: String) {
+    private func emailRegisterAlert(title: String, message: String) {
         
         let theAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         theAlert.addAction(UIAlertAction(title: "Fix Error", style: .cancel, handler: nil))
@@ -154,7 +154,7 @@ class EmailRegistrationViewController: UIViewController {
     
     
     
-    func changePictureURL(url: URL) {
+    private func changePictureURL(url: URL) {
         
         let userPictureChange = Auth.auth().currentUser?.createProfileChangeRequest()
         userPictureChange?.photoURL = url

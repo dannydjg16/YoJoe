@@ -12,13 +12,13 @@ import Firebase
 class FeedSwitcher: UIViewController {
     
     //MARK: Constants/Variables
-    let userID = Auth.auth().currentUser?.uid
-    let userRef = Database.database().reference(withPath: "Users")
-    var followingArray: [String] = []
-    var lastVC: UIViewController?
+    private let userID = Auth.auth().currentUser?.uid
+    private let userRef = Database.database().reference(withPath: "Users")
+    private var followingArray: [String] = []
+    private var lastVC: UIViewController?
     
     //MARK: Connections
-    @IBOutlet weak var feedSwitcherSC: UISegmentedControl!
+    @IBOutlet private weak var feedSwitcherSC: UISegmentedControl!
     
     
     
@@ -72,11 +72,8 @@ class FeedSwitcher: UIViewController {
         self.addChildVC(child: nearbyFeedViewController)
         lastVC = nearbyFeedViewController
         
-        
         //MARK: Navigation Bar Color
         navigationController?.navigationBar.barTintColor = UIColor(hue: 0.1333, saturation: 0.12, brightness: 0.94, alpha: 1.0)
-        
-        
         
         
         setupView()
@@ -85,16 +82,12 @@ class FeedSwitcher: UIViewController {
     
     
     
-    func setupView(){
+    private func setupView(){
+        
         segmentSetup()
-        
-        
-        
-        
+    
         loadNextView()
     }
-    
-    
     
     
     private func loadNextView() {
@@ -151,7 +144,7 @@ class FeedSwitcher: UIViewController {
     
     
     
-    @objc func selectionDidChange() {
+    @objc private func selectionDidChange() {
         loadNextView()
     }
     
@@ -168,7 +161,7 @@ class FeedSwitcher: UIViewController {
         viewController.didMove(toParent: self)
     }
     
-    func removeChildVC (child viewController: UIViewController) {
+    private func removeChildVC (child viewController: UIViewController) {
         viewController.willMove(toParent: nil)
         viewController.view.removeFromSuperview()
         viewController.removeFromParent()
