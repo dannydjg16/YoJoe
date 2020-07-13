@@ -27,7 +27,7 @@ class setUpProfileView: UIViewController {
     @IBOutlet private weak var userNameTField: UITextField!
     @IBOutlet private weak var userEmailTextField: UITextField!
     
-    @IBAction func toProfile(_ sender: Any) {
+    @IBAction private func toProfile(_ sender: Any) {
         
         
         if self.firstNameOfUser == "First Name" || self.lastNameOfUser == "Last Name" || self.userNameOfUser == "UserName" || profilePictureString == "" {
