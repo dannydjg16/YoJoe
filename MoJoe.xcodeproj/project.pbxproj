@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5F4F05D7CFC8171CECE7FA91 /* Pods_MoJoe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE5188F47E28591D566832E /* Pods_MoJoe.framework */; };
-		7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E312B2E212C98E3009D7F83 /* AppDelegate.swift */; };
 		7E312B36212C98E3009D7F83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B34212C98E3009D7F83 /* Main.storyboard */; };
 		7E312B38212C98E3009D7F83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B37212C98E3009D7F83 /* Assets.xcassets */; };
-		7E312B3B212C98E3009D7F83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */; };
-		8166FFFD24468BF600C9705D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8166FFFC24468BF600C9705D /* GoogleService-Info.plist */; };
 		8178AC672495BC2500AB42C2 /* AppLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC512495BC2500AB42C2 /* AppLoadingViewController.swift */; };
 		8178AC682495BC2500AB42C2 /* CommentsForBrewDebut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC522495BC2500AB42C2 /* CommentsForBrewDebut.swift */; };
 		8178AC692495BC2500AB42C2 /* DebutYourBrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178AC532495BC2500AB42C2 /* DebutYourBrew.swift */; };
@@ -65,6 +62,9 @@
 		8178ACC32495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA82495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift */; };
 		8178ACC42495BC4100AB42C2 /* ShopReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACA92495BC4100AB42C2 /* ShopReviewCell.swift */; };
 		8178ACC52495BC4100AB42C2 /* BrewDebutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8178ACAA2495BC4100AB42C2 /* BrewDebutCell.swift */; };
+		81806BFF24C38F9F0047778B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81806BFB24C38F9F0047778B /* GoogleService-Info.plist */; };
+		81806C0024C38F9F0047778B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81806BFC24C38F9F0047778B /* LaunchScreen.storyboard */; };
+		81806C0124C38F9F0047778B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81806BFE24C38F9F0047778B /* AppDelegate.swift */; };
 		818416CE249BEB28003E8D98 /* MoJoeShopReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818416CD249BEB28003E8D98 /* MoJoeShopReviewTests.swift */; };
 		81CD57CD24A05D47006311CC /* MoJoeDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CD57CC24A05D47006311CC /* MoJoeDateTests.swift */; };
 		81CD57DB24A062BC006311CC /* MoJoeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CD57DA24A062BC006311CC /* MoJoeUITests.swift */; };
@@ -97,13 +97,10 @@
 /* Begin PBXFileReference section */
 		68B6CEEA1D516D622CE5F1CC /* Pods-MoJoe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoJoe.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoJoe/Pods-MoJoe.release.xcconfig"; sourceTree = "<group>"; };
 		7E312B2B212C98E3009D7F83 /* MoJoe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoJoe.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E312B2E212C98E3009D7F83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E312B35212C98E3009D7F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E312B37212C98E3009D7F83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7E312B3A212C98E3009D7F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E312B3C212C98E3009D7F83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8141909D21E18E7B000BE77F /* MoJoe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoJoe.entitlements; sourceTree = "<group>"; };
-		8166FFFC24468BF600C9705D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8178AC512495BC2500AB42C2 /* AppLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLoadingViewController.swift; sourceTree = "<group>"; };
 		8178AC522495BC2500AB42C2 /* CommentsForBrewDebut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsForBrewDebut.swift; sourceTree = "<group>"; };
 		8178AC532495BC2500AB42C2 /* DebutYourBrew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebutYourBrew.swift; sourceTree = "<group>"; };
@@ -156,6 +153,9 @@
 		8178ACA82495BC4100AB42C2 /* UserPostPictureCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostPictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		8178ACA92495BC4100AB42C2 /* ShopReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopReviewCell.swift; sourceTree = "<group>"; };
 		8178ACAA2495BC4100AB42C2 /* BrewDebutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrewDebutCell.swift; sourceTree = "<group>"; };
+		81806BFB24C38F9F0047778B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		81806BFD24C38F9F0047778B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81806BFE24C38F9F0047778B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		818416CB249BEB28003E8D98 /* MoJoeShopReviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoJoeShopReviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		818416CD249BEB28003E8D98 /* MoJoeShopReviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoJoeShopReviewTests.swift; sourceTree = "<group>"; };
 		818416CF249BEB28003E8D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,24 +240,14 @@
 		7E312B2D212C98E3009D7F83 /* MoJoe */ = {
 			isa = PBXGroup;
 			children = (
+				81806BFA24C38F9F0047778B /* App Delegate etc */,
 				8178AC7D2495BC3800AB42C2 /* Models */,
 				8178AC8E2495BC4100AB42C2 /* Views */,
 				8178AC502495BC2500AB42C2 /* Controllers */,
 				7E312B34212C98E3009D7F83 /* Main.storyboard */,
-				815292D52316C7E1008AB219 /* Stuff I never use */,
 				7E312B37212C98E3009D7F83 /* Assets.xcassets */,
 			);
 			path = MoJoe;
-			sourceTree = "<group>";
-		};
-		815292D52316C7E1008AB219 /* Stuff I never use */ = {
-			isa = PBXGroup;
-			children = (
-				8166FFFC24468BF600C9705D /* GoogleService-Info.plist */,
-				7E312B2E212C98E3009D7F83 /* AppDelegate.swift */,
-				7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */,
-			);
-			path = "Stuff I never use";
 			sourceTree = "<group>";
 		};
 		8178AC502495BC2500AB42C2 /* Controllers */ = {
@@ -339,6 +329,16 @@
 				8178ACA52495BC4100AB42C2 /* SRReviewCell.swift */,
 			);
 			path = CustomMadeReviewCells;
+			sourceTree = "<group>";
+		};
+		81806BFA24C38F9F0047778B /* App Delegate etc */ = {
+			isa = PBXGroup;
+			children = (
+				81806BFB24C38F9F0047778B /* GoogleService-Info.plist */,
+				81806BFC24C38F9F0047778B /* LaunchScreen.storyboard */,
+				81806BFE24C38F9F0047778B /* AppDelegate.swift */,
+			);
+			path = "App Delegate etc";
 			sourceTree = "<group>";
 		};
 		818416CC249BEB28003E8D98 /* MoJoeShopReviewTests */ = {
@@ -515,8 +515,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E312B3B212C98E3009D7F83 /* LaunchScreen.storyboard in Resources */,
-				8166FFFD24468BF600C9705D /* GoogleService-Info.plist in Resources */,
+				81806BFF24C38F9F0047778B /* GoogleService-Info.plist in Resources */,
+				81806C0024C38F9F0047778B /* LaunchScreen.storyboard in Resources */,
 				7E312B38212C98E3009D7F83 /* Assets.xcassets in Resources */,
 				7E312B36212C98E3009D7F83 /* Main.storyboard in Resources */,
 			);
@@ -635,7 +635,6 @@
 				8178AC6F2495BC2500AB42C2 /* FeedSwitcher.swift in Sources */,
 				8178ACAD2495BC4100AB42C2 /* PostComment.swift in Sources */,
 				8178AC7A2495BC2500AB42C2 /* CoffeeShopView.swift in Sources */,
-				7E312B2F212C98E3009D7F83 /* AppDelegate.swift in Sources */,
 				8178AC782495BC2500AB42C2 /* EditProfile.swift in Sources */,
 				8178ACB02495BC4100AB42C2 /* PostCellOnCommentsPage.swift in Sources */,
 				8178AC792495BC2500AB42C2 /* RealLoginViewController.swift in Sources */,
@@ -649,6 +648,7 @@
 				8178AC862495BC3800AB42C2 /* Date.swift in Sources */,
 				8178AC752495BC2500AB42C2 /* NearbyFeedViewController.swift in Sources */,
 				8178ACB22495BC4100AB42C2 /* OtherUserImageCollectionViewCell.swift in Sources */,
+				81806C0124C38F9F0047778B /* AppDelegate.swift in Sources */,
 				8178AC7C2495BC2500AB42C2 /* VisitReviewViewController.swift in Sources */,
 				8178AC672495BC2500AB42C2 /* AppLoadingViewController.swift in Sources */,
 				8178AC742495BC2500AB42C2 /* ShopReviewSheet.swift in Sources */,
@@ -710,10 +710,10 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		7E312B39212C98E3009D7F83 /* LaunchScreen.storyboard */ = {
+		81806BFC24C38F9F0047778B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7E312B3A212C98E3009D7F83 /* Base */,
+				81806BFD24C38F9F0047778B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
